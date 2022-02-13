@@ -1,0 +1,60 @@
+{
+  "account": {
+    "update_identity": "Update Identity",
+    "updated_identity": "The identity has been updated!",
+
+    "update_email": "Update Email Address",
+    "updated_email": "The email address has been updated!",
+
+    "update_password": "Update Password",
+    "updated_password": "The password has been updated!",
+
+    "quick_login": "Quick Login",
+    "quick_login_description": "Quick Login allows you to login quickly into the panel and SFTP using your billing account.",
+    "enable_quick_login": "Enable Quick Login",
+    "disable_quick_login": "Disable Quick Login",
+    "failed_linking_sso": "Failed linking the external account. Please try again later.",
+
+    "password_requirements": "Passwords must contain at least one uppercase, lowercase, and numeric character and must be at least 8 characters in length.",
+
+    "invalid_confirmation_password": "The password provided for your account was invalid.",
+    "invalid_totp": "The provided 2FA token was invalid.",
+    "totp_already_in_use": "You already have 2FA enabled.",
+
+    "navbar_position": {
+      "left": "Left",
+      "top": "Top"
+    },
+
+    "2fa_must_be_enabled": "The panel administrator has required you to enable 2FA for your account before being able to use the panel."
+  },
+
+  "security": {
+    "active_sessions": "Active Sessions",
+    "sessions_disabled": "Your host has not enabled the ability to manage account sessions via this interface.",
+    "credentials_list": "Credentials List",
+
+    "2fa": "2-Factor Authentication",
+    "2fa_modal_header": "Configure 2FA on Your Account",
+    "2fa_secret": "Secret Code",
+
+    "2fa_notice": "Use the 2FA application on your phone to take a picture of the QR code to the left, or manually enter the code under it. Once you have done so, generate a token and enter it below.",
+    "2fa_enabled": "2-Factor Authentication is enabled on this account and will be required in order to login to the panel. If you would like to disable 2FA, simply enter a valid token below and submit the form.",
+    "2fa_disabled": "2-Factor Authentication is disabled on your account! You should enable 2FA in order to add an extra level of protection on your account.",
+    "enable_2fa": "Enable 2-Factor Authentication",
+    "disable_2fa": "Disable 2-Factor Authentication",
+
+    "create_credentials": "Create an API key",
+    "memo_description": "Set an easy to understand description for this API key to help you identify it later on.",
+    "allowed_ips_description": "If you would like to limit this API key to specific IP addresses enter them above, one per line. CIDR notation is allowed for each IP address. Leave blank to allow any IP address.",
+    "api_key_generated": "A new client API key has been generated for your account."
+  },
+
+  "support": {
+    "your_servers": "Your Servers",
+    "enable_access": "Enable Support OP Access",
+    "disable_access": "Disable Support OP Access",
+    "enable_access_submit": "Support OP Access has been enabled for your server.",
+    "disable_access_submit": "Support OP Access has been enabled for your server."
+  }
+}

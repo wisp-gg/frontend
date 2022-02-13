@@ -1,0 +1,424 @@
+// Tailwind
+//noinspection CssInvalidAtRule
+@tailwind base;
+//noinspection CssInvalidAtRule
+@tailwind components;
+//noinspection CssInvalidAtRule
+@tailwind utilities;
+
+body, html {
+  font-family: 'Rubik', sans-serif !important;
+}
+
+body {
+  @apply bg-primary-600 text-white text-opacity-50 font-normal;
+
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+*::selection {
+  @apply bg-accent-500 bg-opacity-25 text-accent-500;
+}
+
+.router-link {
+  @apply text-white text-opacity-75 hover:text-white;
+}
+
+.router-link-exact-active {
+  @apply text-opacity-100;
+}
+
+.disabled {
+  @apply opacity-40 pointer-events-none;
+}
+
+a[disabled] {
+  @apply opacity-40 pointer-events-none;
+}
+
+code {
+  @apply bg-white bg-opacity-[0.075] rounded-md p-1;
+}
+
+button {
+  @apply focus:outline-none;
+}
+
+.btn-group {
+  span:not(:first-child):not(:last-child) .btn {
+    border-radius: 0 !important;
+  }
+
+  span:first-child .btn {
+    @apply rounded-r-none;
+
+  }
+
+  span:last-child .btn {
+    @apply rounded-l-none;
+  }
+}
+
+.btn {
+  @apply bg-primary-400 border-2 border-solid border-transparent rounded-md shadow-none text-center text-sm py-2 px-3 hover:bg-opacity-50 hover:text-opacity-80;
+
+  &:disabled {
+    @apply opacity-40 pointer-events-none;
+  }
+
+  &.btn-primary {
+    @apply text-accent-500 ;
+  }
+
+  &.btn-secondary {
+    @apply text-white text-opacity-75 hover:text-opacity-60;
+  }
+
+  &.btn-info {
+    @apply text-info;
+  }
+
+  &.btn-success {
+    @apply text-success;
+  }
+
+  &.btn-warning {
+    @apply text-warning;
+  }
+
+  &.btn-danger {
+    @apply text-danger;
+  }
+
+  &.btn-active {
+    @apply bg-opacity-40 text-opacity-80; // TODO: proper color plz
+  }
+}
+
+.alert {
+  @apply rounded-md overflow-hidden border-none p-0 mb-0;
+
+  background: none !important; // TODO: Move to tailwind - how do u nicely do !important in tailwind
+
+  // TODO: Translate @media to tw using sm:* - but should we use bootstrap's breakpoints or move over to tailwinds??
+  @media screen and (max-width: 576px) {
+    @apply flex-col;
+
+    // TODO: Programmatically apply class (with important if its actually needed?)
+    &:not(.alert-dismissible) > div {
+      padding: 1rem !important;
+    }
+  }
+
+  svg {
+    @apply text-white text-opacity-20 text-3xl;
+  }
+
+  // what the fuck is this, im no web dev man
+  &:not(.dropdown-item) {
+    > div:first-child, > div:nth-child(2) {
+      @apply p-2.5;
+    }
+  }
+
+  &.alert-info > div {
+    @apply bg-info first:bg-opacity-30 even:bg-opacity-20;
+  }
+
+  &.alert-warning > div {
+    @apply bg-warning first:bg-opacity-30 even:bg-opacity-20;
+  }
+
+  &.alert-success > div {
+    @apply bg-success first:bg-opacity-30 even:bg-opacity-20;
+  }
+
+  &.alert-danger > div {
+    @apply bg-danger first:bg-opacity-30 even:bg-opacity-20;
+  }
+}
+
+.label {
+  @apply text-base py-1 px-2 rounded-md;
+
+  &.label-warning {
+    @apply text-warning bg-warning bg-opacity-20;
+  }
+
+  &.label-secondary, &.label-default {
+    @apply text-white text-opacity-50 bg-primary-500;
+  }
+
+  &.label-success {
+    @apply text-success bg-success bg-opacity-20;
+  }
+
+  &.label-info {
+    @apply text-info bg-info bg-opacity-20;
+  }
+
+  &.label-danger {
+    @apply text-danger bg-danger bg-opacity-20;
+  }
+
+  &.label-primary {
+    @apply text-accent-500 bg-accent-500 bg-opacity-20;
+  }
+}
+
+.input {
+  @apply transition-all duration-75 ease-linear;
+
+  &:not([type="checkbox"]) {
+    @apply
+  bg-primary-400
+    border-none
+    outline-none
+    shadow-none
+    text-white text-opacity-75
+    h-unset
+    w-full
+    py-4 px-5
+    rounded-md
+
+    disabled:bg-primary-300
+    disabled:opacity-30
+    focus:bg-primary-400
+    focus:outline-none;
+
+    &.input-slim {
+      @apply py-1 px-3;
+    }
+  }
+
+  &[type="checkbox"] {
+    @apply bg-primary-500 cursor-pointer appearance-none inline-block align-middle select-none shrink-0 w-4 h-4 text-accent-500 border border-white border-opacity-30 rounded-sm outline-none  ;
+
+    &:checked {
+      @apply border-transparent bg-current bg-no-repeat bg-center;
+
+      background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 1792 1792' width='12' height='12' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M1671 566q0 40-28 68l-724 724-136 136q-28 28-68 28t-68-28l-136-136-362-362q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 295 656-657q28-28 68-28t68 28l136 136q28 28 28 68z'/%3e%3c/svg%3e");
+    }
+
+    &:disabled {
+      @apply cursor-not-allowed;
+    }
+  }
+}
+
+.darker-input {
+  .input {
+    @apply
+    bg-primary-500
+
+    focus:bg-primary-400;
+  }
+}
+
+.small {
+  font-size: 80%;
+  font-weight: 400;
+}
+
+.badge-new {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    height: 7px;
+    width: 7px;
+    display: block;
+    background: #ca1010;
+    border-radius: 9999px;
+    top: -.2rem;
+    right: -.4rem;
+  }
+
+  &.hide-indicator {
+    &::after {
+      display: none !important;
+    }
+  }
+}
+
+.notification-info {
+  @apply border-l-2 border-solid border-info bg-opacity-25 bg-info;
+}
+
+.notification-danger {
+  @apply border-l-2 border-solid border-danger bg-opacity-25 bg-danger;
+}
+
+.notification-warning {
+  @apply border-l-2 border-solid border-warning bg-opacity-25 bg-warning;
+}
+
+.notification-success {
+  @apply border-l-2 border-solid border-success bg-opacity-25 bg-success;
+}
+
+/* Scrollbar - Credit(pterodactyl/panel) Copied over with different colours. */
+::-webkit-scrollbar {
+  background: none;
+  width: 16px;
+  height: 16px;
+}
+::-webkit-scrollbar-thumb {
+  border: solid 0 rgb(0 0 0 / 0%);
+  border-right-width: 4px;
+  border-left-width: 4px;
+  -webkit-border-radius: 9px 4px;
+  -webkit-box-shadow: inset 0 0 0 1px #333362, inset 0 0 0 4px hsl(209deg 18% 30%);
+}
+::-webkit-scrollbar-track-piece {
+  margin: 4px 0;
+}
+::-webkit-scrollbar-thumb:horizontal {
+  border-right-width: 0;
+  border-left-width: 0;
+  border-top-width: 4px;
+  border-bottom-width: 4px;
+  -webkit-border-radius: 4px 9px;
+}
+::-webkit-scrollbar-thumb:hover {
+  -webkit-box-shadow:
+          inset 0 0 0 1px #1cba95,
+          inset 0 0 0 4px #1cba95;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Page Transition */
+.slide-enter-active {
+  transition-duration: 250ms;
+  transition-property: height, opacity, transform;
+  transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+  overflow: hidden;
+}
+
+.slide-leave-active {
+  transition-duration: 250ms;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+/* Fade Transition */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* MD/below Fade Transition - probably a nicer way to do this with tailwind @variants, but i couldnt figure it out */
+@media (max-width: 768px) { // MD
+  .md\:fade-enter-active,
+  .md\:fade-leave-active {
+    transition: opacity 0.2s ease;
+  }
+
+  .md\:fade-enter-from,
+  .md\:fade-leave-to {
+    opacity: 0;
+  }
+
+}
+
+.td-min {
+  width: 1%;
+  white-space: nowrap;
+}
+
+@layer utilities {
+  .overflow-overlay {
+    overflow: overlay;
+  }
+
+  .overflow-x-overlay {
+    overflow-x: overlay;
+  }
+
+  .overflow-y-overlay {
+    overflow-y: overlay;
+  }
+}
+
+// Ace editor
+.ace_editor {
+  @apply bg-primary-500 text-sm;
+
+  border-bottom-left-radius: 1px !important;
+  border-bottom-right-radius: 1px !important;
+}
+
+.ace_gutter {
+  @apply bg-none border-primary-400 border-r text-white text-opacity-50;
+}
+
+.ace_gutter-layer {
+  @apply bg-primary-500;
+}
+
+.ace_active-line, .ace_gutter-active-line {
+  background: #1a1a34 !important;
+}
+
+.ace_scroller {
+  @apply bg-none;
+}
+
+.ace_selected-word {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.ace_selection {
+  background: rgba(26,212,168,.4) !important;
+  border-radius: 1px;
+}
+
+.ace_search {
+  @apply p-4;
+
+  background-color: #111138 !important;
+  border-color: #111138 !important;
+}
+
+.ace_search_form, .ace_replace_form {
+  @apply flex text-white;
+}
+
+.ace_search_field, .ace_replace_field {
+  @apply bg-primary-400 text-white mr-2;
+  border-color: #121026 !important;
+}
+
+.ace_searchbtn, .ace_replacebtn {
+  @apply bg-primary-400 hover:bg-primary-200;
+  border-color: #121026 !important;
+}
+
+.ace_search_form {
+  @apply mr-3;
+}
+
+.ace_replace_form, .ace_search_options {
+  @apply mt-2 mr-3;
+}
+
+.ace_button {
+  @apply hover:bg-primary-200 mx-1;
+
+  color: #fff !important;
+}

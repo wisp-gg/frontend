@@ -1,0 +1,1 @@
+export { default as NotFoundView } from './404.vue';

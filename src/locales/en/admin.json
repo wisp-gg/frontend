@@ -1,0 +1,351 @@
+{
+  "index": {
+    "instance_overview": "Instance Overview",
+    "current_version": "Welcome to WISP Panel! You are currently running on version {version}.",
+    "license_information": "License Information"
+  },
+
+  "settings": {
+    "general": {
+      "panel_settings": "Panel Settings",
+      "company_name_footer": "This is the name that is used throughout the panel and in emails sent to clients.",
+      "random_database_deployment_footer": "If this is enabled, all game servers can deploy their databases on any database host instead of just the assigned one for the node.",
+
+      "require_2fa": {
+        "not_required": "Not Required",
+        "admin_only": "Admin Only",
+        "all_users": "All Users"
+      },
+      "require_2fa_footer": "If enabled, any account falling into the selected grouping will be required to have 2-Factor authentication enabled to use the Panel.",
+
+      "default_language_footer": "The default language to use when rendering UI components."
+    },
+    "branding": {
+      "recommended_size": "Recommended size:",
+      "formats": "Formats:",
+
+      "login_screen_logo": "Login Screen Logo",
+      "login_screen_logo_recommended_size": "300 x 100px (max 250KB)",
+      "login_screen_logo_recommended_formats": "png, jpg, and svg",
+
+      "favicon": "Favicon",
+      "favicon_recommended_size": "32 x 32px (max 250KB)",
+      "favicon_recommended_formats": "ico",
+
+      "panel_logo": "Panel Logo",
+      "panel_logo_recommended_size": "230 x 50px (max 250KB)",
+      "panel_logo_recommended_formats": "png, jpg, and svg"
+    },
+    "embed": {
+      "embed_settings": "Embed Settings",
+      "site_name_footer": "The site name that should be displayed on embeds.",
+      "title_footer": "The title that should be displayed on embeds.",
+      "description_footer": "Short description that should be displayed on embeds.",
+      "image_url_footer": "The Image URL that will be displayed on embeds."
+    },
+    "js_injector": {
+      "title": "JavaScript Injector",
+      "minification_notice": "The JS may get minified to have fast loading speeds for everyone. Keep a local copy of your JS if you plan to edit it in the future."
+    },
+    "css_injector": {
+      "title": "CSS Injector",
+      "minification_notice": "The CSS may get minified to have fast loading speeds for everyone. Keep a local copy of your CSS if you plan to edit it in the future."
+    },
+    "whmcs": {
+      "sso_integration": "WHMCS SSO Integration",
+      "whmcs_notice": "Please look at the guide on how to gather the credentials required to configure WHMCS SSO for your panel: https://www.notion.so/WHMCS-SSO-22cf66a587514dc8a5a287d1f2a8f230",
+
+      "sso_enabled_footer": "Enables the WHMCS Single-Sign-On integration, allowing users to login to your WISP Panel with their WHMCS account. Required for all other fields to be configured",
+      "button_text_footer": "The login button text that is shown on the login page.",
+      "url_footer": "The URL your whmcs installation is available at. e.g. https://mywhmcs.com/",
+      "client_id_footer": "The WHMCS SSO API Client ID",
+      "client_secret_footer": "The WHMCS SSO Client Secret",
+      "api_id_footer": "The WHMCS API Identifier",
+      "api_secret_footer": "The WHMCS API Secret"
+    },
+
+    "refresh_page_to_apply_changes": "For now, you will have to refresh the website for the custom changes to apply."
+  },
+
+  "migrator": {
+    "notice": "Migrate your data from another Pterodactyl/WISP instance before installing the daemon. If you are migrating more than 100 nests, 100 eggs per nest, 2500 users or 1000 servers contact us for a manual migration, which will also migrate hashed user passwords and database passwords.",
+    "migrate": "Migrate",
+    "notify_users": "Notify users",
+    "notified_users": "All users will receive an email soon. You will be notified when it's finished.",
+
+    "step_1": "Step 1 - Migrate Data",
+    "step_2": "Step 2 - Notify Users",
+    "step_3": "Step 3 - Finishing Touches",
+    "panel_url_footer": "This is the url to the panel from which you want to migrate data. For 0.7.x, the panel should be running v0.7.16 or newer. For 1.x, the panel should be running v1.1.2 or newer. Otherwise, this migrator will not work.",
+    "api_key_footer": "This is required to get the panel's information for the migration. The key should have permissions to anything you want to migrate.",
+    "locations_node_and_game_data": "Locations, Node, Allocations, Databases and Game Server Data",
+    "locations_node_and_game_data_footer": "This will move all game servers with the nodes and their locations. NOTE: This requires all of the options below enabled, and database hosts won't have password configured.",
+    "nests_and_eggs": "Nests and Eggs",
+    "nests_and_eggs_footer": "This will move all nests and eggs overwriting existing ones if they overlap.",
+    "users_footer": "This will move all active users with access to at least one server. Passwords won't be automatically migrated (unless you manually contact us) and will require resending account creation email to each user.",
+
+    "after_migration": "After migration is done, please note the following:",
+    "db_hosts_reset": "All database hosts' passwords need to be set again (as those can't be synced due to Pterodactyl API limitations)",
+    "migrated_nodes_cpu": "Migrated nodes' CPU is set to 800% (with 100% overallocation)",
+    "spare_allocations_ignored": "Any spare allocations from migrated nodes were ignored during the migration",
+    "move_to_installing_daemon": "Then you can move to setting up the WISP Daemon on your game nodes.",
+
+    "states": {
+      "in_progress": "In progress",
+      "notified_users": "No users left to notify",
+      "manual": "Manual",
+      "failed": "Failed"
+    }
+  },
+
+  "announcements": {
+    "title": "Announcements",
+    "create_announcement": "Create Announcement",
+    "edit_announcement": "Edit Announcement",
+    "delete_announcement": "Delete Announcement",
+    "delete_notice": "Deleting this announcement is irreversible - please click delete again to confirm the deletion.",
+    "enabled_footer": "Whether the announcement is instantly visible to all users.",
+    "resend": "Resend",
+    "announcement_resent": "The announcement has been successfully resent to users on the panel.",
+    "cant_resend_disabled": "A disabled announcement can't be resent - enable the announcement first."
+  },
+
+  "database_hosts": {
+    "title": "Database Hosts",
+    "create_host": "Create Database Host",
+    "edit_host": "Edit Database Host",
+    "delete_host": "Delete Database Host",
+    "delete_notice": "Are you sure that you want to delete the {name} database host? There is no going back, all data will immediately be removed.",
+    "host_details": "Host Details",
+    "user_details": "User Details",
+    "databases": "Databases",
+
+    "name_footer": "A short identifier used to distinguish this location from others. Must be between 1 and 60 characters, for example, us.nyc.lvl3.",
+    "host_footer": "The IP address or FQDN that should be used when attempting to connect to this MySQL host from the panel to add new databases.",
+    "port_footer": "The port that MySQL is running on for this host.",
+    "username_footer": "The username of an account that has enough permissions to create new users and databases on the system.",
+    "password_footer": "The password to the account defined.",
+    "phpmyadmin_footer": "Whether the database host has PHPMyAdmin installed on it. This will enable a button to easily navigate to PHPMyAdmin in the client UI.",
+    "display_fqdn_footer": "The Display FQDN that should be used instead of the host IP when redirecting user to PhpMyAdmin."
+  },
+
+  "application_api": {
+    "title": "Application API Credentials",
+
+    "delete_api_key": "Delete Application API Key",
+    "delete_notice": "Please confirm you want to delete the \"{name}\" application API key by repeating the name in the input below. This is an irreversible action which can not be undone.",
+
+    "options": {
+      "none": "None",
+      "read": "Read",
+      "read_write": "Read & Write"
+    }
+  },
+
+  "locations": {
+    "title": "Locations",
+    "create_location": "Create Location",
+    "delete_location": "Delete Location",
+    "delete_notice": "Are you sure that you want to delete the \"{short}\" location? There is no going back, all data will immediately be removed.",
+    "location_has_nodes": "You must delete/move all nodes within the location before deleting it.",
+    "location_details": "Location Details",
+    "nodes" : "Nodes",
+
+    "short_footer": "A short identifier used to distinguish this location from others. Must be between 1 and 60 characters, for example, \"us.nyc.lvl3\".",
+    "long_footer": "A longer description of this location. Must be less than 255 characters."
+  },
+
+  "nodes": {
+    "title": "Nodes",
+    "not_alive": "Error connecting to node! Check browser console for more details.",
+    "cant_delete_attached_servers": "You must delete all servers on this node before deleting it.",
+    "delete_node": "Delete Node",
+    "delete_notice": "Are you sure that you want to delete the \"{name}\" node? Deleting a node is an irreversible action and will immediately remove this node from the panel.",
+
+
+    "about": {
+      "daemon_version": "Daemon Version",
+      "system_information": "System Information",
+      "cpu_cores": "CPU Cores"
+    },
+
+    "settings": {
+      "general_configuration": "General Configuration",
+      "allow_automatic_allocation": "Allow Automatic Allocation",
+      "max_web_upload": "Maximum Web Upload Filesize",
+
+      "daemon_port": "Daemon Port",
+      "sftp_port": "SFTP Port",
+      "fastdl_port": "FastDL Port",
+
+      "display_fqdn_footer": "Please enter the domain name (e.g node.example.com) that will be shown for users instead of *.daemon.panel.gg. If you're using a domain, you're also gonna need to setup the DNS record for it to point at the node or this won't work as expected.",
+      "automatic_allocation_footer": "Allows this node to be used when automatically picking a suitable node for server deployment using the API.",
+      "behind_proxy_footer": "If you are running the daemon behind a proxy such as Cloudflare, select this to have the daemon skip looking for certificates on boot.",
+      "maintenance_mode_footer": "If the node is marked as 'Under Maintenance' users won't be able to access servers that are on this node.",
+      "cpu_footer": "Enter the total amount of cpu available on this node for server allocation. You may also provide a percentage that will determine the amount of cpu over the set limit to allow. 1 core = 100%.",
+      "memory_footer": "Enter the total amount of memory available on this node for allocation to servers. You may also provide a percentage that can allow allocation of more than the defined memory.",
+      "disk_footer": "Enter the total amount of disk space available on this node for server allocation. You may also provide a percentage that will determine the amount of disk space over the set limit to allow.",
+      "max_web_upload_footer": "Enter the maximum size of files that can be uploaded through the web-based file manager."
+    },
+
+    "allocations": {
+      "title": "Node Allocations",
+      "create_new": "Create New",
+      "cant_delete_in_use": "You can't delete an allocation which is attached to a server.",
+      "delete_ip": "Delete IP",
+      "delete_ip_allocations": "Delete all allocations for IP's"
+    }
+  },
+
+  "servers": {
+    "title": "Servers",
+
+    "delete_server": "Delete Server",
+    "delete_server_notice": "Are you sure that you want to delete the \"{name}\" server? Deleting a server is an irreversible action and will immediately remove this server from the panel and daemon.",
+    "force_footer": "Dangerous: Force deleting a server will remove the server from the panel even if the daemon reports an error. This may leave dangling files on your daemon if it reports an error.",
+    "cant_delete_unmigrated_nodes_server": "You can't delete a server on a node which has no configured FQDN - use force delete to proceed.",
+
+    "new": {
+      "core_details": "Core Details",
+
+      "node_footer": "The node which this server will be deployed to.",
+      "primary_allocation_footer": "The main allocation that will be assigned to this server.",
+      "secondary_allocations_footer": "Additional allocations to assign to this server on creation.",
+      "database_limit_footer": "The total number of databases a user is allowed to create for this server. Leave blank to allow unlimited.",
+      "allocation_limit_footer": "The total number of allocations a user is allowed to create for this server. Leave blank to allow unlimited.",
+      "backup_megabytes_limit_footer": "The total number of megabytes the server can use for its backups.",
+      "cpu_footer": "If you do not want to limit CPU usage, set the value to 0. To determine a value, take the number of physical cores and multiply it by 100. For example, on a quad core system (4 * 100 = 400) there is 400% available. To limit a server to using half of a single core, you would set the value to 50. To allow a server to use up to two physical cores, set the value to 200.",
+      "memory_footer": "Memory limit in MB. If you want to disable memory limiting on a server, simply enter 0 into the memory field.",
+      "swap_footer": "Swap space limit in MB. If you want to disable swap space on a server, simply enter 0 into the swap field.",
+      "disk_footer": "Disk space limit in MB. If you want to disable disk space limiting on a server, simply enter 0 into the disk field.",
+      "io_footer": "Block IO should be set to a value between 10-1000.",
+      "skip_scripts_footer": "If the selected Egg has an install script attached to it, the script will run during install. If you would like to skip this step, check this box.",
+    },
+
+    "about": {
+      "server_owner": "Server Owner",
+      "server_node": "Server Node"
+    },
+
+    "details": {
+      "server_details": "Server Details"
+    },
+
+    "build_configuration": {
+      "resource_limits": "Resource Limits",
+      "feature_limits": "Feature Limits",
+      "allocation_management": "Allocation Management"
+    },
+
+    "startup": {
+      "command_modification": "Command Modification",
+      "service_configuration": "Service Configuration",
+      "access_in_startup": "Access In Startup: "
+    },
+
+    "databases": {
+      "notice": "Database passwords can be viewed when visiting this server on the front-end.",
+      "active_databases": "Active Databases",
+      "create_database": "Create Database"
+    },
+
+    "advanced": {
+      "reinstall_server": "Reinstall Server",
+      "reinstall_server_note": "This will reinstall the server with the assigned service script.\nDanger! This could overwrite data.",
+
+      "install_status": "Install Status",
+      "install_status_note": "If you need to change the install status from uninstalled to installed, or vice versa, you may do so with the button below.",
+
+      "rebuild_container": "Rebuild Containers",
+      "rebuild_container_note": "This will trigger a rebuild of the server container when it next starts up. This is useful if you modified the server configuration file manually, or something just didn't work out correctly.",
+
+      "suspend_server": "Suspend Server",
+      "suspend_server_note": "This will suspend the server, stop any running processes, and immediately block the user from being able to access their files or otherwise manage the server through the panel or API.",
+
+      "updating_status": "Updating Status",
+      "updating_status_note": "If you need to change the updating status, you may do so with the button below.",
+
+      "move_server": "Move server to another node",
+
+      "moving_status": "Moving Status",
+      "moving_status_note": "If you need to change the moving status, you may do so with the button below.\n",
+
+      "reset_mod_statuses": "Reset mod installation statuses",
+      "reset_mod_statuses_note": "Will reset all mods' installation state if it bugs out, in case the server has mod installations locked completely and they have been stuck for a long time.",
+
+      "toggle_backup_status": "Toggle backup status"
+    }
+  },
+
+  "users": {
+    "title": "Users",
+
+    "identity": "Identity",
+    "external_id_footer": "Leave empty to not assign an external identifier for this user. The external ID should be unique to this user and not be in use by any other users.",
+    "2fa_enabled": "2FA Enabled",
+    "2fa_enabled_footer": "This requires the user to have 2FA already setup, or otherwise they will not be able to login into their account.",
+
+    "password": "Password",
+    "password_optional": "Providing a user password is optional. New user gets an email prompting them to create a password for their account. If a password is provided here you will need to find a different method of providing it to the user.",
+
+    "root_admin_footer": "Setting this gives a user full administrative access.",
+    "support_op_footer": "Setting this gives a user restricted administrative access for acting as a support agent.",
+    "support_op_bypass_footer": "Setting this will bypass users having to give explicit permission to access their servers through the Support tab.",
+    "ignore_exceptions": "Ignore exceptions raised while revoking keys.",
+    "ignore_exceptions_footer": "If checked, any errors thrown while revoking keys across nodes will be ignored. You should avoid this checkbox if possible as any non-revoked keys could continue to be active for up to 24 hours after this account is changed. If you are needing to revoke account permissions immediately and are facing node issues, you should check this box and then restart any nodes that failed to be updated to clear out any stored keys.",
+
+    "user_has_no_2fa_configured": "The user has no 2FA configured to be able to use it.",
+
+    "delete_user": "Delete User",
+    "delete_notice": "Are you sure that you want to delete the \"{email}\" user? There is no going back, all data will immediately be removed.",
+    "cant_delete_yourself": "You cannot delete yourself.",
+    "cant_delete_user_with_servers": "You cannot delete a user while they own servers."
+  },
+
+  "nests": {
+    "title": "Nests",
+    "eggs": "Eggs",
+    "details": "Nest Details",
+    "create_nest": "Create Nest",
+    "delete_nest": "Delete Nest",
+    "delete_notice": "Are you sure that you want to delete the \"{name}\" nest? There is no going back, all data will immediately be removed.",
+    "id_footer": "A unique ID used for identification of this nest internally and through the API.",
+    "uuid_footer": "A UUID that all servers using this option are assigned for identification purposes.",
+    "name_footer": "This should be a descriptive category name that encompasses all of the eggs within the nest.",
+    "identifier_footer": "Short ID that can enable specific features (working ids: srcds, minecraft).",
+    "nest_has_servers": "You can not delete a nest which has servers running under it.",
+
+    "import_egg": "Import Egg",
+    "egg": {
+      "configuration": "Configuration",
+      "process_management": "Process Management",
+      "delete_egg": "Delete Egg",
+      "delete_notice": "Are you sure that you want to delete the \"{name}\" egg? There is no going back, all data will immediately be removed.",
+      "egg_has_servers": "You can not delete a egg which has servers running under it.",
+      "copy_alert": "All fields are required unless you select a separate option from the 'Copy Settings From' dropdown, in which case fields may be left blank to use the values from that option.",
+
+      "install_script": "Install Script",
+      "update_script": "Update Script",
+
+      "variables": {
+        "create_variable": "Create Startup Variable",
+        "variable_created": "The startup variable has been successfully created.",
+        "variable_updated": "The \"{name}\" startup variable has been successfully updated.",
+        "variable_deleted": "The \"{name}\" startup variable has been successfully deleted.",
+        "env_variable_reserved": "The {name} environment variable is a reserved variable name."
+      },
+
+      "thumbnail_title": "Egg Thumbnail",
+      "thumbnail_recommended_size": "2:1 aspect ratio (max 500KB)",
+      "thumbnail_formats": "png, jpg and svg"
+    }
+  },
+
+  "mods": {
+    "title": "Mods",
+    "mod_details": "Mod Details",
+    "mod_configuration": "Mod Configuration",
+    "delete_mod": "Delete Mod",
+    "delete_notice": "Are you sure that you want to delete the \"{name}\" mod? There is no going back, all data will immediately be removed."
+  }
+}

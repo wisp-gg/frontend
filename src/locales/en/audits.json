@@ -1,0 +1,132 @@
+{
+  "server": {
+    "update": {
+      "title": "Server updated",
+      "message": "{user} updated the details of this server"
+    },
+
+    "subuser": {
+      "create": {
+        "title": "Subuser created",
+        "message": "{user} created a new subuser for {target}"
+      },
+      "update": {
+        "title": "Subuser updated",
+        "message": "{user} updated the subuser permissions for {target}"
+      },
+      "delete": {
+        "title": "Subuser access revoked",
+        "message": "{user} deleted a subuser belonging to {target}"
+      }
+    },
+
+    "database": {
+      "create": {
+        "title": "Database created",
+        "message": "{user} created a new database named {name}"
+      },
+      "update": {
+        "title": "Database updated",
+        "message": "{user} regenerated the database password for {target}"
+      },
+      "delete": {
+        "title": "Database deleted",
+        "message": "{user} deleted the {target} databaase"
+      }
+    },
+
+    "schedule": {
+      "trigger": {
+        "title": "Schedule execution triggered",
+        "message": "{user} triggered the {target} schedule"
+      },
+      "create": {
+        "title": "Schedule created",
+        "message": "{user} created a new schedule named {name}"
+      },
+      "update": {
+        "title": "Schedule updated",
+        "message": "{user} updated the {target} schedule"
+      },
+      "delete": {
+        "title": "Schedule deleted",
+        "message": "{user} deleted the {target} schedule and the containing tasks"
+      }
+    },
+
+    "startup": {
+      "update": {
+        "title": "Startup Variables updated",
+        "message": "{user} updated the server's startup variables"
+      }
+    },
+
+    "monitor": {
+      "update": {
+        "title": "Health Monitor toggled",
+        "message": "{user} toggled the health monitor"
+      },
+
+      "restart": {
+        "title": "Server restart",
+        "message": "Server restart triggered by the health monitor"
+      }
+    },
+
+    "crash": {
+      "title": "Server crash",
+      "message": "The server has crashed"
+    },
+
+    "backup": {
+      "create": {
+        "title": "Backup created",
+        "message": "{user} created a backup named {name}"
+      },
+      "update": {
+        "title": "Backup updated",
+        "message": "{user} toggled the locked status for backup {name}"
+      },
+      "deploy": {
+        "title": "Backup deployed to server",
+        "message": "{user} deployed backup {name} to the server"
+      },
+      "download": {
+        "title": "Backup downloaded",
+        "message": "{user} downloaded the {name} backup"
+      },
+      "delete": {
+        "title": "Backup deleted",
+        "message": "{user} deleted the {name} backup"
+      }
+    },
+
+    "mod": {
+      "update": {
+        "title": "Mod status updated",
+        "message": "{user} toggled the install status of the {name} mod"
+      }
+    },
+
+    "modpack": {
+      "update": {
+        "title": "Modpack installed",
+        "message": "{user} installed the {modpack} modpack"
+      }
+    },
+
+    "plugin": {
+      "update": {
+        "title": "Plugin installed",
+        "message": "{user} installed the {plugin} plugin"
+      }
+    },
+
+    "fastdl": {
+      "update": {
+        "title": "FastDL synced",
+        "message": "{user} synced the FastDL contents for this server"
+      }
+    }
+  }
+}

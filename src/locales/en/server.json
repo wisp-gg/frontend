@@ -1,0 +1,385 @@
+{
+  "errors": {
+    "not_migrated": {
+      "title": "Not Migrated",
+      "description": "The server's node is not yet setup from migration."
+    },
+    "invalid_license": {
+      "title": "Invalid License",
+      "description": "The server's node doesn't have a valid license key linked to it - please contact the panel owner."
+    },
+    "moving": {
+      "title": "Server Moving",
+      "description": "Server is currently being moved to a new node."
+    },
+    "suspended": {
+      "title": "Server Suspended",
+      "description": "Server is currently suspended and can not be accessed until unsuspended."
+    },
+    "install_failed": {
+      "title": "Install Failed",
+      "description": "Server failed the installation process. Contact support."
+    },
+    "deploying_backup": {
+      "title": "Deploying Backup",
+      "description": "Server is deploying a backup."
+    },
+    "installing": {
+      "title": "Server Installing",
+      "description": "Server is currently installing."
+    },
+    "updating": {
+      "title": "Server Updating",
+      "description": "Server is currently completing update process."
+    },
+    "backup_creating": {
+      "title": "Backup In-progress",
+      "description": "Server is currently taking a backup."
+    }
+  },
+
+  "console": {
+    "console_popup": "Open console popup",
+    "upload_logs": "Upload logs",
+    "eula_acceptance": "EULA Acceptance",
+    "eula_notice": "By pressing 'I Accept' below you are indicating your agreement to the Mojang EULA."
+  },
+
+  "power": {
+    "start": "Start",
+    "restart": "Restart",
+    "stop": "Stop",
+    "kill": "Kill"
+  },
+
+  "logs": {
+    "upload_logs": "Upload Logs",
+    "upload_logs_description": "Would you like to upload your logs so that they could be shared?",
+    "upload_complete": "Your logs have been uploaded at: {url}",
+    "upload_failed": "Something went wrong while trying to upload server logs. Try again later."
+  },
+
+  "details": {
+    "server_name": "Server Name",
+    "server_limits": "Server Limits",
+    "server_info": "Server Info",
+    "update_server_name": "Update Server Name",
+    "name_description": "Server name visible in the panel. This doesn't change the actual server hostname, only how its identified in the panel.",
+    "updated": "Your server's details has been updated!"
+  },
+
+  "sftp": {
+    "sftp_details": "SFTP Details",
+    "alert_note": "The SFTP password is the password that you use to login to the panel. Ensure that your client is set to use SFTP and not FTP or FTPS for connections, there is a difference between the protocols."
+  },
+
+  "audit_logs": {
+    "changes": {
+      "hidden_value": "Changed {key} to a new hidden value",
+      "from_to": "Changed {key} from {old} to {new}"
+    },
+
+    "device": {
+      "city": "City",
+      "country": "Country",
+      "user_agent": "User Agent"
+    }
+  },
+
+  "files": {
+    "new_file": "New File",
+    "new_folder": "New Folder",
+    "upload": "Upload",
+    "rename_or_move": "Rename/Move",
+    "copy": "Copy",
+    "compress": "Compress",
+    "decompress": "Decompress",
+    "download": "Download",
+    "delete_files": "Delete Files",
+    "delete_following": "Are you sure you want to delete the following files? Deleting files is an irreversible operation which can not be undone unless you have taken backups.",
+
+    "upload_unavailable": "Uploading files is currently unavailable, try again later or try using SFTP.",
+    "upload_too_large": "Unable to upload the file {name} due to being too large, please use SFTP instead.",
+
+    "search": "Search",
+    "search_results": "Search results for {query}",
+    "too_many_results": "We found too many results for the search term. Please be more specific to be able to see all the results.",
+
+    "git_clone": "Clone",
+    "get_access_token_here": "Get your token here",
+    "cloned_repository": "The repository {repository} has been cloned into {path}.",
+    "git_pull": "Pull",
+    "git_pull_description": "Pull the latest changes of the repository in the current directory.",
+    "pulled_repository": "The repository was pulled and the latest commit is {commit}.",
+    "git_auth_required": "This repository requires authentication, please provide your personal access token.",
+
+    "steam_workshop": "Steam Workshop",
+    "steam_workshop_finished": "The workshop item has been downloaded.",
+    "steam_workshop_finished_but_with_errors": "Finished with the following errors:",
+    "steam_workshop_n_more": "And no more items... | And {n} more item... | And {n} more items...",
+    "steam_workshop_state": {
+      "waiting": "waiting",
+      "downloading": "downloading",
+      "extracting": "extracting",
+      "parsing": "parsing",
+      "writing": "writing {files} files"
+    },
+
+    "file_contents": "File Contents",
+    "save_file": "Save File",
+    "return_to_file_manager": "Return to File Manager",
+    "file_saved": "The file was saved"
+  },
+
+  "databases": {
+    "title": "Databases",
+    "using_databases": "Using {count} / {limit} databases",
+    "create_new": "Create New Database",
+    "delete_database": "Delete Database",
+    "delete_database_notice": "Are you sure that you want to delete the {name} database? There is no going back, all data will immediately be removed.",
+    "host_footer": "This should be the host the database should be deployed on.",
+    "name_footer": "This should be the database name you want to use.",
+    "connections_from_footer": "This should reflect the IP address that connections are allowed from. Uses standard MySQL notation. If unsure leave as %.",
+    "phpmyadmin": "PHPMyAdmin",
+
+    "exceptions": {
+      "too_many": "You have already reached the quota of allowed databases for this server.",
+      "duplicate": "There is already a database created using your given name for this server.",
+      "no_suitable_host": "No database host was found that meets the requirements for this server."
+    }
+  },
+
+  "subusers": {
+    "title": "Manage Users",
+    "add_new_subuser": "Add New Subuser",
+    "update_subuser": "Update Subuser",
+    "delete_subuser": "Delete Subuser",
+    "delete_subuser_notice": "This will immediately remove {name} ({email}) from this server and revoke all permissions.",
+    "configure_permissions": "Configure Permissions",
+
+    "cant_add_owner": "You cannot add the server owner as a subuser for this server.",
+    "subuser_already_exists": "A user with that email address is already assigned as a subuser for this server."
+  },
+
+  "allocations": {
+    "available_allocations": "Available Allocations",
+    "help_title": "Allocation Help",
+    "help_description": "The list to the left includes all available IPs and ports that are open for your server to use for incoming connections.",
+    "primary": "Primary",
+    "make_primary": "Make Primary"
+  },
+
+  "startup": {
+    "startup_command": "Startup Command",
+    "input_rules": "Input Rules:",
+    "variable_saved": "Startup variable successfully saved."
+  },
+
+  "backups": {
+    "all_results": "All Backups",
+    "create_new": "Create New Backup",
+    "create_warning": "Creating a new backup will stop the server if it's already running",
+    "created": "Backup {name} is now being created",
+
+    "cant_delete_locked": "You must unlock the backup before attempting to delete it.",
+    "delete_database": "Delete Backup",
+    "delete_database_notice": "Are you sure that you want to delete the {name} backup? There is no going back, all data will immediately be removed."
+  },
+
+  "schedules": {
+    "name": "Schedules",
+    "create_new": "Create Schedule",
+    "create_task": "Create Task",
+    "edit_schedule": "Edit Schedule",
+    "edit_task": "Edit Task",
+    "delete_schedule": "Delete Schedule",
+    "delete_task": "Delete Task",
+    "delete_notice": "Please confirm you want to delete the \"{name}\" schedule by repeating the name in the input below. This is an irreversible action which can not be undone.",
+    "delete_task_notice": "Are you sure you want to delete this task? This is an irreversible action.",
+    "enabled_footer": "Whether the schedule is enabled or not.",
+    "last_run_at": "Last run at: ",
+    "next_run_at": "Next run at: ",
+    "next_run_at_time": "Next run at {time}",
+    "runs_description": "Runs {description}",
+    "pause_for_seconds": "Pause for {seconds} seconds",
+
+    "states": {
+      "active": "Active",
+      "disabled": "Disabled",
+      "processing": "Processing"
+    },
+
+    "actions": {
+      "power": "Send power action",
+      "command": "Send command",
+      "backup": "Create a backup"
+    },
+
+    "power_actions": {
+      "start": "Start the server",
+      "restart": "Restart the server",
+      "stop": "Stop the server",
+      "kill": "Forcefully stop the server"
+    }
+  },
+
+  "advanced": {
+    "toggle_support_access": "Toggle Support OP Access",
+    "update_server": "Update Server",
+    "health_monitor": "Health Monitor",
+    "install_different_edition": "Install Different Edition",
+    "reinstall_server": "Reinstall Server",
+
+    "support": {
+      "description": "This will allow Support OP's on this panel to access your server till it is disabled again.",
+      "enable_access_alert": "Support OP Access has been enabled for this server.",
+      "disable_access_alert": "Support OP Access has been disabled for this server."
+    },
+
+    "updater": {
+      "description": "This will update the server. This may take a while and will lock your server while its updating. NOTE: Any modifications to the game's base files could be overwritten by the update.",
+      "no_script": "This egg has no update script available.",
+      "beta": "Use the beta branch"
+    },
+
+    "monitor": {
+      "description": "Monitors your server, and automatically restarts it if it's detected unresponsive for 15 seconds. NOTE: Some games may not support this and will do nothing.",
+      "toggled": "The health monitor has been successfully toggled."
+    },
+
+    "install_edition": {
+      "description": "This will install different edition of Minecraft of your choice on the server.",
+      "edition_footer": "The edition for the server.",
+      "version_footer": "The version of the edition.",
+      "format_footer": "All server files will be DELETED (some editions may not work with existing files)"
+    },
+
+    "reinstall": {
+      "description": "This will reinstall the server to the original state you received it as. Danger! This will overwrite ALL server data, so make sure to back up all important files."
+    }
+  },
+
+  "mods": {
+    "states": {
+      "install": "Install",
+      "installing": "Installing",
+      "uninstalling": "Uninstalling",
+      "uninstall": "Uninstall"
+    }
+  },
+
+  "backdoor_scanner": {
+    "scan": "Scan",
+    "show_non_high_severity": "Do you want to show non-high severity results?",
+    "reliability_warning": "This tool assumes you have knowledge of Lua and how backdoors function. The results found aren't guaranteed to be actual backdoors and thus require manual verification.",
+
+    "levels": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "known_backdoor": "Known Backdoor"
+    },
+
+    "detection": "Detection",
+    "description": "Description",
+
+    "detections": {
+      "hardcoded_steamid": {
+        "title": "Hardcoded SteamID",
+        "description": "Used often for hardcoding permissions only for specific person, or just for crediting own work."
+      },
+      "arbitrary_code_execution": {
+        "title": "Arbitrary Code Execution",
+        "description": "Used often to run malicious code, or to run a DRM."
+      },
+      "external_networking": {
+        "title": "External Networking",
+        "description": "Used to get info from external source, like latest version or possibly a backdoor to run code."
+      },
+      "set_usergroup": {
+        "title": "Set Usergroup",
+        "description": "Used to set player's usergroup in-game to a specific rank."
+      },
+      "_g_access": {
+        "title": "_G Access",
+        "description": "Can be used to get any global variable, often used to hide what function is getting called."
+      },
+      "getfenv": {
+        "title": "getfenv Usage",
+        "description": "Can be potentially used to get _G"
+      },
+      "setmetatable": {
+        "title": "setmetatable",
+        "description": "Setting metatable."
+      },
+      "string_char": {
+        "title": "string.char",
+        "description": "Used to create a string from bytes, often used alongside with obfuscated code."
+      },
+      "console_command": {
+        "title": "Console Command",
+        "description": "Runs console command either as a client or a server."
+      },
+      "ulx_in_a_string": {
+        "title": "ULX in a string",
+        "description": "Often used in backdoors to set ranks or do other tings with ULX."
+      },
+      "ip_tracking": {
+        "title": "IP Tracking",
+        "description": "Allows getting IP address either of the server or a client."
+      },
+      "massive_indentation": {
+        "title": "Massive Indentation",
+        "description": "Possible attempt at hiding a backdoor."
+      },
+      "sendlua": {
+        "title": "SendLua",
+        "description": "Can be used to send malicious code to a client."
+      },
+      "backdoor": {
+        "title": "Backdoor",
+        "description": "Confirmed known backdoor."
+      }
+    }
+  },
+
+  "fastdl": {
+    "sync": "Sync FastDL Content",
+    "sync_button": "Sync FastDL",
+    "note": "This will sync all your FastDL content from the game server, compress it and upload to our web server. Everything inside the garrysmod/, garrysmod/addons/ and garrysmod/gamemodes/ folder that contains downloadable content will be synced.",
+    "click_button": "Click this button:",
+    "enable_fastdl": "To enable FastDL for your server after a sync, you need to add {code} into your {file} file.",
+    "sync_started": "FastDL is now syncing. You will be notified when it finishes."
+  },
+
+  "modpacks": {
+    "install_modpack": "Install Modpack",
+    "install_warning": "You are about to install {modpack}, this is an operation which may overwrite existing files & can not be reversed.",
+    "format_footer": "Ticking the format option means that all existing files will be deleted before installing the modpack."
+  },
+
+  "plugins": {
+    "plugin_installed": "{name} plugin has been successfully installed.",
+    "premium": "Not available (premium)",
+    "external": "Not available (external)"
+  },
+
+  "minecraft": {
+    "editions": {
+      "bungeecord": "Bungeecord",
+      "craftbukkit": "CraftBukkit",
+      "fabric": "Fabric",
+      "fabric_snapshots": "Fabric (Snapshots)",
+      "forge": "Forge",
+      "paper": "Paper",
+      "purpur": "Purpur",
+      "spigot": "Spigot",
+      "spongevanilla": "SpongeVanilla",
+      "tuinity": "Tuinity",
+      "vanilla": "Vanilla",
+      "vanilla_snapshots": "Vanilla (Snapshots)",
+      "velocity": "Velocity",
+      "waterfall": "Waterfall"
+    }
+  }
+}

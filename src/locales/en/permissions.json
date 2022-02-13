@@ -1,0 +1,770 @@
+{
+  "server": {
+    "support": {
+      "title": "Support OP Access",
+      "description": "Permissions which are related to allowing support op access to this server.",
+
+      "update": {
+        "title": "Update",
+        "description": "Toggle Support OP Access for this server in the Support tab."
+      }
+    },
+
+    "control": {
+      "title": "Control",
+      "description": "Permissions which are related the servers power state or console.",
+
+      "console": {
+        "title": "Console",
+        "description": "Allows the user to view the console logs for this server."
+      },
+
+      "command": {
+        "title": "Run commands",
+        "description": "Allows the user to send commands to the console. If the user does not have stop or restart permissions they cannot send the application's stop command."
+      },
+
+      "start": {
+        "title": "Start",
+        "description": "Allows the user to start this server."
+      },
+
+      "stop": {
+        "title": "Stop",
+        "description": "Allows the user to stop this server."
+      },
+
+      "restart": {
+        "title": "Restart",
+        "description": "Allows the user to restart this server."
+      }
+    },
+
+    "subuser": {
+      "title": "Subuser",
+      "description": "Permissions which allow users to manage other subusers assigned to the server.",
+
+      "read": {
+        "title": "Read",
+        "description": "Allows the user to list & inspect subusers assigned to this server."
+      },
+
+      "update": {
+        "title": "Update",
+        "description": "Allows the user to edit permissions assigned to other subusers."
+      },
+
+      "create": {
+        "title": "Create",
+        "description": "Allows the user to create additional subusers on this server."
+      },
+
+      "delete": {
+        "title": "Delete",
+        "description": "Allows the user to delete other subusers on this server."
+      }
+    },
+
+    "allocation": {
+      "title": "Allocation",
+      "description": "Permissions which allow the user to manage all assigned IP:Port's to this server.",
+
+      "read": {
+        "title": "Read",
+        "description": "Allows the user to view all allocations assigned to this server. Users with any access to the server can always view the default allocation via the Details page."
+      },
+
+      "update": {
+        "title": "Update",
+        "description": "Allows the user to change the primary allocation."
+      }
+    },
+
+    "startup": {
+      "title": "Startup Parameters",
+      "description": "Permissions which allow users to manage the server's configuration.",
+
+      "read": {
+        "title": "Read",
+        "description": "Allows the user to view the startup command and associated variables for this server."
+      },
+
+      "update": {
+        "title": "Update",
+        "description": "Allows the user to modify startup variables for this server."
+      }
+    },
+
+    "database": {
+      "title": "Database",
+      "description": "Permissions which allow users to manage MySQL databases for the server.",
+
+      "read": {
+        "title": "Read",
+        "description": "Allows the user to view all databases associated with this server including the usernames and passwords for the databases."
+      },
+
+      "update": {
+        "title": "Reset password",
+        "description": "Allows the user to reset the passwords for databases."
+      },
+
+      "create": {
+        "title": "Create",
+        "description": "Allows the user to create additional databases for this server."
+      },
+
+      "delete": {
+        "title": "Delete",
+        "description": "Allows the user to delete the databases from this server."
+      }
+    },
+
+    "file": {
+      "title": "File Manager",
+      "description": "Permissions which allow users to manage the files stored on a server through the File Manager or the SFTP Server.",
+
+      "sftp": {
+        "title": "SFTP",
+        "description": "Allows the user to connect to the SFTP server."
+      },
+
+      "list": {
+        "title": "List",
+        "description": "Allows the user to list all files & folders on this server but not view file contents."
+      },
+
+      "read": {
+        "title": "Read",
+        "description": "Allows the user to view the contents of existing files."
+      },
+
+      "write": {
+        "title": "Write",
+        "description": "Allows the user to update the contents of existing files for this server."
+      },
+
+      "create": {
+        "title": "Create",
+        "description": "Allows the user to create new files for this server."
+      },
+
+      "delete": {
+        "title": "Delete",
+        "description": "Allows the user to delete files from this server in the file manager or SFTP."
+      },
+
+      "archive": {
+        "title": "Archive",
+        "description": "Allows the user to compress files & folders in the file manager."
+      },
+
+      "git": {
+        "title": "Git",
+        "description": "Allows the user to use git actions (ie Cloning, Pulling)."
+      },
+
+      "steam_workshop": {
+        "title": "Steam workshop",
+        "description": "Allows the user to use the workshop downloader."
+      }
+    },
+
+    "schedule": {
+      "title": "Schedule",
+      "description": "Permissions which allow the user to create automatic tasks that run periodically on the server.",
+
+      "read": {
+        "title": "Read",
+        "description": "Allows the user to list schedules & view a schedule's details including all of the assigned tasks."
+      },
+
+      "update": {
+        "title": "Update",
+        "description": "Allows the user to edit a schedule including all of the schedule's tasks. This will allow the user to remove individual tasks, but not delete the schedule itself."
+      },
+
+      "create": {
+        "title": "Create",
+        "description": "Allows the user to create a new schedule."
+      },
+
+      "delete": {
+        "title": "Delete",
+        "description": "Allows the user to delete schedules from this server."
+      }
+    },
+
+    "backup": {
+      "title": "Backup",
+      "description": "Permissions which allow the user to manage backups of the servers files.",
+
+      "read": {
+        "title": "Read",
+        "description": "Allows the user to view all backups for this server."
+      },
+
+      "update": {
+        "title": "Update",
+        "description": "Allows the user lock/unlock backups to stop them from being automatically deleted to make room for future backups."
+      },
+
+      "create": {
+        "title": "Create",
+        "description": "Allows the user to create backups for this server."
+      },
+
+      "delete": {
+        "title": "Delete",
+        "description": "Allows the user to delete a backup belonging to this server."
+      },
+
+      "deploy": {
+        "title": "Deploy",
+        "description": "Allows the user to deploy a backup to this server."
+      },
+
+      "download": {
+        "title": "Download",
+        "description": "Allows the user to download a backup belonging to this server."
+      }
+    },
+
+    "details": {
+      "title": "Details",
+      "description": "Permissions which allow the user to change the name that identifies the server in the panel.",
+
+      "read": {
+        "title": "Read",
+        "description": "Allows the user to view this server details."
+      },
+
+      "update": {
+        "title": "Update",
+        "description": "Allows the user to change this server name. This only allows the user to change the name the server is named in the panel, not in-game."
+      }
+    },
+
+    "audit": {
+      "title": "Audit Log",
+      "description": "Permissions which allow the user to inspect all actions going on for this server.",
+
+      "read": {
+        "title": "Read",
+        "description": "Allows the user to view this server action logs. Note: This may contain information which could be locked behind other permissions."
+      }
+    },
+
+    "fastdl": {
+      "title": "FastDL",
+      "description": "Permissions which allow the user to view the FastDL link or sync content to FastDL for this server.",
+
+      "read": {
+        "title": "Read",
+        "description": "Allows the user to see the FastDL page for this server."
+      },
+
+      "update": {
+        "title": "Update",
+        "description": "Allows the user to sync FastDL content from this server."
+      }
+    },
+
+    "scanner": {
+      "title": "Backdoor Scanner",
+      "description": "Permissions which allow the user to scan the server's files for backdoors.",
+
+      "update": {
+        "title": "Update",
+        "description": "Allows the user to use the Backdoor Scanner for this server."
+      }
+    },
+
+    "mod": {
+      "title": "Mod Manager",
+      "description": "Permissions which allow the user to view & install one-click mods for this server.",
+
+      "read": {
+        "title": "Read",
+        "description": "Allows the user to view available one-click mods to install on this server."
+      },
+
+      "update": {
+        "title": "Update",
+        "description": "Allows the user to install one-click mods on this server."
+      }
+    },
+
+    "modpack": {
+      "title": "Modpack Manager",
+      "description": "Permissions which allow the user to install Minecraft Modpacks on this server.",
+
+      "read": {
+        "title": "Read",
+        "description": "Allows the user to view which modpacks are available for installation on this server."
+      },
+
+      "update": {
+        "title": "Install",
+        "description": "Allows the user to install a modpack on this server."
+      }
+    },
+
+    "plugin": {
+      "title": "Plugin Manager",
+      "description": "Permissions which allow the user to install Minecraft Plugins on this server.",
+
+      "read": {
+        "title": "Read",
+        "description": "Allows the user to view which plugins are available for installation on this server."
+      },
+
+      "update": {
+        "title": "Update",
+        "description": "Allows the user to install a plugin on this server."
+      }
+    },
+
+    "updater": {
+      "title": "Steam Updater",
+      "description": "Permissions which allow the user to update steamcmd based servers.",
+
+      "update": {
+        "title": "Update",
+        "description": "Allows the user to use the Steam Updater for this server."
+      }
+    },
+
+    "monitor": {
+      "title": "Health Monitor",
+      "description": "Permissions which allow the user to use the manage the Health Monitor for this server.",
+
+      "read": {
+        "title": "Read",
+        "description": "Allows the user to view the status of server's Health Monitor."
+      },
+
+      "update": {
+        "title": "Update",
+        "description": "Allows the user to toggle the server's Health Monitor status."
+      }
+    },
+
+    "reinstall": {
+      "title": "Reinstall",
+      "description": "Permissions which allow the user to trigger a re-installation for this server.",
+
+      "update": {
+        "title": "Update",
+        "description": "Allows the user to reinstall this server."
+      }
+    }
+  },
+
+  "admin": {
+    "license": {
+      "title": "License",
+      "description": "Permissions which allow the to view the WISP instances license information.",
+
+      "read": {
+        "title": "Read",
+        "description": "Allows the user to view the License information on the overview page."
+      }
+    },
+
+    "settings": {
+      "title": "Settings",
+      "description": "Permissions which allow admins to customise the WISP instance.",
+
+      "update": {
+        "title": "Update",
+        "description": "Ability to update instance settings."
+      }
+    },
+
+    "migrator": {
+      "title": "Migrator",
+      "description": "Permission to use the migrator system.",
+
+      "read": {
+        "title": "Read",
+        "description": "Permission to read migrators."
+      },
+
+      "update": {
+        "title": "Update",
+        "description": "Permission to update migrators."
+      }
+    },
+
+    "announcement": {
+      "title": "Announcement",
+      "description": "Permission to use the announcement system.",
+
+      "read": {
+        "title": "Read",
+        "description": "Permission to read announcements."
+      },
+
+      "create": {
+        "title": "Create",
+        "description": "Permission to create announcements."
+      },
+
+      "update": {
+        "title": "Update",
+        "description": "Permission to update announcements."
+      },
+
+      "delete": {
+        "title": "Delete",
+        "description": "Permission to delete announcements."
+      }
+    },
+
+    "application_api": {
+      "title": "Application Api",
+      "description": "Permission to use the application api system.",
+
+      "read": {
+        "description": "Permission to read application apis.",
+        "title": "Read"
+      },
+
+      "create": {
+        "description": "Permission to create application apis.",
+        "title": "Create"
+      },
+
+      "update": {
+        "description": "Permission to update application apis.",
+        "title": "Update"
+      },
+
+      "delete": {
+        "description": "Permission to delete application apis.",
+        "title": "Delete"
+      }
+    },
+
+    "database_host": {
+      "title": "Database Host",
+      "description": "Permission to use the database host system.",
+
+      "read": {
+        "title": "Read",
+        "description": "Permission to read database hosts."
+      },
+
+      "create": {
+        "title": "Create",
+        "description": "Permission to create database hosts."
+      },
+
+      "update": {
+        "title": "Update",
+        "description": "Permission to update database hosts."
+      },
+
+      "delete": {
+        "title": "Delete",
+        "description": "Permission to delete database hosts."
+      }
+    },
+
+    "location": {
+      "title": "Location",
+      "description": "Permission to use the location system.",
+
+      "read": {
+        "title": "Read",
+        "description": "Permission to read locations."
+      },
+
+      "create": {
+        "title": "Create",
+        "description": "Permission to create locations."
+      },
+
+      "update": {
+        "title": "Update",
+        "description": "Permission to update locations."
+      },
+
+      "delete": {
+        "title": "Delete",
+        "description": "Permission to delete locations."
+      }
+    },
+
+    "node": {
+      "description": "Permission to use the node system.",
+      "title": "Node",
+
+      "read": {
+        "title": "Read",
+        "description": "Permission to read nodes."
+      },
+
+      "update": {
+        "title": "Update",
+        "description": "Permission to update nodes."
+      },
+
+      "delete": {
+        "title": "Delete",
+        "description": "Permission to delete nodes."
+      }
+    },
+
+    "node_allocation": {
+      "title": "Node Allocation",
+      "description": "Permission to use the node allocation system.",
+
+      "read": {
+        "title": "Read",
+        "description": "Permission to read node allocations."
+      },
+
+      "create": {
+        "title": "Create",
+        "description": "Permission to create node allocations."
+      },
+
+      "update": {
+        "title": "Update",
+        "description": "Permission to update node allocations."
+      },
+
+      "delete": {
+        "title": "Delete",
+        "description": "Permission to delete node allocations."
+      }
+    },
+
+    "user": {
+      "title": "User",
+      "description": "Permission to use the user system.",
+
+      "read": {
+        "title": "Read",
+        "description": "Permission to read users."
+      },
+
+      "create": {
+        "title": "Create",
+        "description": "Permission to create users."
+      },
+
+      "update": {
+        "title": "Update",
+        "description": "Permission to update users."
+      },
+
+      "delete": {
+        "title": "Delete",
+        "description": "Permission to delete users."
+      }
+    },
+
+    "mod": {
+      "title": "Mod",
+      "description": "Permission to use the mod system.",
+
+      "read": {
+        "title": "Read",
+        "description": "Permission to read mods."
+      },
+
+      "create": {
+        "title": "Create",
+        "description": "Permission to create mods."
+      },
+
+      "update": {
+        "title": "Update",
+        "description": "Permission to update mods."
+      },
+
+      "delete": {
+        "title": "Delete",
+        "description": "Permission to delete mods."
+      }
+    },
+
+    "nest": {
+      "title": "Nest",
+      "description": "Permission to use the nest system.",
+
+      "read": {
+        "title": "Read",
+        "description": "Permission to read nests."
+      },
+
+      "create": {
+        "title": "Create",
+        "description": "Permission to create nests."
+      },
+
+      "update": {
+        "title": "Update",
+        "description": "Permission to update nests."
+      },
+
+      "delete": {
+        "title": "Delete",
+        "description": "Permission to delete nests."
+      }
+    },
+
+    "egg": {
+      "title": "Egg",
+      "description": "Permission to use the egg system.",
+
+      "read": {
+        "title": "Read",
+        "description": "Permission to read eggs."
+      },
+
+      "create": {
+        "title": "Create",
+        "description": "Permission to create eggs."
+      },
+
+      "update": {
+        "title": "Update",
+        "description": "Permission to update eggs."
+      },
+
+      "delete": {
+        "title": "Delete",
+        "description": "Permission to delete eggs."
+      }
+    },
+
+    "egg_variable": {
+      "title": "Egg Variable",
+      "description": "Permission to use the egg variable system.",
+
+      "read": {
+        "description": "Permission to read egg variables.",
+        "title": "Read"
+      },
+
+      "create": {
+        "description": "Permission to create egg variables.",
+        "title": "Create"
+      },
+
+      "update": {
+        "description": "Permission to update egg variables.",
+        "title": "Update"
+      },
+
+      "delete": {
+        "description": "Permission to delete egg variables.",
+        "title": "Delete"
+      }
+    },
+
+    "server": {
+      "title": "Server",
+      "description": "Permission to use the server system.",
+
+      "suspend": {
+        "title": "Suspend",
+        "description": "Permission to suspend servers."
+      },
+
+      "toggle_backup": {
+        "title": "Toggle Backup",
+        "description": "Permission to toggle backup servers."
+      },
+
+      "read": {
+        "title": "Read",
+        "description": "Permission to read servers."
+      },
+
+      "create": {
+        "description": "Permission to create servers.",
+        "title": "Create"
+      },
+
+      "move": {
+        "title": "Move",
+        "description": "Permission to move servers."
+      },
+
+      "reset_mods": {
+        "title": "Reset Mods",
+        "description": "Permission to reset mods servers."
+      },
+
+      "details_update": {
+        "title": "Details Update",
+        "description": "Permission to details update servers."
+      },
+
+      "toggle_move": {
+        "title": "Toggle Move",
+        "description": "Permission to toggle move servers."
+      },
+
+      "toggle_update": {
+        "title": "Toggle Update",
+        "description": "Permission to toggle update servers."
+      },
+
+      "toggle_install": {
+        "title": "Toggle Install",
+        "description": "Permission to toggle install servers."
+      },
+
+      "build_update": {
+        "title": "Build Update",
+        "description": "Permission to build update servers."
+      },
+
+      "rebuild": {
+        "title": "Rebuild",
+        "description": "Permission to rebuild servers."
+      },
+
+      "reinstall": {
+        "title": "Reinstall",
+        "description": "Permission to reinstall servers."
+      },
+
+      "delete": {
+        "title": "Delete",
+        "description": "Permission to delete servers."
+      }
+    },
+
+    "server_database": {
+      "title": "Server Database",
+      "description": "Permission to use the server database system.",
+
+      "read": {
+        "title": "Read",
+        "description": "Permission to read server databases."
+      },
+
+      "create": {
+        "title": "Create",
+        "description": "Permission to create server databases."
+      },
+
+      "update": {
+        "title": "Update",
+        "description": "Permission to update server databases."
+      },
+
+      "delete": {
+        "title": "Delete",
+        "description": "Permission to delete server databases."
+      }
+    }
+  }
+}

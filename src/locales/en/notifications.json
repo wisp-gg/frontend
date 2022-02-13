@@ -1,0 +1,39 @@
+{
+  "server": {
+    "backup": {
+      "created": "Finished the creation of the backup {name}.",
+      "failed_to_create": "Failed to create the backup {name}: {err}",
+
+      "deployed": "Finished the deployment of the backup {name}.",
+      "failed_to_deploy": "Failed to deploy the backup {name}."
+    },
+
+    "update": {
+      "updated": "Finished updating.",
+      "failed": "Failed to update the server."
+    },
+
+    "installed": "Finished installing.",
+
+    "version": {
+      "installed": "Finished installing version {name}.",
+      "failed": "Failed to install the version {name}."
+    },
+
+    "fastdl": {
+      "synced": "FastDL has been synced.",
+      "failed": "Failed syncing FastDL."
+    },
+
+    "move": {
+      "moved": "Finished moving.",
+      "db_migration_failed": "Failed migrating the database {name}.",
+
+      "failed": "Failed server transfer.",
+      "failed_to_delete_archive": "Failed deleting server transfer archive for {name}.",
+      "failed_to_delete_created_server": "Failed deleting created server on {name}.",
+      "failed_to_update_allocation": "Failed to free old allocation on {name}.",
+      "failed_final_stage": "Failed final stage for server transfer (make sure old server got deleted from {name} and dbs moved host if not failed)"
+    }
+  }
+}

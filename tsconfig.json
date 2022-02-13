@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "declaration": true,
+    "noUnusedLocals": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "allowJs": true,
+    "checkJs": true,
+    "paths": {
+      "~/*": ["src/*"]
+    },
+    "typeRoots": [
+      "./src/**/*.d.ts"
+    ]
+  },
+  "exclude": [
+    "./node_modules"
+  ],
+  "include": [
+    "./src/**/*.ts",
+    "./src/**/*.d.ts",
+    "./src/**/*.vue"
+  ]
+}

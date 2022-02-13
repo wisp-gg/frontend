@@ -1,0 +1,145 @@
+{
+  "api_docs": "API Docs",
+  "search": "Search",
+  "accept": "Accept",
+  "create": "Create",
+  "submit": "Submit",
+  "delete": "Delete",
+  "cancel": "Cancel",
+  "enable": "Enable",
+  "deploy": "Deploy",
+  "scan": "Scan",
+  "download": "Download",
+  "enabled": "Enabled",
+  "disable": "Disable",
+  "disabled": "Disabled",
+  "export": "Export",
+  "open_modal": "Open modal",
+  "uuid": "UUID",
+  "no_items": "No items",
+  "not_applicable": "N/A",
+  "requires_permission": "You need the {permission} permission. | You need the following permissions: {permission}",
+  "copied_to_clipboard": "Copied to clipboard!",
+  "click_to_reveal": "Click to Reveal.",
+  "reset_password": "Reset Password",
+  "unknown": "Unknown",
+  "results": "no results | 1 result | {n} results",
+  "no_results_found": "No results found",
+  "more_info": "More Info",
+  "changes": "Changes",
+  "metadata": "Metadata",
+  "install": "Install",
+  "manage": "Manage",
+  "edit": "Edit",
+  "trigger": "Trigger",
+  "never": "Never",
+  "none": "None",
+  "save": "Save",
+  "import": "Import",
+  "success": "Success",
+  "info": "Info",
+  "warning": "Warning",
+  "danger": "Danger",
+  "reset": "Reset",
+  "loading": "Loading",
+  "click_to_upload_image": "Click to upload a new image",
+  "invalid_file_type": "Invalid file type",
+  "information": "Information",
+  "description": "Description",
+  "at_a_glance": "At a glance",
+  "settings": "Settings",
+  "limits": "Limits",
+  "notifications": "Notifications",
+  "announcements": "Announcements",
+  "clear_all": "Clear All",
+  "formats": "Formats:",
+  "device_information": "Device Information",
+  "permissions": "Permissions",
+  "lock": "Lock",
+  "unlock": "Unlock",
+  "toggle": "Toggle",
+  "reinstall": "Reinstall",
+  "suspend": "Suspend",
+  "unsuspend": "Unsuspend",
+
+  "users": "Users",
+  "allocations": "Allocations",
+  "database_hosts": "Database Hosts",
+  "server_databases": "Server Databases",
+  "eggs": "Eggs",
+  "locations": "Locations",
+  "nests": "Nests",
+  "nodes": "Nodes",
+  "servers": "Servers",
+
+  "something_went_wrong": "Something went wrong while trying to perform this action.",
+
+  "server": {
+    "hostname": "Hostname",
+    "name": "Name",
+    "cpu": "CPU",
+    "memory": "Memory",
+    "disk": "Disk",
+    "node": "Node",
+    "players": "Players",
+    "players_amount": "{current} / {max} Players",
+    "ip": "IP",
+    "manage": "Manage",
+    "go_to_console": "Go To Console",
+    "launch_sftp": "Launch SFTP",
+    "on_node": " on {node}",
+
+    "gamemode": "Gamemode",
+    "version": "Version",
+    "map": "Map",
+
+    "resource_usage": "Resource Usage",
+    "memory_usage": "Memory Usage",
+    "cpu_usage": "CPU Usage",
+
+    "status": {
+      "unknown": "Unknown",
+      "error": "Error",
+
+      "offline": "Offline",
+      "online": "Online",
+      "starting": "Starting",
+      "stopping": "Stopping",
+
+      "migrating": "Pending migration",
+
+      "installing": "Installing",
+      "failed_install": "Failed to install",
+
+      "suspended": "Suspended",
+      "updating": "Updating",
+      "moving": "Moving",
+
+      "creating_backup": "Creating backup",
+      "deploying_backup": "Deploying backup"
+    }
+  },
+
+  "units": {
+    "bytes": "B",
+    "kilobytes": "KB",
+    "megabytes": "MB",
+    "gigabytes": "GB",
+    "terabytes": "TB"
+  },
+
+  "dates": {
+    "minute_abbreviation": "m",
+    "minute": "minute | minutes"
+  },
+
+  "labels": {
+    "unknown": "Unknown",
+    "latest": "Latest",
+    "recommended": "Recommended"
+  },
+
+  "languages": {
+    "en": "English"
+  }
+}

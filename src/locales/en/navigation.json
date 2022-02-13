@@ -1,0 +1,392 @@
+{
+  "404": {
+    "title": "Not Found",
+    "description": "Couldn't find the page you were looking for."
+  },
+
+  "login": {
+    "index": {
+      "title": "Login",
+      "description": "Login to the panel."
+    },
+
+    "reset_password": {
+      "title": "Reset Password",
+      "description": "Reset your account's password.",
+
+      "token": {
+        "title": "Reset Password",
+        "description": "Finish resetting your account's password."
+      }
+    }
+  },
+
+  "index": {
+    "title": "My Servers",
+    "description": "Servers you have access to."
+  },
+
+  "account": {
+    "title": "My Account",
+
+    "settings": {
+      "title": "Account Settings",
+      "description": "Manage your account details."
+    },
+    "security": {
+      "title": "Security Controls",
+      "description": "Control active sessions and 2-Factor Authentication."
+    }
+  },
+
+  "server": {
+    "title": "My Server",
+
+    "system": {
+      "title": "System",
+
+      "index": {
+        "title": "Console",
+        "description": "Control your server in real time."
+      },
+      "details": {
+        "title": "Server Details",
+        "description": "See details about your game server."
+      },
+      "sftp": {
+        "title": "SFTP Details",
+        "description": "Account details for SFTP connections."
+      },
+      "audit_logs": {
+        "title": "Audit Logs",
+        "description": "View everything happening to your server."
+      }
+    },
+
+    "management": {
+      "title": "Management",
+
+      "files": {
+        "index": {
+          "title": "File Manager",
+          "description": "Manage all of your files directly from the web."
+        },
+        "new": {
+          "title": "New File",
+          "description": "Create a new file."
+        },
+        "edit": {
+          "title": "Edit File",
+          "description": "Make modifications to a file."
+        }
+      },
+      "databases": {
+        "title": "Databases",
+        "description": "All databases available for this server."
+      },
+      "backups": {
+        "title": "Backups",
+        "description": "Manage & deploy server backups here."
+      },
+      "subusers": {
+        "index": {
+          "title": "Subusers",
+          "description": "Control who can access your server."
+        },
+        "new": {
+          "title": "New Subuser",
+          "description": "Add a new user with permissions to your server."
+        },
+        "edit": {
+          "title": "Edit Subuser",
+          "description": "Modify a user's access to server."
+        }
+      },
+      "allocations": {
+        "title": "Allocations",
+        "description": "Control the IPs and ports available on this server."
+      }
+    },
+
+    "configuration": {
+      "title": "Configuration",
+
+      "startup": {
+        "title": "Startup Parameters",
+        "description": "Control server startup arguments."
+      },
+      "schedules": {
+        "index": {
+          "title": "Schedules",
+          "description": "Manage all of this server's schedules in one place."
+        },
+        "manage": {
+          "title": "Manage Schedule",
+          "description": "Manage the tasks & execution time of this schedule."
+        }
+      },
+      "advanced": {
+        "title": "Advanced",
+        "description": "Manage extra options for your server here."
+      }
+    },
+
+    "tools": {
+      "title": "Tools",
+
+      "modpacks": {
+        "title": "Modpack Manager",
+        "description": "Easy way to install mod packs."
+      },
+      "plugins": {
+        "title": "Plugin Manager",
+        "description": "Easy way to install plugins."
+      },
+      "mods": {
+        "title": "Mod Manager",
+        "description": "Easy way to install addons."
+      },
+      "backdoor_scanner": {
+        "title": "Backdoor Scanner",
+        "description": "Find possibly exploitable code in your installed addons."
+      },
+      "fastdl": {
+        "title": "FastDL",
+        "description": "Automatic FastDL Manager for your server."
+      }
+    }
+  },
+
+  "admin": {
+    "title": "Admin",
+
+    "administration": {
+      "title": "Administration",
+
+      "index": {
+        "title": "Overview",
+        "description": "A quick glance at your panel status."
+      },
+      "settings": {
+        "title": "Settings",
+
+        "general": {
+          "title": "General",
+          "description": "Configure WISP to your liking."
+        },
+        "branding": {
+          "title": "Branding",
+          "description": "Configure branding for the panel."
+        },
+        "embed": {
+          "title": "Embed",
+          "description": "Configure OpenGraph embed values for platforms like Discord or Twitter."
+        },
+        "js_injector": {
+          "title": "JS Injector",
+          "description": "Add extra JavaScript to your WISP panel."
+        },
+        "css_injector": {
+          "title": "CSS Injector",
+          "description": "Add extra CSS to your WISP panel."
+        },
+        "whmcs": {
+          "title": "WHMCS SSO",
+          "description": "Configure WHMCS Single-Sign-On integration."
+        }
+      },
+      "migrator": {
+        "title": "Migrator",
+        "description": "Migrate the data from your existing Pterodactyl instance to WISP."
+      },
+      "announcements": {
+        "title": "Announcements",
+        "description": "Broadcast messages to all of your users."
+      },
+      "application_api": {
+        "index": {
+          "title": "Application API",
+          "description": "Control access credentials to the (legacy) API."
+        },
+        "new": {
+          "title": "New Application API",
+          "description": "Create a new access credential to the (legacy) API."
+        },
+        "manage": {
+          "title": "Manage Application API",
+          "description": "Manage access credential to the (legacy) API."
+        }
+      }
+    },
+
+    "management": {
+      "title": "Management",
+
+      "database_hosts": {
+        "index": {
+          "title": "Database Hosts",
+          "description": "Database hosts that servers can have databases created on."
+        },
+        "manage": {
+          "title": "Manage Database Host",
+          "description": "Viewing associated databases and details for this database host."
+        }
+      },
+
+      "locations": {
+        "index": {
+          "title": "Locations",
+          "description": "All locations that nodes can be assigned to for easier categorization."
+        },
+        "manage": {
+          "title": "Manage Location",
+          "description": "Viewing associated nodes and details for this location."
+        }
+      },
+
+      "nodes": {
+        "index": {
+          "title": "Nodes",
+          "description": "All nodes available to deploy servers on within this panel."
+        },
+        "manage": {
+          "about": {
+            "title": "About",
+            "description": "A quick overview of your node."
+          },
+          "settings": {
+            "title": "Settings",
+            "description": "Configure your node settings."
+          },
+          "allocations": {
+            "title": "Allocations",
+            "description": "Control allocations available for servers on this node."
+          }
+        }
+      },
+
+      "servers": {
+        "index": {
+          "title": "Servers",
+          "description": "All servers available on the system."
+        },
+        "new": {
+          "title": "New Server",
+          "description": "Add a new server to the panel."
+        },
+        "manage": {
+          "about": {
+            "title": "About",
+            "description": "A quick overview of the server."
+          },
+          "details": {
+            "title": "Details",
+            "description": "Edit details for this server including owner and container."
+          },
+          "build_configuration": {
+            "title": "Build Configuration",
+            "description": "Control allocations and system resources for this server."
+          },
+          "startup": {
+            "title": "Startup",
+            "description": "Control startup command as well as variables."
+          },
+          "databases": {
+            "title": "Databases",
+            "description": "Manage databases for this server."
+          },
+          "advanced": {
+            "title": "Advanced",
+            "description": "Additional actions to control this server."
+          }
+        }
+      },
+
+      "users": {
+        "index": {
+          "title": "Users",
+          "description": "All registered users on the system."
+        },
+
+        "new": {
+          "title": "New User",
+          "description": "Create a new user on the system."
+        },
+
+        "manage": {
+          "title": "Manage User",
+          "description": "Manage an existing user on the system."
+        }
+      }
+    },
+
+    "service_management": {
+      "title": "Service Management",
+
+      "nests": {
+        "index": {
+          "title": "Nests",
+          "description": "All nests currently available on this system."
+        },
+
+        "manage": {
+          "title": "Manage Nest",
+          "description": "Manage an existing nest on the system."
+        },
+
+        "egg": {
+          "title": "Egg Management",
+
+          "new": {
+            "title": "New Egg",
+            "description": "Create a new Egg to assign to servers."
+          },
+
+          "configuration": {
+            "title": "Configuration",
+            "description": "Configure an existing egg on the system."
+          },
+
+          "variables": {
+            "title": "Variables",
+            "description": "Configure the environment variables for this egg."
+          },
+
+          "scripts": {
+            "title": "Scripts",
+            "description": "Configure the install/update script for this egg."
+          },
+
+          "thumbnail": {
+            "title": "Thumbnail",
+            "description": "Configure the thumbnail picture for this egg."
+          }
+        }
+      },
+
+      "mods": {
+        "index": {
+          "title": "Mods",
+          "description": "All service mods available on the system."
+        },
+
+        "new": {
+          "title": "New Mod",
+          "description": "Create a new mod on the system."
+        },
+
+        "manage": {
+          "title": "Manage Mod",
+          "description": "Manage an existing service mod on the system."
+        }
+      }
+    }
+  },
+
+  "errors": {
+    "go_back": "Return to Previous Page",
+    "go_home": "Go Home",
+    "404": "The requested resource couldn't be found.",
+    "429": "You are currently being rate-limited, try again couple of minutes later."
+  }
+}

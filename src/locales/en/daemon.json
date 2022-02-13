@@ -1,0 +1,76 @@
+{
+  "generic": {
+    "rebuild_required": "{yellow}Your server container needs to be rebuilt. This should only take a few seconds, but could take a few minutes. You do not need to do anything else while this occurs. Your server will automatically continue with startup once this process is completed.",
+    "rebuild_started": "{yellow}Rebuilding server container...",
+    "rebuild_in_progress": "{yellow}Please wait while your server is being rebuilt.",
+    "rebuild_updating_config": "{yellow}New container built, rotating hamsters...",
+    "rebuild_complete": "{cyan}Completed rebuild process for server. Server is now booting.",
+
+    "logs_throttled": "{yellow}Your server is sending too much data too quickly! Automatic spam detection triggered.",
+    "checking_size": "{cyan}Checking size of server data directory...",
+    "disk_usage": "{yellow}Disk Usage: {current}M / {limit}M",
+    "ensuring_permissions": "{yellow}Ensuring file permissions.",
+    "initializing_container": "{yellow}Container is being initialized...",
+    "running_preflight": "{yellow}Running server preflight.",
+    "starting_container": "{green}Starting server container.",
+    "resource_limits_modified": "{warning}Your server has had some resource limits modified, you may need to restart to apply them.",
+
+    "aborting_reboot": "{red}Aborting automatic reboot due to crash within the last 60 seconds.",
+    "crash_detected_rebooting": "{red}Server process detected as entering a crashed state; rebooting.",
+    "crash_detected": "{bgRed}---------- Detected server process in a crashed state! ----------",
+    "exit_code": "{red}Exit code: {white}{exitCode}",
+    "out_of_memory": "{red}Out of Memory: {white}{oomKilled}",
+    "error_response": "{red}Error Response: {white}{error}",
+
+    "state_changed": {
+      "on": "{cyan}Server marked as {bold}ON",
+      "off": "{cyan}Server marked as {bold}OFF",
+      "killed": "{cyan}Server marked as {bold}KILLED",
+      "starting": "{cyan}Server marked as {bold}STARTING",
+      "stopping": "{cyan}Server marked as {bold}STOPPING"
+    }
+  },
+
+  "health": {
+    "detected_map_change": "{yellow}Detected on-going map change, pausing Health Monitor...",
+    "map_change_timeout": "{yellow}Map change is taking over 3 minutes, assuming Health Monitor can be resumed...",
+    "map_change_finished": "{yellow}Map change finished, resuming Health Monitor..."
+  },
+
+  "errors": {
+    "unable_to_read_log_file": "An error was encountered while attempting to read the log file!",
+    "preflight_file_parse": "Encountered an error while processing {file} -- this could lead to issues running the server.\n{message}",
+    "no_egg_configuration": "No server egg configuration could be located; aborting startup.",
+    "no_stop_configuration": "No stop configuration is defined for this egg.",
+    "fatal_start_error": "A fatal error was encountered starting this server.",
+    "not_enough_disk_space": "Not enough disk space! {current}M / {limit}M",
+    "disk_space_violation": "Server is violating disk space limits, stopping process! {current}M / {limit}M",
+
+    "socket": {
+      "trouble_connecting": "We're having some trouble connecting to your server, please wait...",
+      "couldnt_validate_permissions": "There was an error validating the credentials provided for the websocket. Please refresh the page.",
+      "no_permission": "You do not have permission to access the websocket for this server.",
+      "no_upload_permission": "You do not have permission to access the upload websocket for this server.",
+      "invalid_namespace": "An invalid namespace was provided for the websocket. Please refresh the page and contact support if the issue occurs."
+    },
+
+    "steam_workshop": {
+      "no_access_to_this_feature": "You have no access to this feature.",
+      "not_enough_disk_space": "Not enough disk space! {current}M / {total} M",
+      "invalid_id": "Received an invalid workshop item.",
+      "internal_server_error": "Something went wrong while trying to fetch the workshop item, try again later.",
+      "invalid_http_code": "Received HTTP code {code} when trying to fetch the workshop item.",
+      "no_results": "Couldn't find any results for the workshop item.",
+      "invalid_json": "Received invalid JSON when trying to fetch the workshop item.",
+      "failed_getting_collection": "Unable to get the collection items from the provided workshop item.",
+      "unable_to_resolve_file_size": "Unable to resolve the file size for the workshop item.",
+      "exceeds_download_size_limit": "The item exceeds the max downloadable content size of {max_content_size} (item size is {item_size})",
+      "unable_to_resolve_file_name": "Unable to resolve the file name for the workshop item.",
+      "failed_to_download_workshop_item": "Failed to download the workshop item {title}.",
+      "failed_to_connect_to_steam": "Failed connecting to steam servers to be able to retrieve the download URL for {title}",
+      "item_does_not_exist": "The item {title} doesn't seem to exist.",
+      "failed_getting_additional_information": "Failed getting additional information for {title} (does the steam user own this game?)",
+      "item_already_exists": "The item {title} already exists."
+    }
+  }
+}

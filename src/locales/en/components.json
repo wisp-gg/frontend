@@ -1,0 +1,229 @@
+{
+  "form": {
+    "fields": {
+      "name": "Name",
+      "confirm_name": "Confirm Name",
+      "confirm_email": "Confirm Email",
+      "username": "Username",
+      "email": "Email",
+      "password": "Password",
+      "host": "Host",
+      "format": "Format",
+      "beta": "Beta",
+      "enabled": "Enabled",
+      "port": "Port",
+      "description": "Description",
+      "id": "ID",
+      "uuid": "UUID",
+      "identifier": "Identifier",
+      "author": "Author",
+      "ip": "IP",
+      "alias": "Alias",
+      "ports": "Ports",
+
+      "name_first": "First Name",
+      "name_last": "Last Name",
+      "preferences": {
+        "language": "Language",
+        "navbar_position": "Navbar Position"
+      },
+      "new_email": "New Email Address",
+      "current_password": "Current Password",
+      "new_password": "New Password",
+      "new_password_confirmation": "Repeat New Password",
+      "root_admin": "Administrator",
+      "support_op": "Support OP",
+      "support_op_bypass": "Support OP Bypass",
+      "external_id": "External ID",
+
+      "token": "Token",
+
+      "memo": "Memo",
+      "allowed_ips": "Allowed Connection IPS",
+
+      "connection_address": "Connection Address",
+      "connections_from": "Connections From",
+
+      "folder_name": "Folder Name",
+      "file_name": "File Name",
+
+      "edition": "Edition",
+      "version": "Version",
+
+      "repository": "Repository URL",
+      "branch": "Branch",
+      "access_token": "Personal Access Token",
+
+      "workshop_url": "Workshop URL",
+
+      "show_non_high_severity": "Show unfiltered results",
+
+      "time_offset": "Time offset",
+      "cron_minute": "Minute",
+      "cron_hour": "Hour",
+      "cron_day_of_week": "Day Of Week",
+      "cron_day_of_month": "Day Of Month",
+      "action": "Action",
+      "payload": "Payload",
+
+      "panel_url": "Panel URL",
+      "application_api_key": "Application API Key",
+      "users": "Users",
+      "content": "Content",
+      "type": "Type",
+      "enable_phpmyadmin": "Enable PHPMyAdmin",
+      "fqdn": "FQDN",
+      "display_fqdn": "Display FQDN",
+      "behind_proxy": "Behind Proxy",
+      "maintenance_mode": "Maintenance Mode",
+      "location": "Location",
+      "egg": "Egg",
+      "nest": "Nest",
+      "docker_image": "Docker Image",
+      "startup": "Startup Command",
+
+      "cpu": "CPU",
+      "memory": "Memory",
+      "swap": "Swap",
+      "disk": "Disk",
+      "block_io_proportion": "Block IO Proportion",
+      "overallocate": "Overallocate",
+      "database_limit": "Database Limit",
+      "allocation_limit": "Allocation Limit",
+      "backup_megabytes_limit": "Backup Size Limit",
+      "category": "Category",
+      "script_install": "Install Script",
+      "script_uninstall": "Uninstall Script",
+      "config_from": "Copy Settings From",
+      "config_logs": "Log Configuration",
+      "config_startup": "Startup Configuration",
+      "custom_config": "Custom Configuration",
+      "config_files": "Configuration Files",
+      "stop_command": "Stop Command",
+      "copy_script_from": "Copy Script From",
+      "script_container": "Script Container",
+      "script_entry": "Script Entrypoint",
+      "env_variable": "Environment Variable",
+      "default_value": "Default Value",
+      "tickable": "Tickable",
+      "user_viewable": "User Viewable",
+      "user_editable": "User Editable",
+      "rules": "Rules",
+      "primary_allocation": "Primary Allocation",
+      "secondary_allocations": "Secondary Allocations",
+      "server_owner": "Server Owner",
+      "startup_command": "Startup Command",
+      "default_startup_command": "Default Startup Command",
+      "node": "Node",
+      "backup": "Backup",
+      "force": "Force",
+      "start_on_completion": "Start server when installed",
+      "skip_scripts": "Skip install script",
+
+      "branding": {
+        "name": "Company Name"
+      },
+      "misc": {
+        "databases_allow_random": "Enable database deployment on random nodes",
+        "required_2fa": "Require 2-Factor Authentication"
+      },
+      "default_locale": "Default Language",
+
+      "og": {
+        "site_name": "Site Name",
+        "title": "Title",
+        "description": "Description",
+        "image_url": "Image URL"
+      },
+
+      "whmcs": {
+        "enabled": "WHMCS SSO Enabled",
+        "button_text": "Login Button Text",
+        "url": "WHMCS URL",
+        "client_id": "WHMCS Client ID",
+        "client_secret": "WHMCS Client Secret",
+        "api_id": "WHMCS API ID",
+        "api_secret": "WHMCS API Secret"
+      }
+    },
+
+    "validation_error": "There is the following error: | There are the following errors:",
+    "validator": {
+      "required": "This field is required | Missing field {field}",
+      "integer": "The value must be a valid integer | The field {field} must be a valid integer",
+      "email": "Invalid email | Invalid email for field {field}",
+      "max": "The value should not exceed {max} characters | The field {field} should not exceed {max} characters",
+      "regex": "The value is invalid"
+    }
+  },
+
+  "table": {
+    "labels": {
+      "key": "Key",
+      "memo": "Memo",
+      "last_used": "Last Used",
+      "created": "Created",
+
+      "uuid": "UUID",
+      "id": "ID",
+      "email": "Email",
+      "name": "Name",
+      "description": "Description",
+      "owner": "Owner",
+      "connection": "Connection",
+      "username": "Username",
+      "password": "Password",
+      "2fa": "2FA",
+      "downloads": "Downloads",
+      "queued": "Queued",
+      "tasks": "Tasks",
+      "last_run": "Last Run",
+      "next_run": "Next Run",
+
+      "file_name": "File Name",
+      "size": "Size",
+      "created_at": "Created At",
+      "migrated_at": "Migrated At",
+      "last_modified": "Last Modified",
+
+      "fqdn": "FQDN",
+      "ip": "IP",
+      "alias": "Alias",
+      "port": "Port",
+
+      "plan": "Plan",
+      "domain": "Domain",
+      "licensed_to": "Licensed to",
+      "expires": "Expires",
+      "addons": "Addons",
+      "version": "Version",
+      "category": "Category",
+
+      "active": "Active",
+      "content": "Content",
+
+      "host": "Host",
+      "databases": "Databases",
+      "node": "Node",
+      "server": "Server",
+      "connections_from": "Connections From",
+
+      "nodes": "Nodes",
+      "servers": "Servers",
+      "eggs": "Eggs",
+      "location": "Location",
+      "cpu": "CPU",
+      "memory": "Memory",
+      "disk": "Disk",
+
+      "assigned_to": "Assigned To",
+      "internal_identifier": "Internal Identifier",
+      "external_identifier": "External Identifier",
+      "service": "Service",
+      "block_io_weight": "Block IO Weight",
+      "backup_size_limit": "Backup Size Limit",
+      "default_connection": "Default Connection",
+      "connection_alias": "Connection Alias"
+    }
+  }
+}

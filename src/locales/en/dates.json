@@ -1,0 +1,45 @@
+{
+  "weekdays": [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+  ],
+  "months": [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ],
+  "formats": {
+    "L": "DD/MM/YYYY",
+    "LT": "h:mm A",
+    "LLLL": "dddd, MMMM D, YYYY h:mm A"
+  },
+  "relative_time": {
+    "future": "in {time}",
+    "past": "{time} ago",
+    "s": "a few seconds",
+    "m": "a minute",
+    "mm": "{time} minutes",
+    "h": "an hour",
+    "hh": "{time} hours",
+    "d": "a day",
+    "dd": "{time} days",
+    "M": "a month",
+    "MM": "{time} months",
+    "y": "a year",
+    "yy": "{time} years"
+  }
+}
