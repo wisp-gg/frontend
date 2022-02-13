@@ -87,7 +87,9 @@ const config: UserConfig = {
             },
 
             setCommits: {
-                auto: true,
+                repo: 'panel',
+                commit: process.env.CI_COMMIT_SHA,
+                previousCommit: process.env.CI_COMMIT_BEFORE_SHA
             },
         }),
     ],
