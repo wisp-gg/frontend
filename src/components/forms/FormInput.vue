@@ -22,6 +22,7 @@
                     :placeholder="placeholder ? t(placeholder) : ''"
                     :disabled="!hasPerms || inputDisabled"
                     :readonly="readonly"
+                    :checked="checked"
                     @blur="change"
                     @input="emitUpdate"
                     @keydown="emitKeyDown"
@@ -118,6 +119,9 @@ export default defineComponent({
             type: String,
         },
         disabled: {
+            type: Boolean,
+        },
+        checked: {
             type: Boolean,
         },
         readonly: {

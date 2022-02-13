@@ -3,7 +3,7 @@
         <alerts class="mb-6" :by-key="`server.startup.variable(${variable?.envVariable})`" />
 
         <div v-if="variable?.tickable" class="flex">
-            <v-input class="!w-5 !h-5" name="" permission="startup.update" type="checkbox" :checked="variable?.serverValue === 'true'" @change="save" hide-label no-margin />
+            <v-input class="!w-5 !h-5" name="" permission="startup.update" type="checkbox" :checked="variable?.serverValue === '1'" @change="save" hide-label no-margin />
             <p class="ml-3 font-lg uppercase">
                 <t path="generic.enabled" />
             </p>
