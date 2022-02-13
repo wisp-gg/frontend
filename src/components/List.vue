@@ -6,6 +6,12 @@
                 <input class="input w-full mb-4" name="search" :placeholder="t('generic.search')" @keyup="search">
             </slot>
 
+            <slot name="pagination">
+                <div class="flex justify-center" :class="list?.results.length ? ['my-4'] : []" v-if="list?.pagination">
+                    <paginator :pagination-data="list?.pagination" :set-page="setPage" />
+                </div>
+            </slot>
+
             <slot name="results" :results="list?.results" :meta="list?.meta" :update="update">
                 <table :key="list?.results" class="w-full block xl:table">
                     <tbody>
