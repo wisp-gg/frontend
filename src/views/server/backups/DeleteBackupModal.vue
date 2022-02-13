@@ -50,7 +50,7 @@ export default defineComponent({
 
             confirm: () => {
                 return useService('backups@delete', 'server.backups.delete_backup', {
-                    id: props.backup.id
+                    id: props.backup.uuidShort
                 }).then(() => dispatch('lists/refresh', 'backups@getAll'));
             }
         };
