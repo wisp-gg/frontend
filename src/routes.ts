@@ -492,7 +492,7 @@ export const routes: RouteRecordRaw[] = [
                         meta: {
                             icon: 'bullhorn',
                             permission: 'announcement.read',
-                            feature: 'announcements',
+                            feature: 'general:announcements',
                         },
                     },
                     {
