@@ -124,15 +124,16 @@ export default class RequestService {
                 }
 
                 const refresh = () => {
-                    const lastRefresh = localStorage.getItem('refresh');
-                    if (lastRefresh) {
+                    const lastRefresh = parseInt(localStorage.getItem('last_refresh') || '');
+                    if (!isNaN(lastRefresh)) {
                         const date = new Date(lastRefresh);
 
                         // If the last refresh was inside a minute, do not reload due to possible infinite refresh loop
                         if (new Date().getTime() - date.getTime() < 60 * 1000) return;
                     }
 
-                    localStorage.setItem('refresh', new Date().getTime().toString());
+                    Logger.debug('RequestService', 'Refreshing the page due to 419...');
+                    localStorage.setItem('last_refresh', new Date().getTime().toString());
                     location.reload();
                 };
 
@@ -141,7 +142,9 @@ export default class RequestService {
                         // TODO: Me, translate backend error?
                         break;
                     case 401:
-                        refresh();
+                        // We can't refresh here because it'll trigger an infinite loop (unless @me endpoint gets whitelisted).
+                        // Though I don't think this is really needed either.
+                        // refresh();
                         break;
                     case 404:
                         Router.push({
