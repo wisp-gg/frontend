@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2018 Game Panel Limited
+Copyright (c) 2022 Game Panel Limited
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
