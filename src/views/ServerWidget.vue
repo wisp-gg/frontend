@@ -57,7 +57,7 @@ export default defineComponent({
             server,
             preference: computed(() => state.user.data?.preferences?.navbarPosition || NavBarPosition.LEFT),
             status: computed(() => socket.status),
-            cpu: computed(() => socket.proc ? `${socket.proc.cpuUsed.toFixed(2)}%` : '--'),
+            cpu: computed(() => socket.proc?.cpuUsed ? `${socket.proc.cpuUsed?.toFixed(2)}%` : '--'),
             memory: computed(() => {
                 if (socket.proc) {
                     const [value, unit] = bytesToString(socket.proc.memoryUsed);
