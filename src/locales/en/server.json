@@ -200,6 +200,7 @@
     "last_run_at": "Last run at: ",
     "next_run_at": "Next run at: ",
     "next_run_at_time": "Next run at {time}",
+    "invalid_cron": "Use a valid cron expression to view description and next run time.",
     "runs_description": "Runs {description}",
     "pause_for_seconds": "Pause for {seconds} seconds",
 

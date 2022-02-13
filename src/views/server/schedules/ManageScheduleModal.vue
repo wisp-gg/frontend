@@ -10,12 +10,17 @@
             <v-input name="name" rule="required" :value="schedule?.name" />
 
             <div class="w-full bg-primary-300 p-2 mb-4 text-center rounded-lg">
-                <h2 class="text-2xl uppercase">
-                    {{ cronDescription }}
+                <template v-if="cronInfo">
+                    <h2 class="text-2xl uppercase">
+                        {{ cronInfo.description }}
+                    </h2>
+                    <p>
+                        <t :path="['server.schedules.next_run_at_time', { time: cronInfo.nextRunTime }]" />
+                    </p>
+                </template>
+                <h2 v-else class="text-xl">
+                    <t path="server.schedules.invalid_cron" />
                 </h2>
-                <p>
-                    <t :path="['server.schedules.next_run_at_time', { time: nextRunTime }]" />
-                </p>
             </div>
 
             <div class="flex space-x-4">
@@ -66,12 +71,21 @@ export default defineComponent({
 
         const cronString = computed(() => `${cron.minute} ${cron.hour} ${cron.dayOfMonth} * ${cron.dayOfWeek}`);
 
+        const getCronInfo = (expression: string) => {
+            try {
+                // TODO: locale support
+                return {
+                    description: cronstrue.toString(expression, { locale: 'en', use24HourTimeFormat: true }),
+                    nextRunTime: formatDateAbsolute(cronParser.parseExpression(expression).next().toISOString(), 'LL @ LT'),
+                }
+            } catch { // Invalid cron
+                return;
+            }
+        };
+
         return {
             cron,
-
-            // TODO: locale support
-            cronDescription: computed(() => cronstrue.toString(cronString.value, { locale: 'en', use24HourTimeFormat: true })),
-            nextRunTime: computed(() => formatDateAbsolute(cronParser.parseExpression(cronString.value).next().toISOString(), 'LL @ LT') || t('generic.not_applicable')),
+            cronInfo: computed(() => getCronInfo(cronString.value)),
 
             onSuccess: (schedule: Schedule) => {
                 if (props.schedule) {
