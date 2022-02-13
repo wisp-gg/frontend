@@ -182,8 +182,8 @@
     "created": "Backup {name} is now being created",
 
     "cant_delete_locked": "You must unlock the backup before attempting to delete it.",
-    "delete_database": "Delete Backup",
-    "delete_database_notice": "Are you sure that you want to delete the {name} backup? There is no going back, all data will immediately be removed."
+    "delete_backup": "Delete Backup",
+    "delete_backup_notice": "Are you sure that you want to delete the {name} backup? There is no going back, all data will immediately be removed."
   },
 
   "schedules": {
