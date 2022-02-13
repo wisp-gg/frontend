@@ -1,5 +1,5 @@
 <template>
-    <list service-id="servers@getAll" :per-page="6">
+    <list service-id="servers@getAll" :per-page="12">
         <template #layout="list">
             <div class="darker-input">
                 <input class="input w-full mb-8" name="search" :placeholder="t('generic.search')" @keyup="list.search">

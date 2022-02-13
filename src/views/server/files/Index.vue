@@ -8,7 +8,7 @@
             <list
                 service-id="files@getDirectory"
                 :data="path"
-                :per-page="10"
+                :per-page="100"
                 :skeletons="5"
                 :fields="listFields"
                 ref="listElement"
