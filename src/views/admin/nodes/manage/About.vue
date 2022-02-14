@@ -11,8 +11,11 @@
                                 </td>
                                 <td class="pb-2">
                                     <skeleton :content="8">
-                                        <code>
-                                            {{ daemonInfo.version }}
+                                        <code v-if="daemonInfo?.version">
+                                            {{ daemonInfo?.version }}
+                                        </code>
+                                        <code v-else>
+                                            <t path="generic.unknown" />
                                         </code>
                                     </skeleton>
                                 </td>
@@ -24,10 +27,15 @@
                                 </td>
                                 <td class="pb-2">
                                     <skeleton :content="20">
-                                        {{ daemonInfo.system.type }}({{ daemonInfo.system.arch }})
+                                        <div v-if="daemonInfo?.system">
+                                            {{ daemonInfo?.system?.type }}({{ daemonInfo?.system?.arch }})
 
-                                        <code>
-                                            {{ daemonInfo.system.kernel }}
+                                            <code>
+                                                {{ daemonInfo?.system?.kernel }}
+                                            </code>
+                                        </div>
+                                        <code v-else>
+                                            <t path="generic.unknown" />
                                         </code>
                                     </skeleton>
                                 </td>
@@ -39,7 +47,7 @@
                                 </td>
                                 <td>
                                     <skeleton :content="8">
-                                        {{ daemonInfo.system.cpus }}
+                                        {{ daemonInfo?.system?.cpus }}
                                     </skeleton>
                                 </td>
                             </tr>
@@ -48,11 +56,11 @@
                 </div>
             </container>
 
-            <container v-if="node ? node.description : true" title="generic.description" class="mt-4">
+            <container v-if="node ? node?.description : true" title="generic.description" class="mt-4">
                 <pre class="whitespace-normal bg-primary-300 p-2 rounded-lg">
                     <!-- TODO: skeleton looks awkward for this -->
                     <skeleton :content="60">
-                        {{ node.description }}
+                        {{ node?.description }}
                     </skeleton>
                 </pre>
             </container>
