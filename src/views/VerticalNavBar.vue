@@ -39,7 +39,7 @@
 
                 <div class="justify-end z-10">
                     <div class="flex items-center py-3 bg-primary-800 border-t border-white border-opacity-10">
-                        <v-button :to="{name: 'admin.administration.index'}" class="mx-auto relative text-lg text-white text-opacity-50 hover:text-opacity-80" v-if="user?.rootAdmin || user?.supportOp">
+                        <v-button :to="{name: adminRoute}" class="mx-auto relative text-lg text-white text-opacity-50 hover:text-opacity-80" v-if="user?.rootAdmin || user?.supportOp">
                             <fa :icon="['fas', 'cogs']" class="cursor-pointer" />
                         </v-button>
                         <div class="mx-auto relative" v-if="announcementsEnabled">
@@ -103,6 +103,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref } from 'vue';
+import { useRoute } from 'vue-router';
 import { state } from '~/core';
 import { useService, hasFeatures } from '~/plugins';
 import NavDropdown from './NavDropdown.vue';
@@ -120,6 +121,7 @@ export default defineComponent({
     },
     setup() {
         const open = ref(false);
+        const route = useRoute();
 
         return {
             routes: computed(() =>
@@ -138,6 +140,8 @@ export default defineComponent({
             name: computed(() => state.settings.data?.branding?.name || 'WISP'),
             logo: computed(() => state.settings.data?.branding?.logo || fullLogo),
             user: computed(() => state.user.data),
+
+            adminRoute: computed(() => route.name?.toString().startsWith('admin.') ? 'index' : 'admin.administration.index'),
 
             announcementsEnabled: computed(() => hasFeatures('general:announcements')),
 

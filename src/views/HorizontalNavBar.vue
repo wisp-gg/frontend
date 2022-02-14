@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="flex justify-end items-center py-3 space-x-12">
-                    <v-button :to="{name: 'admin.administration.index'}" class="relative text-lg text-white text-opacity-50 hover:text-opacity-80" v-if="user?.rootAdmin || user?.supportOp">
+                    <v-button :to="{name: adminRoute}" class="relative text-lg text-white text-opacity-50 hover:text-opacity-80" v-if="user?.rootAdmin || user?.supportOp">
                         <fa :icon="['fas', 'cogs']" class="cursor-pointer" />
                     </v-button>
                     <div class="mx-auto relative" v-if="announcementsEnabled">
@@ -109,6 +109,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref } from 'vue';
+import { useRoute } from 'vue-router';
 import { state, Store } from '~/core';
 import { useService, hasFeatures } from '~/plugins';
 import { RouteData } from '~/store/modules/navigation';
@@ -120,6 +121,7 @@ import Notifications from '~/views/Notifications.vue';
 export default defineComponent({
     components: { Notifications, Announcements, ServerWidget },
     setup() {
+        const route = useRoute();
         const hoveredCategory = ref<RouteData | null>(null);
 
         Store.subscribe(mutation => {
@@ -150,6 +152,8 @@ export default defineComponent({
             name: computed(() => state.settings.data?.branding?.name || 'WISP'),
             logo: computed(() => state.settings.data?.branding?.logo || fullLogo),
             email: computed(() => state.user.data?.email),
+
+            adminRoute: computed(() => route.name?.toString().startsWith('admin.') ? 'index' : 'admin.administration.index'),
 
             announcementsEnabled: computed(() => hasFeatures('general:announcements')),
 
