@@ -117,7 +117,7 @@
                 <v-input label="components.form.fields.startup_command" name="startup" rule="required" :value="selectedEgg?.startup" />
             </skeleton>
 
-            <list v-if="selectedEgg" service-id="eggVariables@getAll" :data="{ nest: selectedEgg.nestId, egg: selectedEgg.id }" :per-page="25">
+            <list v-if="selectedEgg" service-id="eggVariables@getAll" :data="{ nest: selectedEgg.nestId, egg: selectedEgg.id }">
                 <template #results="{ results }">
                     <div class="flex flex-wrap flex-col lg:flex-row mt-4">
                         <div class="w-full lg:w-1/2 lg:odd:pr-3 lg:even:pl-3" v-for="(result, idx) of results" :key="idx">

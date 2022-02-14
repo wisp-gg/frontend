@@ -1,6 +1,6 @@
 <template>
     <div>
-        <list service-id="startup@getAll" :per-page="12" :skeletons="6" @meta="onMeta">
+        <list service-id="startup@getAll" :skeletons="6" @meta="onMeta">
             <template #results="{ results }">
                 <container title="server.startup.startup_command">
                     <input class="input" id="startup_command" v-clipboard="startupCommand" :value="startupCommand" readonly>

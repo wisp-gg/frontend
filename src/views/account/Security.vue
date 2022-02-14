@@ -10,7 +10,7 @@
                 </div>
             </template>
 
-            <list service-id="account@getCredentials" :per-page="6" :fields="listFields">
+            <list service-id="account@getCredentials" :per-page="12" :fields="listFields">
                 <template #headers-after>
                     <th />
                 </template>

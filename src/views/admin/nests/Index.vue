@@ -1,20 +1,18 @@
 <template>
-    <container no-padding title="admin.nests.title">
-        <template #actions>
-            <div class="space-x-4">
+    <list service-id="nests@getAll" :fields="listFields" searchable>
+        <template #search-extra>
+            <div class="ml-4 flex space-x-4">
                 <import-egg-modal />
                 <create-nest-modal />
             </div>
         </template>
 
-        <list service-id="nests@getAll" :fields="listFields">
-            <template #field-name="{ result }">
-                <v-button class="text-white/75" permission="nest.update" :to="{ name: 'admin.service_management.nests.manage', params: { nest: result.id } }">
-                    {{ result.name }}
-                </v-button>
-            </template>
-        </list>
-    </container>
+        <template #field-name="{ result }">
+            <v-button class="text-white/75" permission="nest.update" :to="{ name: 'admin.service_management.nests.manage', params: { nest: result.id } }">
+                {{ result.name }}
+            </v-button>
+        </template>
+    </list>
 </template>
 
 <script lang="ts">

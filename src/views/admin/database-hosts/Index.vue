@@ -1,45 +1,45 @@
 <template>
-    <container no-padding title="admin.database_hosts.title">
-        <template #actions>
-            <create-database-host-modal />
+    <list service-id="databaseHosts@getAll" :fields="listFields" searchable>
+        <template #search-extra>
+            <div class="ml-4">
+                <create-database-host-modal />
+            </div>
         </template>
 
-        <list service-id="databaseHosts@getAll" :fields="listFields">
-            <template #headers-after>
-                <th />
-            </template>
+        <template #headers-after>
+            <th />
+        </template>
 
-            <template #field-name="{ result }">
-                <v-button :to="{ name: 'admin.management.database_hosts.manage', params: { databaseHost: result.id } }" permission="database_host.read" class="text-white/75">
-                    {{ result.name }}
-                </v-button>
-            </template>
+        <template #field-name="{ result }">
+            <v-button :to="{ name: 'admin.management.database_hosts.manage', params: { databaseHost: result.id } }" permission="database_host.read" class="text-white/75">
+                {{ result.name }}
+            </v-button>
+        </template>
 
-            <template #field-databases="{ result }">
-                0 / {{ result.maxDatabases ?? '∞' }}
-            </template>
+        <template #field-databases="{ result }">
+            0 / {{ result.maxDatabases ?? '∞' }}
+        </template>
 
-            <template #field-node="{ result }">
-                <v-button v-if="result.node" :to="{ name: 'admin.management.nodes.manage.about', params: { node: result.node.id } }" permission="node.read" class="text-white/75">
-                    {{ result.node.name }}
-                </v-button>
-            </template>
+        <template #field-node="{ result }">
+            <v-button v-if="result.node" :to="{ name: 'admin.management.nodes.manage.about', params: { node: result.node.id } }" permission="node.read" class="text-white/75">
+                {{ result.node.name }}
+            </v-button>
+        </template>
 
-            <template #fields-after="{ result }">
-                <td class="p-6 text-right space-x-4">
-                    <skeleton :content="6">
-                        <v-button color="primary" permission="database_host.read" :to="{ name: 'admin.management.database_hosts.manage', params: { databaseHost: result.id } }">
-                            <t path="generic.manage" />
-                        </v-button>
-                    </skeleton>
+        <template #fields-after="{ result }">
+            <td class="p-6 text-right space-x-4">
+                <skeleton :content="6">
+                    <v-button color="primary" permission="database_host.read" :to="{ name: 'admin.management.database_hosts.manage', params: { databaseHost: result.id } }">
+                        <t path="generic.manage" />
+                    </v-button>
+                </skeleton>
 
-                    <skeleton :content="4">
-                        <delete-database-host-modal :host="result" />
-                    </skeleton>
-                </td>
-            </template>
-        </list>
-    </container>
+                <skeleton :content="4">
+                    <delete-database-host-modal :host="result" />
+                </skeleton>
+            </td>
+        </template>
+    </list>
 </template>
 
 <script lang="ts">

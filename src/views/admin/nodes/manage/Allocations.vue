@@ -5,7 +5,7 @@
                 <delete-allocation-ip-modal />
             </template>
 
-            <list service-id="nodeAllocations@getAll" :per-page="25" :fields="listFields">
+            <list service-id="nodeAllocations@getAll" :fields="listFields">
                 <template #headers-after>
                     <th />
                 </template>

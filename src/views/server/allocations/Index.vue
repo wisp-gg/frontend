@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col items-start lg:flex-row lg:gap-x-6">
         <container class="w-full lg:w-2/3" no-padding title="server.allocations.available_allocations">
-            <list service-id="allocations@getAll" :per-page="6" :fields="listFields">
+            <list service-id="allocations@getAll" :fields="listFields">
                 <template #headers-after>
                     <th />
                 </template>

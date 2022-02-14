@@ -2,7 +2,6 @@
     <div class="flex items-stretch overflow-x-hidden">
         <list
             service-id="auditLogs@get"
-            :per-page="20"
             :class="selectedAudit ? 'audit-log-list' : ''"
             class="flex flex-col gap-y-2 transition-all transform"
         >

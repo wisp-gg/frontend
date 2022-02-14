@@ -1,35 +1,35 @@
 <template>
-    <container no-padding title="admin.locations.title">
-        <template #actions>
-            <create-location-modal />
+    <list service-id="locations@getAll" :fields="listFields" searchable>
+        <template #search-extra>
+            <div class="ml-4">
+                <create-location-modal />
+            </div>
         </template>
 
-        <list service-id="locations@getAll" :fields="listFields">
-            <template #headers-after>
-                <th />
-            </template>
+        <template #headers-after>
+            <th />
+        </template>
 
-            <template #field-short="{ result }">
-                <v-button permission="location.read" :to="{ name: 'admin.management.locations.manage', params: { location: result.id } }" class="text-white/75">
-                    {{ result.short }}
-                </v-button>
-            </template>
+        <template #field-short="{ result }">
+            <v-button permission="location.read" :to="{ name: 'admin.management.locations.manage', params: { location: result.id } }" class="text-white/75">
+                {{ result.short }}
+            </v-button>
+        </template>
 
-            <template #fields-after="{ result }">
-                <td class="p-6 text-right space-x-4">
-                    <skeleton :content="6">
-                        <v-button color="primary" permission="location.read" :to="{ name: 'admin.management.locations.manage', params: { location: result.id } }">
-                            <t path="generic.manage" />
-                        </v-button>
-                    </skeleton>
+        <template #fields-after="{ result }">
+            <td class="p-6 text-right space-x-4">
+                <skeleton :content="6">
+                    <v-button color="primary" permission="location.read" :to="{ name: 'admin.management.locations.manage', params: { location: result.id } }">
+                        <t path="generic.manage" />
+                    </v-button>
+                </skeleton>
 
-                    <skeleton :content="4">
-                        <delete-location-modal :location="result" />
-                    </skeleton>
-                </td>
-            </template>
-        </list>
-    </container>
+                <skeleton :content="4">
+                    <delete-location-modal :location="result" />
+                </skeleton>
+            </td>
+        </template>
+    </list>
 </template>
 
 <script lang="ts">

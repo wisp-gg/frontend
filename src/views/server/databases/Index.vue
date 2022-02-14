@@ -6,7 +6,7 @@
             </div>
         </template>
 
-        <list service-id="databases@getAll" :per-page="6" :fields="listFields" @results="onListResults">
+        <list service-id="databases@getAll" :fields="listFields" @results="onListResults">
             <template #headers-after>
                 <th />
             </template>

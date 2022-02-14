@@ -4,7 +4,7 @@
             <create-variable-modal />
         </div>
 
-        <list service-id="eggVariables@getAll" :per-page="12" :skeletons="6">
+        <list service-id="eggVariables@getAll" :skeletons="6">
             <template #results="{ results }">
                 <div class="grid lg:grid-cols-2 gap-x-4 gap-y-4">
                     <egg-variable v-for="(result, idx) of results" :key="idx" :variable="result" />

@@ -2,8 +2,12 @@
     <div class="w-full block overflow-x-auto">
         <slot name="layout" :results="list?.results" :pagination="list?.pagination" :search="search" :set-page="setPage">
             <slot v-if="searchable" name="search" :submit="search">
-                <!-- TODO: Spinner to appear on right side signifying it is currently searching -->
-                <input class="input w-full mb-4" name="search" :placeholder="t('generic.search')" @keyup="search">
+                <div class="flex mb-4">
+                    <!-- TODO: Spinner to appear on right side signifying it is currently searching -->
+                    <input class="input w-full flex-grow" name="search" :placeholder="t('generic.search')" @keyup="search">
+
+                    <slot name="search-extra" />
+                </div>
             </slot>
 
             <slot name="results" :results="list?.results" :meta="list?.meta" :update="update">
@@ -119,7 +123,7 @@ export default defineComponent({
         },
         perPage: {
             type: Number,
-            default: 10,
+            default: 25,
         },
         skeletons: {
             type: Number,
@@ -242,6 +246,8 @@ export default defineComponent({
 
             search: debounce(async (evt: KeyboardEvent) => {
                 const value = (<HTMLInputElement> evt.target).value;
+                if (state.lists.data[serviceId]?.search === value) return; // Stops re-search when hitting cmd/ctrl for example
+
                 if (value) {
                     await setAttribute('page', 1);
                     await setAttribute('search', value);
