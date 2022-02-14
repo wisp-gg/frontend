@@ -6,8 +6,8 @@
                     <input class="input" id="startup_command" v-clipboard="startupCommand" :value="startupCommand" readonly>
                 </container>
 
-                <div class="flex flex-wrap flex-col lg:flex-row mt-4 space-y-4">
-                    <div class="w-full lg:w-1/2 lg:odd:pr-3 lg:even:pl-3" v-for="(result, idx) of results" :key="idx">
+                <div class="flex flex-wrap flex-col lg:flex-row mt-4 gap-y-4">
+                    <div class="w-full lg:w-1/2 lg:odd:pr-2 lg:even:pl-2" v-for="(result, idx) of results" :key="idx">
                         <startup-variable :variable="result" />
                     </div>
                 </div>
