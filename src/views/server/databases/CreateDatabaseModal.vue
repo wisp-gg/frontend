@@ -1,6 +1,6 @@
 <template>
-    <modal has-alerts title="server.databases.create_new" permission="database.create" opener-text="generic.create">
-        <v-form service-id="databases@create">
+    <modal has-alerts title="server.databases.create_new" permission="database.create" opener-text="generic.create" v-slot="{ close }">
+        <v-form service-id="databases@create" :on-success="() => { close(); updateList(); }">
             <v-select
                 name="host"
                 footer="server.databases.host_footer"
@@ -26,11 +26,14 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { dispatch } from '~/core';
 import { useService } from '~/plugins';
 
 export default defineComponent({
     setup() {
         return {
+            updateList: () => dispatch('lists/refresh', 'databases@getAll'),
+
             async fetchDatabaseHosts() {
                 return useService<ListResponse>('databaseHosts@get', {
                     displayErrorsInUI: 'server.databases.create_new',
