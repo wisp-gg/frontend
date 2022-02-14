@@ -111,6 +111,8 @@
       "rules": "Rules",
       "primary_allocation": "Primary Allocation",
       "secondary_allocations": "Secondary Allocations",
+      "add_allocations": "Add Additional Allocations",
+      "remove_allocations": "Remove Additional Allocations",
       "server_owner": "Server Owner",
       "startup_command": "Startup Command",
       "default_startup_command": "Default Startup Command",

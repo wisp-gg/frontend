@@ -33,15 +33,26 @@
                 </skeleton>
 
 
-                <!-- TODO: Pull un-used allocations from node -->
                 <skeleton :content="16">
                     <v-select
-                        label="components.form.fields.secondary_allocations"
-                        name="secondary_allocation_ids"
+                        label="components.form.fields.add_allocations"
+                        name="add_allocation_ids"
+                        mode="tags"
+
+                        :options="fetchAllocations"
+                        label-prop="connection"
+                        value-prop="id"
+                        searchable
+                    />
+                </skeleton>
+
+                <skeleton :content="16">
+                    <v-select
+                        label="components.form.fields.remove_allocations"
+                        name="remove_allocation_ids"
                         mode="tags"
 
                         :options="secondaryAllocations"
-                        :value="secondaryAllocations.map(r => r.id)"
                         label-prop="connection"
                         value-prop="id"
                         searchable
@@ -63,15 +74,30 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
 import { state } from '~/core';
+import { useService } from '~/plugins';
 
 export default defineComponent({
     setup() {
+        const fetchAllocations = async (query: string) => {
+            if (!state.models.server?.node) return [];
+
+            const res = await useService<any>('nodeAllocations@getAllForSelector', { background: true }, {
+                node: state.models.server.node.id,
+                in_use: false,
+                ip_port: query
+            });
+
+            return res.data;
+        };
+
         return {
             server: computed(() => state.models.server!),
 
             secondaryAllocations: computed(() => {
                 return state.models.server?.allocations.filter(r => !r.primary) ?? [];
             }),
+
+            fetchAllocations,
         };
     }
 });

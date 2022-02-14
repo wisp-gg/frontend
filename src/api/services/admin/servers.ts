@@ -1,5 +1,6 @@
 import { Parser } from '~/api';
 import { Server } from '~/api/models';
+import { dispatch } from '~/core';
 import RequestService from './request';
 
 interface CreateServerRequest {
@@ -48,7 +49,8 @@ interface UpdateBuildRequest {
     allocations_limit: number;
     backup_megabytes_limit: number;
     allocation_id: number;
-    secondary_allocation_ids: number[];
+    add_allocation_ids: number[];
+    remove_allocation_ids: number[];
 }
 
 interface SuspendServerRequest {
@@ -99,7 +101,11 @@ class ServersService {
     updateBuild(data: UpdateBuildRequest): Promise<Server> {
         return RequestService.put('/servers/:server/build', data)
             .then(Parser.parse)
-            .then(RequestService.updateModelBinding);
+            .then(server => {
+                dispatch('models/refresh', 'server');
+
+                return server;
+            });
     }
 
     reinstall(): Promise<Server> {
