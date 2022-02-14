@@ -8,7 +8,7 @@
         <div class="flex-grow" :class="preference === 1 ? ['flex', 'flex-col', 'items-center'] : ['pl-0', 'md:pl-64', 'mt-12 md:mt-0']">
             <socket-error-notice />
 
-            <div class="m-8" :class="preference === 1 ? ['container'] : []">
+            <div class="mx-4 mt-8 md:mx-8" :class="preference === 1 ? ['container'] : []">
                 <div class="flex flex-col md:flex-row justify-between items-center mb-8">
                     <div class="flex">
                         <div class="w-14 h-14 md:w-20 md:h-20 mr-3 flex items-center justify-center header-icon shrink-0">
