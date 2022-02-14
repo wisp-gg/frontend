@@ -741,6 +741,18 @@ export const routes: RouteRecordRaw[] = [
                                     }
                                 ]
                             },
+                            { // Backwards compatibility with WHMCS's go go Service button
+                                name: 'admin.management.servers.view',
+                                path: 'view/:id',
+                                redirect: to => {
+                                    return {
+                                        name: 'admin.management.servers.manage.about',
+                                        params: {
+                                            server: to.params.id,
+                                        },
+                                    };
+                                },
+                            }
                         ]
                     },
 
