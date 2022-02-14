@@ -30,7 +30,7 @@
                     :key="selectedEdition"
                     :options="versions"
                     label-prop="name"
-                    value-prop="id"
+                    value-prop="name"
                     :group-label-prop="shouldCategorise ? 'category' : null"
                     :group-options-prop="shouldCategorise ? 'versions' : null"
 
