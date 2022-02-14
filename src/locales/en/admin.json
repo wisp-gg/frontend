@@ -126,7 +126,8 @@
     "username_footer": "The username of an account that has enough permissions to create new users and databases on the system.",
     "password_footer": "The password to the account defined.",
     "phpmyadmin_footer": "Whether the database host has PHPMyAdmin installed on it. This will enable a button to easily navigate to PHPMyAdmin in the client UI.",
-    "display_fqdn_footer": "The Display FQDN that should be used instead of the host IP when redirecting user to PhpMyAdmin."
+    "display_fqdn_footer": "The Display FQDN that should be used instead of the host IP when redirecting user to PhpMyAdmin.",
+    "node_footer": "Servers on the node which is selected will be able to choose this host as an option when creating a database"
   },
 
   "application_api": {

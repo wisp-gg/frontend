@@ -6,7 +6,22 @@
                 <v-input name="host" footer="admin.database_hosts.host_footer" rule="required" :value="databaseHost?.host" />
                 <v-input name="port" footer="admin.database_hosts.port_footer" rule="required" type="number" :value="databaseHost?.port" />
                 <v-switch name="enable_phpmyadmin" footer="admin.database_hosts.phpmyadmin_footer" :value="databaseHost?.enablePhpmyadmin" />
-                <v-input name="display_fqdn" footer="admin.database_hosts.display_fqdn_footer" :value="databaseHost?.displayFqdn" />
+
+                <skeleton :content="16">
+                    <v-model-select
+                        service-id="nodes@getAll"
+                        parameter="name"
+
+                        label="components.form.fields.node"
+                        footer="admin.database_hosts.node_footer"
+                        name="node_id"
+                        label-prop="name"
+                        value-prop="id"
+
+                        :value="databaseHost?.node"
+                    />
+                </skeleton>
+                <v-input name="display_fqdn" footer="admin.database_hosts.display_fqdn_footer" :value="databaseHost?.displayFqdn ?? ''" />
             </container>
 
             <div class="w-full lg:w-1/2">

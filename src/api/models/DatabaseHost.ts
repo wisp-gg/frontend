@@ -14,6 +14,10 @@ export class DatabaseHost extends BaseModel {
     public username = '';
     public maxDatabases?: number = undefined;
 
+    getRouteName() {
+        return 'databaseHost';
+    }
+
     getRouteID() {
         return this.id.toString();
     }
