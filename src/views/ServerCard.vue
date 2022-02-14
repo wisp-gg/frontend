@@ -1,8 +1,8 @@
 <template>
-    <div class="w-full lg:w-1/2 lg:even:pl-3 lg:odd:pr-3">
+    <div class="w-full lg:even:pl-3 lg:odd:pr-3">
         <div class="server flex flex-col text-center overflow-hidden whitespace-nowrap" :style="`--thumbnail:url('${server?.egg?.thumbnail || minecraft}');`">
             <div class="gradient" />
-            <div class="flex items-center bg-primary-900 bg-opacity-25 px-8 py-4">
+            <div class="flex items-center bg-primary-900 bg-opacity-25 px-4 md:px-8 py-4">
                 <div class="self-start mt-1 mr-2">
                     <span v-if="!server || stats.status === -2" class="text-accent-500">
                         <fa :icon="['fas', 'spinner']" spin fixed-width />
@@ -20,9 +20,9 @@
                     </skeleton>
                     <p class="text-white/75">
                         <skeleton :content="16">
-                            <span v-clipboard>{{ server.primaryAllocation().displayName() }}</span>
+                            <span class="tracking-wide" v-clipboard>{{ server.primaryAllocation().displayName() }}</span>
 
-                            <span class="text-white/50">
+                            <span class="text-white/50 block md:inline text-sm leading-none tracking-tight">
                                 <t :path="['generic.server.on_node', { node: server.node.name }]" />
                             </span>
                         </skeleton>
@@ -31,7 +31,7 @@
 
                 <button
                     v-tippy="'generic.server.go_to_console'"
-                    class="border border-primary-50 px-2 rounded text-primary-0 hover:text-white mr-4"
+                    class="border border-primary-50 px-2 rounded text-primary-0 hover:text-white mr-4 hidden md:block"
                     @click="server?.openConsolePopup()"
                 >
                     <fa :icon="['fas', 'external-link-square-alt']" fixed-width />
@@ -40,7 +40,7 @@
                     <router-link :to="{name: 'server.system.index', params: { server: server?.uuidShort }}">
                         <button
                             v-tippy="'generic.server.manage'"
-                            class="border border-primary-50 px-2 rounded text-primary-0 hover:text-white"
+                            class="border border-primary-50 px-2 rounded text-primary-0 hover:text-white hidden md:block"
                         >
                             <fa :icon="['fas', 'wrench']" fixed-width />
                         </button>
@@ -48,30 +48,30 @@
                 </skeleton>
             </div>
 
-            <div class="flex flex-wrap justify-between align-start px-8 py-4">
-                <p v-tippy="'generic.server.cpu'" class="text-white">
+            <div class="grid grid-cols-2 xl:grid-cols-4 px-4 py-2 md:px-8 md:py-4">
+                <p v-tippy="'generic.server.cpu'" class="block md:flex 2xl:block flex-col items-center text-white text-sm xl:text-normal tracking-tight">
                     <skeleton :content="8">
-                        <fa class="text-white/50 mr-1" :icon="['fas', 'tachometer-alt']" size="sm" fixed-width />
+                        <fa class="text-white/50 mr-1 inline md:block 2xl:inline" :icon="['fas', 'tachometer-alt']" size="sm" fixed-width />
                         {{ stats.proc?.cpu?.total?.toFixed(2) ?? '--' }} %
                     </skeleton>
                 </p>
-                <p v-tippy="'generic.server.memory'" class="text-white">
+                <p v-tippy="'generic.server.memory'" class="block md:flex 2xl:block flex-col items-center text-white text-sm xl:text-normal tracking-tight">
                     <skeleton :content="8">
-                        <fa class="text-white/50 mr-1" :icon="['fas', 'memory']" size="sm" fixed-width />
+                        <fa class="text-white/50 mr-1 inline md:block 2xl:inline" :icon="['fas', 'memory']" size="sm" fixed-width />
 
                         {{ memoryUsage }} / {{ memoryMax }}
                     </skeleton>
                 </p>
-                <p v-tippy="'generic.server.disk'" class="text-white">
+                <p v-tippy="'generic.server.disk'" class="block md:flex 2xl:block flex-col items-center text-white text-sm xl:text-normal tracking-tight">
                     <skeleton :content="8">
-                        <fa class="text-white/50 mr-1" :icon="['fas', 'hdd']" size="sm" fixed-width />
+                        <fa class="text-white/50 mr-1 inline md:block 2xl:inline" :icon="['fas', 'hdd']" size="sm" fixed-width />
 
                         {{ diskUsage }} / {{ diskMax }}
                     </skeleton>
                 </p>
-                <p v-tippy="'generic.server.players'" class="text-white">
+                <p v-tippy="'generic.server.players'" class="block md:flex 2xl:block flex-col items-center text-white text-sm xl:text-normal tracking-tight">
                     <skeleton :content="8">
-                        <fa class="text-white/50 mr-1" :icon="['fas', 'user']" size="sm" fixed-width />
+                        <fa class="text-white/50 mr-1 inline md:block 2xl:inline" :icon="['fas', 'user']" size="sm" fixed-width />
                         {{ stats.query?.players?.length ?? '--' }} / {{ stats.query?.maxplayers ?? '--' }}
                     </skeleton>
                 </p>

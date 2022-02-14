@@ -1,17 +1,17 @@
 <template>
     <ul v-if="paginationData.totalPages > 1">
         <li :class="firstPage ? ['disabled'] : []">
-            <button @click="setPage(currentPage - 1)">
+            <button class="p-4 md:py-3" @click="setPage(currentPage - 1)">
                 ‹
             </button>
         </li>
         <li v-for="page of pageElements" :class="currentPage === page && ['active'] || page === '...' && ['disabled'] || []">
-            <button @click="setPage(page)">
+            <button class="p-4 md:py-3" @click="setPage(page)">
                 {{ page }}
             </button>
         </li>
         <li :class="lastPage ? ['disabled'] : []">
-            <button @click="setPage(currentPage + 1)">
+            <button class="p-4 md:py-3" @click="setPage(currentPage + 1)">
                 ›
             </button>
         </li>
@@ -33,7 +33,6 @@
         background: #1D1C39;
         color: rgba(255,255,255,.5) !important;
         border: none !important;
-        padding: 1rem 1.4rem;
         box-shadow: none !important;
     }
 
