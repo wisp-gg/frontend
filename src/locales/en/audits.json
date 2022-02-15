@@ -31,7 +31,7 @@
       },
       "delete": {
         "title": "Database deleted",
-        "message": "{user} deleted the {target} databaase"
+        "message": "{user} deleted the {target} database"
       }
     },
 
