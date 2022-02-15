@@ -4,8 +4,9 @@
         opener-color="primary"
         :opener-text="announcement ? 'generic.edit' : 'generic.create'"
         :permission="announcement ? 'announcement.update' : 'announcement.create'"
+        v-slot="{ close }"
     >
-        <v-form :service-id="submit">
+        <v-form :service-id="submit(close)">
             <v-select
                 name="type"
                 rule="required"
@@ -46,11 +47,17 @@ export default defineComponent({
         return {
             allowedTypes,
 
-            submit: (data: Record<string, string>) => {
-                return useService(`announcements@${props.announcement ? 'update' : 'create'}`, true, {
-                    ...(props.announcement ? { id: props.announcement.id } : {}),
-                    ...data,
-                }).then(() => dispatch('lists/refresh', 'announcements@getAll'));
+            submit: (close: () => void) => {
+                return (data: Record<string, string>) => {
+                    return useService(`announcements@${props.announcement ? 'update' : 'create'}`, true, {
+                        ...(props.announcement ? { id: props.announcement.id } : {}),
+                        ...data,
+                    }).then(() => {
+                        close();
+
+                        dispatch('lists/refresh', 'announcements@getAll');
+                    });
+                };
             }
         };
     },
