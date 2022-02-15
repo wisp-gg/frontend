@@ -8,10 +8,10 @@
         </template>
 
         <template #default>
-            <v-form service-id="files@renameFile">
+            <v-form service-id="files@renameFile" :on-success="updateList">
                 <v-input type="hidden" name="path" :value="path" />
 
-                <v-input name="name" rule="required" :value="name" />
+                <v-input name="to" label="components.form.fields.name" rule="required" :value="name" />
 
                 <div class="text-right space-x-4">
                     <v-submit color="primary" label="generic.submit" :permission="['file.read', 'file.write']" />
@@ -23,6 +23,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { dispatch } from '~/core';
 
 export default defineComponent({
     props: {
@@ -36,7 +37,9 @@ export default defineComponent({
         },
     },
     setup() {
-        return {};
+        return {
+            updateList: () => dispatch('lists/refresh', 'files@getDirectory'),
+        };
     }
 });
 </script>

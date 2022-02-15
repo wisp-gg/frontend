@@ -22,7 +22,7 @@ export interface DownloadFileResponse {
 }
 
 export interface RenameFileRequest extends FileRequest {
-    name: string;
+    to: string;
 }
 
 export interface CompressFilesRequest extends ManageFilesRequest {

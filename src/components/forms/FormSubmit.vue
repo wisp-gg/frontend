@@ -19,7 +19,7 @@ export default defineComponent({
             type: String,
         },
         permission: {
-            type: String,
+            type: [String, Array],
         },
     },
 
