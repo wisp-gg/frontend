@@ -75,7 +75,7 @@ export default defineComponent({
             creating,
             nests: (query: string) => {
                 return useService<ListResponse>('nests@getAll', true, {
-                    ['filter[name]']: query,
+                    ['search']: query,
                 }, true).then(data => data.data);
             },
             mod: computed(() => state.models.mod),

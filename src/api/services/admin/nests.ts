@@ -11,7 +11,7 @@ interface CreateNestRequest {
 class NestsService {
     getAll(req: PaginatableRequest): Promise<ListResponse> {
         return RequestService.getCached('nests', '/nests', {
-            include: ['eggsCount', 'serversCount'],
+            include: ['eggsCount', 'serversCount', 'eggs'],
             ...req,
         }).then(Parser.parse);
     }
