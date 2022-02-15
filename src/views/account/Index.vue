@@ -35,7 +35,7 @@
                     <v-input type="hidden" name="action" value="email" />
 
                     <v-input label="components.form.fields.new_email" name="email" :value="user.email" rule="required|email" />
-                    <v-input name="current_password" rule="required" />
+                    <v-input type="password" name="current_password" rule="required" />
 
                     <div class="text-right">
                         <v-submit color="primary" label="client.account.update_email" />
@@ -49,10 +49,10 @@
                 <v-form service-id="account@update" on-success="client.account.updated_password">
                     <v-input type="hidden" name="action" value="password" />
 
-                    <v-input name="current_password" rule="required" />
-                    <v-input name="new_password" footer="client.account.password_requirements" rule="required" />
+                    <v-input type="password" name="current_password" rule="required" />
+                    <v-input type="password" name="new_password" footer="client.account.password_requirements" rule="required" />
 
-                    <v-input name="new_password_confirmation" rule="required" />
+                    <v-input type="password" name="new_password_confirmation" rule="required" />
 
                     <div class="text-right">
                         <v-submit color="primary" label="client.account.update_password" />
