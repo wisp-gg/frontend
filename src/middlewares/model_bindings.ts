@@ -1,6 +1,7 @@
 import { RouteLocationNormalized } from 'vue-router';
 import { Logger, dispatch, state } from '~/core';
 import * as Namespaces from '~/api/services';
+import {TranslatableError} from "~/errors";
 
 // Fetches relevant models in the route parameters automatically. Works by checking if [parameter]Service has a `get` method,
 // indicating it's a route model. Uses the model's `getRouteID()` method to verify if the model has changed and should be refetched.
@@ -57,6 +58,9 @@ export class ModelBindings implements Middleware {
             const finished = await dispatch('loading/add');
 
             Promise.all(promises)
+                .catch(err => {
+                    if (err instanceof TranslatableError) dispatch('alerts/add', err.getDisplayError());
+                })
                 .finally(() => finished());
         }
     }
