@@ -93,13 +93,20 @@
         </container>
 
         <container title="admin.servers.advanced.toggle_backup_status">
-            <v-form service-id="servers@toggleBackup">
-                <v-select
-                    name="backup"
-                    :options="[]"
+            <v-form service-id="serverBackups@toggle">
+                <skeleton :content="16">
+                    <v-model-select
+                        name="id"
+                        label="components.form.fields.backup"
+                        service-id="serverBackups@getAll"
+                        parameter="name"
 
-                    rule="required"
-                />
+                        label-prop="name"
+                        value-prop="id"
+
+                        rule="required"
+                    />
+                </skeleton>
 
                 <v-submit class="w-full" color="info" permission="server.toggle_backup">
                     <t path="generic.toggle" />

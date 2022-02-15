@@ -62,10 +62,6 @@ interface MoveServerRequest {
     node_id?: number;
 }
 
-interface ToggleBackupRequest {
-    backup_id: number;
-}
-
 class ServersService {
     getAll(req: PaginatableRequest): Promise<ListResponse> {
         return RequestService.get('/servers', {
@@ -152,12 +148,6 @@ class ServersService {
 
     resetMods(): Promise<Server> {
         return RequestService.post('/servers/:server/reset-mods')
-            .then(Parser.parse)
-            .then(RequestService.updateModelBinding);
-    }
-
-    toggleBackup(data: ToggleBackupRequest): Promise<Server> {
-        return RequestService.post(`/servers/:server/backups/${data.backup_id}/toggle`)
             .then(Parser.parse)
             .then(RequestService.updateModelBinding);
     }

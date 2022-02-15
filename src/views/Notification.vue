@@ -53,8 +53,6 @@ export default defineComponent({
                         params: props.notification.url[1]
                     });
                 } catch {
-                    console.log('invalid url');
-
                     return;
                 }
 

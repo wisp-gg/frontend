@@ -10,6 +10,7 @@ export { default as EggVariablesService } from './eggVariables';
 export { default as NodeAllocationsService } from './nodeAllocations';
 export { default as NodesService } from './nodes';
 export { default as OverviewService } from './overview';
+export { default as ServerBackupsService } from './serverBackups';
 export { default as ServerDatabasesService } from './serverDatabases';
 export { default as ServersService } from './servers';
 export { default as ServerStartupService } from './serverStartup';
