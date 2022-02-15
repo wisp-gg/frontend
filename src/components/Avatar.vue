@@ -4,7 +4,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, watch } from 'vue';
 import { md5 } from 'hash-wasm';
 
 export default defineComponent({
@@ -18,10 +18,14 @@ export default defineComponent({
     setup(props) {
         const avatarURL = ref<null | string>(null);
 
-        md5(props.email)
-            .then(hash => {
-                avatarURL.value = `https://www.gravatar.com/avatar/${hash}?s=160`;
-            });
+        const setAvatarURL = (email: string) =>
+            md5(props.email)
+                .then(hash => {
+                    avatarURL.value = `https://www.gravatar.com/avatar/${hash}?s=160`;
+                });
+
+        setAvatarURL(props.email);
+        watch(() => props.email, value => setAvatarURL(value));
 
         return {
             avatarURL,
