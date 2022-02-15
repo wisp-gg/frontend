@@ -42,7 +42,6 @@
                     <v-model-select
                         name="host"
                         service-id="databaseHosts@getAll"
-                        parameter="name"
 
                         label-prop="name"
                         value-prop="id"

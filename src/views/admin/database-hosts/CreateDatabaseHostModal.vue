@@ -14,7 +14,6 @@
                     <v-input name="display_fqdn" footer="admin.database_hosts.display_fqdn_footer" />
                     <v-model-select
                         service-id="nodes@getAll"
-                        parameter="name"
 
                         label="components.form.fields.node"
                         footer="admin.database_hosts.node_footer"

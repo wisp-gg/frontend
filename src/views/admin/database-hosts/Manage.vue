@@ -10,7 +10,6 @@
                 <skeleton :content="16">
                     <v-model-select
                         service-id="nodes@getAll"
-                        parameter="name"
 
                         label="components.form.fields.node"
                         footer="admin.database_hosts.node_footer"

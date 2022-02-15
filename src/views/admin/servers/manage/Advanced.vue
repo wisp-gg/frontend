@@ -48,7 +48,6 @@
                     name="location_id"
                     label="components.form.fields.location"
                     service-id="locations@getAll"
-                    parameter="long"
 
                     label-prop="long"
                     value-prop="id"
@@ -61,7 +60,6 @@
                         name="node_id"
                         label="components.form.fields.node"
                         service-id="nodes@getAll"
-                        parameter="name"
 
                         label-prop="name"
                         value-prop="id"
@@ -99,7 +97,6 @@
                         name="id"
                         label="components.form.fields.backup"
                         service-id="serverBackups@getAll"
-                        parameter="name"
 
                         label-prop="name"
                         value-prop="id"

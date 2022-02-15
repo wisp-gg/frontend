@@ -8,7 +8,6 @@
             <skeleton :content="16">
                 <v-model-select
                     service-id="users@getAll"
-                    parameter="email"
 
                     label="components.form.fields.server_owner"
                     name="owner_id"

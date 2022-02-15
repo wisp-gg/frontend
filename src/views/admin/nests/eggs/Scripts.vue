@@ -8,7 +8,6 @@
             <div class="grid grid-cols-3 justify-between p-4 gap-x-4">
                 <v-model-select
                     service-id="nests@getAllForSelector"
-                    parameter="name"
 
                     label="components.form.fields.copy_script_from"
                     name="copy_update_script_from"
@@ -33,7 +32,6 @@
             <div class="grid grid-cols-3 justify-between p-4 gap-x-4">
                 <v-model-select
                     service-id="nests@getAllForSelector"
-                    parameter="name"
 
                     label="components.form.fields.copy_script_from"
                     name="copy_update_script_from"

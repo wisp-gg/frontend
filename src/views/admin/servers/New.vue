@@ -6,7 +6,6 @@
                     <v-input name="name" rule="required" />
                     <v-model-select
                         service-id="users@getAll"
-                        parameter="email"
 
                         label="components.form.fields.server_owner"
                         name="owner_id"
@@ -27,7 +26,6 @@
             <div class="grid lg:grid-cols-3 gap-x-4 gap-y-4">
                 <v-model-select
                     service-id="nodes@getAll"
-                    parameter="name"
 
                     label="components.form.fields.node"
                     footer="admin.servers.new.node_footer"
@@ -93,7 +91,6 @@
             <div class="grid lg:grid-cols-2 gap-x-4 gap-y-4">
                 <v-model-select
                     service-id="nests@getAllForSelector"
-                    parameter="name"
 
                     label="components.form.fields.egg"
                     name="egg_id"

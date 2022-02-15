@@ -24,10 +24,6 @@ export default defineComponent({
             type: String,
             required: true,
         },
-        parameter: {
-            type: String,
-            required: true,
-        },
         labelProp: {
             type: String,
             required: true,
@@ -62,7 +58,7 @@ export default defineComponent({
                 return useService<any>(props.serviceId, {
                     background: true,
                 }, {
-                    [`filter[${props.parameter}]`]: query
+                    search: query
                 }).then(results => {
                     if (!props.value) return setOptions(results.data);
 

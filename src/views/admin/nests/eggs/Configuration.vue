@@ -22,7 +22,6 @@
                 <div>
                     <v-model-select
                         service-id="nests@getAllForSelector"
-                        parameter="name"
 
                         name="config_from"
                         label-prop="name"

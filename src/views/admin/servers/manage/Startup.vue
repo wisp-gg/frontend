@@ -21,7 +21,6 @@
                 <skeleton :content="16">
                     <v-model-select
                         service-id="nests@getAllForSelector"
-                        parameter="name"
 
                         label="components.form.fields.egg"
                         name="egg_id"
