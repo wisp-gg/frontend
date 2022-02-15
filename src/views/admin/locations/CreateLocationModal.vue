@@ -1,5 +1,5 @@
 <template>
-    <modal title="admin.locations.create_location" permission="location.create" opener-color="primary" opener-text="generic.create">
+    <modal has-alerts title="admin.locations.create_location" permission="location.create" opener-color="primary" opener-text="generic.create">
         <template #default="{ close }">
             <v-form service-id="locations@create" :on-success="() => { close(); updateList(); }">
                 <v-input label="components.form.fields.name" name="short" footer="admin.locations.short_footer" rule="required" />
