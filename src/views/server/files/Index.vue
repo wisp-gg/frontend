@@ -103,12 +103,12 @@
 
                 <template #field-name="{ result }">
                     <template v-if="result.isDirectory">
-                        <v-button class="text-white text-opacity-50 hover:text-opacity-80" @click="navigateDirectory(result.name)">
+                        <v-button class="text-white text-opacity-50 group-hover:text-opacity-100" @click="navigateDirectory(result.name)">
                             {{ result.name }}
                         </v-button>
                     </template>
                     <template v-else>
-                        <v-button :to="{name: 'server.management.files.edit', hash: `#${path}${path.endsWith('/') ? '' : '/'}${result.name}`}" v-if="result.isReadable" permission="file.read" class="text-white text-opacity-50 hover:text-opacity-80">
+                        <v-button :to="{name: 'server.management.files.edit', hash: `#${path}${path.endsWith('/') ? '' : '/'}${result.name}`}" v-if="result.isReadable" permission="file.read" class="text-white text-opacity-50 group-hover:text-opacity-100">
                             {{ result.name }}
                         </v-button>
                         <template v-else>
@@ -130,7 +130,7 @@
                 </template>
 
                 <template #fields-after="{ result }">
-                    <td class="p-6 w-[10%]">
+                    <td class="p-4 w-[10%]">
                         <skeleton :content="4">
                             <file-actions-dropdown :path="path" :file="result" />
                         </skeleton>

@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full block overflow-x-auto">
+    <div class="w-full block">
         <slot name="layout" :results="list?.results" :pagination="list?.pagination" :search="search" :set-page="setPage">
             <slot v-if="searchable" name="search" :submit="search">
                 <div class="flex mb-4">
@@ -45,10 +45,10 @@
                         <template v-else>
                             <slot name="items-before" :update="update" />
 
-                            <tr v-for="(result, idx) in list?.results" :key="idx" class="bg-primary-500 border-b border-primary-400 block xl:table-row xl:border-none last:border-none" @click="onCheckboxRowClick($event, result)">
+                            <tr v-for="(result, idx) in list?.results" :key="idx" class="bg-primary-500 border-b border-primary-400 block xl:table-row xl:border-none last:border-none group hover:opacity-80 hover:text-white" @click="onCheckboxRowClick($event, result)">
                                 <slot name="fields-before" :result="result" :update="update" />
 
-                                <td class="px-6 pt-3 xl:py-6 text-center td-min" v-if="checkbox">
+                                <td class="px-6 pt-3 xl:py-4 text-center td-min" v-if="checkbox">
                                     <div class="flex items-center">
                                         <skeleton :content="2">
                                             <input class="input w-auto" type="checkbox" :ref="elem => registerCheckboxItem(elem, result)" @click="onCheckboxClick($el)">
@@ -76,7 +76,7 @@
                                     </div>
                                 </td>
 
-                                <td v-for="(field, fieldIdx) in fields" :key="fieldIdx" class="p-6 text-left hidden xl:table-cell" :style="field.style">
+                                <td v-for="(field, fieldIdx) in fields" :key="fieldIdx" class="p-4 text-left hidden xl:table-cell" :style="field.style">
                                     <skeleton :content="field.skeleton ?? field.key.length">
                                         <slot :name="`field-${field.key}`" :result="result" :update="update">
                                             <list-result :field="field" :value="result ? field.key.split('.').reduce((previous, current) => previous[current], result) : null ?? field.default" />
