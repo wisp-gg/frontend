@@ -63,7 +63,7 @@ class FilesService {
     }
 
     renameFile(data: RenameFileRequest) {
-        return RequestService.post('/servers/:server/files/rename', data);
+        return RequestService.patch('/servers/:server/files/rename', data);
     }
 
     compressFile(data: CompressFilesRequest) {
