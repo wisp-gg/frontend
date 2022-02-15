@@ -393,7 +393,7 @@ export const routes: RouteRecordRaw[] = [
                     return {
                         name: 'admin.management.servers.manage.about',
                         params: {
-                            server: state.models.server?.uuidShort,
+                            server: state.models.server?.id,
                         },
                     };
                 },
@@ -772,7 +772,7 @@ export const routes: RouteRecordRaw[] = [
                                             return {
                                                 name: 'server.system.index',
                                                 params: {
-                                                    server: state.models.server?.id,
+                                                    server: state.models.server?.uuidShort,
                                                 },
                                             };
                                         },

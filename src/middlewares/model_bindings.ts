@@ -12,7 +12,7 @@ export class ModelBindings implements Middleware {
     private toDelete: string[] = [];
     constructor(private namespace: string) {}
 
-    async run(to: RouteLocationNormalized) {
+    async run(to: RouteLocationNormalized, from: RouteLocationNormalized) {
         this.toDelete = [];
 
         const models: { id: string, name: string, get: () => Promise<any> }[] = [];
@@ -33,10 +33,14 @@ export class ModelBindings implements Middleware {
             }
         }
 
+        // If model binding switches in between requests (admin <-> client), this.namespace will always cause it to be the new
+        // route's namespace and thus never trigger a refresh.
+        const namespace = from.name?.toString().split('.').shift() || this.namespace;
+
         const currentModels = models.map(a => a.name);
         this.toDelete = Object.keys(state.models).filter(name => name !== '_refreshFuncs' && !currentModels.includes(name));
         const modelsToFetch = models.filter(model => {
-            return !state.models[model.name] || state.models[model.name]?.getRouteID(this.namespace) !== model.id;
+            return !state.models[model.name] || state.models[model.name]?.getRouteID(namespace) !== model.id;
         });
 
         Logger.debug('ModelBindings', `The following state changes will happen: fetch [${modelsToFetch.map(a => a.name).join(', ')}], delete [${this.toDelete.join(', ')}], final [${models.map(a => a.name).join(', ')}]`);
