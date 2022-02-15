@@ -7,7 +7,6 @@
         <v-form class="mt-3" service-id="advanced@installVersion">
             <skeleton :content="16">
                 <v-select
-
                     name="edition"
                     footer="server.advanced.install_edition.edition_footer"
 
@@ -30,7 +29,7 @@
                     :key="selectedEdition"
                     :options="versions"
                     label-prop="name"
-                    value-prop="name"
+                    value-prop="id"
                     :group-label-prop="shouldCategorise ? 'category' : null"
                     :group-options-prop="shouldCategorise ? 'versions' : null"
 
