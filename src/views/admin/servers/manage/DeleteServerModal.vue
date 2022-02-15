@@ -6,10 +6,10 @@
             </v-button>
         </template>
 
-        <template #default>
+        <template #default="{ close }">
             <t :path="['admin.servers.delete_server_notice', { name: server.name }]" />
 
-            <v-form class="mt-4" :service-id="confirm" :can-submit="canDelete">
+            <v-form class="mt-4" :service-id="confirm" :can-submit="canDelete" :on-success="() => { close(); success(); }">
                 <v-input name="confirm_name" v-model:value="confirmationValue" />
 
                 <v-switch name="force" footer="admin.servers.force_footer" />
@@ -48,12 +48,14 @@ export default defineComponent({
             canDelete: computed(() => confirmationValue.value === props.server.name),
 
             confirm: (data: { force: boolean }) => {
-                return useService('servers@delete', 'admin.servers.delete_server', { force: data.force }).then(() => {
-                    router.push({
-                        name: 'admin.management.servers.index'
-                    });
+                return useService('servers@delete', 'admin.servers.delete_server', { force: data.force });
+            },
+
+            success: () => {
+                router.push({
+                    name: 'admin.management.servers.index'
                 });
-            }
+            },
         };
     }
 });

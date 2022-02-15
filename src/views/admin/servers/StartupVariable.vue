@@ -1,7 +1,7 @@
 <template>
     <div>
         <skeleton :content="16">
-            <v-switch no-margin v-if="variable?.tickable" :name="`environment.${variable.envVariable}`" :value="(serverValue ?? variable.defaultValue) === 'true'" />
+            <v-switch no-margin v-if="variable?.tickable" :label="['_raw', variable.name]" :name="`environment.${variable.envVariable}`" :value="(serverValue ?? variable.defaultValue) === 'true'" />
 
             <v-input
                 v-else

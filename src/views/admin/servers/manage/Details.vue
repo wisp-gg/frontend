@@ -11,7 +11,7 @@
                     parameter="email"
 
                     label="components.form.fields.server_owner"
-                    name="server_owner_id"
+                    name="owner_id"
                     label-prop="selectorName"
                     value-prop="id"
                     rule="required"
