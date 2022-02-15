@@ -108,7 +108,8 @@ Router.afterEach(async guard => {
                     return;
                 }
 
-                if (child.redirect) return;
+                if (child.meta?.hidden) return;
+                if (child.meta?.adminOnly && (!state.user.data?.rootAdmin && !state.user.data?.supportOp)) return;
 
                 return {
                     name: realChild.name.toString(),

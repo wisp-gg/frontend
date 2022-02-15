@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from 'vue-router';
-import { Router } from '~/core';
+import { Router, state } from '~/core';
 import { Admin, Authenticated, Guest, Permission, Feature, TOTP, ModelBindings } from '~/middlewares';
 import { GenericLayout, PopupLayout, Passthrough, TabberPassthrough } from '~/views';
 import { NotFoundView } from '~/views/errors';
@@ -15,6 +15,8 @@ declare module 'vue-router' {
         icon?: string; // Used for vertical NavBar only
         permission?: string;
         feature?: string;
+        hidden?: boolean;
+        adminOnly?: boolean;
     }
 }
 
@@ -57,6 +59,7 @@ export const routes: RouteRecordRaw[] = [
         path: '/auth/login/sso',
         meta: {
             middlewares: [Guest],
+            hidden: true,
         },
         redirect: to => {
             return {
@@ -92,6 +95,9 @@ export const routes: RouteRecordRaw[] = [
             { // Redirect for backwards compatability with v1
                 name: 'account.sso',
                 path: 'account/sso',
+                meta: {
+                    hidden: true,
+                },
                 redirect: to => {
                     return {
                         name: 'account.settings',
@@ -375,6 +381,23 @@ export const routes: RouteRecordRaw[] = [
                     }
                 ],
             },
+
+            {
+                name: 'server.administrate',
+                path: 'administrate',
+                meta: {
+                    adminOnly: true,
+                    permission: 'admin:server.read',
+                },
+                redirect: () => {
+                    return {
+                        name: 'admin.management.servers.manage.about',
+                        params: {
+                            server: state.models.server?.uuidShort,
+                        },
+                    };
+                },
+            }
         ],
     },
     {
@@ -738,12 +761,31 @@ export const routes: RouteRecordRaw[] = [
                                             icon: 'network-wired',
                                             permission: 'server.read',
                                         }
-                                    }
+                                    },
+                                    {
+                                        name: 'admin.management.servers.manage.go_to_server',
+                                        path: 'go_to_server', // TODO: rename this to something better?
+                                        meta: {
+                                            adminOnly: true,
+                                        },
+                                        redirect: () => {
+                                            return {
+                                                name: 'server.system.index',
+                                                params: {
+                                                    server: state.models.server?.id,
+                                                },
+                                            };
+                                        },
+                                    },
                                 ]
                             },
+
                             { // Backwards compatibility with WHMCS's go go Service button
                                 name: 'admin.management.servers.view',
                                 path: 'view/:id',
+                                meta: {
+                                    hidden: true,
+                                },
                                 redirect: to => {
                                     return {
                                         name: 'admin.management.servers.manage.about',
@@ -752,7 +794,7 @@ export const routes: RouteRecordRaw[] = [
                                         },
                                     };
                                 },
-                            }
+                            },
                         ]
                     },
 

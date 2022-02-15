@@ -20,7 +20,7 @@ class Feature implements Middleware {
                         return {
                             name: '404',
                             params: {
-                                catchAll: to.path.split('/').slice(1).join('/'),
+                                catchAll: location.pathname.substring(1),
                             },
                             query: to.query,
                             hash: to.hash,
@@ -31,7 +31,7 @@ class Feature implements Middleware {
                 return {
                     name: '404',
                     params: {
-                        catchAll: to.path.split('/').slice(1).join('/'),
+                        catchAll: location.pathname.substring(1),
                     },
                     query: to.query,
                     hash: to.hash,

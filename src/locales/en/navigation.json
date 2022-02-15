@@ -154,6 +154,10 @@
         "title": "FastDL",
         "description": "Automatic FastDL Manager for your server."
       }
+    },
+
+    "administrate": {
+      "title": "Administrate"
     }
   },
 
@@ -298,6 +302,9 @@
           "advanced": {
             "title": "Advanced",
             "description": "Additional actions to control this server."
+          },
+          "go_to_server": {
+            "title": "Go To Server"
           }
         }
       },

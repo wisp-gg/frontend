@@ -150,7 +150,7 @@ export default class RequestService {
                         Router.push({
                             name: '404',
                             params: {
-                                catchAll: Router.currentRoute.value.path.split('/').slice(1).join('/'),
+                                catchAll: location.pathname.substring(1),
                             },
                             query: Router.currentRoute.value.query,
                             hash: Router.currentRoute.value.hash,

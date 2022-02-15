@@ -77,7 +77,7 @@ class ServersService {
 
     get(): Promise<Server> {
         return RequestService.get('/servers/:server', {
-            include: ['node', 'nest', 'egg', 'allocations', 'user'],
+            include: ['node', 'nest', 'egg', 'allocations', 'user', 'features'],
         }).then(Parser.parse);
     }
 
