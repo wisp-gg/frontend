@@ -36,7 +36,7 @@ class BackupsService {
     }
 
     delete(data: Backup) {
-        return RequestService.delete(`/servers/:server/backups/${data.uuidShort}`);
+        return RequestService.delete(`/servers/:server/backups/${data.id}`);
     }
 }
 
