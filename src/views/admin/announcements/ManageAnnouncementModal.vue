@@ -6,7 +6,7 @@
         :permission="announcement ? 'announcement.update' : 'announcement.create'"
         v-slot="{ close }"
     >
-        <v-form :service-id="submit(close)">
+        <v-form :service-id="submit" :on-success="() => { updateList(); close(); }">
             <v-select
                 name="type"
                 rule="required"
@@ -47,15 +47,12 @@ export default defineComponent({
         return {
             allowedTypes,
 
-            submit: (close: () => void) => {
+            updateList: () => dispatch('lists/refresh', 'announcements@getAll'),
+            submit: () => {
                 return (data: Record<string, string>) => {
                     return useService(`announcements@${props.announcement ? 'update' : 'create'}`, true, {
                         ...(props.announcement ? { id: props.announcement.id } : {}),
                         ...data,
-                    }).then(() => {
-                        close();
-
-                        dispatch('lists/refresh', 'announcements@getAll');
                     });
                 };
             }
