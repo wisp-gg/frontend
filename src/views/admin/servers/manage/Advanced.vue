@@ -46,6 +46,7 @@
             <v-form service-id="servers@move">
                 <v-model-select
                     name="location_id"
+                    label="components.form.fields.location"
                     service-id="locations@getAll"
                     parameter="long"
 
@@ -58,6 +59,7 @@
                 <skeleton :content="16">
                     <v-model-select
                         name="node_id"
+                        label="components.form.fields.node"
                         service-id="nodes@getAll"
                         parameter="name"
 
