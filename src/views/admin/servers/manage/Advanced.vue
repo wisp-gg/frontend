@@ -45,7 +45,7 @@
         <container title="admin.servers.advanced.move_server">
             <v-form service-id="servers@move">
                 <v-model-select
-                    name="location"
+                    name="location_id"
                     service-id="locations@getAll"
                     parameter="long"
 
@@ -57,7 +57,7 @@
 
                 <skeleton :content="16">
                     <v-model-select
-                        name="node"
+                        name="node_id"
                         service-id="nodes@getAll"
                         parameter="name"
 
