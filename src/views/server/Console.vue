@@ -3,7 +3,7 @@
         <div ref="terminalElement" />
         <div class="flex terminal-input">
             <div class="text-gray-300 terminal-prompt">
-                root:~/<span class="text-accent-500">$</span>
+                container:~/<span class="text-accent-500">$</span>
             </div>
             <v-input
                 class="flex-grow"
