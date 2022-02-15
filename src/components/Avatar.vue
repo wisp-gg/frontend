@@ -19,7 +19,7 @@ export default defineComponent({
         const avatarURL = ref<null | string>(null);
 
         const setAvatarURL = (email: string) =>
-            md5(props.email)
+            md5(email)
                 .then(hash => {
                     avatarURL.value = `https://www.gravatar.com/avatar/${hash}?s=160`;
                 });
