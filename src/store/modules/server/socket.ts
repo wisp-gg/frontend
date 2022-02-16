@@ -17,8 +17,8 @@ const socket: Module<SocketStore, any> = {
 
     mutations: {
         setState: (state, payload: boolean) => {
+            if (payload) delete state.error;
             state.connected = payload;
-            delete state.error;
         },
 
         setError: (state, error?: string) => {

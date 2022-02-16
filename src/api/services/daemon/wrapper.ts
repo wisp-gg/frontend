@@ -19,35 +19,43 @@ class DaemonWrapper extends WebSocketTransformer {
         Logger.debug(`DaemonWrapper[${server.uuidShort}]`, `Connecting to ${url}`);
 
         this.socket = io(url, {
-            query: { token },
             transports: ['websocket'],
         });
 
-        this.socket.on('error', err => Logger.warn(`DaemonWrapper[${server.uuidShort}]`, `WebSocket received an error: ${err}`));
-        this.socket.on('connect_error', err => {
-            Logger.warn(`DaemonWrapper[${server.uuidShort}]`, `WebSocket connection failed: ${err}`);
+        const connectionFailedHandler = (message: string) => {
+            Logger.warn(`DaemonWrapper[${server.uuidShort}]`, `WebSocket connection failed: ${message}`);
 
-            let errorCode = err.message;
-
-            switch(errorCode.toLowerCase()) { // Convert any errors we don't control to translated format
+            switch(message.toLowerCase()) { // Convert any errors we don't control to translated format
                 case 'websocket error':
                 case 'timeout':
-                    errorCode = 'errors.socket.trouble_connecting';
+                    message = 'errors.socket.trouble_connecting';
                     break;
                 case 'invalid namespace':
-                    errorCode = 'errors.socket.invalid_namespace';
+                    message = 'errors.socket.invalid_namespace';
                     break;
             }
 
-            dispatch('server/socket/setError', errorCode);
-        });
+            dispatch('server/socket/setError', message);
+        };
+
+        this.socket.on('error', err => Logger.warn(`DaemonWrapper[${server.uuidShort}]`, `WebSocket received an error: ${err}`));
+        this.socket.on('connect_error', err => connectionFailedHandler(err.message));
+        this.socket.on('auth_failed', data => connectionFailedHandler(data.message));
+
         this.socket.on('connect', () => {
-            Logger.info(`DaemonWrapper[${server.uuidShort}]`, 'WebSocket connected.');
+            Logger.debug(`DaemonWrapper[${server.uuidShort}]`, `WebSocket connected, attempting to authenticate with token ${token.substring(0, 10)}(truncated)`);
+
+            this.socket!.emit('auth', token);
+        });
+
+        this.socket.on('auth_success', () => {
+            Logger.info(`DaemonWrapper[${server.uuidShort}]`, 'WebSocket connected and successfully authenticated');
 
             dispatch('server/socket/setState', true);
             this.emit('connected');
         });
-        this.socket.once('connect', () => this.setupEvents());
+        this.socket.once('auth_success', () => this.setupEvents());
+
         this.socket.on('disconnect', () => {
             dispatch('server/socket/setState', false);
         });
@@ -65,13 +73,26 @@ class DaemonWrapper extends WebSocketTransformer {
 
         // Setup the upload socket - if something goes really wrong here, it isn't critical so this is mostly here as a "best effort"
         if (upload_url) {
+            const uploadConnectionFailedHandler = (message: string) => {
+                Logger.warn(`DaemonWrapper[${server.uuidShort}]`, `Upload WebSocket connection failed: ${message}`);
+            };
+
             this.uploadSocket = io(upload_url, {
                 query: { token },
                 transports: ['websocket'],
             });
+
+            this.uploadSocket.on('connect', () => {
+                Logger.info(`DaemonWrapper[${server.uuidShort}]`, `Upload WebSocket connected, attempting to authenticate with token ${token.substring(0, 10)}(truncated)`);
+
+                this.uploadSocket!.emit('auth', token);
+            });
+            this.uploadSocket.on('auth_success', () => Logger.info(`DaemonWrapper[${server.uuidShort}]`, 'Upload WebSocket connected and successfully authenticated'));
+
             this.uploadSocket.on('error', err => Logger.warn(`DaemonWrapper[${server.uuidShort}]`, `Upload WebSocket received an error: ${err}`));
-            this.uploadSocket.on('connect', () => Logger.info(`DaemonWrapper[${server.uuidShort}]`, 'Upload WebSocket connected.'));
-            this.uploadSocket.on('connect_error', err => Logger.warn(`DaemonWrapper[${server.uuidShort}]`, `Upload WebSocket connection failed: ${err}`));
+
+            this.uploadSocket.on('connect_error', err => uploadConnectionFailedHandler(err.message));
+            this.uploadSocket.on('auth_failed', data => uploadConnectionFailedHandler(data.message));
             this.uploadSocket.on('disconnect', () => Logger.info(`DaemonWrapper[${server.uuidShort}]`, 'Upload WebSocket disconnected.'));
 
             this.siofu = new SocketIOFileUpload(this.uploadSocket);
