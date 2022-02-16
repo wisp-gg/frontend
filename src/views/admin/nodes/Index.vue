@@ -1,5 +1,5 @@
 <template>
-    <list service-id="nodes@getAll" :fields="listFields" searchable>
+    <list service-id="nodes@getAll" :fields="listFields" filter="alphabetical-nodes" searchable> 
         <template #headers-before>
             <th />
         </template>

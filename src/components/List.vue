@@ -137,6 +137,9 @@ export default defineComponent({
         checkbox: {
             type: Boolean,
         },
+        filter: {
+            type: String
+        },
         searchable: {
             type: Boolean,
         },
@@ -186,6 +189,12 @@ export default defineComponent({
         };
         const getAttribute = (key: string) => state.lists.data[serviceId]?.[key];
 
+        const filterList = (res: ListResponse) => {
+            if (props.filter == "alphabetical-nodes") res.data.sort((a: any, b: any) => a.name.localeCompare(b.name));
+
+            return res.data;
+        }
+
         const update = async () => {
             Logger.debug('List', `Updating list contents from ${props.serviceId}...`);
 
@@ -209,7 +218,7 @@ export default defineComponent({
             } else {
                 useService<ListResponse>(props.serviceId, true, paginatableRequest, props.data)
                     .then(res => {
-                        setAttribute('results', res.data);
+                        setAttribute('results', filterList(res));
                         setAttribute('meta', res.meta);
 
                         if (res.meta?.pagination) setAttribute('pagination', res.meta.pagination);
