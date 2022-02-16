@@ -91,7 +91,11 @@ class ServersService {
             description: data.description.length > 0 ? data.description : "null"
         })
             .then(Parser.parse)
-            .then(RequestService.updateModelBinding);
+            .then(server => {
+                dispatch('models/refresh', 'server');
+
+                return server;
+            });
     }
 
     updateBuild(data: UpdateBuildRequest): Promise<Server> {
