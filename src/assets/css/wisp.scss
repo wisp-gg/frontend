@@ -103,8 +103,6 @@ button {
 
   // TODO: Translate @media to tw using sm:* - but should we use bootstrap's breakpoints or move over to tailwinds??
   @media screen and (max-width: 576px) {
-    @apply flex-col;
-
     // TODO: Programmatically apply class (with important if its actually needed?)
     &:not(.alert-dismissible) > div {
       padding: 1rem !important;
