@@ -79,6 +79,7 @@
     "name": "Name",
     "cpu": "CPU",
     "memory": "Memory",
+    "swap": "Swap",
     "disk": "Disk",
     "node": "Node",
     "players": "Players",
