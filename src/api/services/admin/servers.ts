@@ -86,10 +86,7 @@ class ServersService {
     }
 
     updateDetails(data: UpdateDetailsRequest): Promise<Server> {
-        return RequestService.put('/servers/:server/details', {
-            ...data,
-            description: data.description.length > 0 ? data.description : "null"
-        })
+        return RequestService.put('/servers/:server/details', data)
             .then(Parser.parse)
             .then(server => {
                 dispatch('models/refresh', 'server');
