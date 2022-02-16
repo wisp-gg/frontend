@@ -48,14 +48,10 @@ export default defineComponent({
             allowedTypes,
 
             updateList: () => dispatch('lists/refresh', 'announcements@getAll'),
-            submit: () => {
-                return (data: Record<string, string>) => {
-                    return useService(`announcements@${props.announcement ? 'update' : 'create'}`, true, {
-                        ...(props.announcement ? { id: props.announcement.id } : {}),
-                        ...data,
-                    });
-                };
-            }
+            submit: (data: Record<string, any>) => useService(`announcements@${props.announcement ? 'update' : 'create'}`, true, {
+                ...(props.announcement ? { id: props.announcement.id } : {}),
+                ...data,
+            }),
         };
     },
 });
