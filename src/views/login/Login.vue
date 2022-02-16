@@ -15,7 +15,7 @@
             </div>
 
             <v-button class="w-full" color="secondary" @click="sso">
-                <t path="login.sso" />
+                <t :path="ssoText" />
             </v-button>
         </template>
 
@@ -110,6 +110,9 @@ export default defineComponent({
             sso: () => useService<{ url: string }>('authentication@login', true, {
                 method: 'sso',
                 sso_redirect: redirectURL,
+            }),
+            ssoText: computed(() => {
+                return state.settings.data?.whmcs?.button_text ? ['_raw', state.settings.data?.whmcs.button_text] : 'login.sso';
             }),
 
             showModal: ref(false),
