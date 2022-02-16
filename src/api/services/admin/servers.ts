@@ -86,7 +86,10 @@ class ServersService {
     }
 
     updateDetails(data: UpdateDetailsRequest): Promise<Server> {
-        return RequestService.put('/servers/:server/details', data)
+        return RequestService.put('/servers/:server/details', {
+            ...data,
+            description: data.description.length > 0 ? data.description : "null"
+        })
             .then(Parser.parse)
             .then(RequestService.updateModelBinding);
     }
