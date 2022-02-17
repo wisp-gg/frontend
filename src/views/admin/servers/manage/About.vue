@@ -74,7 +74,7 @@
                     </td>
                     <td class="p-4">
                         <skeleton :content="12">
-                            <code>{{ server.limits.memory }} MB</code> / <code>{{ server.limits.swap }} MB</code>
+                            <code>{{ server.limits.memory }} MB</code> / <code v-tippy="'generic.server.swap'">{{ server.limits.swap }} MB</code>
                         </skeleton>
                     </td>
                 </tr>
