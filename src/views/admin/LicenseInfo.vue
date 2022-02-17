@@ -49,7 +49,7 @@
                             <skeleton :content="16">
                                 <t v-if="!license?.expiresAt" path="generic.never" />
 
-                                {{ license?.expiresAt }} <!-- TODO: <date :value="x" /> component? -->
+                                <date :timestamp="license?.expiresAt" />
                             </skeleton>
                         </td>
                     </tr>
