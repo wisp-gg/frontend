@@ -11,7 +11,7 @@ import { formatDate, formatDateAbsolute } from '~/core/lang';
 export default defineComponent({
     props: {
         timestamp: {
-            type: String, Number,
+            type: String,
             required: true
         }
     },
