@@ -63,8 +63,6 @@
 
                         label-prop="name"
                         value-prop="id"
-
-                        rule="required"
                     />
                 </skeleton>
 

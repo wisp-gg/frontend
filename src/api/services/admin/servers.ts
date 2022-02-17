@@ -135,7 +135,7 @@ class ServersService {
     }
 
     move(data: MoveServerRequest): Promise<Server> {
-        return RequestService.post('/servers/:server/move')
+        return RequestService.post('/servers/:server/move', data)
             .then(Parser.parse)
             .then(RequestService.updateModelBinding);
     }
