@@ -153,7 +153,7 @@
 
                     <div class="text-center border-t border-white/25 py-2">
                         <skeleton :content="8">
-                            <v-button class="text-white/75 hover:text-white" permission="user.read" :to="{ name: 'admin.management.users.manage', params: { user: server.user.id } }">
+                            <v-button class="text-white/75 hover:text-white" permission="user.read" :to="{ name: 'admin.management.users.manage.about', params: { user: server.user.id } }">
                                 <t path="generic.more_info" />
                             </v-button>
                         </skeleton>

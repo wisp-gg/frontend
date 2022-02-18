@@ -51,7 +51,7 @@ import { defineComponent, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { state } from '~/core';
 import { User } from '~/api/models';
-import DeleteUserModal from './DeleteUserModal.vue';
+import DeleteUserModal from '../DeleteUserModal.vue';
 
 export default defineComponent({
     components: {
@@ -69,7 +69,7 @@ export default defineComponent({
 
             onSuccess: (user: User) => {
                 if (creating.value) router.push({
-                    name: 'admin.management.users.manage',
+                    name: 'admin.management.users.manage.about',
                     params: {
                         user: user.id,
                     }

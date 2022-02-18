@@ -1,6 +1,5 @@
 <template>
-
-    <list service-id="servers@getAll" :fields="listFields" searchable>
+    <list service-id="servers@getAll" :fields="listFields" :data="listExtraData" searchable>
         <template #search-extra>
             <div class="ml-4">
                 <v-button color="primary" :to="{ name: 'admin.management.servers.new' }" permission="server.create">
@@ -25,8 +24,8 @@
 
         <template #field-owner="{ result }">
             <div class="flex items-center">
-                <avatar :email="result.user.email" class="rounded-full h-10 mx-auto" />
-                <v-button permission="user.read" :to="{ name: 'admin.management.users.manage', params: { user: result.user.id } }" class="text-white/75 grow pl-4">
+                <avatar :email="result.user.email" class="rounded-full h-10" />
+                <v-button permission="user.read" :to="{ name: 'admin.management.users.manage.about', params: { user: result.user.id } }" class="text-white/75 grow pl-4">
                     {{ result.user.fullName }}
                 </v-button>
             </div>
@@ -58,12 +57,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { computed, defineComponent } from 'vue';
 import StatusIndicator from '~/views/StatusIndicator.vue';
 
 export default defineComponent({
     components: { StatusIndicator },
-    setup() {
+
+    props: {
+        filterUser: {
+            type: Number,
+        },
+        filterNode: {
+            type: Number,
+        },
+    },
+    setup(props) {
         return {
             listFields: <ListField[]>[
                 { key: 'name', skeleton: 8 },
@@ -71,7 +79,15 @@ export default defineComponent({
                 { key: 'owner', skeleton: 12 },
                 { key: 'node', skeleton: 6 },
                 { key: 'connection', skeleton: 12 },
-            ]
+            ],
+
+            listExtraData: computed(() => {
+                const data: Record<string, number> = {};
+                if (props.filterUser) data['filter[owner_id]'] = props.filterUser;
+                if (props.filterNode) data['filter[node_id]'] = props.filterNode;
+
+                return data;
+            })
         };
     }
 });

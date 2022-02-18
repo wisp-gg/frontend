@@ -265,6 +265,10 @@
           "allocations": {
             "title": "Allocations",
             "description": "Control allocations available for servers on this node."
+          },
+          "servers": {
+            "title": "Servers",
+            "description": "List servers installed on this node."
           }
         }
       },
@@ -321,8 +325,14 @@
         },
 
         "manage": {
-          "title": "Manage User",
-          "description": "Manage an existing user on the system."
+          "about": {
+            "title": "About",
+            "description": "Manage an existing user on the system."
+          },
+          "servers": {
+            "title": "Servers",
+            "description": "List servers owned by this user."
+          }
         }
       }
     },

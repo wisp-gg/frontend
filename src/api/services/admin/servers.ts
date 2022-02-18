@@ -63,12 +63,12 @@ interface MoveServerRequest {
 }
 
 class ServersService {
-    getAll(req: PaginatableRequest): Promise<ListResponse> {
+    getAll(req: PaginatableRequest, extraData = {}): Promise<ListResponse> {
         return RequestService.get('/servers', {
-            ...req,
             include: ['node', 'allocations', 'user'],
-        })
-            .then(Parser.parse);
+            ...req,
+            ...extraData,
+        }).then(Parser.parse);
     }
 
     get(): Promise<Server> {
@@ -86,10 +86,7 @@ class ServersService {
     }
 
     updateDetails(data: UpdateDetailsRequest): Promise<Server> {
-        return RequestService.put('/servers/:server/details', {
-            ...data,
-            owner_id: 1,
-        })
+        return RequestService.put('/servers/:server/details', data)
             .then(Parser.parse)
             .then(RequestService.updateModelBinding);
     }

@@ -671,6 +671,15 @@ export const routes: RouteRecordRaw[] = [
                                             icon: 'network-wired',
                                             permission: 'node_allocation.read',
                                         }
+                                    },
+                                    {
+                                        name: 'admin.management.nodes.manage.servers',
+                                        path: 'servers',
+                                        component: () => import('~/views/admin/nodes/manage/Servers.vue'),
+                                        meta: {
+                                            icon: 'server',
+                                            permission: 'server.read',
+                                        }
                                     }
                                 ]
                             },
@@ -819,20 +828,35 @@ export const routes: RouteRecordRaw[] = [
                             {
                                 name: 'admin.management.users.new',
                                 path: 'new',
-                                component: () => import('~/views/admin/users/Manage.vue'),
+                                component: () => import('~/views/admin/users/manage/About.vue'),
                                 meta: {
                                     icon: 'user',
                                     permission: 'user.create',
                                 }
                             },
-
                             {
                                 name: 'admin.management.users.manage',
                                 path: ':user',
-                                component: () => import('~/views/admin/users/Manage.vue'),
-                                meta: {
-                                    icon: 'user',
-                                }
+                                component: TabberPassthrough,
+                                children: [
+                                    {
+                                        name: 'admin.management.users.manage.about',
+                                        path: '',
+                                        component: () => import('~/views/admin/users/manage/About.vue'),
+                                        meta: {
+                                            icon: 'user',
+                                        }
+                                    },
+                                    {
+                                        name: 'admin.management.users.manage.servers',
+                                        path: 'servers',
+                                        component: () => import('~/views/admin/users/manage/Servers.vue'),
+                                        meta: {
+                                            icon: 'server',
+                                            permission: 'server.read',
+                                        }
+                                    },
+                                ]
                             },
                         ],
                     },
