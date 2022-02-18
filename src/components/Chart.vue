@@ -233,16 +233,19 @@ export default defineComponent({
                 if (streaming || nextPoints.length < 2) return;
                 streaming = true;
 
-                const handleDataPoint = (speed: number) => {
-                    const nextPoint = nextPoints.shift();
-                    if (!nextPoint) return;
-
-                    data.push(nextPoint.point);
+                const handleDataPoints = (points: number) => {
+                    data.push(
+                        ...nextPoints
+                            .splice(0, points)
+                            .map(a => a.point)
+                    );
 
                     if (data.length > dataThreshold) {
                         data.splice(0, data.length - dataStore);
                     }
+                };
 
+                const animateChart = (speed: number) => {
                     chart.updateOptions({
                         chart: {
                             animations: {
@@ -267,23 +270,21 @@ export default defineComponent({
                     const buffered = nextPoints.length;
 
                     let delay;
-                    let skip = false;
                     if (buffered > 3) { // We're significantly behind - just instantly show the points as the buffer could be huge.
                         delay = 1;
-                        skip = true;
-
-                        while(nextPoints.length > 3) {
-                            handleDataPoint(1);
-                        }
+                        handleDataPoints(nextPoints.length - 3);
                     } else if(buffered > 1) { // there's 2-3 data points spare - slightly speed up to compensate for starting to be stale.
                         delay = dataPointsEvery;
+                        handleDataPoints(1);
                     } else if(buffered == 1) { // there's single data point spare - this is ok but we would like to have a spare data point.
                         delay = dataPointsEvery + 50;
+                        handleDataPoints(1);
                     } else { // we're too far ahead - wait as long as possible (aka +latencyThreshold).
                         delay = dataPointsEvery + latencyThreshold;
+                        handleDataPoints(1);
                     }
 
-                    if (!skip) handleDataPoint(delay);
+                    animateChart(delay);
                     if (nextPoints.length > 0) {
                         timer.wait(() => loop(), delay);
                     } else {

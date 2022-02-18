@@ -137,7 +137,7 @@ export default class RequestService {
                     location.reload();
                 };
 
-                switch(err.response.status) {
+                switch(err.response?.status) {
                     case 400:
                         // TODO: Me, translate backend error?
                         break;
