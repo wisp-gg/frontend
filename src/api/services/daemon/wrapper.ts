@@ -16,7 +16,6 @@ class DaemonWrapper extends WebSocketTransformer {
     async connect(server: Server): Promise<void> {
         const { url, upload_url, token } = await ServerService.getWebsocket(); // TODO: race condition, we may want to connect as some point, but if we disconnect right after the request starts (and before it ends), it'll keep connecting :/
 
-        console.log(url, upload_url, token);
         Logger.debug(`DaemonWrapper[${server.uuidShort}]`, `Connecting to ${url}`);
 
         this.socket = io(url, {
