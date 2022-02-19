@@ -14,6 +14,12 @@ export class Node extends BaseModel {
         sftp: -1,
         fastdl: -1,
     };
+    public uploadSize = -1;
+
+    // Admin only props
+    public public = false;
+    public maintenanceMode = false;
+    public serversCount?: number;
     public limits = {
         cpu: -1,
         cpuOverallocate: -1,
@@ -22,12 +28,9 @@ export class Node extends BaseModel {
         disk: -1,
         diskOverallocate: -1,
     };
-    public uploadSize = -1;
-
-    // Admin only props
-    public public = false;
-    public maintenanceMode = false;
-    public serversCount?: number;
+    public cpuUsage = -1;
+    public memoryUsage = -1;
+    public diskUsage = -1;
 
     getRouteName() {
         return 'node';
@@ -51,5 +54,17 @@ export class Node extends BaseModel {
 
     public get location(): Location {
         return this.getRelationship('location');
+    }
+
+    public get cpuLimit() {
+        return this.limits.cpu * (1 + (this.limits.cpuOverallocate / 100));
+    }
+
+    public get memoryLimit() {
+        return this.limits.memory * (1 + (this.limits.memoryOverallocate / 100));
+    }
+
+    public get diskLimit() {
+        return this.limits.disk * (1 + (this.limits.diskOverallocate / 100));
     }
 }
