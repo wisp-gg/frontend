@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div ref="terminalElement" />
+        <div class="flex flex-grow" ref="terminalElement" />
         <div class="flex terminal-input">
             <div class="text-gray-300 terminal-prompt">
                 root:~/<span class="text-accent-500">$</span>
@@ -27,6 +27,10 @@
 <style>
     .terminal {
         padding: 1rem 1rem 0 1rem;
+    }
+
+    .xterm {
+        flex-grow: 1;
     }
 
     .xterm-viewport {
@@ -135,7 +139,20 @@ export default defineComponent({
             terminal.open(terminalElement.value);
             fitAddon.fit();
 
-            useWindowEvent('resize', debounce(() => fitAddon.fit(), 100));
+            useWindowEvent('resize', debounce(() => {
+                // https://github.com/xtermjs/xterm.js/issues/3564
+                let lastCols, lastRows;
+                let loop = true;
+                while(loop) {
+                    const { cols, rows } = fitAddon.proposeDimensions();
+                    fitAddon.fit();
+
+                    if (cols === lastCols && rows === lastRows) loop = false;
+
+                    lastCols = cols;
+                    lastRows = rows;
+                }
+            }, 100));
 
             let hooked = false;
             const hookSearchBarKeyEvents = () => {

@@ -1,4 +1,3 @@
 <template>
-    <!-- TODO: this should force fullscreen for all contents -->
-    <router-view />
+    <router-view class="min-h-screen flex flex-col" />
 </template>
