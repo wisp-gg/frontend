@@ -46,7 +46,6 @@ import cronstrue from 'cronstrue/i18n';
 import cronParser from 'cron-parser';
 import { Schedule } from '~/api/models';
 import { dispatch, formatDateAbsolute, state } from '~/core';
-import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
     props: {
@@ -55,7 +54,6 @@ export default defineComponent({
         }
     },
     setup(props) {
-        const { t } = useI18n();
         const { push } = useRouter();
 
         const cron = reactive({
@@ -77,7 +75,7 @@ export default defineComponent({
                 return {
                     description: cronstrue.toString(expression, { locale: 'en', use24HourTimeFormat: true }),
                     nextRunTime: formatDateAbsolute(cronParser.parseExpression(expression).next().toISOString(), 'LL @ LT'),
-                }
+                };
             } catch { // Invalid cron
                 return;
             }

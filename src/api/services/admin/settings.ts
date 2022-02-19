@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { dispatch } from '~/core';
 import RequestService from './request';
 
@@ -40,8 +39,9 @@ interface AssetRequest {
 
 class SettingsService {
     fetchAsset(url: string) {
-        return axios.get(url)
-            .then(res => res.data);
+        // Avoid using axios due to CORS
+        return fetch(url)
+            .then(res => res.text());
     }
 
     updateGeneral(data: GeneralSettingsRequest) {
