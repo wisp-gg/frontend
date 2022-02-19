@@ -67,6 +67,7 @@ import {
     faUserAlt as fasUserAlt,
     faKey as fasKey,
     faPowerOff as fasPowerOff,
+    faIdBadge as fasIdBadge,
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -86,7 +87,7 @@ library.add(
     fasFileAlt, fasWifi, fasGamepad, fasMapMarkedAlt, fasUsers, fasEdit, fasArrowRight, fasCopy, fasFileArchive, fasDownload,
     fasTrash, fasDatabase, fasWrench, fasUserPlus, fasUserCog, fasNetworkWired, fasFingerprint, fasBoxes, fasCalendarAlt, fasPlug,
     fasCubes, fasPlus, fasChevronRight, fasSearch, fasPencilAlt, fasDoorOpen, fasStopwatch, fasPlayCircle, fasHome, fasRandom,
-    fasGlobe, fasHeartbeat, fasCube, fasEgg, farClock, fasUserAlt, fasKey, fasPowerOff,
+    fasGlobe, fasHeartbeat, fasCube, fasEgg, farClock, fasUserAlt, fasKey, fasPowerOff, fasIdBadge,
 
     /* REGULAR */
     farHeart,

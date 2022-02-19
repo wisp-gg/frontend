@@ -11,13 +11,16 @@
                 </div>
 
                 <div class="text-left flex-grow">
-                    <skeleton :content="8">
-                        <router-link :to="{name: 'server.system.index', params: { server: server?.uuidShort }}">
-                            <p class="text-white text-lg">
+                    <p class="text-white text-lg">
+                        <skeleton :content="8">
+                            <router-link :to="{name: 'server.system.index', params: { server: server?.uuidShort }}">
                                 {{ server?.name }}
-                            </p>
-                        </router-link>
-                    </skeleton>
+                            </router-link>
+                            <span class="text-white/50 block md:inline text-sm leading-none tracking-tight pl-2" v-clipboard>
+                                {{ server?.uuidShort }}
+                            </span>
+                        </skeleton>
+                    </p>
                     <p class="text-white/75">
                         <skeleton :content="16">
                             <span class="tracking-wide" v-clipboard>{{ server.primaryAllocation().displayName() }}</span>
