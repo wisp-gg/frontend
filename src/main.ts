@@ -18,6 +18,7 @@ import {
     Button,
     Chart,
     Container,
+    Date,
     Footer,
     List,
     TranslatedMessage,
@@ -52,6 +53,7 @@ app
     .component('chart', Chart)
     .component('can', Can)
     .component('container', Container)
+    .component('date', Date)
     .component('list', List)
     .component('modal', Modal)
     .component('paginator', Paginator)

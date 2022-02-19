@@ -6,6 +6,7 @@ export { default as Button } from './Button.vue';
 export { default as Can } from './Can.vue';
 export { default as Chart } from './Chart.vue';
 export { default as Container } from './Container.vue';
+export { default as Date } from './Date.vue';
 export { default as Footer } from './Footer.vue';
 export { default as List } from './List.vue';
 export { default as Modal } from './Modal.vue';
