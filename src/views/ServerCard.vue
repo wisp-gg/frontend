@@ -138,7 +138,7 @@
 </style>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, onUnmounted, onUpdated, computed } from 'vue';
+import { defineComponent, ref, onMounted, onUnmounted, computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Server } from '~/api/models';
 import { mappedState, ServerStats } from '~/api/services/client/node';
@@ -163,27 +163,33 @@ export default defineComponent({
         });
 
         let registered = false;
-        const register = () => {
-            if (registered || !props.server) return;
+        const register = (server?: Server) => {
+            if (registered || !server) return;
 
             ServersService.registerStats(
-                props.server.uuidShort,
-                props.server.node.id,
+                server.uuidShort,
+                server.node.id,
                 serverStats => stats.value = serverStats,
             );
             registered = true;
         };
 
-        const unregister = () => {
-            if (!registered || !props.server) return;
+        const unregister = (server?: Server) => {
+            if (!registered || !server) return;
 
-            ServersService.unregisterStats(props.server.uuidShort);
+            ServersService.unregisterStats(server.uuidShort);
             registered = false;
         };
 
-        onMounted(register);
-        onUpdated(register);
-        onUnmounted(unregister);
+        onMounted(() => register(props.server));
+        watch(() => props.server, (newServer?: Server, oldServer?: Server) => {
+            unregister(oldServer);
+            stats.value = {
+                status: -2,
+            };
+            register(newServer);
+        });
+        onUnmounted(() => unregister(props.server));
 
         return {
             minecraft,
