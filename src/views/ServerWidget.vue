@@ -1,7 +1,9 @@
 <template>
     <div class="flex items-start bg-primary-900" :class="preference === 0 ? 'px-6 py-3' : 'px-4 py-2 rounded-l-lg'">
-        <div>
-            <p>{{ server?.name }}</p>
+        <div class="overflow-hidden">
+            <p class="line-clamp-1 max-w-lg">
+                {{ server?.name }}
+            </p>
             <p v-clipboard class="text-sm text-white text-opacity-40">
                 {{ server?.primaryAllocation()?.displayName() }}
             </p>
