@@ -9,11 +9,15 @@ import { WebSocketTransformer } from './websocket';
 
 class DaemonWrapper extends WebSocketTransformer {
     protected uploadSocket: Socket | undefined;
+    protected id: string | undefined;
     public siofu: SocketIOFileUpload | undefined;
 
     // The promise will resolve before the connection succeeds (as it doesn't matter).
     // It shouldn't be relied on as indicator for "successfully connected".
     async connect(server: Server): Promise<void> {
+        await this.disconnect();
+        this.id = server.uuidShort;
+
         const { url, upload_url, token } = await ServerService.getWebsocket(); // TODO: race condition, we may want to connect as some point, but if we disconnect right after the request starts (and before it ends), it'll keep connecting :/
 
         Logger.debug(`DaemonWrapper[${server.uuidShort}]`, `Connecting to ${url}`);
@@ -57,6 +61,8 @@ class DaemonWrapper extends WebSocketTransformer {
         this.socket.once('auth_success', () => this.setupEvents());
 
         this.socket.on('disconnect', () => {
+            Logger.info(`DaemonWrapper[${server.uuidShort}]`, 'WebSocket disconnected');
+
             dispatch('server/socket/setState', false);
         });
 
@@ -93,7 +99,7 @@ class DaemonWrapper extends WebSocketTransformer {
 
             this.uploadSocket.on('connect_error', err => uploadConnectionFailedHandler(err.message));
             this.uploadSocket.on('auth_failed', data => uploadConnectionFailedHandler(data.message));
-            this.uploadSocket.on('disconnect', () => Logger.info(`DaemonWrapper[${server.uuidShort}]`, 'Upload WebSocket disconnected.'));
+            this.uploadSocket.on('disconnect', () => Logger.info(`DaemonWrapper[${server.uuidShort}]`, 'Upload WebSocket disconnected'));
 
             this.siofu = new SocketIOFileUpload(this.uploadSocket);
             ['start', 'progress', 'complete', 'error'].forEach(name => {
@@ -103,7 +109,10 @@ class DaemonWrapper extends WebSocketTransformer {
     }
 
     async disconnect(): Promise<void> {
-        this.clearEvents(); // TODO: components reload after visiting them - are we able to allow them not to rerender each time for better UX?
+        // Do not clear events for now - this should be handled automatically by server.ts plugin for now
+        // this.clearEvents(); // TODO: components reload after visiting them - are we able to allow them not to rerender each time for better UX?
+
+        delete this.id;
 
         this.socket?.disconnect();
         delete this.socket;
@@ -118,7 +127,11 @@ class DaemonWrapper extends WebSocketTransformer {
         dispatch('server/socket/setProc', undefined);
         dispatch('server/socket/setQuery', undefined);
 
-        Logger.info('DaemonWrapper', 'WebSockets disconnected.');
+        Logger.info('DaemonWrapper', 'WebSockets reset.');
+    }
+
+    getId() {
+        return this.id;
     }
 }
 
