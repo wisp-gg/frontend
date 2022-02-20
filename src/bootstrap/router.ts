@@ -1,9 +1,36 @@
+import { computed, watch } from 'vue';
 import { RouteRecordRaw } from 'vue-router';
 import { getRouteParams } from '~/helpers';
 import { Logger, Router, Store, Lang, state, dispatch } from '~/core';
 import { globalMiddlewares } from '~/routes';
 import { RouteData } from '~/store/modules/navigation';
 import { Passthrough, TabberPassthrough } from '~/views';
+
+const pageTitle = computed(() => {
+    const branding = state.settings.data?.branding?.name || 'WISP';
+    const routeName = Router.currentRoute.value.name?.toString();
+    const routeMatched = Router.currentRoute.value.matched;
+    if (!routeName || routeMatched.length < 0) return `${branding} | Game Panel`;
+
+    const routeTranslation = Lang.global.t(`navigation.${routeName}.title`);
+
+    // TODO: this should also consider (Tabber)Passthrough with separation of admin and client area
+    const route = routeMatched[routeMatched.length - 1];
+    for(const path of route.path.split('/')) {
+        if (!path.startsWith(':')) continue;
+
+        const paramName = path.substring(1);
+        if (paramName in state.models) {
+            const model = state.models[paramName];
+            if (!model.name) continue;
+
+            return `${branding} | ${model.name} - ${routeTranslation}`;
+        }
+    }
+
+    return `${branding} | ${routeTranslation}`;
+});
+watch(pageTitle, (value: string) => document.title = value);
 
 function normalizeMiddleware(middleware: Middleware | [Middleware, number]) {
     return Array.isArray(middleware) ? middleware : [middleware, 0];
@@ -80,13 +107,6 @@ Router.beforeEach(async (to, from, next) => {
 });
 
 Router.afterEach(async guard => {
-    // TODO: this should be handled somewhere in a different place (e.g. ModelBindings middleware after it has finished retrieving all the data, and just have some reasonable default?)
-    // TODO: this should consider the first model binding in the route path (instead of being hardcoded to server, e.g. consider user visiting a node in admin area)
-    // TODO: this should also consider (Tabber)Passthrough with separation of admin and client area
-    // TODO: Lang.global.t isn't available on first load always due to lang file still loading
-    const translatedTitle = `${state.models.server?.name ? `${state.models.server.name} - ` : ''}${Lang.global.t(`navigation.${<string> guard.name}.title`)}`;
-    document.title = `${state.settings.data?.branding?.name || 'WISP'} | ${translatedTitle}`;
-
     if (guard.matched.length > 0) {
         const routes: RouteData[] = [];
 
