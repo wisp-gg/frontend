@@ -2,7 +2,7 @@
     <v-form :service-id="creating ? 'users@create' : 'users@update'" :on-success="onSuccess" class="grid grid-cols-1 lg:grid-cols-2 items-start gap-x-4 gap-y-4">
         <div class="space-y-4">
             <container title="admin.users.identity">
-                <v-input name="email" :value="user?.email" />
+                <v-input name="email" :value="user?.email" rule="required" />
 
                 <div class="flex flex-col xl:flex-row gap-x-6">
                     <v-input class="flex-grow" name="name_first" :value="user?.nameFirst" rule="required" />
