@@ -2,14 +2,11 @@
     <container :title="['_raw', variable?.name || '']">
         <alerts class="mb-6" :by-key="`server.startup.variable(${variable?.envVariable})`" />
 
-        <div v-if="variable?.tickable" class="flex">
-            <v-input class="!w-5 !h-5" name="" permission="startup.update" type="checkbox" :checked="variable?.serverValue === '1'" @change="save" hide-label no-margin />
-            <p class="ml-3 font-lg uppercase">
-                <t path="generic.enabled" />
-            </p>
+        <div v-if="variable?.tickable">
+            <v-switch name="enabled" permission="startup.update" :value="variable?.serverValue === '1'" @update:value="save" no-margin />
         </div>
 
-        <v-input v-else name="" permission="startup.update" :value="variable?.serverValue || ''" @keyup="save" hide-label no-margin />
+        <v-input v-else name="" permission="startup.update" :value="variable?.serverValue || ''" @keyup="save($event.target.value)" hide-label no-margin />
 
         <p class="mt-3">
             <skeleton :content="12">
@@ -50,13 +47,13 @@ export default defineComponent({
         if (!updateStartupCommand) throw new Error('Missing required injection updateStartupCommand');
 
         return {
-            save: debounce((evt: KeyboardEvent) => {
+            save: debounce((value: string | boolean) => {
+                console.log('save called');
+
                 if (!props.variable?.envVariable) return; // No variable, Skeleton maybe?
 
                 const alertKey = `server.startup.variable(${props.variable?.envVariable})`;
                 dispatch('alerts/clear', alertKey);
-
-                const value = props.variable.tickable ? (<HTMLInputElement>evt.target).checked : (<HTMLInputElement> evt.target).value;
 
                 useService<ListResponse>('startup@save', alertKey, {
                     environment: {

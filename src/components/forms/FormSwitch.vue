@@ -106,6 +106,10 @@ export default defineComponent({
             input.value = newValue;
         });
 
+        watch(() => input.value, newValue => {
+            emit('update:value', newValue);
+        });
+
         let unregister: any;
 
         onBeforeMount(() => {
@@ -146,11 +150,6 @@ export default defineComponent({
 
                 return true;
             }),
-
-            toggle: () => {
-                input.value = !input.value;
-                emit('update:value', input.value);
-            }
         };
     },
 });
