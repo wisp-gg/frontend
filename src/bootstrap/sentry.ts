@@ -14,7 +14,7 @@ export function enableSentry(app: App, router: Router) {
         integrations: [
             new BrowserTracing({
                 routingInstrumentation: Sentry.vueRouterInstrumentation(router),
-                tracingOrigins: [location.host],
+                tracingOrigins: [`//${location.host}/api/`],
             }),
         ],
         logErrors: true,
