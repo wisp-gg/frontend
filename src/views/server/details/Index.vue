@@ -15,8 +15,8 @@
                 <div class="flex flex-wrap gap-y-6 align-center">
                     <details-attribute icon="server" name="generic.server.name" :value="server?.name" />
                     <details-attribute icon="tachometer-alt" name="generic.server.cpu" :value="`${limits?.cpu} %`" />
-                    <details-attribute icon="memory" name="generic.server.memory" format-unit :value="limits?.memory * 1000 * 1000" />
-                    <details-attribute icon="hdd" name="generic.server.disk" format-unit :value="limits?.disk * 1000 * 1000" />
+                    <details-attribute icon="memory" name="generic.server.memory" format-unit :value="limits?.memory * 1024 * 1024" />
+                    <details-attribute icon="hdd" name="generic.server.disk" format-unit :value="limits?.disk * 1024 * 1024" />
                 </div>
             </container>
 
