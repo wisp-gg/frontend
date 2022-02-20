@@ -24,8 +24,16 @@ const validationRules: ValidationRules = {
             valid: /\S+@\S+\.\S+/.test(value),
         };
     },
+    min: (value: any, input: any) => {
+        if (isNaN(parseInt(value)) || Array.isArray(value)) value = value.length;
+        else if (typeof value === 'object') value = Object.keys(value).length;
+
+        return {
+            valid: value >= input,
+        };
+    },
     max: (value: any, input: any) => {
-        if (typeof value === 'string' || Array.isArray(value)) value = value.length;
+        if (isNaN(parseInt(value)) || Array.isArray(value)) value = value.length;
         else if (typeof value === 'object') value = Object.keys(value).length;
 
         return {
@@ -58,6 +66,7 @@ export class Validator {
             const ruleSplit = rule.split(':');
             const ruleName = ruleSplit.shift() as string;
             const ruleData = ruleSplit.join(':');
+            console.log(ruleName, ruleData);
             if (!validationRules[ruleName]) {
                 Logger.warn('Validator', `Unable to validate ${name}: Unknown validation rule ${ruleName}`);
                 continue;
@@ -78,7 +87,7 @@ export class Validator {
                     const res = validationRules[ruleName](normalized, ruleData);
                     if (!res.valid) {
                         const additionalData: Record<string, any> = {};
-                        if (ruleData) additionalData[ruleName] = ruleData;
+                        if (ruleData != undefined) additionalData[ruleName] = ruleData;
 
                         errors.push(
                             [`components.form.validator.${ruleName}`, additionalData]

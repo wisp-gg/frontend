@@ -154,7 +154,8 @@
       "required": "This field is required | Missing field {field}",
       "integer": "The value must be a valid integer | The field {field} must be a valid integer",
       "email": "Invalid email | Invalid email for field {field}",
-      "max": "The value should not exceed {max} characters | The field {field} should not exceed {max} characters",
+      "min": "The value should not be less than {min} | The field {field} should not be less than {min}",
+      "max": "The value should not exceed {max} | The field {field} should not exceed {max}",
       "regex": "The value is invalid"
     }
   },

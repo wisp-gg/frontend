@@ -45,7 +45,7 @@
                 </container>
 
                 <container title="admin.nodes.settings.general_configuration" class="my-4">
-                    <v-input name="upload_size" label="admin.nodes.settings.max_web_upload" footer="admin.nodes.settings.max_web_upload_footer" rule="required" :value="node?.uploadSize" suffix="generic.units.megabytes" />
+                    <v-input name="upload_size" label="admin.nodes.settings.max_web_upload" footer="admin.nodes.settings.max_web_upload_footer" rule="required|min:0|max:1000" :value="node?.uploadSize" suffix="generic.units.megabytes" />
 
                     <div class="grid grid-cols-2 gap-x-4">
                         <v-input name="daemon_listen" label="admin.nodes.settings.daemon_port" rule="required" :value="node?.ports.base" />
