@@ -31,7 +31,7 @@
                     <details-attribute icon="users" name="generic.server.players">
                         <t :path="['generic.server.players_amount', { current: query?.players.length ?? '--', max: query?.maxplayers ?? '--' }]" />
                     </details-attribute>
-                    <details-attribute icon="wifi" name="generic.server.ip" :value="server?.primaryAllocation().connection" />
+                    <details-attribute icon="wifi" name="generic.server.ip" :value="server?.primaryAllocation().displayName()" />
                     <details-attribute icon="id-badge" name="generic.uuid">
                         <p v-clipboard>
                             {{ server?.uuidShort }}
