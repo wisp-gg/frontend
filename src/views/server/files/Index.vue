@@ -1,7 +1,47 @@
 <template>
     <div>
         <div class="flex flex-col md:flex-row mb-4">
-            <file-breadcrumbs :path="path" class="flex-grow" />
+            <file-breadcrumbs :path="path">
+                <popper placement="bottom">
+                    <v-button class="ml-2" color="secondary">
+                        <fa :icon="['fas', 'ellipsis-h']" />
+                    </v-button>
+
+                    <template #content>
+                        <ul class="bg-primary-300 mt-2 mr-4 rounded border border-white/25">
+                            <li>
+                                <v-button color="secondary" permission="file.write" :to="{name: 'server.management.files.new', hash: `#${path}${path.endsWith('/') ? '' : '/'}`}" class="flex items-center p-4 text-sm w-full rounded-none">
+                                    <fa class="mr-2" :icon="['fas', 'file-alt']" size="lg" fixed-width />
+                                    <t path="server.files.new_file" />
+                                </v-button>
+                            </li>
+                            <li>
+                                <create-folder-modal :path="path" />
+                            </li>
+                            <li>
+                                <v-button color="secondary" permission="file.write" class="flex items-center p-4 text-sm w-full rounded-none" @click="uploadPrompt(path)">
+                                    <fa class="mr-2" :icon="['fas', 'upload']" size="lg" fixed-width />
+                                    <t path="server.files.upload" />
+                                </v-button>
+                            </li>
+                            <li>
+                                <file-search-modal />
+                            </li>
+                            <li class="border-t border-opacity-20">
+                                <git-clone-modal :path="path" />
+                            </li>
+                            <li>
+                                <git-pull-modal :path="path" />
+                            </li>
+                            <can feature="workshop-dl">
+                                <li class="border-t border-opacity-20">
+                                    <steam-workshop-modal :path="path" />
+                                </li>
+                            </can>
+                        </ul>
+                    </template>
+                </popper>
+            </file-breadcrumbs>
         </div>
 
         <div :class="dragging ? ['drag-files'] : []" ref="fileList">
@@ -16,48 +56,7 @@
                 class="files"
             >
                 <template #headers-after>
-                    <th class="text-right">
-                        <div class="flex justify-end" />
-                        <popper placement="bottom">
-                            <v-button color="secondary">
-                                <fa :icon="['fas', 'ellipsis-h']" />
-                            </v-button>
-
-                            <template #content>
-                                <ul class="bg-primary-300 mt-2 rounded border border-white/25">
-                                    <li>
-                                        <v-button color="secondary" permission="file.write" :to="{name: 'server.management.files.new', hash: `#${path}${path.endsWith('/') ? '' : '/'}`}" class="flex items-center p-4 text-sm w-full rounded-none">
-                                            <fa class="mr-2" :icon="['fas', 'file-alt']" size="lg" fixed-width />
-                                            <t path="server.files.new_file" />
-                                        </v-button>
-                                    </li>
-                                    <li>
-                                        <create-folder-modal :path="path" />
-                                    </li>
-                                    <li>
-                                        <v-button color="secondary" permission="file.write" class="flex items-center p-4 text-sm w-full rounded-none" @click="uploadPrompt(path)">
-                                            <fa class="mr-2" :icon="['fas', 'upload']" size="lg" fixed-width />
-                                            <t path="server.files.upload" />
-                                        </v-button>
-                                    </li>
-                                    <li>
-                                        <file-search-modal />
-                                    </li>
-                                    <li class="border-t border-opacity-20">
-                                        <git-clone-modal :path="path" />
-                                    </li>
-                                    <li>
-                                        <git-pull-modal :path="path" />
-                                    </li>
-                                    <can feature="workshop-dl">
-                                        <li class="border-t border-opacity-20">
-                                            <steam-workshop-modal :path="path" />
-                                        </li>
-                                    </can>
-                                </ul>
-                            </template>
-                        </popper>
-                    </th>
+                    <th />
                 </template>
 
                 <template #items-before>

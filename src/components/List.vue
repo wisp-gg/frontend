@@ -16,7 +16,7 @@
                         <tr class="w-full bg-primary-400 hidden xl:table-row">
                             <slot name="headers-before" />
 
-                            <th class="px-6 py-3" v-if="checkbox">
+                            <th class="px-4 py-3" v-if="checkbox">
                                 <div class="flex items-center justify-start">
                                     <input class="input w-auto" type="checkbox" ref="checkboxAll" @click="onCheckboxAllClick">
 
@@ -24,7 +24,7 @@
                                 </div>
                             </th>
 
-                            <th v-for="field in fields" :key="field.key" class="px-6 py-3 text-left uppercase">
+                            <th v-for="field in fields" :key="field.key" class="px-4 py-3 text-left uppercase">
                                 <t :path="`components.table.labels.${field.label ?? field.key}`" />
                             </th>
 
@@ -48,7 +48,7 @@
                             <tr v-for="(result, idx) in list?.results" :key="idx" class="bg-primary-500 border-b border-primary-400 block xl:table-row xl:border-none last:border-none group hover:opacity-80 hover:text-white" @click="onCheckboxRowClick($event, result)">
                                 <slot name="fields-before" :result="result" :update="update" />
 
-                                <td class="px-6 pt-3 xl:py-4 text-center td-min" v-if="checkbox">
+                                <td class="px-4 pt-3 xl:py-4 text-center td-min" v-if="checkbox">
                                     <div class="flex items-center">
                                         <skeleton :content="2">
                                             <input class="input w-auto" type="checkbox" :ref="elem => registerCheckboxItem(elem, result)" @click="onCheckboxClick($el)">
@@ -60,7 +60,7 @@
 
                                 <td class="block xl:hidden">
                                     <div class="flex flex-row flex-wrap">
-                                        <div v-for="(field, fieldIdx) in fields" :key="fieldIdx" class="w-full px-6 py-3 text-left sm:w-1/2" :style="field.style">
+                                        <div v-for="(field, fieldIdx) in fields" :key="fieldIdx" class="w-full px-4 py-3 text-left sm:w-1/2" :style="field.style">
                                             <h5 class="text-white/75 font-semibold uppercase">
                                                 <skeleton :content="12">
                                                     <t :path="`components.table.labels.${field.label ?? field.key}`" />
