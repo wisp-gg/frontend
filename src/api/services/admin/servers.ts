@@ -88,7 +88,11 @@ class ServersService {
     updateDetails(data: UpdateDetailsRequest): Promise<Server> {
         return RequestService.put('/servers/:server/details', data)
             .then(Parser.parse)
-            .then(RequestService.updateModelBinding);
+            .then(server => {
+                dispatch('models/refresh', 'server');
+
+                return server;
+            });
     }
 
     updateBuild(data: UpdateBuildRequest): Promise<Server> {
