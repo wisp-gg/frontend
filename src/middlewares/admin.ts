@@ -7,7 +7,7 @@ class Admin implements Middleware {
     }
 
     async run(to: RouteLocationNormalized) {
-        if (!state.user.data?.rootAdmin) {
+        if (!state.user.data?.rootAdmin && !state.user.data?.supportOp) {
             // TODO: this should be a 403 instead
             return {
                 name: '404',
