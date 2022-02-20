@@ -18,11 +18,14 @@ export default defineComponent({
     setup(props) {
         const avatarURL = ref<null | string>(null);
 
-        const setAvatarURL = (email: string) =>
+        const setAvatarURL = (email?: string) => {
+            if (!email) return;
+
             md5(email)
                 .then(hash => {
                     avatarURL.value = `https://www.gravatar.com/avatar/${hash}?s=160`;
                 });
+        };
 
         setAvatarURL(props.email);
         watch(() => props.email, value => setAvatarURL(value));
