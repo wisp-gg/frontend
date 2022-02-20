@@ -46,6 +46,7 @@ export default defineComponent({
             const editor = ace.edit(editorElem.value);
             editor.setTheme('ace/theme/dracula');
             editor.setShowPrintMargin(false);
+            editor.getSession().setUseSoftTabs(true);
             editor.getSession().setUseWrapMode(true);
 
             const setValue = (value: string) => {
