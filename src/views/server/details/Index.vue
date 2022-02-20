@@ -14,7 +14,7 @@
             <container class="w-full lg:w-1/2" title="server.details.server_limits">
                 <div class="flex flex-wrap gap-y-6 align-center">
                     <details-attribute icon="server" name="generic.server.name" :value="server?.name" />
-                    <details-attribute icon="tachometer-alt" name="generic.server.cpu" :value="`${limits?.cpu} %`" />
+                    <details-attribute icon="tachometer-alt" name="generic.server.cpu" :value="limits?.cpu ? `${limits?.cpu} %` : '∞'" />
                     <details-attribute icon="memory" name="generic.server.memory" format-unit :value="limits?.memory * 1024 * 1024" />
                     <details-attribute icon="hdd" name="generic.server.disk" format-unit :value="limits?.disk * 1024 * 1024" />
                 </div>

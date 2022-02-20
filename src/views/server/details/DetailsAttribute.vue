@@ -48,6 +48,7 @@ export default defineComponent({
 
         return {
             finalValue: computed(() => {
+                if (props.value === 0) return '∞';
                 if (!props.value) return t('generic.unknown');
                 if (!props.formatUnit) return props.value;
                 if (typeof props.value !== 'number') throw new Error('Attempted to format bytes whilst value is not a number');
