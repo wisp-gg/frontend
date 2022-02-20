@@ -43,6 +43,7 @@ class NodeService {
     getAll(req: PaginatableRequest): Promise<Node[]> {
         return RequestService.get('/nodes', {
             ...req,
+            sort: 'name',
             include: ['location', 'servers_count']
         })
             .then(Parser.parse);
