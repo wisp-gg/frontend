@@ -3,6 +3,7 @@ export { default as useWindowEvent } from './window';
 export { supportsDragAndDrop } from './browser';
 export { default as timer } from './timer';
 export { default as useService } from './service';
+export { default as refreshList } from './refreshList';
 export { hasPermissions, translateRequiresPermissions, permissionsStateLoaded } from './permission';
 export { hasFeatures, featuresStateLoaded } from './feature';
 export { cleanData } from './clean';

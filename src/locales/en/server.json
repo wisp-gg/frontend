@@ -157,6 +157,7 @@
     "delete_subuser_notice": "This will immediately remove {name} ({email}) from this server and revoke all permissions.",
     "configure_permissions": "Configure Permissions",
 
+    "subuser_added": "Successfully added the user as a subuser for this server. We've sent them an email with instructions on how to finish setting up their account.",
     "cant_add_owner": "You cannot add the server owner as a subuser for this server.",
     "subuser_already_exists": "A user with that email address is already assigned as a subuser for this server."
   },

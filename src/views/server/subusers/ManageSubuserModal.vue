@@ -7,7 +7,7 @@
         @open="onModalOpen"
     >
         <template #default="{ close }">
-            <v-form :service-id="submit" :on-success="() => { close(); updateList(); }">
+            <v-form :service-id="submit" :on-success="onSuccess(close)">
                 <v-input class="flex-grow" name="email" rule="required" :value="email" :readonly="!!subuser">
                     <v-submit class="ml-5" no-margin color="primary" :label="!!subuser ? 'server.subusers.update_subuser' : 'server.subusers.add_new_subuser'" :permission="!!subuser ? 'subuser.update' : 'subuser.create'" />
                 </v-input>
@@ -77,7 +77,7 @@ import { computed, defineComponent, ref } from 'vue';
 import { dispatch } from '~/core';
 import { ServerPermissions } from '~/api/services/client/subusers';
 import { ServerSubuser } from '~/api/models';
-import { useService } from '~/plugins';
+import { useService, refreshList } from '~/plugins';
 
 export default defineComponent({
     props: {
@@ -104,6 +104,21 @@ export default defineComponent({
         };
 
         return {
+            onSuccess: (close: () => void) => {
+                return () => {
+                    close();
+
+                    refreshList('subusers@getAll')
+                        .then(() => {
+                            if (!props.subuser) {
+                                dispatch('alerts/add', {
+                                    type: 'success',
+                                    title: ['server.subusers.subuser_added'],
+                                });
+                            }
+                        });
+                };
+            },
             updateList: () => dispatch('lists/refresh', 'subusers@getAll'),
 
             email,
