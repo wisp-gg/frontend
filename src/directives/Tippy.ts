@@ -35,6 +35,11 @@ const directive: Directive = {
     },
     updated: (el, binding) => {
         if (!binding.value) {
+            if (el._setTippy) {
+                clearTimeout(el._setTippy);
+                delete el._setTippy;
+            }
+
             el._tippy?.destroy();
             return delete el._tippy;
         }
@@ -43,6 +48,11 @@ const directive: Directive = {
     },
 
     beforeUnmount: el => {
+        if (el._setTippy) {
+            clearTimeout(el._setTippy);
+            delete el._setTippy;
+        }
+
         el._tippy?.destroy();
         return delete el._tippy;
     }
