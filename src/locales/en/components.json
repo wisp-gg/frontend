@@ -135,7 +135,7 @@
         "site_name": "Site Name",
         "title": "Title",
         "description": "Description",
-        "image_url": "Image URL"
+        "image": "Image URL"
       },
 
       "whmcs": {
