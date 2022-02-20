@@ -2,8 +2,8 @@
   "sign_in": "Sign In",
   "or": "or",
   "sso": "Login with SSO",
-  "reset_password": "Struggling to Login?",
-  "locate": "Locate",
+  "struggling_to_login": "Struggling to Login?",
+  "reset_password": "Reset Password",
   "back": "Back to Login",
 
   "password_reset_email_sent": "Password reset instructions have been sent to your email if there is an account associated with it.",
