@@ -12,7 +12,8 @@ export class DatabaseHost extends BaseModel {
 
     // Admin only props
     public username = '';
-    public maxDatabases?: number = undefined;
+    public maxDatabases: number | undefined;
+    public databasesCount: number | undefined;
 
     getRouteName() {
         return 'databaseHost';

@@ -23,7 +23,7 @@ class DatabaseHostsService {
     getAll(req: PaginatableRequest): Promise<ListResponse> {
         return RequestService.get('/database-hosts', {
             ...req,
-            include: 'node'
+            include: ['node', 'databasesCount'],
         })
             .then(Parser.parse);
     }

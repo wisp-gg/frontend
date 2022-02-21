@@ -17,7 +17,7 @@
         </template>
 
         <template #field-databases="{ result }">
-            0 / {{ result.maxDatabases ?? '∞' }}
+            {{ result.databasesCount }} / {{ result.maxDatabases ?? '∞' }}
         </template>
 
         <template #field-node="{ result }">
