@@ -1,0 +1,73 @@
+name: Bug Report
+description: Provide a bug report to help us improve the project
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Provide as much detail as possible for us to reproduce and resolve the issue.
+
+        Make sure there are no existing bug reports by searching the [repository issues](https://github.com/wisp-gg/frontend/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Abug).
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Describe the bug
+      description: Please provide a clear and concise description of the issue.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: Please describe in detail what you expected to happen.
+      placeholder: Click on the file manager button, and the files would be displayed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual Behavior
+      description: What actually happened instead
+      placeholder: File manager page was empty with only page background displayed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce-steps
+    attributes:
+      label: Steps to Reproduce
+      description: Please be as detailed as possible when providing steps to reproduce the issue
+      placeholder: |
+        Step 1 Click on a file manager button
+        Step 2 Be redirected to a file manager page
+        Step 3 Empty page is displayed
+    validations:
+      required: true
+
+  - type: input
+    id: browser-details
+    attributes:
+      label: Browser Details
+      description: The browser type and version you are using.
+      placeholder: Firefox 97.0
+
+  - type: input
+    id: desktop-os
+    attributes:
+      label: Desktop OS
+      description: The operating system you are using.
+      placeholder: Windows 10
+
+  - type: textarea
+    id: optional-information
+    attributes:
+      label: Optional additional information
+      description: |
+        Optionally can provide any additional information here, such as browser console or network tab output that might contain useful information.
+      render: bash
+    validations:
+      required: false
