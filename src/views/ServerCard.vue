@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full lg:even:pl-3 lg:odd:pr-3">
+    <div class="w-full 2xl:even:pl-3 2xl:odd:pr-3">
         <div class="server flex flex-col text-center overflow-hidden whitespace-nowrap" :style="`--thumbnail:url('${server?.egg?.thumbnail || minecraft}');`">
             <div class="gradient" />
             <div class="flex items-center bg-primary-900 bg-opacity-25 px-4 md:px-8 py-4">
@@ -16,7 +16,7 @@
                             <router-link :to="{name: 'server.system.index', params: { server: server?.uuidShort }}">
                                 {{ server?.name }}
                             </router-link>
-                            <span class="text-white/50 block md:inline text-sm leading-none tracking-tight pl-2" v-clipboard>
+                            <span class="text-white/50 hidden md:inline text-sm leading-none tracking-tight pl-2" v-clipboard>
                                 {{ server?.uuidShort }}
                             </span>
                         </skeleton>
