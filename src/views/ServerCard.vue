@@ -10,7 +10,7 @@
                     <status-indicator v-else :status="stats.status" />
                 </div>
 
-                <div class="text-left flex-grow">
+                <div class="text-left flex-grow overflow-hidden">
                     <p class="text-white text-lg">
                         <skeleton :content="8">
                             <router-link :to="{name: 'server.system.index', params: { server: server?.uuidShort }}">
