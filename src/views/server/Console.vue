@@ -31,6 +31,7 @@
 
     .xterm {
         flex-grow: 1;
+        font-family: "JetBrains Mono", monospace;
     }
 
     .xterm-viewport {
@@ -100,8 +101,10 @@ export default defineComponent({
                 allowTransparency: true,
                 cursorStyle: 'underline',
                 disableStdin: true,
-                fontSize: 12,
-                fontFamily: 'monospace',
+                fontSize: 14,
+                fontFamily: 'JetBrains Mono',
+                fontWeight: 'normal',
+                lineHeight: 1.1,
                 rows: 30,
                 scrollback: 1000,
                 theme: {
