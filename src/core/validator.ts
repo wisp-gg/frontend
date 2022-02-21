@@ -66,7 +66,6 @@ export class Validator {
             const ruleSplit = rule.split(':');
             const ruleName = ruleSplit.shift() as string;
             const ruleData = ruleSplit.join(':');
-            console.log(ruleName, ruleData);
             if (!validationRules[ruleName]) {
                 Logger.warn('Validator', `Unable to validate ${name}: Unknown validation rule ${ruleName}`);
                 continue;

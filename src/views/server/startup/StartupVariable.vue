@@ -48,8 +48,6 @@ export default defineComponent({
 
         return {
             save: debounce((value: string | boolean) => {
-                console.log('save called');
-
                 if (!props.variable?.envVariable) return; // No variable, Skeleton maybe?
 
                 const alertKey = `server.startup.variable(${props.variable?.envVariable})`;

@@ -73,7 +73,12 @@ export default defineComponent({
 
         onMounted(async () => {
             // TODO: prefer using minecraft@* service instead for game-specific features
-            minecraftData.value = await useService<MinecraftData>('advanced@fetchVersions', true);
+            useService<MinecraftData>('advanced@fetchVersions', true)
+                .then(data => {
+                    if (!data.versions) return; // The endpoint may return empty JSON if the version data is missing
+
+                    minecraftData.value = data;
+                });
         });
 
         return {
