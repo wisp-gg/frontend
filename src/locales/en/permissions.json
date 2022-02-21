@@ -320,7 +320,7 @@
       },
 
       "update": {
-        "title": "Update",
+        "title": "install",
         "description": "Allows the user to install a plugin on this server."
       }
     },
@@ -582,7 +582,7 @@
       },
 
       "update": {
-        "title": "Update",
+        "title": "install",
         "description": "Permission to update mods."
       },
 
