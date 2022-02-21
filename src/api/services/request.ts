@@ -139,7 +139,19 @@ export default class RequestService {
 
                 switch(err.response?.status) {
                     case 400:
-                        // TODO: Me, translate backend error?
+                    case 422:
+                        const errors: any[] = err.response?.data?.errors;
+                        if (errors) {
+                            throw new TranslatableError(
+                                ['components.form.validation_error', errors.length],
+                                errors
+                                    .filter(error => error.detail)
+                                    .map(error => {
+                                        // TODO: localization support
+                                        return ['_raw', error.detail];
+                                    })
+                            )
+                        }
                         break;
                     case 401:
                         // We can't refresh here because it'll trigger an infinite loop (unless @me endpoint gets whitelisted).
@@ -158,9 +170,6 @@ export default class RequestService {
                         break;
                     case 419:
                         refresh();
-                        break;
-                    case 422:
-                        // TODO: Me, translate backend error?
                         break;
                     case 429:
                         throw new TranslatableError(['navigation.errors.429']);
