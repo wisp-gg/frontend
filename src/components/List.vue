@@ -2,7 +2,7 @@
     <div class="w-full block">
         <slot name="layout" :results="list?.results" :pagination="list?.pagination" :search="search" :set-page="setPage">
             <slot v-if="searchable" name="search" :submit="search">
-                <div class="flex mb-4">
+                <div class="flex mb-4 items-center">
                     <!-- TODO: Spinner to appear on right side signifying it is currently searching -->
                     <input class="input w-full flex-grow" name="search" :placeholder="t('generic.search')" @keyup="search">
 
