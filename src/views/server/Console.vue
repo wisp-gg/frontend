@@ -264,8 +264,11 @@ export default defineComponent({
             textInput,
             server: computed(() => state.models.server),
             inputKeyDown: (e: KeyboardEvent) => {
-                switch(e.code) {
-                    case 'ArrowUp': {
+                // Although keyCode is deprecated, it seems that in certain cases the browser sends fancier key names
+                // that aren't fully documented? (e.g. Enter also has "Middle Enter" and "Numpad Enter", etc.)
+                // @see https://github.com/wisp-gg/frontend/issues/139
+                switch(e.keyCode) {
+                    case 38: { // ArrowUp
                         e.preventDefault();
 
                         historyIndex = Math.max(0, historyIndex - 1);
@@ -274,7 +277,7 @@ export default defineComponent({
                         }
                         break;
                     }
-                    case 'ArrowDown': {
+                    case 40: { // ArrowDown
                         historyIndex = Math.min(history.length, historyIndex + 1);
                         if (historyIndex < history.length) {
                             textInput.value = history[historyIndex];
@@ -283,7 +286,7 @@ export default defineComponent({
                         }
                         break;
                     }
-                    case 'Enter': {
+                    case 13: { // Enter
                         const input = textInput.value;
                         if (!input || input.trim() === '') return;
 
