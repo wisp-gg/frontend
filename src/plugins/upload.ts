@@ -147,7 +147,7 @@ function handleFinishUpload(evt: any) {
 
 DaemonWrapper.registerEvent('upload-complete', handleFinishUpload);
 DaemonWrapper.registerEvent('upload-error', evt => {
-    if (evt.code === 1 || evt.file?.size > (state.models.server?.node?.uploadSize || 100) * 1000 * 1000) {
+    if (evt.code === 1 || evt.file?.size > (state.models.server?.node?.uploadSize || 100) * 1024 * 1024) {
         dispatch('alerts/add', {
             type: 'danger',
             title: ['server.files.upload_too_large', { name: evt.file.name }],

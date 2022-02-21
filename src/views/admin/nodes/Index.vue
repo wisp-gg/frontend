@@ -49,8 +49,8 @@ export default defineComponent({
             listFields: <ListField[]>[
                 { key: 'name', skeleton: 8 },
                 { key: 'location', skeleton: 12 },
-                { label: 'memory', key: 'limits.memory', format: 'size', multiplier: 1000 * 1000, skeleton: 6 },
-                { label: 'disk', key: 'limits.disk', format: 'size', multiplier: 1000 * 1000, skeleton: 6 },
+                { label: 'memory', key: 'limits.memory', format: 'size', multiplier: 1024 * 1024, skeleton: 6 },
+                { label: 'disk', key: 'limits.disk', format: 'size', multiplier: 1024 * 1024, skeleton: 6 },
                 { label: 'servers', key: 'serversCount', features: ['code'], skeleton: 4 },
             ]
         };
