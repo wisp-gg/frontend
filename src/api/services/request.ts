@@ -140,6 +140,7 @@ export default class RequestService {
                 switch(err.response?.status) {
                     case 400:
                     case 422:
+                        // TODO: this could be smarter - detect which field caused the error
                         const errors: any[] = err.response?.data?.errors;
                         if (errors) {
                             throw new TranslatableError(

@@ -67,10 +67,8 @@ export default defineComponent({
             }),
             componentProps: computed(() => {
                 if (props.href || props.to) {
-                    return {
+                    const properties: Record<string, any> = {
                         ...context.attrs,
-                        href: props.href,
-                        to: props.to,
                         class: [
                             'cursor-pointer',
                             ...(props.color ? ['btn', `btn-${props.color}`] : []),
@@ -78,6 +76,11 @@ export default defineComponent({
                         ],
                         disabled: disabled.value,
                     };
+
+                    if (props.href) properties.href = props.href;
+                    if (props.to) properties.to = props.to;
+
+                    return properties;
                 }
 
                 return {
