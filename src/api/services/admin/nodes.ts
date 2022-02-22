@@ -1,6 +1,7 @@
 import RequestService from './request';
 import { Node } from '~/api/models';
 import { Parser } from '~/api';
+import { dispatch } from '~/core';
 
 interface GetNodeDaemonInfoRequest {
     id: number;
@@ -59,7 +60,11 @@ class NodeService {
     update(data: UpdateNodeRequest): Promise<Node> {
         return RequestService.put('/nodes/:node', data)
             .then(Parser.parse)
-            .then(RequestService.updateModelBinding);
+            .then(node => {
+                dispatch('models/refresh', 'node');
+
+                return node;
+            });
     }
 
     delete(): Promise<void> {
