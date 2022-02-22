@@ -131,9 +131,11 @@ function handleFinishUpload(evt: any) {
     if (parent) {
         if (parent.uploaded_files !== undefined) {
             parent.uploaded_files++;
-        }
 
-        if (parent.files === parent.uploaded_files) {
+            if (parent.uploaded_files === parent.files) {
+                delete pendingFiles.value[parentId];
+            }
+        } else if (parent.uploaded_size === parent.size) {
             delete pendingFiles.value[parentId];
         }
     }
