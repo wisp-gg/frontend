@@ -151,13 +151,16 @@ export default class RequestService {
                                         // TODO: localization support
                                         return ['_raw', error.detail];
                                     })
-                            )
+                            );
                         }
                         break;
                     case 401:
                         // We can't refresh here because it'll trigger an infinite loop (unless @me endpoint gets whitelisted).
                         // Though I don't think this is really needed either.
                         // refresh();
+                        break;
+                    case 403:
+                        // TODO: display that no perms (although this should never realistically happen)
                         break;
                     case 404:
                         Router.push({
@@ -176,7 +179,7 @@ export default class RequestService {
                         throw new TranslatableError(['navigation.errors.429']);
                 }
 
-                throw new RequestError(endpoint, err);
+                throw new RequestError(method, endpoint, err);
             });
     }
 

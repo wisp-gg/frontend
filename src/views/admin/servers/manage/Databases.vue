@@ -25,7 +25,7 @@
                                 </skeleton>
 
                                 <skeleton :content="4">
-                                    <v-button color="danger" permission="server_database.delete">
+                                    <v-button color="danger" permission="server_database.delete" @click="deleteDatabase(result.id)">
                                         <t path="generic.delete" />
                                     </v-button>
                                 </skeleton>
@@ -37,7 +37,7 @@
         </div>
 
         <container class="w-full lg:w-1/3" title="admin.servers.databases.create_database">
-            <v-form service-id="serverDatabases@create">
+            <v-form service-id="serverDatabases@create" :on-success="updateList">
                 <skeleton :content="16">
                     <v-model-select
                         name="host"
@@ -77,13 +77,23 @@ import { useService } from '~/plugins';
 export default defineComponent({
     components: { Alert },
     setup() {
+        const updateList = () => dispatch('lists/refresh', 'serverDatabases@getAll');
         return {
             server: computed(() => state.models.server!),
+
+            updateList,
 
             rotatePassword: (id: number) => {
                 return useService('serverDatabases@rotatePassword', true, {
                     id
-                }).then(() => dispatch('lists/refresh', 'serverDatabases@getAll'));
+                })
+                    .then(updateList);
+            },
+            deleteDatabase: (id: number) => {
+                return useService('serverDatabases@delete', true, {
+                    id,
+                })
+                    .then(updateList);
             },
 
             listFields: <ListField[]>[
