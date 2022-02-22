@@ -24,10 +24,9 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
-import { state } from '~/core';
+import { state, dispatch } from '~/core';
 import { User } from '~/api/models';
 import { useService } from '~/plugins';
-import { useRouter } from 'vue-router';
 
 export default defineComponent({
     props: {
@@ -37,8 +36,6 @@ export default defineComponent({
         },
     },
     setup(props) {
-        const router = useRouter();
-
         const confirmEmailValue = ref<string>();
 
         return {
@@ -59,11 +56,7 @@ export default defineComponent({
             confirm: () => {
                 return useService('users@delete', 'admin.users.delete_user', {
                     id: props.user.id
-                }).then(() => {
-                    router.push({
-                        name: 'admin.management.users.index'
-                    });
-                });
+                }).then(() => dispatch('lists/refresh', 'users@getAll'));
             }
         };
     }
