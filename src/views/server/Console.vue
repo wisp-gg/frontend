@@ -32,7 +32,6 @@
 
     .xterm {
         flex-grow: 1;
-        font-family: "JetBrains Mono", monospace;
     }
 
     .xterm-viewport {
@@ -61,7 +60,6 @@
 import { computed, defineComponent, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { debounce } from 'debounce';
-import '@fontsource/jetbrains-mono'; // Import it here instead of bootstrap/assets.ts as this is the only place its used - so there's no need for it to be included in the global assets list
 import { Terminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 import { SearchAddon } from 'xterm-addon-search';
@@ -104,8 +102,7 @@ export default defineComponent({
                 cursorStyle: 'underline',
                 disableStdin: true,
                 fontSize: 13,
-                fontFamily: 'JetBrains Mono',
-                fontWeight: 'normal',
+                fontFamily: 'monospace',
                 lineHeight: 1.1,
                 rows: 30,
                 scrollback: 1000,
