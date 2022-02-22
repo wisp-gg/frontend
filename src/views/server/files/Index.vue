@@ -215,15 +215,30 @@ export default defineComponent({
                     });
                 });
 
+                // Chrome seems to spam dragenter and dragleave events, so to avoid flickering rely on a delay.
+                let dragStopper: undefined | ReturnType<typeof setTimeout>;
                 ['dragover', 'dragenter'].forEach(evt => {
                     fileList.value?.addEventListener(evt, () => {
+                        if (dragStopper) {
+                            clearTimeout(dragStopper);
+                            dragStopper = undefined;
+                        }
+
                         dragging.value = true;
                     });
                 });
 
                 ['dragleave', 'dragend', 'drop'].forEach(evt => {
                     fileList.value?.addEventListener(evt, () => {
-                        dragging.value = false;
+                        if (dragStopper) clearTimeout(dragStopper);
+                        dragStopper = setTimeout(() => {
+                            if (dragStopper) {
+                                clearTimeout(dragStopper);
+                                dragStopper = undefined;
+                            }
+
+                            dragging.value = false;
+                        }, 100);
                     });
                 });
 
