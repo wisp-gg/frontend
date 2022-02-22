@@ -133,13 +133,13 @@ function handleFinishUpload(evt: any) {
             parent.uploaded_files++;
         }
 
-        if (parent.size === parent.uploaded_size || parent.files === parent.uploaded_files) {
+        if (parent.files === parent.uploaded_files) {
             delete pendingFiles.value[parentId];
         }
     }
 
     if (uploadQueue.length === 0) {
-        onAllUploadsFinish?.();
+        if (Object.keys(pendingFiles.value).length === 0) onAllUploadsFinish?.();
     } else {
         DaemonWrapper.siofu?.submitFiles([uploadQueue.shift()]);
     }
