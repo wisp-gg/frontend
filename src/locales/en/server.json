@@ -39,6 +39,7 @@
   },
 
   "console": {
+    "type_a_command": "Type a command...",
     "console_popup": "Open console popup",
     "upload_logs": "Upload logs",
     "eula_acceptance": "EULA Acceptance",

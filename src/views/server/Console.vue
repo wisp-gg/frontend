@@ -2,13 +2,14 @@
     <div>
         <div class="flex flex-grow" ref="terminalElement" />
         <div class="flex terminal-input">
-            <div class="text-gray-300 terminal-prompt">
-                root:~/<span class="text-accent-500">$</span>
+            <div class="text-accent-500 terminal-prompt">
+                $
             </div>
             <v-input
                 class="flex-grow"
                 name=""
                 permission="control.command"
+                placeholder="server.console.type_a_command"
                 v-model:value="textInput"
                 @keydown="inputKeyDown"
                 no-margin
@@ -60,6 +61,7 @@
 import { computed, defineComponent, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { debounce } from 'debounce';
+import '@fontsource/jetbrains-mono'; // Import it here instead of bootstrap/assets.ts as this is the only place its used - so there's no need for it to be included in the global assets list
 import { Terminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 import { SearchAddon } from 'xterm-addon-search';
@@ -101,7 +103,7 @@ export default defineComponent({
                 allowTransparency: true,
                 cursorStyle: 'underline',
                 disableStdin: true,
-                fontSize: 14,
+                fontSize: 13,
                 fontFamily: 'JetBrains Mono',
                 fontWeight: 'normal',
                 lineHeight: 1.1,
