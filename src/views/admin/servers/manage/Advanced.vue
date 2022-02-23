@@ -53,6 +53,8 @@
                     value-prop="id"
 
                     rule="required"
+
+                    v-model:value="selectedLocation"
                 />
 
                 <skeleton :content="16">
@@ -63,6 +65,8 @@
 
                         label-prop="name"
                         value-prop="id"
+
+                        :key="selectedLocation"
                     />
                 </skeleton>
 
@@ -112,13 +116,17 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import { state } from '~/core';
 import { useService } from '~/plugins';
+import { Location } from '~/api/models';
 
 export default defineComponent({
     setup() {
+        const selectedLocation = ref<Location>();
+
         return {
+            selectedLocation,
             server: computed(() => state.models.server!),
 
             reinstall: () => useService('servers@reinstall', true).then(() => {
