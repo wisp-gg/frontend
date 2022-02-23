@@ -33,6 +33,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useService } from '~/plugins';
+import { dispatch } from '~/core';
 
 export default defineComponent({
     setup() {
@@ -41,7 +42,8 @@ export default defineComponent({
                 return useService('allocations@update', true, {
                     id,
                     primary: true
-                });
+                })
+                    .then(() => dispatch('lists/refresh', 'allocations@getAll'));
             },
 
             listFields: <ListField[]>[
