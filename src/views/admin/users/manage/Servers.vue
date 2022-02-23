@@ -1,5 +1,5 @@
 <template>
-    <server-list-page :filter-user="userId" />
+    <server-list-page :filter="{ owner_id: userId }" />
 </template>
 
 <script lang="ts">

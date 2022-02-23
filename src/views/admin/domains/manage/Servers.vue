@@ -1,5 +1,5 @@
 <template>
-    <server-list-page :filter="{ node_id: nodeId }" />
+    <server-list-page :filter="{ ['domains.id']: domainId }" />
 </template>
 
 <script lang="ts">
@@ -11,7 +11,7 @@ export default defineComponent({
     components: { ServerListPage },
     setup() {
         return {
-            nodeId: computed(() => state.navigation.currentRoute.params!.node),
+            domainId: computed(() => state.navigation.currentRoute.params!.domain),
         };
     }
 });

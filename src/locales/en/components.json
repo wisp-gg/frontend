@@ -146,7 +146,9 @@
         "client_secret": "WHMCS Client Secret",
         "api_id": "WHMCS API ID",
         "api_secret": "WHMCS API Secret"
-      }
+      },
+
+      "domain_name": "Domain Name"
     },
 
     "validation_error": "There is the following error: | There are the following errors:",
@@ -226,7 +228,9 @@
       "block_io_weight": "Block IO Weight",
       "backup_size_limit": "Backup Size Limit",
       "default_connection": "Default Connection",
-      "connection_alias": "Connection Alias"
+      "connection_alias": "Connection Alias",
+
+      "domain_name": "Domain Name"
     }
   }
 }

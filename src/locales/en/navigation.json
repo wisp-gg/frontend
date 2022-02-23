@@ -396,6 +396,30 @@
           "title": "Manage Mod",
           "description": "Manage an existing service mod on the system."
         }
+      },
+
+      "domains": {
+        "index": {
+          "title": "Domains",
+          "description": "All domains available on the system."
+        },
+
+        "new": {
+          "title": "New Domain",
+          "description": "Create a new domain on the system."
+        },
+
+        "manage": {
+          "configuration": {
+            "title": "Domain Configuration",
+            "description": "Configure the domain."
+          },
+
+          "servers": {
+            "title": "Servers",
+            "description": "See all the servers associated with this domain."
+          }
+        }
       }
     }
   },

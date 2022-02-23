@@ -348,5 +348,20 @@
     "mod_configuration": "Mod Configuration",
     "delete_mod": "Delete Mod",
     "delete_notice": "Are you sure that you want to delete the \"{name}\" mod? There is no going back, all data will immediately be removed."
+  },
+
+  "domains": {
+    "domain_details": "Domain Details",
+    "domain_name_footer": "The domain name that game servers can create subdomains on, allowing users to choose a subdomain and point it at their game server's allocations automatically. Currently, we only support subdomains on the root domain.",
+
+    "instructions": "You'll need to do the following actions for the domain to work properly:",
+    "acquire_domain": "Purchase or use an existing domain you have.",
+    "setup_nameservers": "Point the domain's nameservers at \"TO BE DECIDED\" (note that this may take up to 48 hours to propagate). Alternatively if you still want to use the domain for other things although not recommended, you could create a wildcard NS record instead.",
+
+    "update_notice": "Updating the domain name will update every single server's subdomain to the new domain.",
+    "domain_already_in_use": "The provided domain is already in use on another panel instance and cannot be reused.",
+
+    "delete_domain": "Delete Domain",
+    "delete_notice": "Are you sure that you want to delete the \"{name}\" domain? There is no going back, and all servers associated with this domain will lose subdomains associated with it."
   }
 }

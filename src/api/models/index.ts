@@ -5,6 +5,7 @@ export { ApiKey } from './ApiKey';
 export { AuditLog } from './AuditLog';
 export { Backup } from './Backup';
 export { DatabaseHost } from './DatabaseHost';
+export { Domain } from './Domain';
 export { Egg } from './Egg';
 export { EggVariable } from './EggVariable';
 export { File } from './File';

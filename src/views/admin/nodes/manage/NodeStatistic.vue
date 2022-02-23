@@ -55,11 +55,9 @@ export default defineComponent({
         const percentage = computed(() => {
             if (!props.max) return 0;
 
-            const value = props.value / props.max * 100;
-
             // Clamp to 100% width to avoid going outside of the div
             // @see https://github.com/wisp-gg/frontend/issues/190
-            return value > 100 ? 100 : value;
+            return Math.min(100, props.value / props.max * 100);
         });
 
         // TODO: move this to a helper to avoid duplication (e.g. with ListResult)?

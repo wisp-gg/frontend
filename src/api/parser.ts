@@ -25,7 +25,8 @@ import {
     ServerDatabase,
     ServerSubuser,
     ServerVariable,
-    User
+    User,
+    Domain,
 } from './models';
 
 export class Parser {
@@ -56,6 +57,7 @@ export class Parser {
         'server_subuser': ServerSubuser,
         'server_variable': ServerVariable,
         'user': User,
+        'domain': Domain,
     };
 
     static parse(response: APIResponse, returnDataOnlyForLists = false): any {
