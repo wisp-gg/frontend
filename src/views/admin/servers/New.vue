@@ -49,6 +49,8 @@
                     searchable
                     no-translate
                     rule="required"
+
+                    :key="selectedNode"
                 />
 
                 <v-select
@@ -63,6 +65,8 @@
                     value-prop="id"
                     searchable
                     no-translate
+
+                    :key="selectedNode"
                 />
             </div>
         </container>
