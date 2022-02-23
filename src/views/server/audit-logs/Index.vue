@@ -16,8 +16,18 @@
                     />
                 </template>
 
-                <div v-else>
-                    <p>no items</p>
+                <div v-else class="flex flex-col lg:flex-row justify-center items-center my-8">
+                    <img class="w-2/3 lg:w-1/3" :src="notFound" />
+
+                    <div class="text-center gap-y-8 mt-4 lg:mt-0 lg:ml-4 lg:text-left">
+                        <h1 class="text-2xl text-white/75">
+                            <t path="server.audit_logs.no_audits" />
+                        </h1>
+
+                        <p>
+                            <t path="server.audit_logs.no_audits_description" />
+                        </p>
+                    </div>
                 </div>
             </template>
         </list>
@@ -41,6 +51,7 @@ import { defineComponent, ref } from 'vue';
 import { AuditLog } from '~/api/models';
 import AuditLogRow from './AuditLogRow.vue';
 import AuditDetailsContainer from './AuditDetailsContainer.vue';
+import notFound from '~/assets/svg/undraw/not_found.svg';
 
 export default defineComponent({
     components: { AuditLogRow, AuditDetailsContainer },
@@ -49,6 +60,7 @@ export default defineComponent({
 
         return {
             selectedAudit,
+            notFound,
 
             selectAudit: (audit: AuditLog) => {
                 selectedAudit.value = audit;

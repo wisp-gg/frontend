@@ -75,6 +75,9 @@
   },
 
   "audit_logs": {
+    "no_audits": "No Audit Logs",
+    "no_audits_description": "Seems like you have no audit logs. Perform some actions on your server to generate and see an overview of whats happening to your server here.",
+
     "changes": {
       "hidden_value": "Changed {key} to a new hidden value",
       "from_to": "Changed {key} from {old} to {new}"

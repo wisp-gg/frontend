@@ -75,6 +75,9 @@
   "something_went_wrong": "Something went wrong while trying to perform this action.",
 
   "server": {
+    "no_servers": "No Servers",
+    "no_servers_description": "Seems like you have no servers...",
+
     "hostname": "Hostname",
     "name": "Name",
     "cpu": "CPU",
