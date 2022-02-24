@@ -6,16 +6,16 @@ import RequestService from './request';
 import NodeService from './node';
 
 class ServersService {
-    get(): Promise<Server> {
-        return RequestService.get('/servers/:server', {
-            include: ['node', 'egg', 'allocations', 'features'],
-        }).then(Parser.parse);
-    }
-
     getAll(req: PaginatableRequest): Promise<ListResponse> {
         return RequestService.get('/servers', {
             ...req,
             include: ['node', 'egg', 'allocations'],
+        }).then(Parser.parse);
+    }
+
+    get(): Promise<Server> {
+        return RequestService.get('/servers/:server', {
+            include: ['node', 'nest', 'egg', 'allocations', 'features'],
         }).then(Parser.parse);
     }
 

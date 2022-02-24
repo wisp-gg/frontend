@@ -78,6 +78,12 @@ export class Server extends BaseModel {
         window.open(href, 'Console', 'width=600,height=400');
     }
 
+    public get joinURL() {
+        if (this.nest?.shortName === 'srcds') {
+            return `steam://connect/${this.primaryAllocation().displayName()}`;
+        }
+    }
+
     // Admin only
     public get nest(): Nest {
         return this.getRelationship('nest');
