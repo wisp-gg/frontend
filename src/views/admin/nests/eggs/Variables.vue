@@ -1,5 +1,9 @@
 <template>
     <div>
+        <div class="mb-4">
+            <alert type="warning" icon="info-circle" :title="['admin.nests.egg.daemon_restart_required_after_changes']" />
+        </div>
+
         <div class="bg-primary-500 p-4 rounded text-right space-x-4 mb-4">
             <create-variable-modal />
         </div>

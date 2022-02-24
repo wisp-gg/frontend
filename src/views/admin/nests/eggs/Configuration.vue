@@ -1,5 +1,9 @@
 <template>
     <v-form :service-id="creating ? 'eggs@create' : 'eggs@update'" :on-success="onSuccess" class="space-y-4">
+        <div class="mb-4" v-if="!creating">
+            <alert type="warning" icon="info-circle" :title="['admin.nests.egg.daemon_restart_required_after_changes']" />
+        </div>
+
         <container title="admin.nests.egg.configuration">
             <div class="grid lg:grid-cols-2 gap-x-4 gap-y-4">
                 <div>

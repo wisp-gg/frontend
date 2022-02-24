@@ -327,6 +327,8 @@
 
     "import_egg": "Import Egg",
     "egg": {
+      "daemon_restart_required_after_changes": "Any changes to existing egg configuration currently requires to restart the daemons afterwards with `wisp restart`.",
+
       "configuration": "Configuration",
       "process_management": "Process Management",
       "delete_egg": "Delete Egg",
