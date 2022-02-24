@@ -14,7 +14,7 @@
             <template #field-name="{ result }">
                 <div class="flex items-center">
                     <avatar :email="result.user.email" class="rounded-full h-10" />
-                    <p class="pl-4">{{ result.user.fullName }}</p>
+                    <p class="ml-4">{{ result.user.fullName }}</p>
                 </div>
             </template>
 

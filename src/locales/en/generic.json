@@ -71,6 +71,8 @@
   "nests": "Nests",
   "nodes": "Nodes",
   "servers": "Servers",
+  "admin": "Admin",
+  "support_op": "Support Op",
 
   "something_went_wrong": "Something went wrong while trying to perform this action.",
 

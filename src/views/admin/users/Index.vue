@@ -8,12 +8,31 @@
             </div>
         </template>
 
+        <template #headers-before>
+            <th class="w-4" />
+        </template>
+
         <template #headers-after>
             <th />
         </template>
 
+        <template #fields-before="{ result }">
+            <td class="p-6 text-center text-2xl">
+                <skeleton :content="4">
+                    <fa
+                        v-if="result.rootAdmin || result.supportOp"
+                        v-tippy="result.rootAdmin ? 'generic.admin' : 'generic.support_op'"
+                        :icon="['fas', 'star']"
+                        :class="result.rootAdmin ? ['text-yellow-300'] : ['text-accent-300']"
+                    />
+                </skeleton>
+            </td>
+        </template>
+
         <template #field-fullName="{ result }">
-            <v-button permission="user.read" :to="{ name: 'admin.management.users.manage.about', params: { user: result.id } }" class="text-white/75">
+            <v-button permission="user.read" :to="{ name: 'admin.management.users.manage.about', params: { user: result.id } }" class="flex items-center text-white/75">
+                <avatar :email="result.email" class="rounded-full h-10 mr-4" />
+
                 {{ result.fullName }}
             </v-button>
         </template>
