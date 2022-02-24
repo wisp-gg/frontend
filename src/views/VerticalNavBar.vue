@@ -58,7 +58,7 @@
                             <p>{{ user?.fullName }}</p>
                             <!-- TODO: come up with better use cases for "roles" until we have rbac -->
                             <p class="uppercase text-sm text-white text-opacity-40 tracking-wider" v-if="user?.rootAdmin">
-                                root
+                                admin
                             </p>
                             <p class="uppercase text-sm text-white text-opacity-40 tracking-wider" v-else-if="user?.supportOp">
                                 support op
