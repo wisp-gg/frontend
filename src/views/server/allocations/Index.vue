@@ -47,8 +47,7 @@ export default defineComponent({
             },
 
             listFields: <ListField[]>[
-                { key: 'ip', features: ['code', 'clipboard'], skeleton: 8 },
-                { key: 'alias', features: ['code'], skeleton: 12 },
+                { key: 'ip', features: ['code', 'clipboard'], skeleton: 12 },
                 { key: 'port', features: ['code'], skeleton: 4 },
             ],
         };

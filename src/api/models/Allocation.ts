@@ -5,10 +5,12 @@ export class Allocation extends BaseModel {
     public id = -1;
     public primary = false;
     public ip = '';
-    public alias?: string;
     public port = -1;
 
-    // Admin
+    // Admin - ip is replaced by alias if applicable on client api
+    public alias?: string;
+
+
     public get connection(): string {
         return `${this.ip}:${this.port}`;
     }
