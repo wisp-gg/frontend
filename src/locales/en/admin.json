@@ -253,26 +253,33 @@
     "advanced": {
       "reinstall_server": "Reinstall Server",
       "reinstall_server_note": "This will reinstall the server with the assigned service script.\nDanger! This could overwrite data.",
+      "reinstall_started": "The reinstall process has been started.",
 
       "install_status": "Install Status",
       "install_status_note": "If you need to change the install status from uninstalled to installed, or vice versa, you may do so with the button below.",
+      "install_toggled": "The install status has been toggled.",
 
       "rebuild_container": "Rebuild Containers",
       "rebuild_container_note": "This will trigger a rebuild of the server container when it next starts up. This is useful if you modified the server configuration file manually, or something just didn't work out correctly.",
+      "rebuild_requested": "Rebuild request has been sent to the daemon, and the server will rebuild itself on the next start.",
 
       "suspend_server": "Suspend Server",
       "suspend_server_note": "This will suspend the server, stop any running processes, and immediately block the user from being able to access their files or otherwise manage the server through the panel or API.",
+      "suspend_toggled": "The suspension status has been toggled.",
 
       "updating_status": "Updating Status",
       "updating_status_note": "If you need to change the updating status, you may do so with the button below.",
+      "updating_toggled": "The update status has been toggled.",
 
       "move_server": "Move server to another node",
 
       "moving_status": "Moving Status",
       "moving_status_note": "If you need to change the moving status, you may do so with the button below.\n",
+      "moving_toggled": "The move status has been toggled.",
 
       "reset_mod_statuses": "Reset mod installation statuses",
       "reset_mod_statuses_note": "Will reset all mods' installation state if it bugs out, in case the server has mod installations locked completely and they have been stuck for a long time.",
+      "reset_mod_triggered": "All server mod installation statuses have been reset.",
 
       "toggle_backup_status": "Toggle backup status",
 
