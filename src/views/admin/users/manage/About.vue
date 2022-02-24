@@ -9,7 +9,7 @@
                     <v-input class="flex-grow" name="name_last" :value="user?.nameLast" rule="required" />
                 </div>
 
-                <v-input name="external_id" footer="admin.users.external_id_footer" :value="user?.externalId" />
+                <v-input name="external_id" footer="admin.users.external_id_footer" :value="user?.externalId ?? ''" />
                 <v-switch name="use_totp" label="admin.users.2fa_enabled" footer="admin.users.2fa_enabled_footer" :value="user?.useTotp" v-if="!creating" />
             </container>
 
