@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center bg-primary-300 rounded-lg p-4 cursor-pointer w-full">
+    <div class="flex items-center rounded-lg p-4 cursor-pointer w-full" :class="selected ? ['bg-primary-450'] : ['bg-primary-300']">
         <div class="inline-block flex items-center gap-x-1 flex-grow">
             <skeleton circle>
                 <span class="rounded-lg text-center mr-3 h-8 w-8 flex shrink-0 items-center justify-center" :class="`${icon[1]} bg-opacity-50`">
@@ -37,7 +37,10 @@ export default defineComponent({
     props: {
         audit: {
             type: AuditLog,
-        }
+        },
+        selected: {
+            type: Boolean,
+        },
     },
     setup(props) {
         return {

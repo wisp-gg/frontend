@@ -10,7 +10,8 @@
                     <audit-log-row
                         v-for="(result, idx) of results"
                         :key="idx"
-                        @click="selectAudit(result)"
+                        @click="selectAudit(result, idx)"
+                        :selected="selectedAudit?.[1] === idx"
 
                         :audit="result"
                     />
@@ -33,7 +34,7 @@
         </list>
 
         <div class="w-full lg:w-1/2 lg:ml-4 transition-all transform" :class="selectedAudit ? '' : '!w-0 translate-x-full'">
-            <audit-details-container :audit="selectedAudit" @close="closeContainer" />
+            <audit-details-container :audit="selectedAudit?.[0]" @close="closeContainer" />
         </div>
     </div>
 </template>
@@ -56,14 +57,14 @@ import notFound from '~/assets/svg/undraw/not_found.svg';
 export default defineComponent({
     components: { AuditLogRow, AuditDetailsContainer },
     setup() {
-        const selectedAudit = ref<AuditLog | undefined>();
+        const selectedAudit = ref<[AuditLog, number] | undefined>();
 
         return {
             selectedAudit,
             notFound,
 
-            selectAudit: (audit: AuditLog) => {
-                selectedAudit.value = audit;
+            selectAudit: (audit: AuditLog, idx: number) => {
+                selectedAudit.value = [audit, idx];
             },
             closeContainer: () => {
                 selectedAudit.value = undefined;

@@ -73,7 +73,12 @@
                                 {{ key[1] }}
                             </td>
                             <td class="p-4">
-                                {{ audit.metadata[key[0]] }}
+                                <a v-if="isValidLink(audit.metadata[key[0]])" class="text-white/75" target="_blank" rel="noopener noreferrer" :href="audit.metadata[key[0]]">
+                                    {{ audit.metadata[key[0]] }}
+                                </a>
+                                <template v-else>
+                                    {{ audit.metadata[key[0]] }}
+                                </template>
                             </td>
                         </tr>
                     </table>
@@ -129,6 +134,13 @@ export default defineComponent({
         return {
             close: () => {
                 emit('close');
+            },
+
+            isValidLink(content: any) {
+                if (!content || typeof content !== 'string') return false;
+
+                const regex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
+                return content.match(regex);
             },
 
             formattedDate: computed(() => props.audit?.createdAt ? formatDateAbsolute(props.audit?.createdAt, 'L LT') : null),
