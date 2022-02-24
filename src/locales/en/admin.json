@@ -274,7 +274,9 @@
       "reset_mod_statuses": "Reset mod installation statuses",
       "reset_mod_statuses_note": "Will reset all mods' installation state if it bugs out, in case the server has mod installations locked completely and they have been stuck for a long time.",
 
-      "toggle_backup_status": "Toggle backup status"
+      "toggle_backup_status": "Toggle backup status",
+
+      "install_marked_as_failed": "Can't toggle server's install status due to it failing to install. Please reinstall the server instead."
     }
   },
 
