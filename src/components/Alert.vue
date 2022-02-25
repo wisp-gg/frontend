@@ -1,6 +1,6 @@
 <template>
     <!-- TODO: allow discarding the alert through an "x" button -->
-    <div :class="`alert alert-${type} flex`" role="alert">
+    <div :class="`alert alert-${type} xs:flex`" role="alert">
         <div class="flex items-center">
             <fa :icon="['fas', icon]" />
         </div>
