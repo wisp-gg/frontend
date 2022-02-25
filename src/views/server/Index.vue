@@ -7,9 +7,9 @@
         </div>
 
         <container title="generic.server.resource_usage">
-            <div class="grid grid-cols-2">
-                <chart type="cpu" />
-                <chart type="memory" />
+            <div class="flex flex-wrap gap-x-6 lg:flex-nowrap">
+                <chart class="w-full lg:w-1/2" type="cpu" />
+                <chart class="w-full lg:w-1/2" type="memory" />
             </div>
         </container>
     </div>
