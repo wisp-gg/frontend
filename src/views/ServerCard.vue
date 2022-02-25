@@ -34,7 +34,7 @@
 
                 <button
                     v-tippy="'generic.server.go_to_console'"
-                    class="border border-primary-50 px-2 rounded text-primary-0 hover:text-white mr-4 hidden md:block"
+                    class="border border-primary-100 px-2 rounded text-primary-0 hover:text-white mr-4 hidden xs:block"
                     @click="server?.openConsolePopup()"
                 >
                     <fa :icon="['fas', 'external-link-square-alt']" fixed-width />
@@ -43,7 +43,7 @@
                     <router-link :to="{name: 'server.system.index', params: { server: server?.uuidShort }}">
                         <button
                             v-tippy="'generic.server.manage'"
-                            class="border border-primary-50 px-2 rounded text-primary-0 hover:text-white hidden md:block"
+                            class="border border-primary-100 px-2 rounded text-primary-0 hover:text-white hidden xs:block"
                         >
                             <fa :icon="['fas', 'wrench']" fixed-width />
                         </button>

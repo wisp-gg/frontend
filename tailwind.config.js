@@ -55,7 +55,11 @@ module.exports = {
                     '0%': { 'background-position': '-200px 0' },
                     '100%': { 'background-position': 'calc(200px + 100%) 0' }
                 }
-            }
+            },
+
+            screens: {
+                'xs': '400px',
+            },
         },
     },
     plugins: [
