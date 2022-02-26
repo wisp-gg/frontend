@@ -45,7 +45,7 @@
                         <template v-else>
                             <slot name="items-before" :update="update" />
 
-                            <tr v-for="(result, idx) in list?.results" :key="idx" class="bg-primary-500 border-b border-primary-400 block xl:table-row xl:border-none last:border-none group hover:opacity-80 hover:text-white" @click="onCheckboxRowClick($event, result)">
+                            <tr v-for="(result, idx) in list?.results" :key="idx" class="bg-primary-500 border-b border-primary-400 block xl:table-row xl:border-none last:border-none group hover:opacity-80 hover:text-white" @click="onCheckboxRowClick($event, result)" @contextmenu="onContextMenu">
                                 <slot name="fields-before" :result="result" :update="update" />
 
                                 <td class="px-4 pt-3 xl:py-4 text-center td-min" v-if="checkbox">
@@ -139,6 +139,9 @@ export default defineComponent({
         },
         searchable: {
             type: Boolean,
+        },
+        onContextMenu: {
+            type: Function,
         },
     },
     emits: ['results', 'meta', 'pagination', 'checked'], // update setAttribute if you touch this

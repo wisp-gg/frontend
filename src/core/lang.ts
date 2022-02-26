@@ -3,8 +3,12 @@ import { createI18n } from 'vue-i18n';
 import dayjs from 'dayjs';
 import RelativeFormat from 'dayjs/plugin/relativeTime';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
+import UTC from 'dayjs/plugin/utc';
+import Timezone from 'dayjs/plugin/timezone';
 dayjs.extend(RelativeFormat);
 dayjs.extend(LocalizedFormat);
+dayjs.extend(UTC);
+dayjs.extend(Timezone);
 
 import { default as Store } from '~/core/store';
 
@@ -85,18 +89,24 @@ Store.subscribe(mutation => {
     }
 });
 
-export function formatDate(value: string, format: string) {
+function createDayjsInstance(value: string, timezone?: string) {
+    if (timezone) return dayjs(value).tz(timezone).locale(lang.global.locale);
+
+    return dayjs(value).locale(lang.global.locale);
+}
+
+export function formatDate(value: string, format: string, timezone?: string) {
     if (dayjs(new Date()).diff(dayjs(value), 'd') >= 1) {
-        return formatDateAbsolute(value, format);
+        return formatDateAbsolute(value, format, timezone);
     } else {
-        return formatDateRelative(value);
+        return formatDateRelative(value, timezone);
     }
 }
 
-export function formatDateRelative(value: string) {
-    return dayjs(value).locale(lang.global.locale).fromNow();
+export function formatDateRelative(value: string, timezone?: string) {
+    return createDayjsInstance(value, timezone).fromNow();
 }
 
-export function formatDateAbsolute(value: string, format: string) {
-    return dayjs(value).locale(lang.global.locale).format(format);
+export function formatDateAbsolute(value: string, format: string, timezone?: string) {
+    return createDayjsInstance(value, timezone).format(format);
 }
