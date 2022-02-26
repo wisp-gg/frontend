@@ -1,5 +1,5 @@
 <template>
-    <div class="relative h-full bg-primary-300 rounded-lg p-8">
+    <div class="relative h-full bg-primary-300 rounded-lg p-3 sm:p-8">
         <div @click="close" class="absolute top-8 right-8 text-right mr-2 text-xl cursor-pointer">
             <fa :icon="['fas', 'times']" />
         </div>
@@ -72,7 +72,7 @@
                             <td class="p-4">
                                 {{ key[1] }}
                             </td>
-                            <td class="p-4">
+                            <td class="p-4 break-all">
                                 {{ audit.metadata[key[0]] }}
                             </td>
                         </tr>

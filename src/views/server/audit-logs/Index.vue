@@ -3,7 +3,7 @@
         <list
             service-id="auditLogs@get"
             :class="selectedAudit ? 'audit-log-list' : ''"
-            class="flex flex-col gap-y-2 transition-all transform"
+            class="flex flex-col gap-y-2 transition-all transform lg:w-1/2 lg:ml-4"
         >
             <template #results="{ results }">
                 <template v-if="results.length > 0">
