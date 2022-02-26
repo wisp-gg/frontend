@@ -16,7 +16,7 @@
                 </template>
 
                 <template #fields-after="{ result }">
-                    <td class="px-4 pt-4 w-full xl:w-auto block xl:table-cell ml-auto text-right">
+                    <td class="p-4 w-full xl:w-auto block xl:table-cell ml-auto text-right">
                         <skeleton :content="8">
                             <v-form service-id="security@deleteCredential" :on-success="updateList">
                                 <v-input type="hidden" name="identifier" :value="result.identifier" />
