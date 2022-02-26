@@ -15,7 +15,7 @@
 
         <div class="flex items-center">
             <skeleton :content="8">
-                <p class="text-white" v-tippy="tooltip">
+                <p class="text-white/75 text-right" v-tippy="tooltip">
                     {{ formattedDate }}
                 </p>
             </skeleton>
