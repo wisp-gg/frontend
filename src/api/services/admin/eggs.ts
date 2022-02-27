@@ -1,7 +1,7 @@
 import { Parser } from '~/api';
 import { Egg } from '~/api/models';
 import RequestService from './request';
-import { dispatch } from "~/core";
+import { dispatch } from '~/core';
 
 interface CreateEggRequest {
     name: string;
