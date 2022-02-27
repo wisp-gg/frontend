@@ -46,11 +46,17 @@
         </container>
 
         <div class="bg-primary-500 flex justify-between p-4 rounded">
-            <skeleton v-if="!creating" :content="4">
-                <v-button color="info" permission="egg.read" :href="exportUrl">
-                    <t path="generic.export" />
-                </v-button>
-            </skeleton>
+            <div class="space-x-4">
+                <skeleton v-if="!creating" :content="4">
+                    <import-update-modal />
+                </skeleton>
+
+                <skeleton v-if="!creating" :content="4">
+                    <v-button color="info" permission="egg.read" :href="exportUrl">
+                        <t path="generic.export" />
+                    </v-button>
+                </skeleton>
+            </div>
 
             <div class="space-x-4">
                 <skeleton v-if="!creating" :content="4">
@@ -73,9 +79,10 @@ import { onModelLoaded } from '~/plugins';
 import { Egg } from '~/api/models';
 import Alert from '~/components/Alert.vue';
 import DeleteEggModal from './DeleteEggModal.vue';
+import ImportUpdateModal from "~/views/admin/nests/eggs/ImportUpdateModal.vue";
 
 export default defineComponent({
-    components: { DeleteEggModal, Alert },
+    components: { ImportUpdateModal, DeleteEggModal, Alert },
     setup() {
         const router = useRouter();
         const route = useRoute();

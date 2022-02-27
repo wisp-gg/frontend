@@ -1,6 +1,7 @@
 import { Parser } from '~/api';
 import { Egg } from '~/api/models';
 import RequestService from './request';
+import { dispatch } from "~/core";
 
 interface CreateEggRequest {
     name: string;
@@ -19,6 +20,10 @@ interface CreateEggRequest {
 interface ImportEggRequest {
     import_file: File;
     nest_id: number;
+}
+
+interface ImportUpdateEggRequest {
+    import_file: File;
 }
 
 interface UpdateScriptsRequest {
@@ -67,8 +72,22 @@ class EggsService {
 
         return RequestService.post(`/nests/${data.nest_id}/eggs/import?include=nest`, formData, {
             'Content-Type': 'multipart/form-data',
+        }).then(Parser.parse);
+    }
+
+    importUpdate(data: ImportUpdateEggRequest) {
+        const formData = new FormData();
+        formData.append('import_file', data.import_file);
+
+        return RequestService.post('/nests/:nest/eggs/:egg/import?include=nest', formData, {
+            'Content-Type': 'multipart/form-data',
         })
-            .then(Parser.parse);
+            .then(Parser.parse)
+            .then(egg => {
+                dispatch('models/refresh', 'egg');
+
+                return egg;
+            });
     }
 
     update(data: CreateEggRequest): Promise<Egg> {

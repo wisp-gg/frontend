@@ -336,6 +336,9 @@
       "egg_has_servers": "You can not delete a egg which has servers running under it.",
       "copy_alert": "All fields are required unless you select a separate option from the 'Copy Settings From' dropdown, in which case fields may be left blank to use the values from that option.",
 
+      "update_egg": "Update Egg",
+      "import_update_notice": "Importing a new egg file will overwrite any existing settings. If you wish to keep your existing settings, you should import the new egg separately.",
+
       "install_script": "Install Script",
       "update_script": "Update Script",
 
