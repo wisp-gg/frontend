@@ -3,7 +3,7 @@
         <container class="w-full lg:w-3/4" title="client.security.credentials_list" no-padding>
             <template #actions>
                 <div class="text-right">
-                    <a href="https://docs.panel.gg/" target="_blank" class="mr-3 text-white text-opacity-50">
+                    <a href="https://www.notion.so/API-Documentation-7b6a2cd53a1047aa9f8c7942ca0c1fe1" target="_blank" class="mr-3 text-white text-opacity-50">
                         <t path="generic.api_docs" />
                     </a>
                     <create-credential-button />
