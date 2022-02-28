@@ -23,6 +23,7 @@ export { Schedule } from './Schedule';
 export { ScheduleTask } from './ScheduleTask';
 export { Server } from './Server';
 export { ServerDatabase } from './ServerDatabase';
+export { ServerSubdomain } from './ServerSubdomain';
 export { ServerSubuser } from './ServerSubuser';
 export { ServerVariable } from './ServerVariable';
 export { User } from './User';

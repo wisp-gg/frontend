@@ -134,6 +134,10 @@
     "tools": {
       "title": "Tools",
 
+      "subdomains": {
+        "title": "Subdomain Manager",
+        "description": "Manage the subdomains used to connect to your server's here."
+      },
       "modpacks": {
         "title": "Modpack Manager",
         "description": "Easy way to install mod packs."

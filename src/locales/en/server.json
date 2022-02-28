@@ -265,6 +265,11 @@
     }
   },
 
+  "subdomains": {
+    "title": "Subdomains",
+    "using_subdomains": "Using {count} / {limit} subdomains"
+  },
+
   "mods": {
     "states": {
       "install": "Install",

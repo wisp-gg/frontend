@@ -330,6 +330,16 @@ export const routes: RouteRecordRaw[] = [
                 },
                 children: [
                     {
+                        name: 'server.tools.subdomains',
+                        path: 'subdomains',
+                        component: () => import('~/views/server/subdomains/Index.vue'),
+                        meta: {
+                            icon: 'cubes',
+                            permission: 'subdomain.read',
+                            feature: 'domain-manager',
+                        }
+                    },
+                    {
                         name: 'server.tools.modpacks',
                         path: 'modpacks',
                         component: () => import('~/views/server/modpacks/Index.vue'),
