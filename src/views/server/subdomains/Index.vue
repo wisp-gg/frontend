@@ -1,12 +1,12 @@
 <template>
-    <container title="server.subdomains.title" :description="['server.subdomains.using_subdomains', { count: subdomainCount, limit: subdomainLimit === null ? '∞' : subdomainLimit }]" no-padding>
+    <container title="server.subdomains.title" no-padding>
         <template #actions>
             <div class="text-right">
-                TODO: Create
+                <create-subdomain-modal />
             </div>
         </template>
 
-        <list service-id="subdomains@getAll" :fields="listFields" @meta="onMeta">
+        <list service-id="subdomains@getAll" :fields="listFields">
             <template #headers-after>
                 <th />
             </template>
@@ -25,20 +25,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref } from 'vue';
+import { defineComponent } from 'vue';
+import CreateSubdomainModal from './CreateSubdomainModal.vue';
 
 export default defineComponent({
+    components: { CreateSubdomainModal },
     setup() {
-        const subdomainCount = ref(0);
-
         return {
-            onMeta: (results: ListResponseMeta) => subdomainCount.value = results.pagination.total,
-
-            subdomainLimit: computed(() => null), // TODO: Implement state.models.server?.featureLimits.subdomains
-            subdomainCount,
-
             listFields: <ListField[]>[
-                { label: 'name', key: 'displayName', skeleton: 12 },
+                { label: 'name', key: 'displayName', features: ['code', 'clipboard'], skeleton: 12 },
             ],
         };
     },

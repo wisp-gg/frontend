@@ -109,6 +109,7 @@
       "user_viewable": "User Viewable",
       "user_editable": "User Editable",
       "rules": "Rules",
+      "allocation": "Allocation",
       "primary_allocation": "Primary Allocation",
       "secondary_allocations": "Secondary Allocations",
       "add_allocations": "Add Additional Allocations",
@@ -121,6 +122,7 @@
       "force": "Force",
       "start_on_completion": "Start server when installed",
       "skip_scripts": "Skip install script",
+      "domain_name": "Domain Name",
 
       "branding": {
         "name": "Company Name"
@@ -146,9 +148,7 @@
         "client_secret": "WHMCS Client Secret",
         "api_id": "WHMCS API ID",
         "api_secret": "WHMCS API Secret"
-      },
-
-      "domain_name": "Domain Name"
+      }
     },
 
     "validation_error": "There is the following error: | There are the following errors:",
