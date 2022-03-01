@@ -14,9 +14,7 @@
             <template #fields-after="{ result }">
                 <td class="p-6 text-right">
                     <skeleton :content="4">
-                        <v-button color="danger">
-                            TODO: Delete
-                        </v-button>
+                        <delete-subdomain-modal :subdomain="result" />
                     </skeleton>
                 </td>
             </template>
@@ -27,9 +25,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import CreateSubdomainModal from './CreateSubdomainModal.vue';
+import DeleteSubdomainModal from './DeleteSubdomainModal.vue';
 
 export default defineComponent({
-    components: { CreateSubdomainModal },
+    components: { CreateSubdomainModal, DeleteSubdomainModal },
     setup() {
         return {
             listFields: <ListField[]>[

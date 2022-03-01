@@ -1036,7 +1036,7 @@ export const routes: RouteRecordRaw[] = [
                                 children: [
                                     {
                                         name: 'admin.service_management.domains.manage.configuration',
-                                        path: 'configuration',
+                                        path: '',
                                         component: () => import('~/views/admin/domains/manage/Configuration.vue'),
                                         meta: {
                                             icon: 'globe',

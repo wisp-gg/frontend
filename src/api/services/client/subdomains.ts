@@ -7,6 +7,10 @@ interface CreateSubdomainRequest {
     domain_id: number;
 }
 
+interface DeleteSubdomainRequest {
+    id: number;
+}
+
 class SubdomainsService {
     getAll(req: PaginatableRequest): Promise<ListResponse> {
         return RequestService.get('/servers/:server/subdomains', {
@@ -20,6 +24,9 @@ class SubdomainsService {
             .then(Parser.parse);
     }
 
+    delete(data: DeleteSubdomainRequest): Promise<void> {
+        return RequestService.delete(`/servers/:server/subdomains/${data.id}`);
+    }
 
     domains(): Promise<ListResponse> {
         return RequestService.get('/servers/:server/subdomains/domains')

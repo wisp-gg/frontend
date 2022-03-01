@@ -270,7 +270,11 @@
     "using_subdomains": "Using {count} / {limit} subdomains",
     "create_new": "Create New Subdomain",
     "name_footer": "The vanity name of the subdomain.",
-    "domain_footer": "The domain which the subdomain will be created on."
+    "domain_footer": "The domain which the subdomain will be created on.",
+    "allocation_footer": "The allocation which the subdomain will point towards.",
+
+    "delete_subdomain": "Delete Subdomain",
+    "delete_subdomain_notice": "Are you sure that you want to delete the {name} subdomain? All connections using this subdomain will no longer work."
   },
 
   "mods": {
