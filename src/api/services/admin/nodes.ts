@@ -4,7 +4,7 @@ import { Parser } from '~/api';
 import { dispatch } from '~/core';
 
 interface GetNodeDaemonInfoRequest {
-    id: number;
+    nodes: number[];
 }
 
 interface UpdateNodeRequest {
@@ -28,6 +28,7 @@ interface UpdateNodeRequest {
     daemonSFTP: number;
     daemonFastdl: number;
 }
+
 
 export interface NodeDaemonInfo {
     alive: boolean;
@@ -71,8 +72,8 @@ class NodeService {
         return RequestService.delete('/nodes/:node');
     }
 
-    daemonInfo(data: GetNodeDaemonInfoRequest): Promise<NodeDaemonInfo> {
-        return RequestService.get(`/nodes/${data.id}/daemon-info`);
+    daemonInfo(data: GetNodeDaemonInfoRequest): Promise<Record<string, NodeDaemonInfo>> {
+        return RequestService.get('/nodes/daemon-info', data);
     }
 }
 
