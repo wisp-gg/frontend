@@ -3,8 +3,6 @@ api_token_env: CROWDIN_PERSONAL_TOKEN
 base_path: .
 base_url: https://api.crowdin.com
 
-preserve_hierarchy: true
-
 files:
 - source: src/locales/en/*.json
   translation: src/locales/%two_letters_code%/%file_name%
