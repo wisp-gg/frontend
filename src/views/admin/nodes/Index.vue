@@ -57,7 +57,7 @@ export default defineComponent({
         const fetchDaemonInfo = async () => {
             if (!nodes.value.length) return null;
 
-            const res = await useService<Record<string, NodeDaemonInfo>>('nodes@daemonInfo', { displayErrorsInUI: true, background: true }, {
+            const res = await useService<Record<string, NodeDaemonInfo>>('nodes@massDaemonInfo', { displayErrorsInUI: true, background: true }, {
                 nodes: nodes.value.map(n => n.id),
             });
 

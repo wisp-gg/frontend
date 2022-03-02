@@ -4,6 +4,10 @@ import { Parser } from '~/api';
 import { dispatch } from '~/core';
 
 interface GetNodeDaemonInfoRequest {
+    id: number;
+}
+
+interface GetMassNodeDaemonInfoRequest {
     nodes: number[];
 }
 
@@ -72,7 +76,11 @@ class NodeService {
         return RequestService.delete('/nodes/:node');
     }
 
-    daemonInfo(data: GetNodeDaemonInfoRequest): Promise<Record<string, NodeDaemonInfo>> {
+    daemonInfo(data: GetNodeDaemonInfoRequest): Promise<NodeDaemonInfo> {
+        return RequestService.get(`/nodes/${data.id}/daemon-info`);
+    }
+
+    massDaemonInfo(data: GetMassNodeDaemonInfoRequest): Promise<Record<string, NodeDaemonInfo>> {
         return RequestService.get('/nodes/daemon-info', data);
     }
 }
