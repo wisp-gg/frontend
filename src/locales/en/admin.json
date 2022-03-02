@@ -220,7 +220,7 @@
       "swap_footer": "Swap space limit in MB. If you want to disable swap space on a server, simply enter 0 into the swap field.",
       "disk_footer": "Disk space limit in MB. If you want to disable disk space limiting on a server, simply enter 0 into the disk field.",
       "io_footer": "Block IO should be set to a value between 10-1000.",
-      "skip_scripts_footer": "If the selected Egg has an install script attached to it, the script will run during install. If you would like to skip this step, check this box.",
+      "skip_scripts_footer": "If the selected Egg has an install script attached to it, the script will run during install. If you would like to skip this step, check this box."
     },
 
     "about": {
