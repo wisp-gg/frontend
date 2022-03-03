@@ -2,8 +2,8 @@ name: Push localization strings to Crowdin
 
 on:
   push:
-#    paths:
-#    - 'src/locales/**'
+    paths:
+    - 'src/locales/**'
 
 jobs:
   push-to-crowdin:
