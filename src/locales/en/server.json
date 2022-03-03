@@ -328,7 +328,7 @@
       },
       "ulx_in_a_string": {
         "title": "ULX in a string",
-        "description": "Often used in backdoors to set ranks or do other tings with ULX."
+        "description": "Often used in backdoors to set ranks or do other things with ULX."
       },
       "ip_tracking": {
         "title": "IP Tracking",
