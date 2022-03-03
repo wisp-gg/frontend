@@ -132,12 +132,17 @@ export default class RequestService {
                         if (new Date().getTime() - date.getTime() < 60 * 1000) return;
                     }
 
-                    Logger.debug('RequestService', 'Refreshing the page due to 419...');
+                    Logger.debug('RequestService', 'Refreshing the page...');
                     localStorage.setItem('last_refresh', new Date().getTime().toString());
                     location.reload();
                 };
 
                 switch(err.response?.status) {
+                    case 301:
+                    case 302:
+                        // Assume if the backend redirects us it means the user is already authenticated.
+                        refresh();
+                        break;
                     case 400:
                     case 422:
                         // TODO: this could be smarter - detect which field caused the error
