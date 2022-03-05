@@ -141,7 +141,7 @@
 import { defineComponent, ref, onMounted, onUnmounted, computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Server } from '~/api/models';
-import { ServerStats } from '~/api/services/client/node';
+import { ServerStats } from '~/api/services/client/servers';
 import { ServersService } from '~/api/services/client';
 import minecraft from '~/assets/svg/minecraft.png';
 import StatusIndicator from '~/views/StatusIndicator.vue';
@@ -168,7 +168,6 @@ export default defineComponent({
 
             ServersService.registerStats(
                 server.uuidShort,
-                server.node.id,
                 serverStats => stats.value = serverStats,
             );
             registered = true;

@@ -6,7 +6,7 @@
 import { defineComponent, ref, onMounted, onUnmounted, watch } from 'vue';
 import { Server } from '~/api/models';
 import { ServersService } from '~/api/services/client';
-import { ServerStats } from '~/api/services/client/node';
+import { ServerStats } from '~/api/services/client/servers';
 import StatusIndicator from '~/views/StatusIndicator.vue';
 
 export default defineComponent({
@@ -19,7 +19,7 @@ export default defineComponent({
         },
     },
 
-    setup(props, context) {
+    setup(props) {
         const stats = ref<ServerStats>({
             status: -2,
         });
@@ -30,7 +30,6 @@ export default defineComponent({
 
             ServersService.registerStats(
                 server.uuidShort,
-                server.node.id,
                 serverStats => stats.value = serverStats,
             );
             registered = true;

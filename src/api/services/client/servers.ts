@@ -1,9 +1,59 @@
 import Logger from '~/core/logger';
 import { Parser } from '~/api';
 import { Server } from '~/api/models';
-import { ServerStats } from './node';
 import RequestService from './request';
-import NodeService from './node';
+
+export enum ServerStatus {
+    Error = -1,
+
+    Offline = 0,
+    Online = 1,
+    Starting = 2,
+    Stopping = 3,
+
+    Migrating = 10,
+
+    Installing = 20,
+    FailedInstall = 21,
+
+    Suspended = 30,
+    Updating = 31,
+    Moving = 32,
+
+    CreatingBackup = 40,
+    DeployingBackup = 41,
+}
+
+export const mappedState: {[status: number]: [string, string]} = {
+    [ServerStatus.Error]: ['danger', 'error'],
+
+    [ServerStatus.Offline]: ['danger', 'offline'],
+    [ServerStatus.Online]: ['success', 'online'],
+    [ServerStatus.Starting]: ['info', 'starting'],
+    [ServerStatus.Stopping]: ['info', 'stopping'],
+
+    [ServerStatus.Migrating]: ['warning', 'migrating'],
+
+    [ServerStatus.Installing]: ['warning', 'installing'],
+    [ServerStatus.FailedInstall]: ['danger', 'failed_install'],
+
+    [ServerStatus.Suspended]: ['warning', 'suspended'],
+    [ServerStatus.Updating]: ['info', 'updating'],
+    [ServerStatus.Moving]: ['info', 'moving'],
+
+    [ServerStatus.CreatingBackup]: ['info', 'creating_backup'],
+    [ServerStatus.DeployingBackup]: ['info', 'deploying_backup'],
+};
+
+export interface ServerStats {
+    status: ServerStatus;
+    proc?: Record<string, any>; // TODO: Me
+    query?: Record<string, any>; // TODO: Me
+}
+
+interface GetStatsRequest {
+    servers: string[];
+}
 
 class ServersService {
     getAll(req: PaginatableRequest): Promise<ListResponse> {
@@ -19,15 +69,16 @@ class ServersService {
         }).then(Parser.parse);
     }
 
-    private queue: {[uuid: string]: {nodeId: number, callback: (stats: ServerStats) => void}} = {};
+    private stats(data: GetStatsRequest): Promise<{[uuid: string]: ServerStats}> {
+        return RequestService.get('/servers/stats', data);
+    }
+
+    private queue: {[uuid: string]: (stats: ServerStats) => void} = {};
     private startupTimer: null | ReturnType<typeof setTimeout> = null;
     private fetchTimer: null | ReturnType<typeof setInterval> = null;
-    registerStats(serverUuid: string, nodeId: number, callback: (stats: ServerStats) => void) {
+    registerStats(serverUuid: string , callback: (stats: ServerStats) => void) {
         Logger.debug('ServersService', `Registering ${serverUuid} for stats...`);
-        this.queue[serverUuid] = {
-            nodeId,
-            callback,
-        };
+        this.queue[serverUuid] = callback;
 
         // Due to how this logic is handled inside ServerCard, we could have
         // multiple server cards register itself in a short period of time.
@@ -50,45 +101,38 @@ class ServersService {
     fetchStats() {
         Logger.debug('ServersService', 'Fetching all server stats...');
 
-        const nodes: {[nodeId: string]: string[]} = {};
-        for(const serverUuid in this.queue) {
-            const data = this.queue[serverUuid];
-
-            nodes[data.nodeId] = nodes[data.nodeId] || [];
-            nodes[data.nodeId].push(serverUuid);
-        }
-
         const fetchedServer: {[uuid: string]: boolean} = {};
-        for(const nodeId in nodes) {
-            NodeService.getStats(nodeId, nodes[nodeId])
-                .then(res => {
-                    for(const uuid in res) {
-                        if (!this.queue[uuid]) {
-                            Logger.warn('ServersService', `Received stats for ${uuid} even though it wasn't requested...?`);
-                            continue;
-                        }
 
-                        this.queue[uuid].callback(res[uuid]);
-                        fetchedServer[uuid] = true;
+        this.stats({
+            servers: Object.keys(this.queue),
+        })
+            .then(res => {
+                for(const uuid in res) {
+                    if (!this.queue[uuid]) {
+                        Logger.warn('ServersService', `Received stats for ${uuid} even though it wasn't requested...?`);
+                        continue;
                     }
-                })
-                .catch(err => {
-                    Logger.warn('ServersService', `Failed fetching server stats for node ${nodeId} (${nodes[nodeId].join(', ')}): ${err}`);
-                })
-                .finally(() => {
-                    // If either the request failed or is missing some specific
-                    // server for whatever reason, their stats should be set to
-                    // an equivalent of an error.
-                    for(const uuid of nodes[nodeId]) {
-                        if (fetchedServer[uuid] || !this.queue[uuid]) continue;
 
-                        Logger.debug('ServersService', `Missing data for ${uuid}, assuming it's dead.`);
-                        this.queue[uuid].callback({
-                            status: -1,
-                        });
-                    }
-                });
-        }
+                    this.queue[uuid](res[uuid]);
+                    fetchedServer[uuid] = true;
+                }
+            })
+            .catch(err => {
+                Logger.warn('ServersService', `Failed fetching server stats (${Object.keys(this.queue).join(', ')}): ${err}`);
+            })
+            .finally(() => {
+                // If either the request failed or is missing some specific
+                // server for whatever reason, their stats should be set to
+                // an equivalent of an error.
+                for(const uuid of Object.keys(this.queue)) {
+                    if (fetchedServer[uuid] || !this.queue[uuid]) continue;
+
+                    Logger.debug('ServersService', `Missing data for ${uuid}, assuming it's dead.`);
+                    this.queue[uuid]({
+                        status: -1,
+                    });
+                }
+            });
     }
 
     unregisterStats(serverUuid: string) {
