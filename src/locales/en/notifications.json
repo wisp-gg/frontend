@@ -35,5 +35,17 @@
       "failed_to_update_allocation": "Failed to free old allocation on {name}.",
       "failed_final_stage": "Failed final stage for server transfer (make sure old server got deleted from {name} and dbs moved host if not failed)"
     }
+  },
+
+  "admin": {
+    "migrator": {
+      "title": "Migrator",
+
+      "finished_migrating_data": "Finished migrating data from {fqdn}.",
+      "exceeded_limits": "Failed migration for {fqdn}: {message} Contact us for manual migration.",
+      "aborted_migration": "Aborted migration for {fqdn}: {message}",
+      "data_mismatch": "Failed migration for {fqdn} due to data mismatch: {message}",
+      "failed_due_to_internal_error": "Failed migration for {fqdn}: Something went wrong internally, please contact us through a support ticket."
+    }
   }
 }
