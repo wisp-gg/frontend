@@ -23,11 +23,11 @@ onModelLoaded('server', () => {
 
 export const pendingFiles = ref<Record<string, PendingFile>>({});
 
-function handleWebkitEntry(entry: any, parent: string, path: string): Promise<PendingFile> {
+function handleWebkitEntry(entry: any, parent: string, path: string, relativePath: string): Promise<PendingFile> {
     if (entry.isFile) {
         return new Promise((resolve, reject) => entry.file((file: FileWithMetadata) => {
             file.meta = Object.assign(file.meta || {}, {
-                relativePath: (file as any).webkitRelativePath,
+                relativePath,
                 parent,
                 path,
             });
@@ -46,7 +46,7 @@ function handleWebkitEntry(entry: any, parent: string, path: string): Promise<Pe
                 return resolve(
                     (
                         await Promise.all(
-                            entries.map(entry => handleWebkitEntry(entry, parent, path))
+                            entries.map(entry => handleWebkitEntry(entry, parent, path, `${relativePath}/${entry.name}`))
                         )
                     ).reduce((prev, cur) => {
                         return {
@@ -80,7 +80,7 @@ export async function handleUploadEvent(evt: Event, path: string) {
                 uploaded_size: 0,
             };
 
-            pendingFiles.value[identifier] = await handleWebkitEntry(webkitEntry, identifier, path);
+            pendingFiles.value[identifier] = await handleWebkitEntry(webkitEntry, identifier, path, webkitEntry.name);
         } else {
             const actualFile: FileWithMetadata = file instanceof File ? file : file.getAsFile();
             if (!actualFile) return; // Should we throw an error instead?
@@ -131,15 +131,17 @@ function handleFinishUpload(evt: any) {
     if (parent) {
         if (parent.uploaded_files !== undefined) {
             parent.uploaded_files++;
-        }
 
-        if (parent.size === parent.uploaded_size || parent.files === parent.uploaded_files) {
+            if (parent.uploaded_files === parent.files) {
+                delete pendingFiles.value[parentId];
+            }
+        } else if (parent.uploaded_size === parent.size) {
             delete pendingFiles.value[parentId];
         }
     }
 
     if (uploadQueue.length === 0) {
-        onAllUploadsFinish?.();
+        if (Object.keys(pendingFiles.value).length === 0) onAllUploadsFinish?.();
     } else {
         DaemonWrapper.siofu?.submitFiles([uploadQueue.shift()]);
     }

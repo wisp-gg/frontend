@@ -51,6 +51,7 @@
                 :per-page="100"
                 :skeletons="5"
                 :fields="listFields"
+                :on-context-menu="onContextMenu"
                 ref="listElement"
                 checkbox
                 class="files"
@@ -215,15 +216,30 @@ export default defineComponent({
                     });
                 });
 
+                // Chrome seems to spam dragenter and dragleave events, so to avoid flickering rely on a delay.
+                let dragStopper: undefined | ReturnType<typeof setTimeout>;
                 ['dragover', 'dragenter'].forEach(evt => {
                     fileList.value?.addEventListener(evt, () => {
+                        if (dragStopper) {
+                            clearTimeout(dragStopper);
+                            dragStopper = undefined;
+                        }
+
                         dragging.value = true;
                     });
                 });
 
                 ['dragleave', 'dragend', 'drop'].forEach(evt => {
                     fileList.value?.addEventListener(evt, () => {
-                        dragging.value = false;
+                        if (dragStopper) clearTimeout(dragStopper);
+                        dragStopper = setTimeout(() => {
+                            if (dragStopper) {
+                                clearTimeout(dragStopper);
+                                dragStopper = undefined;
+                            }
+
+                            dragging.value = false;
+                        }, 100);
                     });
                 });
 
@@ -262,6 +278,13 @@ export default defineComponent({
                 { label: 'size', key: 'size', skeleton: 4, style: 'width: auto' },
                 { label: 'last_modified', key: 'modifiedAt', format: 'datetime', skeleton: 16, style: 'width: auto' },
             ],
+
+            onContextMenu: (evt: MouseEvent) => {
+                evt.preventDefault();
+                // TODO: Me
+
+                return false;
+            },
 
             getPreviousDirectory,
             navigateDirectory: (directory: string) => {

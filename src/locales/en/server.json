@@ -39,6 +39,7 @@
   },
 
   "console": {
+    "type_a_command": "Type a command...",
     "console_popup": "Open console popup",
     "upload_logs": "Upload logs",
     "eula_acceptance": "EULA Acceptance",
@@ -74,6 +75,9 @@
   },
 
   "audit_logs": {
+    "no_audits": "No Audit Logs",
+    "no_audits_description": "Seems like you have no audit logs. Perform some actions on your server to generate and see an overview of what's happening to your server here.",
+
     "changes": {
       "hidden_value": "Changed {key} to a new hidden value",
       "from_to": "Changed {key} from {old} to {new}"
@@ -324,7 +328,7 @@
       },
       "ulx_in_a_string": {
         "title": "ULX in a string",
-        "description": "Often used in backdoors to set ranks or do other tings with ULX."
+        "description": "Often used in backdoors to set ranks or do other things with ULX."
       },
       "ip_tracking": {
         "title": "IP Tracking",

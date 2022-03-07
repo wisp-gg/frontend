@@ -68,7 +68,7 @@ const config: UserConfig = {
             extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.vue'],
         }),
         viteSentry({
-            // Only do dry run if VITE_VERSION is missing
+            // Only do dry run if RELEASE_VERSION is missing
             dryRun: !process.env.RELEASE_VERSION,
 
             authToken: process.env.SENTRY_AUTH_TOKEN as string,

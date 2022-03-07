@@ -132,12 +132,17 @@ export default class RequestService {
                         if (new Date().getTime() - date.getTime() < 60 * 1000) return;
                     }
 
-                    Logger.debug('RequestService', 'Refreshing the page due to 419...');
+                    Logger.debug('RequestService', 'Refreshing the page...');
                     localStorage.setItem('last_refresh', new Date().getTime().toString());
                     location.reload();
                 };
 
                 switch(err.response?.status) {
+                    case 301:
+                    case 302:
+                        // Assume if the backend redirects us it means the user is already authenticated.
+                        refresh();
+                        break;
                     case 400:
                     case 422:
                         // TODO: this could be smarter - detect which field caused the error
@@ -151,13 +156,16 @@ export default class RequestService {
                                         // TODO: localization support
                                         return ['_raw', error.detail];
                                     })
-                            )
+                            );
                         }
                         break;
                     case 401:
                         // We can't refresh here because it'll trigger an infinite loop (unless @me endpoint gets whitelisted).
                         // Though I don't think this is really needed either.
                         // refresh();
+                        break;
+                    case 403:
+                        // TODO: display that no perms (although this should never realistically happen)
                         break;
                     case 404:
                         Router.push({
@@ -176,7 +184,7 @@ export default class RequestService {
                         throw new TranslatableError(['navigation.errors.429']);
                 }
 
-                throw new RequestError(endpoint, err);
+                throw new RequestError(method, endpoint, err);
             });
     }
 

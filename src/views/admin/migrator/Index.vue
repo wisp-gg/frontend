@@ -8,7 +8,7 @@
                     <div class="lg:w-1/2">
                         <v-input name="panel_url" footer="admin.migrator.panel_url_footer" rule="required" />
 
-                        <v-input name="api_key" label="components.form.fields.application_api_key" footer="admin.migrator.api_key_footer" rule="required" />
+                        <v-input type="password" name="api_key" label="components.form.fields.application_api_key" footer="admin.migrator.api_key_footer" rule="required" />
                     </div>
 
                     <div class="lg:w-1/2">
@@ -27,7 +27,7 @@
         </container>
 
         <container no-padding title="admin.migrator.step_2" class="my-4">
-            <list service-id="migrator@getAll" :fields="listFields">
+            <list service-id="migrator@getAll" :fields="listFields" :per-page="5">
                 <template #headers-after>
                     <th />
                 </template>

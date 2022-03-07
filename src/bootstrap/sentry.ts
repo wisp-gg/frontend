@@ -17,7 +17,12 @@ export function enableSentry(app: App, router: Router) {
                 tracingOrigins: [`//${location.host}/api/`],
             }),
         ],
-        logErrors: true,
         tracesSampleRate: 0.1,
+
+        logErrors: true,
+        ignoreErrors: [
+            'Request aborted',
+            'TranslatableError: ',
+        ],
     });
 }

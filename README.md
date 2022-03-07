@@ -1,5 +1,7 @@
 # Game Panel Frontend
 
+[![Crowdin](https://badges.crowdin.net/wisp-game-panel/localized.svg)](https://crowdin.com/project/wisp-game-panel)
+
 At the moment, this repository functions as a public issue tracker for known issues, and at a later date can be used to modify the game panel's frontend completely (though to be decided later on). How to run this locally, etc. isn't something we currently will provide support for, and this should be treated purely as a reference for CSS modifications for now.
 
 ## Translating

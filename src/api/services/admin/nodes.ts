@@ -1,9 +1,14 @@
 import RequestService from './request';
 import { Node } from '~/api/models';
 import { Parser } from '~/api';
+import { dispatch } from '~/core';
 
 interface GetNodeDaemonInfoRequest {
     id: number;
+}
+
+interface GetMassNodeDaemonInfoRequest {
+    nodes: number[];
 }
 
 interface UpdateNodeRequest {
@@ -27,6 +32,7 @@ interface UpdateNodeRequest {
     daemonSFTP: number;
     daemonFastdl: number;
 }
+
 
 export interface NodeDaemonInfo {
     alive: boolean;
@@ -59,7 +65,11 @@ class NodeService {
     update(data: UpdateNodeRequest): Promise<Node> {
         return RequestService.put('/nodes/:node', data)
             .then(Parser.parse)
-            .then(RequestService.updateModelBinding);
+            .then(node => {
+                dispatch('models/refresh', 'node');
+
+                return node;
+            });
     }
 
     delete(): Promise<void> {
@@ -68,6 +78,10 @@ class NodeService {
 
     daemonInfo(data: GetNodeDaemonInfoRequest): Promise<NodeDaemonInfo> {
         return RequestService.get(`/nodes/${data.id}/daemon-info`);
+    }
+
+    massDaemonInfo(data: GetMassNodeDaemonInfoRequest): Promise<Record<string, NodeDaemonInfo>> {
+        return RequestService.get('/nodes/daemon-info', data);
     }
 }
 

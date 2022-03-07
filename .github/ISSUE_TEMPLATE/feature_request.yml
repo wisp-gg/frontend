@@ -1,6 +1,5 @@
 name: Feature Request
 description: Suggest a new feature for the WISP project
-title: "[Request]: "
 labels: [enchancement]
 body:
   - type: markdown

@@ -1,5 +1,9 @@
 <template>
     <v-form :service-id="creating ? 'eggs@create' : 'eggs@update'" :on-success="onSuccess" class="space-y-4">
+        <div class="mb-4" v-if="!creating">
+            <alert type="warning" icon="info-circle" :title="['admin.nests.egg.daemon_restart_required_after_changes']" />
+        </div>
+
         <container title="admin.nests.egg.configuration">
             <div class="grid lg:grid-cols-2 gap-x-4 gap-y-4">
                 <div>
@@ -42,11 +46,17 @@
         </container>
 
         <div class="bg-primary-500 flex justify-between p-4 rounded">
-            <skeleton v-if="!creating" :content="4">
-                <v-button color="info" permission="egg.read" :href="exportUrl">
-                    <t path="generic.export" />
-                </v-button>
-            </skeleton>
+            <div class="space-x-4">
+                <skeleton v-if="!creating" :content="4">
+                    <import-update-modal />
+                </skeleton>
+
+                <skeleton v-if="!creating" :content="4">
+                    <v-button color="info" permission="egg.read" :href="exportUrl">
+                        <t path="generic.export" />
+                    </v-button>
+                </skeleton>
+            </div>
 
             <div class="space-x-4">
                 <skeleton v-if="!creating" :content="4">
@@ -69,9 +79,10 @@ import { onModelLoaded } from '~/plugins';
 import { Egg } from '~/api/models';
 import Alert from '~/components/Alert.vue';
 import DeleteEggModal from './DeleteEggModal.vue';
+import ImportUpdateModal from "~/views/admin/nests/eggs/ImportUpdateModal.vue";
 
 export default defineComponent({
-    components: { DeleteEggModal, Alert },
+    components: { ImportUpdateModal, DeleteEggModal, Alert },
     setup() {
         const router = useRouter();
         const route = useRoute();

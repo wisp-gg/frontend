@@ -2,8 +2,10 @@
     <server-error v-if="alerts.find(r => r.title[0].startsWith('server.errors'))" />
 
     <div v-else :class="['flex', preference === 1 ? 'flex-col' : '']">
-        <horizontal-nav-bar v-if="preference === 1" />
-        <vertical-nav-bar v-if="preference === 0" />
+        <div :data-nav-preference="preference === 1 ? 'horizontal' : 'vertical'">
+            <horizontal-nav-bar v-if="preference === 1" />
+            <vertical-nav-bar v-if="preference === 0" />
+        </div>
 
         <div class="flex-grow" :class="preference === 1 ? ['flex', 'flex-col', 'items-center'] : ['pl-0', 'md:pl-64', 'mt-12 md:mt-0']">
             <socket-error-notice />

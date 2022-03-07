@@ -2,7 +2,7 @@
     <div class="w-full block">
         <slot name="layout" :results="list?.results" :pagination="list?.pagination" :search="search" :set-page="setPage">
             <slot v-if="searchable" name="search" :submit="search">
-                <div class="flex mb-4">
+                <div class="flex mb-4 items-center">
                     <!-- TODO: Spinner to appear on right side signifying it is currently searching -->
                     <input class="input w-full flex-grow" name="search" :placeholder="t('generic.search')" @keyup="search">
 
@@ -45,7 +45,7 @@
                         <template v-else>
                             <slot name="items-before" :update="update" />
 
-                            <tr v-for="(result, idx) in list?.results" :key="idx" class="bg-primary-500 border-b border-primary-400 block w-full xl:table-row xl:border-none last:border-none hover:bg-primary-600 group" @click="onCheckboxRowClick($event, result)">
+                            <tr v-for="(result, idx) in list?.results" :key="idx" class="g-primary-500 border-b border-primary-400 block w-full xl:table-row xl:border-none last:border-none hover:bg-primary-600 group" @click="onCheckboxRowClick($event, result)" @contextmenu="onContextMenu">
                                 <slot name="fields-before" :result="result" :update="update" />
 
                                 <td class="px-4 pt-3 xl:py-4 text-center td-min" v-if="checkbox">
@@ -139,6 +139,9 @@ export default defineComponent({
         },
         searchable: {
             type: Boolean,
+        },
+        onContextMenu: {
+            type: Function,
         },
     },
     emits: ['results', 'meta', 'pagination', 'checked'], // update setAttribute if you touch this

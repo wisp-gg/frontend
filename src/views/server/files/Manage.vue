@@ -92,7 +92,7 @@ export default defineComponent({
                 if (isNewFile) {
                     router.push({
                         name: 'server.management.files.edit',
-                        hash: `#${data.path}`,
+                        hash: `#${path.value}`,
                     });
                 }
             },

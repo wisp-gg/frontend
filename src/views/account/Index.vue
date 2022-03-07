@@ -6,8 +6,8 @@
                     <v-input type="hidden" name="action" value="identity" />
 
                     <div class="grid xl:grid-cols-2 gap-x-6">
-                        <v-input class="flex-grow" name="name_first" :value="user.nameFirst" rule="required" />
-                        <v-input class="flex-grow" name="name_last" :value="user.nameLast" rule="required" />
+                        <v-input class="flex-grow" name="name_first" :value="user?.nameFirst" rule="required" />
+                        <v-input class="flex-grow" name="name_last" :value="user?.nameLast" rule="required" />
                     </div>
 
                     <div class="grid xl:grid-cols-2 gap-x-6">
@@ -34,7 +34,7 @@
                 <v-form service-id="account@update" on-success="client.account.updated_email">
                     <v-input type="hidden" name="action" value="email" />
 
-                    <v-input label="components.form.fields.new_email" name="email" :value="user.email" rule="required|email" />
+                    <v-input label="components.form.fields.new_email" name="email" :value="user?.email" rule="required|email" />
                     <v-input type="password" name="current_password" rule="required" />
 
                     <div class="text-right">

@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
-import { mappedState } from '~/api/services/client/node';
+import { mappedState } from '~/api/services/client/servers';
 
 export default defineComponent({
     props: {

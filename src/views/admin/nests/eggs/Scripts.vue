@@ -1,5 +1,9 @@
 <template>
     <v-form service-id="eggs@updateScripts" class="space-y-4">
+        <div class="mb-4">
+            <alert type="warning" icon="info-circle" :title="['admin.nests.egg.daemon_restart_required_after_changes']" />
+        </div>
+
         <container no-padding title="admin.nests.egg.install_script">
             <skeleton :content="64">
                 <v-editor class="border-b border-primary-400" name="script_install" path="install.sh" :value="egg?.scriptInstall" />

@@ -1,6 +1,5 @@
 name: Bug Report
 description: Provide a bug report to help us improve the project
-title: "[Bug]: "
 labels: [bug]
 body:
   - type: markdown
@@ -42,9 +41,9 @@ body:
       label: Steps to Reproduce
       description: Please be as detailed as possible when providing steps to reproduce the issue
       placeholder: |
-        Step 1 Click on a file manager button
-        Step 2 Be redirected to a file manager page
-        Step 3 Empty page is displayed
+        Step 1 - Click on a file manager button
+        Step 2 - Be redirected to a file manager page
+        Step 3 - Empty page is displayed
     validations:
       required: true
 
@@ -54,13 +53,17 @@ body:
       label: Browser Details
       description: The browser type and version you are using.
       placeholder: Firefox 97.0
+    validations:
+      required: true
 
   - type: input
-    id: desktop-os
+    id: operating-system
     attributes:
-      label: Desktop OS
+      label: Operating System
       description: The operating system you are using.
-      placeholder: Windows 10
+      placeholder: Windows 10, iOS 15 or Android 12
+    validations:
+      required: true
 
   - type: textarea
     id: optional-information

@@ -3,10 +3,15 @@ import { createI18n } from 'vue-i18n';
 import dayjs from 'dayjs';
 import RelativeFormat from 'dayjs/plugin/relativeTime';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
+import UTC from 'dayjs/plugin/utc';
+import Timezone from 'dayjs/plugin/timezone';
 dayjs.extend(RelativeFormat);
 dayjs.extend(LocalizedFormat);
+dayjs.extend(UTC);
+dayjs.extend(Timezone);
 
-import { default as Store } from '~/core/store';
+import Logger from './logger';
+import { default as Store } from './store';
 
 function setDayjsLocale(name: string, dates: Record<string, any>) {
     dates.name = name;
@@ -27,27 +32,29 @@ function setDayjsLocale(name: string, dates: Record<string, any>) {
         }
     }
 
+    // Check if we have empty values, and fallback to the english translation
+    for(const category in dates) {
+        if (category === 'name') continue;
+
+        for(const key in dates[category]) {
+            if (!dates[category][key]) dates[category][key] = (dayjs.Ls['en'] as any)[category][key];
+        }
+    }
+
     dayjs.locale(name, dates);
 }
 
 const lang = createI18n({
     locale: 'en',
-
-    messages: {
-        en: {},
-    },
 });
 
-async function loadLanguage(name: string) {
-    if (name !== 'en') {
-        // TODO: handle new languages properly
-        throw new Error('Currently, only `en` is supported as a language.');
-    }
+export async function loadLanguage(name: string) {
+    Logger.debug('Lang', `Missing ${name}, loading...`);
 
     const data: Record<string, any> = {};
     await Promise.all(
         ['admin', 'audits', 'client', 'components', 'daemon', 'dates', 'generic', 'login', 'navigation', 'permissions', 'notifications', 'server'].map(namespace =>
-            import(`../locales/en/${namespace}.json`)
+            import(`../locales/${name}/${namespace}.json`)
                 .then(({ default: contents }) => data[namespace] = contents)
         )
     );
@@ -62,7 +69,10 @@ async function loadLanguage(name: string) {
 export default lang;
 
 export function getAvailableLanguages() {
-    return lang.global.availableLocales;
+    // TODO: can vite somehow hint folders in a dir? (probably not a good idea until all of the translations are good to go)
+    return [
+        'en',
+    ];
 }
 
 export function getCurrentLanguage() {
@@ -72,10 +82,16 @@ export function getCurrentLanguage() {
 export async function setCurrentLanguage(language: string) {
     if (!getAvailableLanguages().includes(language)) return;
 
-    await loadLanguage(language);
+    const messages: any = lang.global.messages;
+    if (!messages[language]) await loadLanguage(language);
 
-    lang.global.locale = language;
+    Logger.debug('Lang', `Setting the current language as ${language}.`);
     dayjs.locale(language);
+
+    // There seems to be a weird bug(?) where `lang.global.locale` is a ComputedRefImpl instead of just a string
+    const global: any = lang.global;
+    if (global.locale?.value) global.locale.value = language;
+    else global.locale = language;
 }
 
 Store.subscribe(mutation => {
@@ -85,18 +101,24 @@ Store.subscribe(mutation => {
     }
 });
 
-export function formatDate(value: string, format: string) {
+function createDayjsInstance(value: string, timezone?: string) {
+    if (timezone) return dayjs(value).tz(timezone).locale(lang.global.locale);
+
+    return dayjs(value).locale(lang.global.locale);
+}
+
+export function formatDate(value: string, format: string, timezone?: string) {
     if (dayjs(new Date()).diff(dayjs(value), 'd') >= 1) {
-        return formatDateAbsolute(value, format);
+        return formatDateAbsolute(value, format, timezone);
     } else {
-        return formatDateRelative(value);
+        return formatDateRelative(value, timezone);
     }
 }
 
-export function formatDateRelative(value: string) {
-    return dayjs(value).locale(lang.global.locale).fromNow();
+export function formatDateRelative(value: string, timezone?: string) {
+    return createDayjsInstance(value, timezone).fromNow();
 }
 
-export function formatDateAbsolute(value: string, format: string) {
-    return dayjs(value).locale(lang.global.locale).format(format);
+export function formatDateAbsolute(value: string, format: string, timezone?: string) {
+    return createDayjsInstance(value, timezone).format(format);
 }

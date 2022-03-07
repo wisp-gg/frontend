@@ -4,6 +4,7 @@ import { cleanData } from '~/plugins/clean';
 
 export class RequestError extends Error {
     constructor(
+        private method: string,
         private endpoint: string,
         private err: AxiosError,
         private data?: {[key: string]: any} | null,
@@ -34,6 +35,6 @@ export class RequestError extends Error {
     }
 
     toString(): string {
-        return `${this.message}\nEndpoint: ${this.endpoint}\nData: ${this.getData()}\nBody: ${this.getBody()}`;
+        return `${this.message}\nEndpoint: ${this.method} ${this.endpoint}\nData: ${this.getData()}\nBody: ${this.getBody()}`;
     }
 }

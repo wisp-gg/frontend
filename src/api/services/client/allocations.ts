@@ -1,5 +1,6 @@
 import { Parser } from '~/api';
 import RequestService from './request';
+import { Allocation } from '~/api/models';
 
 interface UpdateAllocation {
     id: number;
@@ -12,10 +13,11 @@ class AllocationsService {
         return RequestService.get('/servers/:server/allocations', req).then(Parser.parse);
     }
 
-    update(data: UpdateAllocation): Promise<void> {
+    update(data: UpdateAllocation): Promise<Allocation> {
         return RequestService.patch(`/servers/:server/allocations/${data.id}`, {
             primary: data.primary
-        });
+        })
+            .then(Parser.parse);
     }
 }
 

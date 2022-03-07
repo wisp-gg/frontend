@@ -2,13 +2,14 @@
     <div>
         <div class="flex flex-grow" ref="terminalElement" />
         <div class="flex terminal-input">
-            <div class="text-gray-300 terminal-prompt">
-                root:~/<span class="text-accent-500">$</span>
+            <div class="text-accent-500 terminal-prompt">
+                $
             </div>
             <v-input
                 class="flex-grow"
                 name=""
                 permission="control.command"
+                placeholder="server.console.type_a_command"
                 v-model:value="textInput"
                 @keydown="inputKeyDown"
                 no-margin
@@ -100,8 +101,9 @@ export default defineComponent({
                 allowTransparency: true,
                 cursorStyle: 'underline',
                 disableStdin: true,
-                fontSize: 12,
+                fontSize: 13,
                 fontFamily: 'monospace',
+                lineHeight: 1.1,
                 rows: 30,
                 scrollback: 1000,
                 theme: {

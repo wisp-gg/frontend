@@ -23,8 +23,8 @@
   "click_to_reveal": "Click to Reveal.",
   "reset_password": "Reset Password",
   "unknown": "Unknown",
-  "results": "no results | 1 result | {n} results",
   "no_results_found": "No results found",
+  "results": "no results | 1 result | {n} results",
   "more_info": "More Info",
   "changes": "Changes",
   "metadata": "Metadata",
@@ -66,15 +66,20 @@
   "allocations": "Allocations",
   "database_hosts": "Database Hosts",
   "server_databases": "Server Databases",
-  "eggs": "Eggs",
   "locations": "Locations",
   "nests": "Nests",
+  "eggs": "Eggs",
   "nodes": "Nodes",
   "servers": "Servers",
+  "admin": "Admin",
+  "support_op": "Support Op",
 
   "something_went_wrong": "Something went wrong while trying to perform this action.",
 
   "server": {
+    "no_servers": "No Servers",
+    "no_servers_description": "Seems like you have no servers...",
+
     "hostname": "Hostname",
     "name": "Name",
     "cpu": "CPU",
@@ -141,6 +146,31 @@
   },
 
   "languages": {
-    "en": "English"
+    "en": "English",
+    "ar_SA": "Arabic",
+    "cs_CZ": "Czech",
+    "da_DK": "Danish",
+    "de_DE": "German",
+    "en_PT": "English (Pirate)",
+    "es_AR": "Spanish (Argentina)",
+    "es_EM": "Spanish (Modern)",
+    "et_EE": "Estonian",
+    "fi_FI": "Finnish",
+    "fr_FR": "French",
+    "hi_IN": "Hindi",
+    "hr_HR": "Hungarian",
+    "it_IT": "Italian",
+    "ja_JP": "Japanese",
+    "nl_NL": "Dutch",
+    "no_NO": "Norwegian",
+    "pl_PL": "Polish",
+    "pt_BR": "Portuguese",
+    "ro_RO": "Romanian",
+    "ru_RU": "Russian",
+    "ru_UA": "Ukrainian",
+    "sv_SE": "Swedish",
+    "tr_TR": "Turkish",
+    "ur_PK": "Urdu",
+    "zh_CN": "Chinese (Simplified)"
   }
 }

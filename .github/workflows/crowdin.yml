@@ -1,0 +1,25 @@
+name: Push localization strings to Crowdin
+
+on:
+  push:
+    paths:
+    - 'src/locales/**'
+
+jobs:
+  push-to-crowdin:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set branch name from source branch
+        run: echo "##[set-output name=branch;]${GITHUB_REF#refs/heads/}"
+        id: extract_branch
+      - name: Push
+        uses: crowdin/github-action@1.4.7
+        with:
+          upload_sources: true
+          crowdin_branch_name: ${{ steps.extract_branch.outputs.branch }}
+        env:
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
