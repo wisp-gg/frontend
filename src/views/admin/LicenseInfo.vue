@@ -2,7 +2,7 @@
     <div class="flex mt-2">
         <!-- TODO: Component for this? Since its also used in audit logs -->
         <div class="lg:w-1/2 border border-white/10 rounded-lg mt-4 overflow-hidden">
-            <div class="p-4 bg-primary-50 text-white border-b border-white/10 rounded-t-lg">
+            <div class="p-4 text-white rounded-t-lg">
                 <t path="admin.index.license_information" />
             </div>
 

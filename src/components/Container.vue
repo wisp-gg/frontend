@@ -1,6 +1,6 @@
 <template>
     <div class="bg-primary-500 bg-clip-content rounded-md">
-        <div class="text-white text-opacity-75 border-b border-primary-400 px-4 py-3">
+        <div class="text-white text-opacity-75 border-b border-primary-400 p-3 sm:px-4">
             <slot name="header">
                 <div class="flex">
                     <div class="flex flex-grow items-center">
@@ -24,7 +24,7 @@
             </slot>
         </div>
 
-        <div :class="!noPadding ? ['p-6'] : []">
+        <div :class="!noPadding ? ['p-3 sm:p-6'] : []">
             <slot />
         </div>
     </div>
