@@ -1,7 +1,7 @@
 <template>
     <list service-id="servers@getAll" :fields="listFields" :data="listExtraData" searchable>
         <template #search-extra>
-            <div class="ml-4">
+            <div class="ml-4 flex">
                 <v-button color="primary" :to="{ name: 'admin.management.servers.new' }" permission="server.create">
                     <t path="generic.create" />
                 </v-button>
