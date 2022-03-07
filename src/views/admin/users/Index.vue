@@ -1,7 +1,7 @@
 <template>
     <list service-id="users@getAll" :fields="listFields" searchable>
         <template #search-extra>
-            <div class="ml-4">
+            <div class="ml-4 flex">
                 <v-button color="primary" permission="user.create" :to="{ name: 'admin.management.users.new' }">
                     <t path="generic.create" />
                 </v-button>
