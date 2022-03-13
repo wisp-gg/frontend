@@ -1,12 +1,12 @@
 <template>
     <!-- TODO(@havasu): fix padding/margins to be more consistent, also if the screen is too small it'll have the buttons overlap each other :/ -->
-    <div class="mb-8">
+    <div class="my-4">
         <label class="text-white opacity-50 tracking-wide uppercase block mb-4" v-if="!hideLabel">
             <t :path="label" />
         </label>
 
         <div class="btn-group">
-            <label class="btn btn-primary" :class="input === key.toString() ? ['btn-active'] : []" v-for="(value, key) in options" :key="key">
+            <label class="btn" :class="input === key.toString() ? ['btn-primary'] : ['opacity-75']" v-for="(value, key) in options" :key="key">
                 <input type="radio" :name="name" autocomplete="off" :value="key" @input="update" :disabled="inputDisabled">
                 <t :path="`${prefix ? `${prefix}.` : ''}${value}`" />
             </label>
@@ -26,16 +26,16 @@ input[type="radio"] {
 }
 
 .btn-group {
-    &:first-child:not(:last-child) {
+    .btn:first-child:not(:last-child) {
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
     }
 
-    &:not(:first-child):not(:last-child) {
+    .btn:not(:first-child):not(:last-child) {
         border-radius: 0;
     }
 
-    &:last-child:not(&:first-child) {
+    .btn:last-child:not(:first-child) {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
     }
