@@ -14,7 +14,7 @@
         <div class="flex-grow mt-12 md:mt-0" :class="preference === 1 ? ['flex', 'flex-col', 'items-center'] : ['pl-0', 'md:pl-64']">
             <socket-error-notice />
 
-            <div class="mx-4 mt-8 md:mx-8" :class="preference === 1 ? ['container'] : []">
+            <div class="mx-4 mt-8 md:mx-8" :class="preference === 1 ? ['md:container'] : []">
                 <div class="flex flex-col md:flex-row justify-between items-center mb-8">
                     <div class="flex">
                         <div class="w-14 h-14 md:w-20 md:h-20 mr-3 flex items-center justify-center header-icon shrink-0">
@@ -105,11 +105,11 @@ import { defineComponent, computed } from 'vue';
 import { Router, state } from '~/core';
 import { NavBarPosition } from '~/api/models/User';
 import { Passthrough, TabberPassthrough } from '~/views';
+import MobileNav from '~/views/MobileNav.vue';
 import HorizontalNavBar from './HorizontalNavBar.vue';
 import VerticalNavBar from './VerticalNavBar.vue';
 import SocketErrorNotice from '~/views/SocketErrorNotice.vue';
 import ServerError from '~/views/errors/ServerError.vue';
-import MobileNav from "~/views/MobileNav.vue";
 
 export default defineComponent({
     components: {
