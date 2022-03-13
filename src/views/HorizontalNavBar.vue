@@ -1,5 +1,4 @@
 <template>
-    <!-- TODO: Mobile support -->
     <nav class="flex justify-center items-stretch h-20 p-3 nav-primary">
         <div class="flex justify-between items-center container">
             <div class="flex">
