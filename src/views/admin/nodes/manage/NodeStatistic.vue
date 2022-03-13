@@ -1,22 +1,22 @@
 <template>
-    <div class="flex" :class="color">
-        <div class="w-1/4 bg-black/25 flex justify-center items-center text-white/75">
-            <fa :icon="['fas', icon]" size="3x" />
-        </div>
-        <div class="w-full p-1">
-            <div class="p-2">
-                <h3 class="text-white/75">
-                    <t :path="`${name}`" />
-                </h3>
-                <p>
-                    {{ formattedValue }}
-                    <span v-if="max">
+    <div class="flex relative">
+        <div class="w-full">
+            <div class="p-4 flex relative z-20">
+                <fa class="mr-4"  :class="color" :icon="['fas', icon]" size="2x" />
+                <div>
+                    <h3 class="text-white/75">
+                        <t :path="`${name}`" />
+                    </h3>
+                    <p>
+                        {{ formattedValue }}
+                        <span v-if="max">
                         / {{ formattedMax }}
                     </span>
-                </p>
+                    </p>
+                </div>
             </div>
-            <div class="-mx-1 my-2 h-[2px] min-w-full bg-white/25" v-if="max">
-                <div class="bg-white h-[2px]" :style="`width:${percentage}%`" />
+            <div class="absolute h-full min-w-full z-10 top-0 left-0" v-if="max">
+                <div class="bg-primary-400 h-full" :style="`width:${percentage}%`" />
             </div>
         </div>
     </div>
@@ -81,14 +81,14 @@ export default defineComponent({
             percentage,
             color: computed(() => {
                 if (percentage.value > 80) {
-                    return 'bg-red-800';
+                    return 'text-red-500';
                 }
 
                 if (percentage.value > 50) {
-                    return 'bg-yellow-700';
+                    return 'text-yellow-700';
                 }
 
-                return 'bg-green-800';
+                return 'text-green-500';
             }),
 
             formattedValue: computed(() => format(props.value)),
