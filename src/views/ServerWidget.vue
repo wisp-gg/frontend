@@ -8,17 +8,17 @@
                 {{ server?.primaryAllocation()?.displayName() }}
             </p>
         </div>
-        <status-indicator :class="preference === 0 ? 'ml-auto' : 'ml-8'" :status="status" />
+        <status-indicator :class="preference === 0 ? 'ml-auto' : 'ml-auto md:ml-8'" :status="status" />
     </div>
 
-    <div class="flex flex-wrap px-6 py-3 text-sm" :class="preference === 0 ? '' : 'min-w-40 border border-l-0 border-primary-700 rounded-r-lg'">
+    <div class="flex flex-wrap px-6 py-3 text-sm" :class="preference === 0 ? '' : 'md:min-w-40 md:border md:border-l-0 md:border-primary-700 md:rounded-r-lg'">
         <p class="text-left w-1/2">
             <span v-tippy="'generic.server.cpu'">
                 <fa :icon="['fas', 'tachometer-alt']" size="sm" fixed-width />
             </span>
             {{ cpu }}
         </p>
-        <p class="w-1/2" :class="preference === 0 ? 'text-left' : 'text-right'">
+        <p class="w-1/2" :class="preference === 0 ? 'text-left' : 'md:text-right'">
             <span v-tippy="'generic.server.memory'">
                 <fa :icon="['fas', 'memory']" size="sm" fixed-width />
             </span>
@@ -30,7 +30,7 @@
             </span>
             {{ disk }}
         </p>
-        <p class="w-1/2" :class="preference === 0 ? 'text-left' : 'text-right'">
+        <p class="w-1/2" :class="preference === 0 ? 'text-left' : 'md:text-right'">
             <span v-tippy="'generic.server.players'">
                 <fa :icon="['fas', 'user']" size="sm" fixed-width />
             </span>
