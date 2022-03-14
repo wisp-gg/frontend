@@ -1,7 +1,7 @@
 <template>
     <list service-id="nests@getAll" :fields="listFields" searchable>
         <template #search-extra>
-            <div class="ml-4 flex items-center space-x-4">
+            <div class="ml-4 flex space-x-4">
                 <import-egg-modal />
                 <create-nest-modal />
             </div>

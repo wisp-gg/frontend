@@ -1,5 +1,5 @@
 <template>
-    <modal title="admin.nests.create_nest" opener-color="primary" opener-text="generic.create" permission="nest.create">
+    <modal has-alerts title="admin.nests.create_nest" opener-color="primary" opener-text="generic.create" permission="nest.create">
         <v-form service-id="nests@create" :on-success="onSuccess">
             <v-input name="name" footer="admin.nests.name_footer" rule="required" />
             <v-input label="components.form.fields.identifier" name="shortName" footer="admin.nests.identifier_footer" rule="required" />

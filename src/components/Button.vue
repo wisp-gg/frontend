@@ -70,8 +70,8 @@ export default defineComponent({
                     const properties: Record<string, any> = {
                         ...context.attrs,
                         class: [
-                            'cursor-pointer inline-flex items-center',
-                            ...(props.color ? ['btn', `btn-${props.color}`] : []),
+                            'cursor-pointer',
+                            ...(props.color ? ['btn', `btn-${props.color}`, 'inline-flex', 'items-center'] : []),
                             ...(context.attrs.class ? (context.attrs.class as string).split(' ') : []),
                         ],
                         disabled: disabled.value,
