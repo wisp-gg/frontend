@@ -8,7 +8,9 @@ interface ToggleBackupRequest {
 
 class ServerBackupService {
     getAll(): Promise<ListResponse> {
-        return RequestService.get('/servers/:server/backups').then(Parser.parse);
+        return RequestService.get('/servers/:server/backups', {
+            'filter[creating]': true,
+        }).then(Parser.parse);
     }
 
     toggle(data: ToggleBackupRequest): Promise<Server> {
