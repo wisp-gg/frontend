@@ -1,8 +1,8 @@
 <template>
     <list service-id="mods@getAll" :fields="listFields" searchable>
         <template #search-extra>
-            <div class="ml-4">
-                <v-button color="primary" permission="mod.create" :to="{ name: 'admin.service_management.mods.new' }">
+            <div class="ml-4 flex">
+                <v-button class="block" color="primary" permission="mod.create" :to="{ name: 'admin.service_management.mods.new' }">
                     <t path="generic.create" />
                 </v-button>
             </div>

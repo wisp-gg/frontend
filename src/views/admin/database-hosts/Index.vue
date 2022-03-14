@@ -1,7 +1,7 @@
 <template>
     <list service-id="databaseHosts@getAll" :fields="listFields" searchable>
         <template #search-extra>
-            <div class="ml-4">
+            <div class="ml-4 flex">
                 <create-database-host-modal />
             </div>
         </template>
