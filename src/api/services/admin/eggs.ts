@@ -40,7 +40,7 @@ interface UpdateScriptsRequest {
     copyUpdateScriptFrom?: number;
 }
 
-interface UpdateThumbnailRequest {
+interface AssetRequest {
     asset: File;
 }
 
@@ -102,11 +102,14 @@ class EggsService {
             .then(RequestService.updateModelBinding);
     }
 
-    updateThumbnail(data: UpdateThumbnailRequest): Promise<Egg> {
+    private assetToFormData(data: AssetRequest) {
         const formData = new FormData();
         if (data.asset) formData.append('asset', data.asset);
+        return formData;
+    }
 
-        return RequestService.put('/nests/:nest/eggs/:egg/thumbnail', formData, {
+    updateThumbnail(data: AssetRequest): Promise<Egg> {
+        return RequestService.post('/nests/:nest/eggs/:egg/thumbnail', this.assetToFormData(data), {
             'Content-Type': 'multipart/form-data',
         })
             .then(Parser.parse)
