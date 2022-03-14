@@ -1,5 +1,5 @@
 <template>
-    <span class="focus:outline-none" :class="spanClass" v-tippy="tippy" v-if="disabled || hasTooltip" tabindex="0">
+    <span class="focus:outline-none inline-flex" :class="spanClass" v-tippy="tippy" v-if="disabled || hasTooltip" tabindex="0">
         <component :is="component" v-bind="componentProps">
             <slot />
         </component>
@@ -70,7 +70,7 @@ export default defineComponent({
                     const properties: Record<string, any> = {
                         ...context.attrs,
                         class: [
-                            'cursor-pointer',
+                            'cursor-pointer inline-flex items-center',
                             ...(props.color ? ['btn', `btn-${props.color}`] : []),
                             ...(context.attrs.class ? (context.attrs.class as string).split(' ') : []),
                         ],

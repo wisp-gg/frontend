@@ -9,7 +9,7 @@
         </template>
 
         <template #fields-before="{ result }">
-            <td class="p-6 flex justify-center items-center">
+            <td class="p-4" style="width: 1px;">
                 <skeleton :content="4">
                     <status-indicator :loading-first="loadingFirst" :daemon-info="daemonInfo[result.id]" />
                 </skeleton>

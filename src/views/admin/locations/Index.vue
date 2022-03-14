@@ -1,7 +1,7 @@
 <template>
     <list service-id="locations@getAll" :fields="listFields" searchable>
         <template #search-extra>
-            <div class="ml-4">
+            <div class="ml-4 flex">
                 <create-location-modal />
             </div>
         </template>
