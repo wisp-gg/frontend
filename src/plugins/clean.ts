@@ -1,4 +1,4 @@
-const blacklistedFields = ['token', 'password', 'secret'];
+const blacklistedFields = ['token', 'password', 'secret', 'api_key'];
 export function cleanData(data: Record<string, any>) {
     if (data instanceof Array) {
         return data;

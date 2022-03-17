@@ -5,7 +5,7 @@
             <div class="mb-1 text-white">
                 <fa :icon="['fas', notification.icon]" />
                 <span class="ml-1">
-                    <t :path="notification.title" />
+                    <t :path="title" />
                 </span>
             </div>
             <p class="text-white">
@@ -59,7 +59,14 @@ export default defineComponent({
                 return props.notification.url;
             }),
 
+            title: computed(() => {
+                if (props.notification.title?.[0] === '_raw') return props.notification.title;
+
+                return ['notifications.' + props.notification.title?.[0], props.notification.title?.[1]];
+            }),
             message: computed(() => {
+                if (props.notification.message?.[0] === '_raw') return props.notification.message;
+
                 return ['notifications.' + props.notification.message?.[0], props.notification.message?.[1]];
             }),
         };

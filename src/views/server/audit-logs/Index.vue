@@ -2,8 +2,8 @@
     <div class="flex items-stretch overflow-x-hidden">
         <list
             service-id="auditLogs@get"
-            :class="selectedAudit ? 'audit-log-list' : ''"
-            class="flex flex-col gap-y-2 transition-all transform"
+            :class="selectedAudit ? 'audit-log-list' : '!w-full'"
+            class="w-full lg:w-1/2 flex flex-col gap-y-2 transition-all transform"
         >
             <template #results="{ results }">
                 <template v-if="results.length > 0">

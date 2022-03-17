@@ -5,43 +5,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, ref } from 'vue';
-import { Node } from '~/api/models';
+import { computed, defineComponent } from 'vue';
 import { NodeDaemonInfo } from '~/api/services/admin/nodes';
-import { useService } from '~/plugins';
 
 export default defineComponent({
     props: {
-        node: {
-            type: Node,
-            required: true
-        }
+        loadingFirst: {
+            type: Boolean,
+        },
+        daemonInfo: {
+            type: Object as () => NodeDaemonInfo,
+        },
     },
 
     setup(props) {
-        const loadingFirst = ref<boolean>(true);
-        const runningVersion = ref<string | null>(null);
-
-        let timer: NodeJS.Timer | null = null;
-
-        const ping = async () => {
-            const nodeInfo = await useService<NodeDaemonInfo>('nodes@daemonInfo', { displayErrorsInUI: true, background: true }, {
-                id: props.node.id
-            });
-
-            runningVersion.value = nodeInfo.alive ? nodeInfo.version : null;
-            if (loadingFirst.value) loadingFirst.value = false;
-        };
-
-        onMounted(() => {
-            ping();
-            timer = setInterval(ping, 10 * 1000);
-        });
-        onUnmounted(() => timer && clearInterval(timer));
-
         return {
-            loadingFirst,
-            runningVersion
+            runningVersion: computed(() => props.daemonInfo?.alive ? props.daemonInfo.version : null),
         };
     }
 });

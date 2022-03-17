@@ -117,7 +117,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
-import { state } from '~/core';
+import { state, dispatch } from '~/core';
 import { useService } from '~/plugins';
 import { Location } from '~/api/models';
 
@@ -125,37 +125,22 @@ export default defineComponent({
     setup() {
         const selectedLocation = ref<Location>();
 
+        const createAlert = (title: string) => dispatch('alerts/add', {
+            type: 'success',
+            title: [title],
+        });
+
         return {
             selectedLocation,
             server: computed(() => state.models.server!),
 
-            reinstall: () => useService('servers@reinstall', true).then(() => {
-                // TODO: Alert
-            }),
-
-            toggleInstall: () => useService('servers@toggleInstall', true).then(() => {
-                // TODO: Alert
-            }),
-
-            rebuild: () => useService('servers@rebuild', true).then(() => {
-                // TODO: Alert
-            }),
-
-            suspend: () => useService('servers@suspend', true, { suspended: !state.models.server!.suspended }).then(() => {
-                // TODO: Alert
-            }),
-
-            toggleUpdate: () => useService('servers@toggleUpdate', true).then(() => {
-                // TODO: Alert
-            }),
-
-            toggleMove: () => useService('servers@toggleMove', true).then(() => {
-                // TODO: Alert
-            }),
-
-            resetMods: () => useService('servers@resetMods', true).then(() => {
-                // TODO: Alert
-            }),
+            reinstall: () => useService('servers@reinstall', true).then(() => createAlert('admin.servers.advanced.reinstall_started')),
+            toggleInstall: () => useService('servers@toggleInstall', true).then(() => createAlert('admin.servers.advanced.install_toggled')),
+            rebuild: () => useService('servers@rebuild', true).then(() => createAlert('admin.servers.advanced.rebuild_requested')),
+            suspend: () => useService('servers@suspend', true, { suspended: !state.models.server!.suspended }).then(() => createAlert('admin.servers.advanced.suspend_toggled')),
+            toggleUpdate: () => useService('servers@toggleUpdate', true).then(() => createAlert('admin.servers.advanced.updating_toggled')),
+            toggleMove: () => useService('servers@toggleMove', true).then(() => createAlert('admin.servers.advanced.moving_toggled')),
+            resetMods: () => useService('servers@resetMods', true).then(() => createAlert('admin.servers.advanced.reset_mod_triggered')),
         };
     }
 });

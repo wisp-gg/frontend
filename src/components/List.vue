@@ -2,7 +2,7 @@
     <div class="w-full block">
         <slot name="layout" :results="list?.results" :pagination="list?.pagination" :search="search" :set-page="setPage">
             <slot v-if="searchable" name="search" :submit="search">
-                <div class="flex mb-4 items-center">
+                <div class="flex mb-4">
                     <!-- TODO: Spinner to appear on right side signifying it is currently searching -->
                     <input class="input w-full flex-grow" name="search" :placeholder="t('generic.search')" @keyup="search">
 
@@ -11,8 +11,8 @@
             </slot>
 
             <slot name="results" :results="list?.results" :meta="list?.meta" :update="update">
-                <table :key="list?.results" class="w-full block xl:table">
-                    <tbody>
+                <table :key="list?.results" class="w-full flex flex-col xl:table">
+                    <tbody class="w-full">
                         <tr class="w-full bg-primary-400 hidden xl:table-row">
                             <slot name="headers-before" />
 
@@ -32,12 +32,12 @@
                         </tr>
 
                         <slot v-if="!list?.results.length" name="items-before">
-                            <tr class="bg-primary-500 block xl:table-row">
+                            <tr class="bg-primary-500 block w-full xl:table-row">
                                 <!-- colspan="20" will clamp to the amount of headers - since we cant nicely know the amount of headers
                                     This is the best option as there most likely isnt a case where there will be over 20 headers.
                                     Without this it'd only span a % of the width of the table.
                                     -->
-                                <td colspan="20" class="py-32 text-center text-2xl text-white text-opacity-75">
+                                <td colspan="20" class="p-32 text-center text-2xl text-white text-opacity-75">
                                     <t path="generic.no_items" />
                                 </td>
                             </tr>
@@ -45,7 +45,7 @@
                         <template v-else>
                             <slot name="items-before" :update="update" />
 
-                            <tr v-for="(result, idx) in list?.results" :key="idx" class="bg-primary-500 border-b border-primary-400 block xl:table-row xl:border-none last:border-none group hover:opacity-80 hover:text-white" @click="onCheckboxRowClick($event, result)">
+                            <tr v-for="(result, idx) in list?.results" :key="idx" class="bg-primary-500 border-b border-primary-400 block w-full xl:table-row xl:border-none last:border-none hover:bg-primary-600 group" @click="onCheckboxRowClick($event, result)" @contextmenu="onContextMenu">
                                 <slot name="fields-before" :result="result" :update="update" />
 
                                 <td class="px-4 pt-3 xl:py-4 text-center td-min" v-if="checkbox">
@@ -139,6 +139,9 @@ export default defineComponent({
         },
         searchable: {
             type: Boolean,
+        },
+        onContextMenu: {
+            type: Function,
         },
     },
     emits: ['results', 'meta', 'pagination', 'checked'], // update setAttribute if you touch this

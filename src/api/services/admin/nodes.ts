@@ -7,6 +7,10 @@ interface GetNodeDaemonInfoRequest {
     id: number;
 }
 
+interface GetMassNodeDaemonInfoRequest {
+    nodes: number[];
+}
+
 interface UpdateNodeRequest {
     name: string;
     description?: string;
@@ -28,6 +32,7 @@ interface UpdateNodeRequest {
     daemonSFTP: number;
     daemonFastdl: number;
 }
+
 
 export interface NodeDaemonInfo {
     alive: boolean;
@@ -73,6 +78,10 @@ class NodeService {
 
     daemonInfo(data: GetNodeDaemonInfoRequest): Promise<NodeDaemonInfo> {
         return RequestService.get(`/nodes/${data.id}/daemon-info`);
+    }
+
+    massDaemonInfo(data: GetMassNodeDaemonInfoRequest): Promise<Record<string, NodeDaemonInfo>> {
+        return RequestService.get('/nodes/daemon-info', data);
     }
 }
 

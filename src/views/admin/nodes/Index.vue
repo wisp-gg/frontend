@@ -1,5 +1,5 @@
 <template>
-    <list service-id="nodes@getAll" :fields="listFields" searchable>
+    <list service-id="nodes@getAll" :fields="listFields" searchable @results="onResults">
         <template #headers-before>
             <th />
         </template>
@@ -9,9 +9,9 @@
         </template>
 
         <template #fields-before="{ result }">
-            <td class="p-6 flex justify-center items-center">
+            <td class="p-4" style="width: 1px;">
                 <skeleton :content="4">
-                    <status-indicator :node="result" />
+                    <status-indicator :loading-first="loadingFirst" :daemon-info="daemonInfo[result.id]" />
                 </skeleton>
             </td>
         </template>
@@ -39,13 +39,47 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted, onUnmounted, ref } from 'vue';
 import StatusIndicator from './StatusIndicator.vue';
+import { useService } from '~/plugins';
+import { Node } from '~/api/models';
+import { NodeDaemonInfo } from '~/api/services/admin/nodes';
 
 export default defineComponent({
     components: { StatusIndicator },
     setup() {
+        const nodes = ref<Node[]>([]);
+        const loadingFirst = ref<boolean>(true);
+        const daemonInfo = ref<Record<string, any>>({});
+
+        let timer: NodeJS.Timer | null = null;
+
+        const fetchDaemonInfo = async () => {
+            if (!nodes.value.length) return null;
+
+            const res = await useService<Record<string, NodeDaemonInfo>>('nodes@massDaemonInfo', { displayErrorsInUI: true, background: true }, {
+                nodes: nodes.value.map(n => n.id),
+            });
+
+            daemonInfo.value = res;
+            if (loadingFirst.value) loadingFirst.value = false;
+        };
+
+        onMounted(() => {
+            timer = setInterval(fetchDaemonInfo, 10 * 1000);
+        });
+        onUnmounted(() => timer && clearInterval(timer));
+
         return {
+            loadingFirst,
+            daemonInfo,
+
+            onResults: (results: Node[]) => {
+                nodes.value = results.filter(Boolean);
+
+                fetchDaemonInfo();
+            },
+
             listFields: <ListField[]>[
                 { key: 'name', skeleton: 8 },
                 { key: 'location', skeleton: 12 },

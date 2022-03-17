@@ -1,7 +1,7 @@
 <template>
     <list service-id="servers@getAll" :fields="listFields" :data="listExtraData" :searchable="searchable">
         <template #search-extra>
-            <div class="ml-4">
+            <div class="ml-4 flex">
                 <v-button color="primary" :to="{ name: 'admin.management.servers.new' }" permission="server.create">
                     <t path="generic.create" />
                 </v-button>
@@ -14,7 +14,7 @@
 
         <template #field-name="{ result }">
             <div class="flex items-center">
-                <status-indicator :status="0" />
+                <server-status-indicator :server="result" />
 
                 <v-button permission="server.read" :to="{ name: 'admin.management.servers.manage.about', params: { server: result.id } }" class="ml-4 text-white/75">
                     {{ result.name }}
@@ -58,10 +58,10 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
-import StatusIndicator from '~/views/StatusIndicator.vue';
+import ServerStatusIndicator from './ServerStatusIndicator.vue';
 
 export default defineComponent({
-    components: { StatusIndicator },
+    components: { ServerStatusIndicator },
 
     props: {
         filter: {

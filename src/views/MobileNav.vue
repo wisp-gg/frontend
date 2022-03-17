@@ -1,12 +1,13 @@
 <template>
-    <div class="h-screen flex flex-col items-stretch fixed w-full md:w-64 nav-primary z-40">
+    <div :class="open ? ['h-screen'] : []" class="flex flex-col items-stretch fixed w-full md:w-64 nav-primary z-40">
         <div class="flex justify-between items-center border-b border-white border-opacity-10 py-4 px-6">
             <router-link :to="{name: 'index'}">
                 <img :src="logo" class="h-8" :alt="name">
             </router-link>
+            <fa :icon="['fas', 'bars']" size="lg" class="md:hidden cursor-pointer" @click="toggleOpen" />
         </div>
 
-        <section class="flex flex-col flex-grow">
+        <section v-show="open" class=" flex flex-col flex-grow">
             <div v-if="server" class="border-b border-white border-opacity-10 text-white text-opacity-75">
                 <server-widget />
             </div>
@@ -117,6 +118,8 @@ export default defineComponent({
         ServerWidget,
     },
     setup() {
+        const open = ref(false);
+        const useScreen = ref(false);
         const route = useRoute();
 
         return {
@@ -140,6 +143,15 @@ export default defineComponent({
             adminRoute: computed(() => route.name?.toString().startsWith('admin.') ? 'index' : 'admin.administration.index'),
 
             announcementsEnabled: computed(() => hasFeatures('general:announcements')),
+
+            open,
+            useScreen,
+            toggleOpen: () => open.value = !open.value,
+            toggleScreen: () => {
+                console.log(`toggle screen to ${!useScreen.value}`);
+
+                useScreen.value = !useScreen.value;
+            },
 
             logout: () => useService('client:authentication@logout', true),
         };

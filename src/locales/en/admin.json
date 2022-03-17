@@ -220,7 +220,7 @@
       "swap_footer": "Swap space limit in MB. If you want to disable swap space on a server, simply enter 0 into the swap field.",
       "disk_footer": "Disk space limit in MB. If you want to disable disk space limiting on a server, simply enter 0 into the disk field.",
       "io_footer": "Block IO should be set to a value between 10-1000.",
-      "skip_scripts_footer": "If the selected Egg has an install script attached to it, the script will run during install. If you would like to skip this step, check this box.",
+      "skip_scripts_footer": "If the selected Egg has an install script attached to it, the script will run during install. If you would like to skip this step, check this box."
     },
 
     "about": {
@@ -253,28 +253,37 @@
     "advanced": {
       "reinstall_server": "Reinstall Server",
       "reinstall_server_note": "This will reinstall the server with the assigned service script.\nDanger! This could overwrite data.",
+      "reinstall_started": "The reinstall process has been started.",
 
       "install_status": "Install Status",
       "install_status_note": "If you need to change the install status from uninstalled to installed, or vice versa, you may do so with the button below.",
+      "install_toggled": "The install status has been toggled.",
 
       "rebuild_container": "Rebuild Containers",
       "rebuild_container_note": "This will trigger a rebuild of the server container when it next starts up. This is useful if you modified the server configuration file manually, or something just didn't work out correctly.",
+      "rebuild_requested": "Rebuild request has been sent to the daemon, and the server will rebuild itself on the next start.",
 
       "suspend_server": "Suspend Server",
       "suspend_server_note": "This will suspend the server, stop any running processes, and immediately block the user from being able to access their files or otherwise manage the server through the panel or API.",
+      "suspend_toggled": "The suspension status has been toggled.",
 
       "updating_status": "Updating Status",
       "updating_status_note": "If you need to change the updating status, you may do so with the button below.",
+      "updating_toggled": "The update status has been toggled.",
 
       "move_server": "Move server to another node",
 
       "moving_status": "Moving Status",
       "moving_status_note": "If you need to change the moving status, you may do so with the button below.\n",
+      "moving_toggled": "The move status has been toggled.",
 
       "reset_mod_statuses": "Reset mod installation statuses",
       "reset_mod_statuses_note": "Will reset all mods' installation state if it bugs out, in case the server has mod installations locked completely and they have been stuck for a long time.",
+      "reset_mod_triggered": "All server mod installation statuses have been reset.",
 
-      "toggle_backup_status": "Toggle backup status"
+      "toggle_backup_status": "Toggle backup status",
+
+      "install_marked_as_failed": "Can't toggle server's install status due to it failing to install. Please reinstall the server instead."
     }
   },
 
@@ -318,12 +327,17 @@
 
     "import_egg": "Import Egg",
     "egg": {
+      "daemon_restart_required_after_changes": "Any changes to existing egg configuration currently requires to restart the daemons afterwards with `wisp restart`.",
+
       "configuration": "Configuration",
       "process_management": "Process Management",
       "delete_egg": "Delete Egg",
       "delete_notice": "Are you sure that you want to delete the \"{name}\" egg? There is no going back, all data will immediately be removed.",
       "egg_has_servers": "You can not delete a egg which has servers running under it.",
       "copy_alert": "All fields are required unless you select a separate option from the 'Copy Settings From' dropdown, in which case fields may be left blank to use the values from that option.",
+
+      "update_egg": "Update Egg",
+      "import_update_notice": "Importing a new egg file will overwrite any existing settings. If you wish to keep your existing settings, you should import the new egg separately.",
 
       "install_script": "Install Script",
       "update_script": "Update Script",

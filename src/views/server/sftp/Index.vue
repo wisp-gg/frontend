@@ -49,10 +49,10 @@ export default defineComponent({
                 return server ? `sftp://${server.node.displayFqdn}:${server.node.ports.sftp}` : undefined;
             }),
             name: computed(() => {
-                const user = state.user.data!;
+                const user = state.user.data;
                 const server = state.models.server;
 
-                return server ? `${user.email}.${server.uuidShort}` : undefined;
+                return server ? `${user?.email}.${server.uuidShort}` : undefined;
             }),
         };
     },

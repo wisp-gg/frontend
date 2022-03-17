@@ -3,7 +3,7 @@
   "version": "v0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=/assets/",
+    "build": "node --max_old_space_size=8192 ./node_modules/vite/bin/vite.js build --base=/assets/",
     "lint": "eslint --quiet --ext .js,.ts,.vue src"
   },
   "dependencies": {

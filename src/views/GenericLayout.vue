@@ -1,14 +1,20 @@
 <template>
     <server-error v-if="alerts.find(r => r.title[0].startsWith('server.errors'))" />
 
-    <div v-else :class="['flex', preference === 1 ? 'flex-col' : '']">
-        <horizontal-nav-bar v-if="preference === 1" />
-        <vertical-nav-bar v-if="preference === 0" />
+    <div v-else class="flex" :class="preference === 1 ? ['flex-col'] : ['flex-col md:flex-row']">
+        <div class="mobile-nav">
+            <mobile-nav />
+        </div>
 
-        <div class="flex-grow" :class="preference === 1 ? ['flex', 'flex-col', 'items-center'] : ['pl-0', 'md:pl-64', 'mt-12 md:mt-0']">
+        <div class="desktop-nav" :data-nav-preference="preference === 1 ? 'horizontal' : 'vertical'">
+            <horizontal-nav-bar v-if="preference === 1" />
+            <vertical-nav-bar v-if="preference === 0" />
+        </div>
+
+        <div class="flex-grow mt-12 md:mt-0" :class="preference === 1 ? ['flex', 'flex-col', 'items-center'] : ['pl-0', 'md:pl-64']">
             <socket-error-notice />
 
-            <div class="mx-4 mt-8 md:mx-8" :class="preference === 1 ? ['container'] : []">
+            <div class="mx-4 mt-8 md:mx-8" :class="preference === 1 ? ['md:container'] : []">
                 <div class="flex flex-col md:flex-row justify-between items-center mb-8">
                     <div class="flex">
                         <div class="w-14 h-14 md:w-20 md:h-20 mr-3 flex items-center justify-center header-icon shrink-0">
@@ -74,6 +80,24 @@
 .text-header {
     font-size: 1.75rem;
 }
+
+.mobile-nav {
+    display: block;
+}
+
+.desktop-nav {
+    display: none;
+}
+
+@media screen and (min-width: 768px) {
+    .mobile-nav {
+        display: none;
+    }
+
+    .desktop-nav {
+        display: block;
+    }
+}
 </style>
 
 <script lang="ts">
@@ -81,6 +105,7 @@ import { defineComponent, computed } from 'vue';
 import { Router, state } from '~/core';
 import { NavBarPosition } from '~/api/models/User';
 import { Passthrough, TabberPassthrough } from '~/views';
+import MobileNav from '~/views/MobileNav.vue';
 import HorizontalNavBar from './HorizontalNavBar.vue';
 import VerticalNavBar from './VerticalNavBar.vue';
 import SocketErrorNotice from '~/views/SocketErrorNotice.vue';
@@ -88,6 +113,7 @@ import ServerError from '~/views/errors/ServerError.vue';
 
 export default defineComponent({
     components: {
+        MobileNav,
         ServerError,
         SocketErrorNotice,
         VerticalNavBar,

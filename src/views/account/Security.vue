@@ -1,6 +1,6 @@
 <template>
-    <div class="flex flex-wrap items-start lg:flex-nowrap gap-x-6">
-        <container class="w-full lg:w-3/4" title="client.security.credentials_list" no-padding>
+    <div class="flex flex-wrap items-start xl:flex-nowrap gap-x-6">
+        <container class="w-full xl:w-3/4" title="client.security.credentials_list" no-padding>
             <template #actions>
                 <div class="text-right">
                     <a href="https://docs.panel.gg/" target="_blank" class="mr-3 text-white text-opacity-50">
@@ -16,7 +16,7 @@
                 </template>
 
                 <template #fields-after="{ result }">
-                    <td class="p-6 text-right">
+                    <td class="p-4 w-full xl:w-auto block xl:table-cell ml-auto text-right">
                         <skeleton :content="8">
                             <v-form service-id="security@deleteCredential" :on-success="updateList">
                                 <v-input type="hidden" name="identifier" :value="result.identifier" />
@@ -31,7 +31,7 @@
             </list>
         </container>
 
-        <container class="w-full lg:w-1/4" title="client.security.2fa">
+        <container class="w-full xl:w-1/4 mt-6 xl:mt-0" title="client.security.2fa">
             <p class="text-white text-opacity-70 mb-4">
                 <t :path="`client.security.2fa_${user.useTotp ? 'enabled' : 'disabled'}`" />
             </p>

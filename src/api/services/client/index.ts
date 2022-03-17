@@ -10,7 +10,6 @@ export { default as FastdlService } from './fastdl';
 export { default as FilesService } from './files';
 export { default as ModpacksService } from './modpacks';
 export { default as ModsService } from './mods';
-export { default as NodeService } from './node';
 export { default as NotificationsService } from './notifications';
 export { default as PluginsService } from './plugins';
 export { default as SchedulesService } from './schedules';

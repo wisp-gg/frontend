@@ -21,7 +21,7 @@
             </template>
 
             <template #fields-after="{ result }">
-                <td class="p-6 text-right space-x-4">
+                <td class="p-4 text-right space-x-4">
                     <skeleton :content="6">
                         <v-button color="primary" permission="application_api.read" :to="{ name: 'admin.administration.application_api.manage', params: { apiKey: result.identifier } }">
                             <t path="generic.manage" />

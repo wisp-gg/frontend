@@ -1,6 +1,7 @@
 import { Parser } from '~/api';
 import { Egg } from '~/api/models';
 import RequestService from './request';
+import { dispatch } from '~/core';
 
 interface CreateEggRequest {
     name: string;
@@ -21,6 +22,10 @@ interface ImportEggRequest {
     nest_id: number;
 }
 
+interface ImportUpdateEggRequest {
+    import_file: File;
+}
+
 interface UpdateScriptsRequest {
     scriptInstall: string;
     scriptIsPrivileged: boolean;
@@ -35,7 +40,7 @@ interface UpdateScriptsRequest {
     copyUpdateScriptFrom?: number;
 }
 
-interface UpdateThumbnailRequest {
+interface AssetRequest {
     asset: File;
 }
 
@@ -67,8 +72,22 @@ class EggsService {
 
         return RequestService.post(`/nests/${data.nest_id}/eggs/import?include=nest`, formData, {
             'Content-Type': 'multipart/form-data',
+        }).then(Parser.parse);
+    }
+
+    importUpdate(data: ImportUpdateEggRequest) {
+        const formData = new FormData();
+        formData.append('import_file', data.import_file);
+
+        return RequestService.post('/nests/:nest/eggs/:egg/import?include=nest', formData, {
+            'Content-Type': 'multipart/form-data',
         })
-            .then(Parser.parse);
+            .then(Parser.parse)
+            .then(egg => {
+                dispatch('models/refresh', 'egg');
+
+                return egg;
+            });
     }
 
     update(data: CreateEggRequest): Promise<Egg> {
@@ -83,11 +102,14 @@ class EggsService {
             .then(RequestService.updateModelBinding);
     }
 
-    updateThumbnail(data: UpdateThumbnailRequest): Promise<Egg> {
+    private assetToFormData(data: AssetRequest) {
         const formData = new FormData();
         if (data.asset) formData.append('asset', data.asset);
+        return formData;
+    }
 
-        return RequestService.put('/nests/:nest/eggs/:egg/thumbnail', formData, {
+    updateThumbnail(data: AssetRequest): Promise<Egg> {
+        return RequestService.post('/nests/:nest/eggs/:egg/thumbnail', this.assetToFormData(data), {
             'Content-Type': 'multipart/form-data',
         })
             .then(Parser.parse)

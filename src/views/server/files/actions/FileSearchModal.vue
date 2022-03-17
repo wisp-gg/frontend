@@ -13,7 +13,7 @@
                     <v-form :service-id="(data) => search(data, next)" class="flex-grow">
                         <v-input name="query" rule="required" hide-label />
 
-                        <div class="text-right">
+                        <div class="text-right mt-4">
                             <v-submit color="primary" label="generic.submit" :permission="['file.list', 'file.read']" />
                         </div>
                     </v-form>

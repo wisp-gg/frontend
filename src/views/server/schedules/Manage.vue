@@ -189,7 +189,9 @@ export default defineComponent({
             }),
 
             lastRunAt: computed(() => schedule.value?.lastRunAt ? formatDateAbsolute(schedule.value.lastRunAt, 'LL @ LT') : t('generic.not_applicable')),
-            nextRunAt: computed(() => cronString.value ? formatDateAbsolute(cronParser.parseExpression(cronString.value).next().toISOString(), 'LL @ LT') : t('generic.not_applicable')),
+            nextRunAt: computed(() => cronString.value ? formatDateAbsolute(cronParser.parseExpression(cronString.value, {
+                tz: 'Europe/London',
+            }).next().toISOString(), 'LL @ LT') : t('generic.not_applicable')),
             tasks: computed(() => (schedule.value?.tasks || []).sort((a: ScheduleTask, b: ScheduleTask) => a.sequenceId - b.sequenceId) || []),
 
             trigger: () => {

@@ -23,8 +23,8 @@
                         label="components.form.fields.primary_allocation"
                         name="allocation_id"
 
-                        :options="server.allocations"
-                        :value="server.primaryAllocation().id"
+                        :options="server?.allocations"
+                        :value="server?.primaryAllocation().id"
                         label-prop="connection"
                         value-prop="id"
                         searchable

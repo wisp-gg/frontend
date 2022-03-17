@@ -42,13 +42,9 @@
         </div>
 
         <container title="generic.server.resource_usage">
-            <div class="flex">
-                <div class="w-full">
-                    <chart type="cpu" />
-                </div>
-                <div class="w-full">
-                    <chart type="memory" />
-                </div>
+            <div class="flex flex-wrap gap-x-6 lg:flex-nowrap">
+                <chart class="w-full lg:w-1/2" type="cpu" />
+                <chart class="w-full lg:w-1/2" type="memory" />
             </div>
         </container>
     </div>

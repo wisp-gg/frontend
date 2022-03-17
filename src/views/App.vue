@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, onBeforeUnmount } from 'vue';
-import { Logger, state, getter, setCurrentLanguage } from '~/core';
+import { Logger, state, getter, loadLanguage, setCurrentLanguage } from '~/core';
 import { AuthenticationService, NotificationsService, SettingsService } from '~/api/services/client';
 
 export default defineComponent({
@@ -37,6 +37,9 @@ export default defineComponent({
             SettingsService.initializeSettings(),
         ])
             .then(async () => {
+                // Always load en - it acts as a fallback for missing translations
+                await loadLanguage('en');
+
                 const preferredLocale = state.user.data?.preferences?.language || state.settings.data?.default_locale;
                 if (preferredLocale) await setCurrentLanguage(preferredLocale);
 
