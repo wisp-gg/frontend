@@ -1,7 +1,7 @@
 <template>
     <list service-id="domains@getAll" :fields="listFields" searchable>
         <template #search-extra>
-            <div class="ml-4">
+            <div class="ml-4 flex items-center">
                 <v-button color="primary" permission="domain.create" :to="{ name: 'admin.service_management.domains.new' }">
                     <t path="generic.create" />
                 </v-button>
