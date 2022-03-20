@@ -104,7 +104,7 @@
 <style src="@vueform/multiselect/themes/default.css"></style>
 <style lang="scss">
 .multiselect {
-    @apply bg-primary-400 py-4 px-5 rounded-md border-none;
+    @apply bg-primary-400 py-5 px-5 rounded-md border-none;
 
     &.is-active {
         @apply shadow-none;
