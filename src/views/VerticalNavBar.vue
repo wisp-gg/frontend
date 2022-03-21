@@ -24,7 +24,7 @@
                             </ul>
                         </nav-dropdown>
                         <li v-else class="px-6 py-3" :key="`1-${idx}`">
-                            <v-button :to="{name: route.name, params: route.params}" :permission="route.permission" class="router-link flex justify-between" @click="open = false">
+                            <v-button :to="{name: route.name, params: route.params}" :permission="route.permission" class="router-link flex justify-between" span-class="!block" @click="open = false">
                                 <p><t :path="`navigation.${route.displayName}.title`" /></p>
                                 <p :class="route.active ? ['text-accent-500'] : ['text-white']">
                                     &bull;
