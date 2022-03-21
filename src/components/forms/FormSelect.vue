@@ -7,6 +7,7 @@
         <multiselect
             v-model="input"
             ref="multiSelectRef"
+            :class="mode === 'tags' ? ['multiselect-multiple'] : ['multiselect-single']"
 
             :id="id"
             :mode="mode"
@@ -103,8 +104,19 @@
 
 <style src="@vueform/multiselect/themes/default.css"></style>
 <style lang="scss">
+.multiselect.multiselect-single {
+    @apply py-5 px-5;
+}
+
+.multiselect.multiselect-multiple {
+    @apply px-5;
+
+    padding-top: calc(1rem - 2px);
+    padding-bottom: calc(1rem - 2px);
+}
+
 .multiselect {
-    @apply bg-primary-400 py-4 px-5 rounded-md border-none;
+    @apply bg-primary-400 rounded-md border-none;
 
     &.is-active {
         @apply shadow-none;
@@ -136,7 +148,7 @@
 }
 
 .multiselect-single-label {
-    @apply text-white/75;
+    @apply text-white/75 px-5;
 }
 
 .multiselect-group-label {
@@ -144,7 +156,7 @@
 }
 
 .multiselect-tags {
-    @apply w-full flex flex-wrap gap-x-1.5 gap-y-1.5;
+    @apply w-full flex flex-wrap gap-x-1.5 gap-y-1.5 pl-0 m-0;
 }
 
 .multiselect-search {
