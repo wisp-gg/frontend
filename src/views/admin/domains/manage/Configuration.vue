@@ -21,6 +21,34 @@
             </div>
 
             <v-input class="pt-8" name="name" label="components.form.fields.domain_name" footer="admin.domains.domain_name_footer" :value="domain?.name" rule="required" />
+
+            <div class="grid md:grid-cols-2 gap-x-4">
+                <skeleton :content="16">
+                    <v-select
+                        name="nest_identifiers"
+                        footer="admin.domains.nest_identifiers_footer"
+                        mode="tags"
+                        taggable
+                        no-translate
+
+                        :options="domain?.nestIdentifiers"
+                        :value="domain?.nestIdentifiers"
+                    />
+                </skeleton>
+
+                <skeleton :content="16">
+                    <v-select
+                        name="egg_identifiers"
+                        footer="admin.domains.egg_identifiers_footer"
+                        mode="tags"
+                        taggable
+                        no-translate
+
+                        :options="domain?.eggIdentifiers"
+                        :value="domain?.eggIdentifiers"
+                    />
+                </skeleton>
+            </div>
         </container>
 
         <div class="bg-primary-500 p-4 rounded text-right space-x-4 mt-4">
@@ -44,7 +72,7 @@ import DeleteDomainModal from '../DeleteDomainModal.vue';
 
 export default defineComponent({
     components: { DeleteDomainModal },
-    setup(props, context) {
+    setup() {
         const router = useRouter();
         const route = useRoute();
         const creating = computed(() => route.name === 'admin.service_management.domains.new');

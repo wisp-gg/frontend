@@ -6,6 +6,8 @@ export class Domain extends BaseModel {
 
     // Admin only props
     public serversCount = -1;
+    public nestIdentifiers: string[] = [];
+    public eggIdentifiers: string[] = [];
 
     getRouteName() {
         return 'domain';

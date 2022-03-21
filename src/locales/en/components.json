@@ -123,6 +123,8 @@
       "start_on_completion": "Start server when installed",
       "skip_scripts": "Skip install script",
       "domain_name": "Domain Name",
+      "nest_identifiers": "Nest Identifiers",
+      "egg_identifiers": "Egg Identifiers",
 
       "branding": {
         "name": "Company Name"
