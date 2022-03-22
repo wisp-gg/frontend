@@ -64,6 +64,7 @@ interface ValidatedResponse {
 // Form stuff
 type registerFormComponentFn = (data: FormComponent) => () => void;
 type displayFormErrorsFn = () => void;
+type submitFormFn = () => void;
 interface FormComponent {
     key?: string;
     value?: import('vue').Ref;

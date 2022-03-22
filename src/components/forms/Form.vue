@@ -72,63 +72,66 @@ export default defineComponent({
         provide('formCanSubmit', canSubmit);
         watch(() => props.canSubmit, value => canSubmit.value = value);
 
-        return {
-            submit: () => {
-                if (!canSubmit.value) return;
+        const submit = () => {
+            if (!canSubmit.value) return;
 
-                formComponents.forEach(component => component.validate?.());
-                if (displayFormErrors() > 0) return;
+            formComponents.forEach(component => component.validate?.());
+            if (displayFormErrors() > 0) return;
 
-                const onSubmit = (state: boolean) => formComponents.forEach(component => component.onSubmit?.(state));
-                onSubmit(true);
+            const onSubmit = (state: boolean) => formComponents.forEach(component => component.onSubmit?.(state));
+            onSubmit(true);
 
-                const onSuccess = (data: any) => {
-                    if (props.onSuccess) {
-                        if (typeof props.onSuccess === 'string') {
-                            dispatch('alerts/add', {
-                                key: alertKey,
+            const onSuccess = (data: any) => {
+                if (props.onSuccess) {
+                    if (typeof props.onSuccess === 'string') {
+                        dispatch('alerts/add', {
+                            key: alertKey,
 
-                                type: 'success',
-                                title: [props.onSuccess],
-                            });
-                        } else {
-                            props.onSuccess(data);
-                        }
-                    }
-                };
-
-                const formData: Record<string, any> = {};
-                formComponents
-                    .forEach(component => {
-                        if (!component.key || !component.value) return;
-
-                        const split = component.key!.split('.');
-                        const finalKey = split.pop()!; // just assume this always exists
-
-                        // We can assume this will succeed as all inputs are validated above.
-                        const value = component.rule ?
-                            Validator.validate(component.key, component.value!.value, component.rule).normalized
-                            : component.value.value;
-
-                        split.reduce((data, key) => data[key] = (data[key] || {}), formData)[finalKey] = value;
-                    });
-
-                if (props.serviceId instanceof Function) {
-                    const output = props.serviceId(formData);
-                    if (output instanceof Promise) {
-                        output
-                            .then(res => onSuccess(res))
-                            .finally(() => onSubmit(false));
+                            type: 'success',
+                            title: [props.onSuccess],
+                        });
                     } else {
-                        onSubmit(false);
+                        props.onSuccess(data);
                     }
-                } else {
-                    useService(props.serviceId, alertKey || true, formData)
+                }
+            };
+
+            const formData: Record<string, any> = {};
+            formComponents
+                .forEach(component => {
+                    if (!component.key || !component.value) return;
+
+                    const split = component.key!.split('.');
+                    const finalKey = split.pop()!; // just assume this always exists
+
+                    // We can assume this will succeed as all inputs are validated above.
+                    const value = component.rule ?
+                        Validator.validate(component.key, component.value!.value, component.rule).normalized
+                        : component.value.value;
+
+                    split.reduce((data, key) => data[key] = (data[key] || {}), formData)[finalKey] = value;
+                });
+
+            if (props.serviceId instanceof Function) {
+                const output = props.serviceId(formData);
+                if (output instanceof Promise) {
+                    output
                         .then(res => onSuccess(res))
                         .finally(() => onSubmit(false));
+                } else {
+                    onSubmit(false);
                 }
-            },
+            } else {
+                useService(props.serviceId, alertKey || true, formData)
+                    .then(res => onSuccess(res))
+                    .finally(() => onSubmit(false));
+            }
         };
-    },
+        provide('formSubmit', () => submit());
+
+        return {
+            submit
+        };
+    }
 });
 </script>
