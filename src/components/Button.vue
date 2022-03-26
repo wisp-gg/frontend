@@ -1,5 +1,5 @@
 <template>
-    <span class="focus:outline-none inline-flex" :class="spanClass" v-tippy="tippy" v-if="disabled || hasTooltip" tabindex="0">
+    <span class="focus:outline-none" :class="spanClass" v-tippy="tippy" v-if="disabled || hasTooltip" tabindex="0">
         <component :is="component" v-bind="componentProps">
             <slot />
         </component>
