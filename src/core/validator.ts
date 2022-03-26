@@ -14,6 +14,10 @@ const validationRules: ValidationRules = {
         };
     },
     integer: (value: any) => {
+        if (!value) return {
+            valid: true, // Although this sounds weird - no value (without required rule) means it doesn't need to be present (but needs to be integer)
+        };
+
         return {
             valid: !Number.isNaN(Number(value)),
             normalized: Number(value),
