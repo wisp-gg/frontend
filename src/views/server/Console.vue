@@ -141,7 +141,7 @@ export default defineComponent({
             terminal.open(terminalElement.value);
             fitAddon.fit();
 
-            useWindowEvent('resize', debounce(() => {
+            const resize = () => {
                 // https://github.com/xtermjs/xterm.js/issues/3564
                 let lastCols, lastRows;
                 let loop = true;
@@ -154,7 +154,9 @@ export default defineComponent({
                     lastCols = cols;
                     lastRows = rows;
                 }
-            }, 100));
+            };
+            useWindowEvent('resize', debounce(resize, 100));
+            resize();
 
             let hooked = false;
             const hookSearchBarKeyEvents = () => {
