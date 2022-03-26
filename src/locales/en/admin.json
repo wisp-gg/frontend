@@ -235,7 +235,8 @@
     "build_configuration": {
       "resource_limits": "Resource Limits",
       "feature_limits": "Feature Limits",
-      "allocation_management": "Allocation Management"
+      "allocation_management": "Allocation Management",
+      "oom_disabled_footer": "Disables the OOM Killer on the server. This will allow the server to float at the maximum ram and swap space."
     },
 
     "startup": {

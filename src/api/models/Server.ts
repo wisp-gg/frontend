@@ -36,6 +36,7 @@ export class Server extends BaseModel {
     public installed = -1;
     public updating = false;
     public moving = false;
+    public oomDisabled = false;
 
     public get egg(): Egg {
         return this.getRelationship('egg');

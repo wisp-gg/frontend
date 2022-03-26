@@ -5,7 +5,9 @@
             <v-input name="memory" rule="required|integer" suffix="generic.units.megabytes" :value="server?.limits.memory" />
             <v-input name="swap" rule="required|integer" suffix="generic.units.megabytes" :value="server?.limits.swap" />
             <v-input name="disk" rule="required|integer" suffix="generic.units.megabytes" :value="server?.limits.disk" />
-            <v-input no-margin label="components.form.fields.block_io_proportion" name="io" rule="required|numeric" :value="server?.limits.io" />
+            <v-input label="components.form.fields.block_io_proportion" name="io" rule="required|numeric" :value="server?.limits.io" />
+            <v-switch name="oom_disabled" footer="admin.servers.build_configuration.oom_disabled_footer" :value="server?.oomDisabled" />
+
         </container>
 
         <div class="w-full lg:w-2/3 space-y-4">

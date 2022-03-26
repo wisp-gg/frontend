@@ -121,6 +121,7 @@
       "force": "Force",
       "start_on_completion": "Start server when installed",
       "skip_scripts": "Skip install script",
+      "oom_disabled": "Disable OOM Killer",
 
       "branding": {
         "name": "Company Name"

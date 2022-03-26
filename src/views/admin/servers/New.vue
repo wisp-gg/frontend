@@ -80,7 +80,7 @@
         </container>
 
         <container title="admin.servers.build_configuration.resource_limits">
-            <div class="grid lg:grid-cols-3 gap-x-4">
+            <div class="grid lg:grid-cols-3 gap-x-4 items-start">
                 <v-input name="cpu" footer="admin.servers.new.cpu_footer" rule="required|integer" :suffix="['_raw', '%']" value="0" />
                 <v-input name="memory" footer="admin.servers.new.memory_footer" rule="required|integer" suffix="generic.units.megabytes" />
                 <v-input name="swap" footer="admin.servers.new.swap_footer" rule="required|integer" suffix="generic.units.megabytes" value="0" />
@@ -88,6 +88,7 @@
 
                 <!-- TODO: Min/max validation rules (10-1000 here) -->
                 <v-input label="components.form.fields.block_io_proportion" footer="admin.servers.new.io_footer" name="io" rule="required|integer" value="500" />
+                <v-switch name="oom_disabled" footer="admin.servers.build_configuration.oom_disabled_footer" />
             </div>
         </container>
 
