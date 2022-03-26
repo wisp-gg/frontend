@@ -177,7 +177,9 @@
   "startup": {
     "startup_command": "Startup Command",
     "input_rules": "Input Rules:",
-    "variable_saved": "Startup variable successfully saved."
+    "variable_saved": "Startup variable successfully saved.",
+    "variable_not_editable_admin": "This variable is not user editable - though as you are an admin, you can update it within the admin area for this server.",
+    "variable_not_editable": "This variable is not user editable."
   },
 
   "backups": {

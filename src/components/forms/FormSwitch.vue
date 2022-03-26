@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col lg:flex-row bg-primary-400 rounded-lg p-4 lg:items-center" :class="requiresMargin ? 'mb-4' : ''" @click="input = !input">
+    <div class="flex flex-col lg:flex-row bg-primary-400 rounded-lg p-4 lg:items-center" :class="[requiresMargin ? 'mb-4' : '', inputDisabled ? 'cursor-not-allowed opacity-75' : '']" @click="toggle">
         <div class="switch" :class="input ? ['active'] : []">
             <input
                 v-model="input"
@@ -14,7 +14,7 @@
         </div>
 
         <div class="mt-4 lg:ml-4 lg:mt-0">
-            <label class="text-white opacity-50 tracking-wide uppercase block" :for="id" v-if="labelStr" @click="input = !input">
+            <label class="text-white opacity-50 tracking-wide uppercase block" :for="id" v-if="labelStr" @click="toggle">
                 <t :path="labelStr" />
             </label>
 
@@ -150,6 +150,12 @@ export default defineComponent({
 
                 return true;
             }),
+
+            toggle: () => {
+                if (inputDisabled.value) return;
+
+                input.value = !input.value;
+            }
         };
     },
 });
