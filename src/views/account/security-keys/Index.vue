@@ -12,7 +12,7 @@
             </template>
 
             <template #fields-after="{ result }">
-                <td class="p-4">
+                <td class="text-right p-4">
                     <skeleton :content="8">
                         <v-button color="danger">
                             todo: delete

@@ -42,7 +42,7 @@ export default defineComponent({
                         registration: {
                             id: credential.id,
                             type: credential.type,
-                            rawId: bufferEncode(credential.rawId),
+                            raw_id: bufferEncode(credential.rawId),
                             response: {
                                 attestation_object: bufferEncode((credential.response as AuthenticatorAttestationResponse).attestationObject),
                                 client_data_json: bufferEncode(credential.response.clientDataJSON),

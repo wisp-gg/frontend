@@ -52,7 +52,8 @@
 
   "security_keys": {
     "title": "Security Keys",
-    "create_security_key": "Create Security Key"
+    "create_security_key": "Create Security Key",
+    "successfully_added": "Security key has been successfully added."
   },
 
   "support": {
