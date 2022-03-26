@@ -113,6 +113,14 @@ export const routes: RouteRecordRaw[] = [
                     icon: 'lock',
                 },
             },
+            {
+                name: 'account.security_keys',
+                path: 'account/security-keys',
+                component: () => import('~/views/account/security-keys/Index.vue'),
+                meta: {
+                    icon: 'key',
+                },
+            },
         ],
     },
     {

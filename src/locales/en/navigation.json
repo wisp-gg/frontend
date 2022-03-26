@@ -36,6 +36,10 @@
     "security": {
       "title": "Security Controls",
       "description": "Control active sessions and 2-Factor Authentication."
+    },
+    "security_keys": {
+      "title": "Security Keys",
+      "description": "Control hardware security keys for your account."
     }
   },
 

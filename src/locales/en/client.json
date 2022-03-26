@@ -50,6 +50,11 @@
     "api_key_generated": "A new client API key has been generated for your account."
   },
 
+  "security_keys": {
+    "title": "Security Keys",
+    "create_security_key": "Create Security Key"
+  },
+
   "support": {
     "your_servers": "Your Servers",
     "enable_access": "Enable Support OP Access",

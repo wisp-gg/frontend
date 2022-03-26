@@ -20,6 +20,7 @@ export { PanelMigration } from './PanelMigration';
 export { Plugin } from './Plugin';
 export { Schedule } from './Schedule';
 export { ScheduleTask } from './ScheduleTask';
+export { SecurityKey } from './SecurityKey';
 export { Server } from './Server';
 export { ServerDatabase } from './ServerDatabase';
 export { ServerSubuser } from './ServerSubuser';

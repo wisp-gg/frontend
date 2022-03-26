@@ -80,3 +80,25 @@ export function convertDataToUnderscore(data: Record<string, any>): any {
 
     return res;
 }
+
+export const base64Decode = (input: string): string => {
+    input = input.replace(/-/g, '+').replace(/_/g, '/');
+    const pad = input.length % 4;
+    if (pad) {
+        if (pad === 1) {
+            throw new Error('InvalidLengthError: Input base64url string is the wrong length to determine padding');
+        }
+        input += new Array(5 - pad).join('=');
+    }
+    return input;
+};
+
+// @ts-expect-error
+export const bufferEncode = (value: ArrayBuffer): string => window.btoa(String.fromCharCode.apply(null, new Uint8Array(value)));
+export const bufferDecode = (value: string): ArrayBuffer => Uint8Array.from(window.atob(value), c => c.charCodeAt(0));
+
+export const decodeSecurityKeyCredentials = (credentials: PublicKeyCredentialDescriptor[]) => credentials.map(c => ({
+    id: bufferDecode(base64Decode(c.id.toString())),
+    type: c.type,
+    transports: c.transports,
+}));
