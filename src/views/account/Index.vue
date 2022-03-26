@@ -104,7 +104,7 @@ export default defineComponent({
         return {
             user: computed(() => state.user.data),
             whmcs: computed(() => state.settings.data?.whmcs),
-            languages: computed(() => getAvailableLanguages()),
+            languages: computed(() => getAvailableLanguages()), // TODO: these should be sorted by alphabet in their respective lang (or don't be translated at all...?)
             currentLanguage: computed(() => getCurrentLanguage()),
             navbarPosition: computed(() => state.user.data?.preferences?.navbarPosition || NavBarPosition.LEFT),
 
