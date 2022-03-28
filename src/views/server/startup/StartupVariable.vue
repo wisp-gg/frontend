@@ -23,7 +23,7 @@
                 name=""
                 permission="startup.update"
                 :value="variable?.serverValue || ''"
-                @keyup="save($event.target.value)"
+                @focusout="save($event.target.value)"
                 hide-label
                 no-margin
             />
@@ -69,7 +69,7 @@ export default defineComponent({
 
         return {
             isAdmin: computed(() => hasPermissions('admin:server_startup.read')),
-            save: debounce((value: string | boolean) => {
+            save: (value: string | boolean) => {
                 if (!props.variable?.envVariable) return; // No variable, Skeleton maybe?
 
                 const alertKey = `server.startup.variable(${props.variable?.envVariable})`;
@@ -90,7 +90,7 @@ export default defineComponent({
                         title: ['server.startup.variable_saved'],
                     });
                 });
-            }, 300),
+            },
         };
     }
 });
