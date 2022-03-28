@@ -55,7 +55,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { ScheduleTask } from '~/api/models';
-import { useService } from '~/plugins';
+import { onModelLoaded, useService } from '~/plugins';
 
 export default defineComponent({
     props: {
@@ -64,9 +64,15 @@ export default defineComponent({
         }
     },
     setup(props) {
-        const allowedActions = ['power', 'command', 'backup'];
+        const allowedActions = ref<string[]>(['power', 'command']);
         const allowedPowerActions = ['start', 'restart', 'stop', 'kill'];
-        const action = ref<string>(props.task?.action || allowedActions[0]);
+        const action = ref<string>(props.task?.action || allowedActions.value[0]);
+
+        onModelLoaded('server', server => {
+            if (server.featureLimits.backupMegabytes > 0) {
+                allowedActions.value.push('backup');
+            }
+        });
 
         return {
             allowedActions,
