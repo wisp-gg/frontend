@@ -75,6 +75,7 @@
   "support_op": "Support Op",
 
   "something_went_wrong": "Something went wrong while trying to perform this action.",
+  "daemon_connection_exception": "There was an exception while attempting to communicate with the daemon.",
 
   "server": {
     "no_servers": "No Servers",
