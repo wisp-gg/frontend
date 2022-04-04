@@ -147,7 +147,9 @@
         "client_secret": "WHMCS Client Secret",
         "api_id": "WHMCS API ID",
         "api_secret": "WHMCS API Secret"
-      }
+      },
+
+      "variable_value": "{env} variable"
     },
 
     "validation_error": "There is the following error: | There are the following errors:",
