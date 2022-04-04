@@ -153,7 +153,6 @@ export default class RequestService {
                                 errors
                                     .filter(error => error.detail)
                                     .map(error => {
-                                        // TODO: localization support
                                         return ['_raw', error.detail];
                                     })
                             );
