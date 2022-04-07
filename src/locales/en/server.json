@@ -177,7 +177,9 @@
   "startup": {
     "startup_command": "Startup Command",
     "input_rules": "Input Rules:",
-    "variable_saved": "Startup variable successfully saved."
+    "variable_saved": "Startup variable successfully saved.",
+    "variable_not_editable_admin": "This variable is not user editable - though as you are an admin, you can update it within the admin area for this server.",
+    "variable_not_editable": "This variable is not user editable."
   },
 
   "backups": {
@@ -208,6 +210,7 @@
     "invalid_cron": "Use a valid cron expression to view description and next run time.",
     "runs_description": "Runs {description}",
     "pause_for_seconds": "Pause for {seconds} seconds",
+    "chain_interval_too_long": "The maximum interval time for a chained task is 15 minutes.",
 
     "states": {
       "active": "Active",

@@ -1,0 +1,44 @@
+{
+  "hello": "Hello!",
+  "whoops": "Whoops!",
+  "regards": "Regards",
+  "all_rights_reserved": "All rights reserved.",
+  "trouble_clicking_action": "If you're having trouble clicking the \"{actionText}\" button, copy and paste the URL below into your browser:",
+
+  "greeting": "Hello {name}!",
+  "visit_panel": "Visit Panel",
+
+  "account": {
+    "subject": {
+      "created": "Account Created",
+      "migrated": "Account Migrated",
+      "reset_password": "Reset Password"
+    },
+    "email_reason": {
+      "created": "You are receiving this email because an account has been created for you on our Game Panel.",
+      "migrated": "You are receiving this email because your account was migrated to a new Game Panel.",
+      "reset_password": "You are receiving this email because we received a password reset request for your account."
+    },
+    "user_email": "Email: {email}",
+    "updating_account": "Your information can be changed in the game panel after account setup.",
+    "setup_your_account": "Setup Your Account",
+    "reset_password": "Reset Password",
+    "reset_password_requested_by_someone_else": "If you did not request a password reset, no further action is required."
+  },
+
+  "server": {
+    "subject": {
+      "added_to_server": "Added To Server",
+      "removed_from_server": "Removed From Server",
+      "installed": "Server Installed"
+    },
+
+    "added_as_subuser": "You have been added as a subuser for the following server, allowing you certain control over the server.",
+    "new_account_notice": "If you don't have an account yet, check for another email from us. If you can't find it, you can reset your game panel password here: {url}",
+    "removed_as_subuser": "You have been removed as a subuser for the following server.",
+    "ready_to_be_used": "Your server has finished installing and is now ready for you to use.",
+    "server_name": "Server Name: {server}",
+    "visit_server": "Visit Server",
+    "login_and_begin_using": "Login and Begin Using"
+  }
+}

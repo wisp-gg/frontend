@@ -64,8 +64,13 @@ export default defineComponent({
             // TODO(@trixter): GLua support
             editor.getSession().setMode(mode);
 
-            // TODO: ctrl+s hotkey, @see https://dev.crident.me/WISP/Panel/-/blob/develop/resources/assets/js/frontend/files/editor.js#L44-55
-            // Should most likely just be something that gets passed to the parent with provide/inject?
+            const submit = inject<submitFormFn>('formSubmit');
+            editor.commands.addCommand({
+                name: 'save',
+                bindKey: {win: 'Ctrl-S',  mac: 'Command-S'},
+                exec: () => submit?.(),
+                readOnly: false
+            });
 
             editor.commands.addCommands(whitespace.commands);
             whitespace.detectIndentation(editor.session);

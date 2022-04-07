@@ -53,7 +53,7 @@ type RootState = import('~/store').RootState;
 type TranslatableMessage = [string, any?];
 
 // Validator
-type ValidationRule = (value: any, input?: any) => { valid: boolean; normalized?: any; };
+type ValidationRule = (value: any, input?: any) => { valid: boolean; subpath?: string; normalized?: any; };
 type ValidationRules = Record<string, ValidationRule>;
 
 interface ValidatedResponse {
@@ -64,6 +64,7 @@ interface ValidatedResponse {
 // Form stuff
 type registerFormComponentFn = (data: FormComponent) => () => void;
 type displayFormErrorsFn = () => void;
+type submitFormFn = () => void;
 interface FormComponent {
     key?: string;
     value?: import('vue').Ref;
