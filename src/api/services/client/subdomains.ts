@@ -13,10 +13,7 @@ interface DeleteSubdomainRequest {
 
 class SubdomainsService {
     getAll(req: PaginatableRequest): Promise<ListResponse> {
-        return RequestService.get('/servers/:server/subdomains', {
-            ...req,
-            include: ['domain']
-        }).then(Parser.parse);
+        return RequestService.get('/servers/:server/subdomains', req).then(Parser.parse);
     }
 
     create(data: CreateSubdomainRequest): Promise<ServerSubdomain> {

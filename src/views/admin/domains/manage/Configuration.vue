@@ -10,14 +10,14 @@
                     <t path="admin.domains.instructions" />
                 </p>
 
-                <ul class="list-disc p-4">
+                <ol class="list-decimal p-4">
                     <li>
                         <t path="admin.domains.acquire_domain" />
                     </li>
                     <li>
                         <t path="admin.domains.setup_nameservers" />
                     </li>
-                </ul>
+                </ol>
             </div>
 
             <v-input class="pt-8" name="name" label="components.form.fields.domain_name" footer="admin.domains.domain_name_footer" :value="domain?.name" rule="required" />
