@@ -11,7 +11,8 @@ class StartupService {
     }
 
     async save(data: StartupSaveData): Promise<ListResponse> {
-        return RequestService.put('/servers/:server/startup', data).then(Parser.parse);
+        return RequestService.put('/servers/:server/startup', data)
+            .then(Parser.parse);
     }
 }
 

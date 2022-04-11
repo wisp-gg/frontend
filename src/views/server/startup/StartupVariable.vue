@@ -82,6 +82,11 @@ export default defineComponent({
                 }).then(data => {
                     updateStartupCommand(data.meta.startupCommand);
 
+                    dispatch('lists/set', {
+                        serviceId: 'startup@getAll',
+                        key: 'results',
+                        value: data.data,
+                    });
                     dispatch('alerts/add', {
                         key: alertKey,
                         timeout: 2500,
