@@ -187,6 +187,7 @@
     "create_new": "Create New Backup",
     "create_warning": "Creating a new backup will stop the server if it's already running",
     "created": "Backup {name} is now being created",
+    "creation_would_exceed_limit": "Creating this backup would exceed the server's backup limit.",
 
     "cant_delete_locked": "You must unlock the backup before attempting to delete it.",
     "delete_backup": "Delete Backup",
