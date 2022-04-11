@@ -93,27 +93,29 @@ export default defineComponent({
                 if (!edition) return [];
 
                 const metadata = minecraftData.value.metadata;
-                if (metadata.show_labels_for.includes(selectedEdition.value)) {
+                const showLabels = metadata.show_labels_for.includes(selectedEdition.value);
+                const skipCategories = metadata.skip_categories_for.includes(selectedEdition.value);
+
+                if (skipCategories) {
+                    return (edition as Version[]).map(version => {
+                        return {
+                            ...version,
+                            name: `${version.name}${showLabels ? ` (${t(`generic.labels.${labelToLocale[version.label]}`)})` : ''}`,
+                        };
+                    });
+                } else {
                     return (edition as CategorizedVersions[]).map(categorizedVersion => {
                         return {
                             category: categorizedVersion.category,
                             versions: categorizedVersion.versions.map(version => {
-                                version.name = `${version.name} (${t(`generic.labels.${labelToLocale[version.label]}`)})`;
-
-                                return version;
+                                return {
+                                    ...version,
+                                    name: `${version.name}${showLabels ? ` (${t(`generic.labels.${labelToLocale[version.label]}`)})` : ''}`,
+                                };
                             }),
                         };
                     });
                 }
-
-                const skipCategories = metadata.skip_categories_for.includes(selectedEdition.value);
-                if (skipCategories) return (edition as Version[]).map(version => {
-                    version.name = `${version.name} (${t(`generic.labels.${labelToLocale[version.label]}`)})`;
-
-                    return version;
-                });
-
-                return edition;
             }),
         };
     },

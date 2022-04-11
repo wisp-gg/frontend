@@ -52,7 +52,6 @@
 
 <script lang="ts">
 import { computed, defineComponent, inject } from 'vue';
-import debounce from 'debounce';
 import { dispatch } from '~/core';
 import { hasPermissions, useService } from '~/plugins';
 import { ServerVariable } from '~/api/models';
