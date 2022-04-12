@@ -1,5 +1,5 @@
 const blacklistedFields = ['token', 'password', 'secret', 'api_key'];
-const skippedFields = ['asset']; // Known to cause issues (due to deep rooted objects)
+const skippedFields = ['asset', 'import_file']; // Known to cause issues (due to deep rooted objects)
 export function cleanData(data: Record<string, any>) {
     if (data instanceof Array) {
         return data;
