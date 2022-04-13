@@ -82,7 +82,19 @@ const settings: Module<SettingsStore, any> = {
         },
 
         update: (state, payload: Partial<Settings>) => {
-            state.data = { ...(state.data as Settings), ... payload };
+            const set = (data: Record<string, any>, payload: Record<string, any>) => {
+                for(const key in payload) {
+                    const value = payload[key];
+
+                    if (typeof value === 'object') {
+                        set(data[key], value);
+                    } else {
+                        data[key] = value;
+                    }
+                }
+            };
+
+            if (state.data) set(state.data, payload);
         },
     },
 
