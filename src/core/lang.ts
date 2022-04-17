@@ -72,6 +72,7 @@ export function getAvailableLanguages() {
     // TODO: can vite somehow hint folders in a dir? (probably not a good idea until all of the translations are good to go)
     return [
         'en', // English
+        'cs_CZ', // Czech
         'da_DK', // Danish
         'nl_NL', // Dutch
         'fr_FR', // French
