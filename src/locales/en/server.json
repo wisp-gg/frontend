@@ -270,7 +270,6 @@
 
   "subdomains": {
     "title": "Subdomains",
-    "using_subdomains": "Using {count} / {limit} subdomains",
     "create_new": "Create New Subdomain",
     "name_footer": "The vanity name of the subdomain.",
     "domain_footer": "The domain which the subdomain will be created on.",
