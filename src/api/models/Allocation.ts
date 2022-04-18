@@ -16,9 +16,11 @@ export class Allocation extends BaseModel {
     }
 
     public displayName(): string {
-        // TODO: Technically, the port should be included if subdomain doesn't have an srv record - but we don't know that here
+        if (this.subdomain) {
+            return `${this.subdomain.displayName}:${this.port}`;
+        }
 
-        return this.subdomain?.displayName ?? `${this.alias ?? this.ip}:${this.port}`;
+        return `${this.alias ?? this.ip}:${this.port}`;
     }
 
     public get subdomain(): ServerSubdomain | undefined {

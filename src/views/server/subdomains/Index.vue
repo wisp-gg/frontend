@@ -11,6 +11,12 @@
                 <th />
             </template>
 
+            <template #field-allocation="{ result }">
+                <code v-clipboard>
+                    {{ result.allocation?.connection }}
+                </code>
+            </template>
+
             <template #fields-after="{ result }">
                 <td class="p-6 text-right">
                     <skeleton :content="4">
@@ -33,6 +39,7 @@ export default defineComponent({
         return {
             listFields: <ListField[]>[
                 { label: 'name', key: 'displayName', features: ['code', 'clipboard'], skeleton: 12 },
+                { label: 'allocation', key: 'allocation', skeleton: 12 },
             ],
         };
     },

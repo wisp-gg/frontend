@@ -262,6 +262,7 @@
       "migrated_at": "Migrated At",
       "last_modified": "Last Modified",
 
+      "allocation": "Allocation",
       "fqdn": "FQDN",
       "ip": "IP",
       "alias": "Alias",

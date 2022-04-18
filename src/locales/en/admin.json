@@ -393,10 +393,11 @@
 
     "instructions": "You'll need to do the following actions for the domain to work properly:",
     "acquire_domain": "Purchase or use an existing domain you have.",
-    "setup_nameservers": "Point the domain's nameservers at \"TO BE DECIDED\" (note that this may take up to 48 hours to propagate). Alternatively if you still want to use the domain for other things although not recommended, you could create a wildcard NS record instead.",
+    "setup_nameservers": "Point the domain's nameservers at \"ns1.subdomain-manager.wisp.gg\" and \"ns2.subdomain-manager.wisp.gg\" (note that this may take up to 48 hours to propagate).",
 
     "update_notice": "Updating the domain name will update every single server's subdomain to the new domain.",
     "domain_already_in_use": "The provided domain is already in use on another panel instance and cannot be reused.",
+    "root_domain_only_supported": "Currently, we only support the root domain only.",
 
     "nest_identifiers_footer": "A list of nest identifiers which allow servers running under the nest to create subdomains on the domain.",
     "egg_identifiers_footer": "**This is mainly used to allow specific eggs under a nest without having to allow the entire nest** A list of egg identifiers which allow servers running under the specific egg to create subdomains on the domain.",

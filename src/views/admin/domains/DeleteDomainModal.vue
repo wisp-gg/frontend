@@ -30,6 +30,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { dispatch } from '~/core';
 import { Domain } from '~/api/models';
 import { useService } from '~/plugins';
@@ -42,6 +43,7 @@ export default defineComponent({
         },
     },
     setup(props) {
+        const router = useRouter();
         const confirmNameValue = ref<string>();
 
         return {
@@ -52,7 +54,13 @@ export default defineComponent({
             confirm: () => {
                 return useService('domains@delete', 'admin.domains.delete_domain', {
                     id: props.domain.id
-                }).then(() => dispatch('lists/refresh', 'domains@getAll'));
+                }).then(() => {
+                    router.push({
+                        name: 'admin.service_management.domains.index'
+                    });
+
+                    dispatch('lists/refresh', 'domains@getAll');
+                });
             }
         };
     }

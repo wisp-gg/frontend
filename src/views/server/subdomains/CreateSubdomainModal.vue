@@ -22,7 +22,7 @@
                     footer="server.subdomains.allocation_footer"
 
                     :value="server.primaryAllocation().id"
-                    :options="server.allocations"
+                    :options="allocations"
                     label-prop="connection"
                     value-prop="id"
                     searchable
@@ -47,6 +47,12 @@ export default defineComponent({
             server: computed(() => state.models.server!),
 
             updateList: () => dispatch('lists/refresh', 'subdomains@getAll'),
+            allocations: computed(() => {
+                const server = state.models.server!;
+                const usedAllocations = state.lists.data['subdomains@getAll']?.results.map(a => a.allocation?.id);
+
+                return server.allocations.filter(a => !usedAllocations.includes(a.id));
+            }),
 
             async fetchDomains() {
                 return useService<ListResponse>('subdomains@domains', {
