@@ -1027,6 +1027,7 @@ export const routes: RouteRecordRaw[] = [
                                 component: () => import('~/views/admin/domains/manage/Configuration.vue'),
                                 meta: {
                                     icon: 'globe',
+                                    permission: 'domain.create',
                                 }
                             },
                             {
@@ -1040,6 +1041,7 @@ export const routes: RouteRecordRaw[] = [
                                         component: () => import('~/views/admin/domains/manage/Configuration.vue'),
                                         meta: {
                                             icon: 'globe',
+                                            permission: 'domain.read',
                                         },
                                     },
                                     {
@@ -1048,6 +1050,7 @@ export const routes: RouteRecordRaw[] = [
                                         component: () => import('~/views/admin/domains/manage/Servers.vue'),
                                         meta: {
                                             icon: 'globe',
+                                            permission: 'server.read',
                                         },
                                     },
                                 ],

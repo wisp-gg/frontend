@@ -13,7 +13,7 @@
         </template>
 
         <template #field-name="{ result }">
-            <v-button permission="domain.read" :to="{ name: 'admin.service_management.domains.manage.configuration', params: { domain: result.id } }">
+            <v-button permission="domain.read" :to="{ name: 'admin.service_management.domains.manage.configuration', params: { domain: result.id } }" class="text-white/75">
                 {{ result.name }}
             </v-button>
         </template>
