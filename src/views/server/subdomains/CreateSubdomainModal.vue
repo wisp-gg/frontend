@@ -31,7 +31,7 @@
             </skeleton>
 
             <div class="text-right space-x-4">
-                <v-submit color="primary" permission="database.create" label="generic.submit" />
+                <v-submit color="primary" permission="subdomain.create" label="generic.submit" />
             </div>
         </v-form>
     </modal>
