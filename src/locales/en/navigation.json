@@ -134,6 +134,10 @@
     "tools": {
       "title": "Tools",
 
+      "subdomains": {
+        "title": "Subdomain Manager",
+        "description": "Manage the subdomains used to connect to your server's here."
+      },
       "modpacks": {
         "title": "Modpack Manager",
         "description": "Easy way to install mod packs."
@@ -395,6 +399,30 @@
         "manage": {
           "title": "Manage Mod",
           "description": "Manage an existing service mod on the system."
+        }
+      },
+
+      "domains": {
+        "index": {
+          "title": "Domains",
+          "description": "All domains available on the system."
+        },
+
+        "new": {
+          "title": "New Domain",
+          "description": "Create a new domain on the system."
+        },
+
+        "manage": {
+          "configuration": {
+            "title": "Domain Configuration",
+            "description": "Configure the domain."
+          },
+
+          "servers": {
+            "title": "Servers",
+            "description": "See all the servers associated with this domain."
+          }
         }
       }
     }

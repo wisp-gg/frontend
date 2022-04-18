@@ -19,4 +19,5 @@ export { default as ServerService } from './server';
 export { default as ServersService } from './servers';
 export { default as SettingsService } from './settings';
 export { default as StartupService } from './startup';
+export { default as SubdomainsService } from './subdomains';
 export { default as SubusersService } from './subusers';

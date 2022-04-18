@@ -6,6 +6,7 @@ import {
     AuditLog,
     Backup,
     DatabaseHost,
+    Domain,
     Egg,
     EggVariable,
     Features,
@@ -23,9 +24,10 @@ import {
     ScheduleTask,
     Server,
     ServerDatabase,
+    ServerSubdomain,
     ServerSubuser,
     ServerVariable,
-    User
+    User,
 } from './models';
 
 export class Parser {
@@ -36,6 +38,7 @@ export class Parser {
         'audit_log': AuditLog,
         'backup': Backup,
         'database_host': DatabaseHost,
+        'domain': Domain,
         'database': ServerDatabase,
         'egg': Egg,
         'egg_variable': EggVariable,
@@ -53,6 +56,7 @@ export class Parser {
         'schedule': Schedule,
         'schedule_task': ScheduleTask,
         'server': Server,
+        'server_subdomain': ServerSubdomain,
         'server_subuser': ServerSubuser,
         'server_variable': ServerVariable,
         'user': User,

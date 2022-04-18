@@ -130,6 +130,7 @@ export default defineComponent({
                 const split = name?.split('.');
                 if (!split || split.length === 0) return [];
 
+                // TODO: TabberPassthrough should be replaced in the path by the model name
                 let filterOut: string[] = [];
                 const matched = currentRoute.matched.filter(element => [Passthrough, TabberPassthrough].includes(element.components.default) && !element.meta?.showAsCategory);
                 if (matched && matched.length > 0) filterOut = matched.map(a => a.name as string);

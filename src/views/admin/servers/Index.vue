@@ -1,5 +1,5 @@
 <template>
-    <list service-id="servers@getAll" :fields="listFields" :data="listExtraData" searchable>
+    <list service-id="servers@getAll" :fields="listFields" :data="listExtraData" :searchable="searchable">
         <template #search-extra>
             <div class="ml-4 flex">
                 <v-button color="primary" :to="{ name: 'admin.management.servers.new' }" permission="server.create">
@@ -64,11 +64,8 @@ export default defineComponent({
     components: { ServerStatusIndicator },
 
     props: {
-        filterUser: {
-            type: Number,
-        },
-        filterNode: {
-            type: Number,
+        filter: {
+            type: Object,
         },
     },
     setup(props) {
@@ -83,11 +80,14 @@ export default defineComponent({
 
             listExtraData: computed(() => {
                 const data: Record<string, number> = {};
-                if (props.filterUser) data['filter[owner_id]'] = props.filterUser;
-                if (props.filterNode) data['filter[node_id]'] = props.filterNode;
+
+                for(const key in props.filter) {
+                    data[`filter[${key}]`] = props.filter[key];
+                }
 
                 return data;
-            })
+            }),
+            searchable: computed(() => !props.filter),
         };
     }
 });

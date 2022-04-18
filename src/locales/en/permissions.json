@@ -280,6 +280,26 @@
       }
     },
 
+    "subdomain": {
+      "title": "Subdomain Manager",
+      "description": "Permission to use the server domain system.",
+
+      "read": {
+        "title": "Read",
+        "description": "Permission to read domains."
+      },
+
+      "create": {
+        "title": "Create",
+        "description": "Permission to create a domain used to connect to this server."
+      },
+
+      "delete": {
+        "title": "Delete",
+        "description": "Permission to delete server domains."
+      }
+    },
+
     "mod": {
       "title": "Mod Manager",
       "description": "Permissions which allow the user to view & install one-click mods for this server.",
@@ -765,6 +785,31 @@
         "title": "Delete",
         "description": "Permission to delete server databases."
       }
+    }
+  },
+
+  "domain": {
+    "title": "Domain",
+    "description": "Permission to use the server domain system.",
+
+    "read": {
+      "title": "Read",
+      "description": "Permission to read domains."
+    },
+
+    "create": {
+      "title": "Create",
+      "description": "Permission to create domains."
+    },
+
+    "update": {
+      "title": "Update",
+      "description": "Permission to update domains and all related server domains."
+    },
+
+    "delete": {
+      "title": "Delete",
+      "description": "Permission to delete domains and all related server domains."
     }
   }
 }

@@ -59,13 +59,13 @@ class ServersService {
     getAll(req: PaginatableRequest): Promise<ListResponse> {
         return RequestService.get('/servers', {
             ...req,
-            include: ['node', 'egg', 'allocations'],
+            include: ['node', 'egg', 'allocations', 'allocations.subdomain'],
         }).then(Parser.parse);
     }
 
     get(): Promise<Server> {
         return RequestService.get('/servers/:server', {
-            include: ['node', 'nest', 'egg', 'allocations', 'features'],
+            include: ['node', 'nest', 'egg', 'allocations', 'features', 'allocations.subdomain'],
         }).then(Parser.parse);
     }
 

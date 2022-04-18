@@ -330,6 +330,16 @@ export const routes: RouteRecordRaw[] = [
                 },
                 children: [
                     {
+                        name: 'server.tools.subdomains',
+                        path: 'subdomains',
+                        component: () => import('~/views/server/subdomains/Index.vue'),
+                        meta: {
+                            icon: 'cubes',
+                            permission: 'subdomain.read',
+                            feature: 'domain-manager',
+                        }
+                    },
+                    {
                         name: 'server.tools.modpacks',
                         path: 'modpacks',
                         component: () => import('~/views/server/modpacks/Index.vue'),
@@ -993,6 +1003,59 @@ export const routes: RouteRecordRaw[] = [
                                 }
                             }
                         ]
+                    },
+                    {
+                        name: 'admin.service_management.domains',
+                        path: 'domains',
+                        component: Passthrough,
+                        meta: {
+                            permission: 'domain.read',
+                        },
+                        children: [
+                            {
+                                name: 'admin.service_management.domains.index',
+                                path: '',
+                                component: () => import('~/views/admin/domains/Index.vue'),
+                                meta: {
+                                    icon: 'globe',
+                                    permission: 'domain.read',
+                                },
+                            },
+                            {
+                                name: 'admin.service_management.domains.new',
+                                path: 'new',
+                                component: () => import('~/views/admin/domains/manage/Configuration.vue'),
+                                meta: {
+                                    icon: 'globe',
+                                    permission: 'domain.create',
+                                }
+                            },
+                            {
+                                name: 'admin.service_management.domains.manage',
+                                path: ':domain',
+                                component: TabberPassthrough,
+                                children: [
+                                    {
+                                        name: 'admin.service_management.domains.manage.configuration',
+                                        path: '',
+                                        component: () => import('~/views/admin/domains/manage/Configuration.vue'),
+                                        meta: {
+                                            icon: 'globe',
+                                            permission: 'domain.read',
+                                        },
+                                    },
+                                    {
+                                        name: 'admin.service_management.domains.manage.servers',
+                                        path: 'servers',
+                                        component: () => import('~/views/admin/domains/manage/Servers.vue'),
+                                        meta: {
+                                            icon: 'globe',
+                                            permission: 'server.read',
+                                        },
+                                    },
+                                ],
+                            },
+                        ],
                     },
                 ]
             }

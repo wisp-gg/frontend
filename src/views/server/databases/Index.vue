@@ -6,7 +6,7 @@
             </div>
         </template>
 
-        <list service-id="databases@getAll" :fields="listFields" @results="onListResults">
+        <list service-id="databases@getAll" :fields="listFields" @meta="onMeta">
             <template #headers-after>
                 <th />
             </template>
@@ -58,7 +58,7 @@ export default defineComponent({
         const databaseCount = ref(0);
 
         return {
-            onListResults: (results: ModelResponse[]) => databaseCount.value = results.length,
+            onMeta: (results: ListResponseMeta) => databaseCount.value = results.pagination.total,
 
             databaseLimit: computed(() => state.models.server?.featureLimits.databases || 0),
             databaseCount,

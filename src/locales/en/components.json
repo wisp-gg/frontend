@@ -109,6 +109,7 @@
       "user_viewable": "User Viewable",
       "user_editable": "User Editable",
       "rules": "Rules",
+      "allocation": "Allocation",
       "primary_allocation": "Primary Allocation",
       "secondary_allocations": "Secondary Allocations",
       "add_allocations": "Add Additional Allocations",
@@ -122,6 +123,9 @@
       "start_on_completion": "Start server when installed",
       "skip_scripts": "Skip install script",
       "oom_disabled": "Disable OOM Killer",
+      "domain_name": "Domain Name",
+      "nest_identifiers": "Nest Identifiers",
+      "egg_identifiers": "Egg Identifiers",
 
       "branding": {
         "name": "Company Name"
@@ -258,6 +262,7 @@
       "migrated_at": "Migrated At",
       "last_modified": "Last Modified",
 
+      "allocation": "Allocation",
       "fqdn": "FQDN",
       "ip": "IP",
       "alias": "Alias",
@@ -295,7 +300,9 @@
       "block_io_weight": "Block IO Weight",
       "backup_size_limit": "Backup Size Limit",
       "default_connection": "Default Connection",
-      "connection_alias": "Connection Alias"
+      "connection_alias": "Connection Alias",
+
+      "domain_name": "Domain Name"
     }
   }
 }
