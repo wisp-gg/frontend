@@ -17,7 +17,7 @@ export class Allocation extends BaseModel {
 
     public displayName(): string {
         if (this.subdomain) {
-            return `${this.subdomain.displayName}:${this.port}`;
+            return this.subdomain.hasSrv ? this.subdomain.displayName : `${this.subdomain.displayName}:${this.port}`;
         }
 
         return `${this.alias ?? this.ip}:${this.port}`;
