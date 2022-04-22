@@ -20,7 +20,7 @@
                         :value="databaseHost?.node"
                     />
                 </skeleton>
-                <v-input name="display_fqdn" footer="admin.database_hosts.display_fqdn_footer" :value="databaseHost?.displayFqdn ?? ''" />
+                <v-input name="phpmyadmin_url" footer="admin.database_hosts.phpmyadmin_url_footer" :value="databaseHost?.phpmyadminUrl ?? ''" />
             </container>
 
             <div class="w-full lg:w-1/2">

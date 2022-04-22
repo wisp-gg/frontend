@@ -19,7 +19,7 @@
                 <td class="p-6 text-right">
                     <div class="flex justify-end space-x-4">
                         <skeleton :content="12">
-                            <form v-if="result.host.enablePhpmyadmin" :action="result.host.phpmyadminUrl()" method="post" target="_blank">
+                            <form v-if="result.host.enablePhpmyadmin" :action="result.host.phpmyadminUrl" method="post" target="_blank">
                                 <input type="hidden" id="pma_username" name="pma_username" :value="result.username">
                                 <input type="hidden" id="pma_password" name="pma_password" :value="result.password">
 

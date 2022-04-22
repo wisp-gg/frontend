@@ -20,6 +20,7 @@
       "ip": "IP",
       "alias": "Alias",
       "ports": "Ports",
+      "phpmyadmin_url": "phpMyAdmin URL",
 
       "name_first": "First Name",
       "name_last": "Last Name",
