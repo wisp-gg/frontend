@@ -126,8 +126,7 @@
     "port_footer": "The port that MySQL is running on for this host.",
     "username_footer": "The username of an account that has enough permissions to create new users and databases on the system.",
     "password_footer": "The password to the account defined.",
-    "phpmyadmin_footer": "Whether the database host has PHPMyAdmin installed on it. This will enable a button to easily navigate to PHPMyAdmin in the client UI.",
-    "phpmyadmin_url_footer": "The URL at which phpMyAdmin is available for this database host.",
+    "phpmyadmin_url_footer": "The URL at which phpMyAdmin is available for this database host. Leaving this blank will hide the ability to open the database in phpMyAdmin.",
     "node_footer": "Servers on the node which is selected will be able to choose this host as an option when creating a database"
   },
 

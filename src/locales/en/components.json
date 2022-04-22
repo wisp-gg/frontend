@@ -72,7 +72,6 @@
       "users": "Users",
       "content": "Content",
       "type": "Type",
-      "enable_phpmyadmin": "Enable PHPMyAdmin",
       "fqdn": "FQDN",
       "display_fqdn": "Display FQDN",
       "behind_proxy": "Behind Proxy",

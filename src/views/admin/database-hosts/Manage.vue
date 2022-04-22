@@ -5,7 +5,6 @@
                 <v-input name="name" footer="admin.database_hosts.name_footer" rule="required" :value="databaseHost?.name" />
                 <v-input name="host" footer="admin.database_hosts.host_footer" rule="required" :value="databaseHost?.host" />
                 <v-input name="port" footer="admin.database_hosts.port_footer" rule="required" type="number" :value="databaseHost?.port" />
-                <v-switch name="enable_phpmyadmin" footer="admin.database_hosts.phpmyadmin_footer" :value="databaseHost?.enablePhpmyadmin" />
 
                 <skeleton :content="16">
                     <v-model-select

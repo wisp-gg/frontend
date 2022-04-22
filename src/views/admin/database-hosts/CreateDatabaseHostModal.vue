@@ -23,8 +23,6 @@
                     />
                 </div>
 
-                <v-switch name="enable_phpmyadmin" footer="admin.database_hosts.phpmyadmin_footer" />
-
                 <div class="text-right">
                     <v-submit color="primary" permission="database_host.create">
                         <t path="generic.create" />

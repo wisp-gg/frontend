@@ -9,7 +9,6 @@ interface CreateDatabaseHostRequest {
     port: number;
     username: string;
     password: string;
-    enable_phpmyadmin: boolean;
     phpmyadmin_url: string;
 }
 

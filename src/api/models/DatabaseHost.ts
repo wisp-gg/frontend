@@ -7,8 +7,7 @@ export class DatabaseHost extends BaseModel {
     public name = '';
     public host = '';
     public port = -1;
-    public phpmyadminUrl = '';
-    public enablePhpmyadmin = false;
+    public phpmyadminUrl: string | undefined;
 
     // Admin only props
     public username = '';
