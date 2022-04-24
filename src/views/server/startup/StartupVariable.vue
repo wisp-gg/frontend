@@ -2,11 +2,32 @@
     <container :title="['_raw', variable?.name || '']">
         <alerts class="mb-6" :by-key="`server.startup.variable(${variable?.envVariable})`" />
 
-        <div v-if="variable?.tickable">
-            <v-switch name="enabled" permission="startup.update" :value="variable?.serverValue === '1'" @update:value="save" no-margin />
-        </div>
+        <skeleton :content="16">
+            <v-switch
+                v-if="variable?.tickable"
+                v-tippy="!variable.userEditable && (isAdmin ? 'server.startup.variable_not_editable_admin': 'server.startup.variable_not_editable')"
+                :disabled="!variable?.userEditable"
 
-        <v-input v-else name="" permission="startup.update" :value="variable?.serverValue || ''" @keyup="save($event.target.value)" hide-label no-margin />
+                name="enabled"
+                permission="startup.update"
+                :value="variable?.serverValue === '1'"
+                @update:value="save"
+                no-margin
+            />
+
+            <v-input
+                v-else
+                v-tippy="!variable.userEditable && (isAdmin ? 'server.startup.variable_not_editable_admin': 'server.startup.variable_not_editable')"
+                :disabled="!variable?.userEditable"
+
+                name=""
+                permission="startup.update"
+                :value="variable?.serverValue || ''"
+                @focusout="save($event.target.value)"
+                hide-label
+                no-margin
+            />
+        </skeleton>
 
         <p class="mt-3">
             <skeleton :content="12">
@@ -30,10 +51,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from 'vue';
-import debounce from 'debounce';
+import { computed, defineComponent, inject } from 'vue';
 import { dispatch } from '~/core';
-import { useService } from '~/plugins';
+import { hasPermissions, useService } from '~/plugins';
 import { ServerVariable } from '~/api/models';
 
 export default defineComponent({
@@ -47,7 +67,8 @@ export default defineComponent({
         if (!updateStartupCommand) throw new Error('Missing required injection updateStartupCommand');
 
         return {
-            save: debounce((value: string | boolean) => {
+            isAdmin: computed(() => hasPermissions('admin:server_startup.read')),
+            save: (value: string | boolean) => {
                 if (!props.variable?.envVariable) return; // No variable, Skeleton maybe?
 
                 const alertKey = `server.startup.variable(${props.variable?.envVariable})`;
@@ -60,6 +81,11 @@ export default defineComponent({
                 }).then(data => {
                     updateStartupCommand(data.meta.startupCommand);
 
+                    dispatch('lists/set', {
+                        serviceId: 'startup@getAll',
+                        key: 'results',
+                        value: data.data,
+                    });
                     dispatch('alerts/add', {
                         key: alertKey,
                         timeout: 2500,
@@ -68,7 +94,7 @@ export default defineComponent({
                         title: ['server.startup.variable_saved'],
                     });
                 });
-            }, 300),
+            },
         };
     }
 });

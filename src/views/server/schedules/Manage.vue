@@ -100,7 +100,7 @@
                     </div>
 
                     <div class="flex bg-primary-600 px-6 py-4 rounded-lg items-center justify-between">
-                        <div class="flex items-center">
+                        <div class="flex items-center flex-grow">
                             <p class="text-2xl text-white font-bold">
                                 {{ task.sequenceId }}
                             </p>
@@ -109,13 +109,13 @@
                                 <h3 class="uppercase">
                                     <t :path="`server.schedules.actions.${task.action}`" />
                                 </h3>
-                                <code v-if="task.payload" class="mt-2">
+                                <code v-if="task.payload" class="mt-2 break-all">
                                     {{ task.payload }}
                                 </code>
                             </div>
                         </div>
 
-                        <div class="space-x-4">
+                        <div class="gap-x-4">
                             <skeleton :content="8">
                                 <manage-task-modal :task="task" />
                             </skeleton>

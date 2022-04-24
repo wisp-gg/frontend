@@ -153,13 +153,13 @@ export default class RequestService {
                                 errors
                                     .filter(error => error.detail)
                                     .map(error => {
-                                        // TODO: localization support
                                         return ['_raw', error.detail];
                                     })
                             );
                         }
                         break;
                     case 401:
+                        // TODO: this should be re-evaluated, if the session becomes invalid it'll be met with 401 (incl. settings endpoint => please refresh page)
                         // We can't refresh here because it'll trigger an infinite loop (unless @me endpoint gets whitelisted).
                         // Though I don't think this is really needed either.
                         // refresh();

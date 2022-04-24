@@ -15,4 +15,5 @@ export { default as ServerDatabasesService } from './serverDatabases';
 export { default as ServersService } from './servers';
 export { default as ServerStartupService } from './serverStartup';
 export { default as SettingsService } from './settings';
+export { default as DomainsService } from './domains';
 export { default as UsersService } from './users';

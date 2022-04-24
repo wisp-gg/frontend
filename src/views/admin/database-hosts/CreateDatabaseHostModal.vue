@@ -11,7 +11,7 @@
                     <v-input name="username" footer="admin.database_hosts.username_footer" rule="required" />
                     <v-input name="password" footer="admin.database_hosts.password_footer" rule="required" type="password" />
 
-                    <v-input name="display_fqdn" footer="admin.database_hosts.display_fqdn_footer" />
+                    <v-input name="phpmyadmin_url" footer="admin.database_hosts.phpmyadmin_url_footer" />
                     <v-model-select
                         service-id="nodes@getAll"
 
@@ -22,8 +22,6 @@
                         value-prop="id"
                     />
                 </div>
-
-                <v-switch name="enable_phpmyadmin" footer="admin.database_hosts.phpmyadmin_footer" />
 
                 <div class="text-right">
                     <v-submit color="primary" permission="database_host.create">

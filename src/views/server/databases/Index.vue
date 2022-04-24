@@ -6,7 +6,7 @@
             </div>
         </template>
 
-        <list service-id="databases@getAll" :fields="listFields" @results="onListResults">
+        <list service-id="databases@getAll" :fields="listFields" @meta="onMeta">
             <template #headers-after>
                 <th />
             </template>
@@ -19,7 +19,7 @@
                 <td class="p-6 text-right">
                     <div class="flex justify-end space-x-4">
                         <skeleton :content="12">
-                            <form v-if="result.host.enablePhpmyadmin" :action="result.host.phpmyadminUrl()" method="post" target="_blank">
+                            <form v-if="result.host.phpmyadminUrl" :action="result.host.phpmyadminUrl" method="post" target="_blank">
                                 <input type="hidden" id="pma_username" name="pma_username" :value="result.username">
                                 <input type="hidden" id="pma_password" name="pma_password" :value="result.password">
 
@@ -58,7 +58,7 @@ export default defineComponent({
         const databaseCount = ref(0);
 
         return {
-            onListResults: (results: ModelResponse[]) => databaseCount.value = results.length,
+            onMeta: (results: ListResponseMeta) => databaseCount.value = results.pagination.total,
 
             databaseLimit: computed(() => state.models.server?.featureLimits.databases || 0),
             databaseCount,

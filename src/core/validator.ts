@@ -14,6 +14,10 @@ const validationRules: ValidationRules = {
         };
     },
     integer: (value: any) => {
+        if (!value) return {
+            valid: true, // Although this sounds weird - no value (without required rule) means it doesn't need to be present (but needs to be integer)
+        };
+
         return {
             valid: !Number.isNaN(Number(value)),
             normalized: Number(value),
@@ -25,19 +29,39 @@ const validationRules: ValidationRules = {
         };
     },
     min: (value: any, input: any) => {
-        if (isNaN(parseInt(value)) || Array.isArray(value)) value = value.length;
-        else if (typeof value === 'object') value = Object.keys(value).length;
+        let subpath = 'numeric';
+        if (Array.isArray(value)) {
+            subpath = 'array';
+            value = value.length;
+        } else if (typeof value === 'object') {
+            subpath = 'array';
+            value = Object.keys(value).length;
+        } else if (isNaN(parseInt(value))) {
+            subpath = 'string';
+            value = value.length;
+        }
 
         return {
             valid: value >= input,
+            subpath,
         };
     },
     max: (value: any, input: any) => {
-        if (isNaN(parseInt(value)) || Array.isArray(value)) value = value.length;
-        else if (typeof value === 'object') value = Object.keys(value).length;
+        let subpath = 'numeric';
+        if (Array.isArray(value)) {
+            subpath = 'array';
+            value = value.length;
+        } else if (typeof value === 'object') {
+            subpath = 'array';
+            value = Object.keys(value).length;
+        } else if (isNaN(parseInt(value))) {
+            subpath = 'string';
+            value = value.length;
+        }
 
         return {
             valid: value <= input,
+            subpath,
         };
     },
     regex: (value: any, input: any) => {
@@ -89,7 +113,7 @@ export class Validator {
                         if (ruleData != undefined) additionalData[ruleName] = ruleData;
 
                         errors.push(
-                            [`components.form.validator.${ruleName}`, additionalData]
+                            [`components.form.validator.${ruleName}${res.subpath ? `.${res.subpath}` : ''}`, additionalData]
                         );
                     } else {
                         if (res.normalized !== undefined) normalized = res.normalized;
@@ -120,7 +144,7 @@ export class Validator {
                 if (global) {
                     error[1] = {
                         ...(error[1] || {}),
-                        field: lang.global.t(`components.form.fields.${name}`).toLowerCase(),
+                        attribute: lang.global.t(`components.form.fields.${name}`).toLowerCase(),
                         count: 2, // Trick i18n to using the pluralized string which is for global errors
                     };
                 }

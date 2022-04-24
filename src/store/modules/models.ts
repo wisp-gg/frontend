@@ -1,5 +1,18 @@
 import { Module } from 'vuex';
-import { BaseModel, Server, Location, Node, DatabaseHost, Mod, Nest, Egg, User, ApiKey, Schedule } from '~/api/models';
+import {
+    BaseModel,
+    Server,
+    Location,
+    Node,
+    DatabaseHost,
+    Mod,
+    Nest,
+    Egg,
+    User,
+    ApiKey,
+    Schedule,
+    Domain
+} from '~/api/models';
 
 interface SetModelData {
     name: keyof ModelsStore;
@@ -26,6 +39,7 @@ export interface ModelsStore {
     user?: User,
     apiKey?: ApiKey,
     schedule?: Schedule,
+    domain?: Domain,
 }
 const models: Module<ModelsStore, any> = {
     namespaced: true,

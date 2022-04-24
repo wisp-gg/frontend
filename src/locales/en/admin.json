@@ -119,14 +119,14 @@
     "host_details": "Host Details",
     "user_details": "User Details",
     "databases": "Databases",
+    "host_has_databases": "Cannot delete a database host server that has active databases linked to it.",
 
     "name_footer": "A short identifier used to distinguish this location from others. Must be between 1 and 60 characters, for example, us.nyc.lvl3.",
     "host_footer": "The IP address or FQDN that should be used when attempting to connect to this MySQL host from the panel to add new databases.",
     "port_footer": "The port that MySQL is running on for this host.",
     "username_footer": "The username of an account that has enough permissions to create new users and databases on the system.",
     "password_footer": "The password to the account defined.",
-    "phpmyadmin_footer": "Whether the database host has PHPMyAdmin installed on it. This will enable a button to easily navigate to PHPMyAdmin in the client UI.",
-    "display_fqdn_footer": "The Display FQDN that should be used instead of the host IP when redirecting user to PhpMyAdmin.",
+    "phpmyadmin_url_footer": "The URL at which phpMyAdmin is available for this database host. Leaving this blank will hide the ability to open the database in phpMyAdmin.",
     "node_footer": "Servers on the node which is selected will be able to choose this host as an option when creating a database"
   },
 
@@ -163,7 +163,6 @@
     "delete_node": "Delete Node",
     "delete_notice": "Are you sure that you want to delete the \"{name}\" node? Deleting a node is an irreversible action and will immediately remove this node from the panel.",
 
-
     "about": {
       "daemon_version": "Daemon Version",
       "system_information": "System Information",
@@ -194,8 +193,15 @@
       "create_new": "Create New",
       "cant_delete_in_use": "You can't delete an allocation which is attached to a server.",
       "delete_ip": "Delete IP",
-      "delete_ip_allocations": "Delete all allocations for IP's"
-    }
+      "delete_ip_allocations": "Delete all allocations for IP's",
+
+      "too_many_ports": "Adding more than 1000 ports in a single range at once is not supported.",
+      "invalid_mapping": "The mapping provided for port {port} was invalid and could not be processed.",
+      "cidr_out_of_range": "CIDR notation only allows masks between /25 and /32.",
+      "port_out_of_range": "Ports in an allocation must be greater than 1024 and less than or equal to 65535."
+    },
+
+    "configuration_not_persisted": "The daemon configuration has been updated, however there was an error encountered when trying to update the daemon's config file. You will need to manually update the /var/lib/wisp/daemon/config/wisp.yaml file to reflect the new changes."
   },
 
   "servers": {
@@ -235,7 +241,8 @@
     "build_configuration": {
       "resource_limits": "Resource Limits",
       "feature_limits": "Feature Limits",
-      "allocation_management": "Allocation Management"
+      "allocation_management": "Allocation Management",
+      "oom_disabled_footer": "Disables the OOM Killer on the server. This will allow the server to float at the maximum ram and swap space."
     },
 
     "startup": {
@@ -284,6 +291,11 @@
       "toggle_backup_status": "Toggle backup status",
 
       "install_marked_as_failed": "Can't toggle server's install status due to it failing to install. Please reinstall the server instead."
+    },
+
+    "deployment": {
+      "no_viable_nodes": "No nodes satisfying the requirements specified for automatic deployment could be found.",
+      "no_viable_allocations": "No allocations satisfying the requirements for automatic deployment were found."
     }
   },
 
@@ -334,10 +346,16 @@
       "delete_egg": "Delete Egg",
       "delete_notice": "Are you sure that you want to delete the \"{name}\" egg? There is no going back, all data will immediately be removed.",
       "egg_has_servers": "You can not delete a egg which has servers running under it.",
+      "egg_is_a_parent": "This egg is a parent to one or more other eggs. Please delete those eggs before deleting this egg.",
+      "must_be_a_child": "The \"Copy Settings From\" directive for this egg must be a child option for the selected nest.",
       "copy_alert": "All fields are required unless you select a separate option from the 'Copy Settings From' dropdown, in which case fields may be left blank to use the values from that option.",
+      "invalid_copy": "The egg selected for copying a script from either does not exist, or is copying a script from itself.",
 
       "update_egg": "Update Egg",
       "import_update_notice": "Importing a new egg file will overwrite any existing settings. If you wish to keep your existing settings, you should import the new egg separately.",
+      "import_json_error": "There was an error while attempting to parse the JSON file: {error}",
+      "import_file_error": "The JSON file provided was not valid.",
+      "import_invalid_json": "The JSON file provided is not in a format that can be recognized.",
 
       "install_script": "Install Script",
       "update_script": "Update Script",
@@ -347,7 +365,10 @@
         "variable_created": "The startup variable has been successfully created.",
         "variable_updated": "The \"{name}\" startup variable has been successfully updated.",
         "variable_deleted": "The \"{name}\" startup variable has been successfully deleted.",
-        "env_variable_reserved": "The {name} environment variable is a reserved variable name."
+        "env_variable_reserved": "The {name} environment variable is a reserved variable name.",
+        "env_not_unique": "The {name} environment variable is not unique.",
+
+        "bad_validation_rule": "The validation rule \"{rule}\" is not a valid rule."
       },
 
       "thumbnail_title": "Egg Thumbnail",
@@ -361,6 +382,26 @@
     "mod_details": "Mod Details",
     "mod_configuration": "Mod Configuration",
     "delete_mod": "Delete Mod",
-    "delete_notice": "Are you sure that you want to delete the \"{name}\" mod? There is no going back, all data will immediately be removed."
+    "delete_notice": "Are you sure that you want to delete the \"{name}\" mod? There is no going back, all data will immediately be removed.",
+    "mod_has_servers": "Cannot modify the associated egg ID when servers are currently attached to a mod."
+  },
+
+  "domains": {
+    "domain_details": "Domain Details",
+    "domain_name_footer": "The domain name that game servers can create subdomains on, allowing users to choose a subdomain and point it at their game server's allocations automatically. Currently, we only support subdomains on the root domain.",
+
+    "instructions": "You'll need to do the following actions for the domain to work properly:",
+    "acquire_domain": "Purchase or use an existing domain you have.",
+    "setup_nameservers": "Point the domain's nameservers at \"ns1.subdomain-manager.wisp.gg\" and \"ns2.subdomain-manager.wisp.gg\" (note that this may take up to 48 hours to propagate).",
+
+    "update_notice": "Updating the domain name will update every single server's subdomain to the new domain.",
+    "domain_already_in_use": "The provided domain is already in use on another panel instance and cannot be reused.",
+    "root_domain_only_supported": "Currently, we only support the root domain only.",
+
+    "nest_identifiers_footer": "A list of nest identifiers which allow servers running under the nest to create subdomains on the domain.",
+    "egg_identifiers_footer": "**This is mainly used to allow specific eggs under a nest without having to allow the entire nest** A list of egg identifiers which allow servers running under the specific egg to create subdomains on the domain.",
+
+    "delete_domain": "Delete Domain",
+    "delete_notice": "Are you sure that you want to delete the \"{name}\" domain? There is no going back, and all servers associated with this domain will lose subdomains associated with it."
   }
 }

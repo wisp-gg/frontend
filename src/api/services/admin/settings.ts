@@ -45,6 +45,7 @@ class SettingsService {
     }
 
     updateGeneral(data: GeneralSettingsRequest) {
+        // TODO: check if lang should change
         return RequestService.post('/settings/general', data)
             .then(() => dispatch('settings/update', data));
     }

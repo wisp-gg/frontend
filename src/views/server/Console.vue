@@ -97,6 +97,7 @@ export default defineComponent({
         onMounted(() => {
             if (!terminalElement.value) throw new Error('Unable to initialize console - terminal element is missing?');
 
+            const rows = 30;
             const terminal = new Terminal({
                 allowTransparency: true,
                 cursorStyle: 'underline',
@@ -104,7 +105,7 @@ export default defineComponent({
                 fontSize: 13,
                 fontFamily: 'monospace',
                 lineHeight: 1.1,
-                rows: 30,
+                rows,
                 scrollback: 1000,
                 theme: {
                     background: '#1c1c1c',
@@ -141,20 +142,24 @@ export default defineComponent({
             terminal.open(terminalElement.value);
             fitAddon.fit();
 
-            useWindowEvent('resize', debounce(() => {
+            const resize = () => {
                 // https://github.com/xtermjs/xterm.js/issues/3564
-                let lastCols, lastRows;
+                let lastCols;
                 let loop = true;
                 while(loop) {
-                    const { cols, rows } = fitAddon.proposeDimensions();
-                    fitAddon.fit();
+                    const { cols } = fitAddon.proposeDimensions();
 
-                    if (cols === lastCols && rows === lastRows) loop = false;
+                    const core = (terminal as any)._core;
+                    core._renderService.clear();
+                    terminal.resize(cols, rows);
+
+                    if (cols === lastCols) loop = false;
 
                     lastCols = cols;
-                    lastRows = rows;
                 }
-            }, 100));
+            };
+            useWindowEvent('resize', debounce(resize, 100));
+            resize();
 
             let hooked = false;
             const hookSearchBarKeyEvents = () => {

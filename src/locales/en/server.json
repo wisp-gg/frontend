@@ -177,7 +177,9 @@
   "startup": {
     "startup_command": "Startup Command",
     "input_rules": "Input Rules:",
-    "variable_saved": "Startup variable successfully saved."
+    "variable_saved": "Startup variable successfully saved.",
+    "variable_not_editable_admin": "This variable is not user editable - though as you are an admin, you can update it within the admin area for this server.",
+    "variable_not_editable": "This variable is not user editable."
   },
 
   "backups": {
@@ -185,6 +187,7 @@
     "create_new": "Create New Backup",
     "create_warning": "Creating a new backup will stop the server if it's already running",
     "created": "Backup {name} is now being created",
+    "creation_would_exceed_limit": "Creating this backup would exceed the server's backup limit.",
 
     "cant_delete_locked": "You must unlock the backup before attempting to delete it.",
     "delete_backup": "Delete Backup",
@@ -208,6 +211,7 @@
     "invalid_cron": "Use a valid cron expression to view description and next run time.",
     "runs_description": "Runs {description}",
     "pause_for_seconds": "Pause for {seconds} seconds",
+    "chain_interval_too_long": "The maximum interval time for a chained task is 15 minutes.",
 
     "states": {
       "active": "Active",
@@ -263,6 +267,17 @@
     "reinstall": {
       "description": "This will reinstall the server to the original state you received it as. Danger! This will overwrite ALL server data, so make sure to back up all important files."
     }
+  },
+
+  "subdomains": {
+    "title": "Subdomains",
+    "create_new": "Create New Subdomain",
+    "name_footer": "The vanity name of the subdomain.",
+    "domain_footer": "The domain which the subdomain will be created on.",
+    "allocation_footer": "The allocation which the subdomain will point towards.",
+
+    "delete_subdomain": "Delete Subdomain",
+    "delete_subdomain_notice": "Are you sure that you want to delete the {name} subdomain? All connections using this subdomain will no longer work."
   },
 
   "mods": {

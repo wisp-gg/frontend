@@ -7,8 +7,7 @@ export class DatabaseHost extends BaseModel {
     public name = '';
     public host = '';
     public port = -1;
-    public displayFqdn = '';
-    public enablePhpmyadmin = false;
+    public phpmyadminUrl: string | undefined;
 
     // Admin only props
     public username = '';
@@ -25,10 +24,6 @@ export class DatabaseHost extends BaseModel {
 
     connection(): string {
         return `${this.host}:${this.port}`;
-    }
-
-    phpmyadminUrl(): string | undefined {
-        return this.enablePhpmyadmin ? `http://${this.displayFqdn || this.host}/phpmyadmin/index.php` : undefined;
     }
 
     // Admin only relations

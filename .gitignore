@@ -5,5 +5,5 @@ dist
 .idea
 .env
 
-src/locales/**
+src/locales/*
 !src/locales/en

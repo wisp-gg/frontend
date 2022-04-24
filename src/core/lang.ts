@@ -71,12 +71,21 @@ export default lang;
 export function getAvailableLanguages() {
     // TODO: can vite somehow hint folders in a dir? (probably not a good idea until all of the translations are good to go)
     return [
-        'en',
+        'en', // English
+        'cs_CZ', // Czech
+        'da_DK', // Danish
+        'nl_NL', // Dutch
+        'fr_FR', // French
+        'es_EM', // Spanish (Modern)
+        'sv_SE', // Swedish
+        'pl_PL', // Polish
     ];
 }
 
 export function getCurrentLanguage() {
-    return lang.global.locale;
+    // There seems to be a weird bug(?) where `lang.global.locale` is a ComputedRefImpl instead of just a string
+    const global: any = lang.global;
+    return global.locale?.value ?? global.locale;
 }
 
 export async function setCurrentLanguage(language: string) {

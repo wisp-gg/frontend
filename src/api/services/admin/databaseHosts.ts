@@ -9,8 +9,7 @@ interface CreateDatabaseHostRequest {
     port: number;
     username: string;
     password: string;
-    enable_phpmyadmin: boolean;
-    display_fqdn: string;
+    phpmyadmin_url: string;
 }
 
 type UpdateDatabaseHostRequest = CreateDatabaseHostRequest

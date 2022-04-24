@@ -108,6 +108,18 @@
       }
     },
 
+    "subdomain": {
+      "create": {
+        "title": "Subdomain created",
+        "message": "{user} created the subdomain {subdomain}"
+      },
+
+      "delete": {
+        "title": "Subdomain deleted",
+        "message": "{user} deleted the subdomain {subdomain}"
+      }
+    },
+
     "modpack": {
       "update": {
         "title": "Modpack installed",
