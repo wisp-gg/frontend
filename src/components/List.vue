@@ -190,9 +190,11 @@ export default defineComponent({
         const getAttribute = (key: string) => state.lists.data[serviceId]?.[key];
 
         const update = async () => {
-            Logger.debug('List', `Updating list contents from ${props.serviceId}...`);
+            const id = typeof props.serviceId === 'object' ? null : props.serviceId;
+            Logger.debug('List', `Updating list contents from ${id ?? 'directly passed data'}...`);
 
-            const finished = await dispatch('loading/add');
+            // TODO: re-evaluate this - in theory this is redundant due to useService handling it for us, but how would placeholder results work?
+            const finished = await dispatch('loading/add', id);
             await setAttribute('results', new Array(skeletons).fill(null));
 
             checkboxes = [];

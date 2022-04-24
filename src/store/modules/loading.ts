@@ -1,29 +1,48 @@
 import { Module } from 'vuex';
+import Logger from '~/core/logger';
 
 export interface LoadingStore {
-    items: number[];
+    items: Record<string, string[]>;
+}
+
+// The context id is in format of `service;metadata-key:metadata-value,...`
+function getPrefix(id: string) {
+    return id.split(';')[0];
 }
 
 let incr = 0;
 const loading: Module<LoadingStore, any> = {
     namespaced: true,
     state: {
-        items: []
+        items: {},
     },
 
     mutations: {
-        addItem: (state, payload: number) => {
-            state.items.push(payload);
+        addItem: (state, id: string) => {
+            Logger.debug('LoadingState', `Added ${id}`);
+
+            const prefix = getPrefix(id);
+            state.items[prefix] = state.items[prefix] || [];
+            state.items[prefix].push(id);
         },
 
-        removeItem: (state, payload: number) => {
-            state.items.splice(state.items.indexOf(payload), 1);
+        removeItem: (state, id: string) => {
+            Logger.debug('LoadingState', `Removed ${id}`);
+
+            const prefix = getPrefix(id);
+            if (!state.items[prefix]) return;
+
+            const index = state.items[prefix].indexOf(id);
+            if (index === -1) return;
+
+            state.items[prefix].splice(index, 1);
+            if (state.items[prefix].length === 0) delete state.items[prefix];
         },
     },
 
     actions: {
-        add: ({ commit }) => {
-            const id = incr++;
+        add: ({ commit }, name?: string) => {
+            const id = name || (incr++).toString();
             commit('addItem', id);
 
             return () => commit('removeItem', id);
@@ -31,7 +50,14 @@ const loading: Module<LoadingStore, any> = {
     },
 
     getters: {
-        isLoading: state => state.items.length > 0,
+        isLoading: state => (id?: string) => {
+            if (!id) return Object.keys(state.items).length > 0;
+
+            const prefix = getPrefix(id);
+            if (!state.items[prefix]) return false;
+
+            return prefix === id ?? (state.items[prefix].indexOf(id) !== -1);
+        },
     }
 };
 

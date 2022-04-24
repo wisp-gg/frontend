@@ -23,7 +23,7 @@ export default defineComponent({
         if (!props.content && !props.circle) throw new Error('Skeleton: must define content prop or set circle to true');
 
         return {
-            loading: computed(() => getter<boolean>('loading/isLoading')),
+            loading: computed(() => getter<(id?: string) => boolean>('loading/isLoading')()),
 
             placeholder: computed(() => {
                 if (typeof props.content === 'number') {
