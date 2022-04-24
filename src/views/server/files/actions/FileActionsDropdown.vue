@@ -53,7 +53,7 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import Popper from 'vue3-popper';
-import { dispatch } from '~/core';
+import state from '~/state';
 import { File } from '~/api/models';
 import { DownloadFileResponse } from '~/api/services/client/files';
 import { useService } from '~/plugins';
@@ -73,7 +73,7 @@ export default defineComponent({
     },
 
     setup(props) {
-        const updateList = () => dispatch('lists/refresh', 'files@getDirectory');
+        const updateList = () => state.lists.refresh('files@getDirectory');
 
         return {
             formattedPath: computed(() => props.path === '/' ? '/' : `${props.path}/`),

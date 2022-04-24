@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
-import { dispatch } from '~/core';
+import state from '~/state';
 import { Backup } from '~/api/models';
 import { useService } from '~/plugins';
 
@@ -51,7 +51,7 @@ export default defineComponent({
             confirm: () => {
                 return useService('backups@delete', 'server.backups.delete_backup', {
                     id: props.backup.uuidShort
-                }).then(() => dispatch('lists/refresh', 'backups@getAll'));
+                }).then(() => state.lists.refresh('backups@getAll'));
             }
         };
     }

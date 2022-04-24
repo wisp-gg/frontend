@@ -1,7 +1,9 @@
 import { io, Socket } from 'socket.io-client';
 // @ts-ignore
 import SocketIOFileUpload from 'socketio-file-upload/client';
-import { Logger, dispatch } from '~/core';
+import { Logger } from '~/core';
+import state from '~/state';
+
 import { Server } from '~/api/models';
 import { ServerService } from '~/api/services/client';
 import { ServerStatus } from './types';
@@ -39,7 +41,7 @@ class DaemonWrapper extends WebSocketTransformer {
                     break;
             }
 
-            dispatch('server/socket/setError', message);
+            state.server.setError(message);
         };
 
         this.socket.on('error', err => Logger.warn(`DaemonWrapper[${server.uuidShort}]`, `WebSocket received an error: ${err}`));
@@ -55,7 +57,7 @@ class DaemonWrapper extends WebSocketTransformer {
         this.socket.on('auth_success', () => {
             Logger.info(`DaemonWrapper[${server.uuidShort}]`, 'WebSocket connected and successfully authenticated');
 
-            dispatch('server/socket/setState', true);
+            state.server.setState(true);
             this.emit('connected');
         });
         this.socket.once('auth_success', () => this.setupEvents());
@@ -63,19 +65,19 @@ class DaemonWrapper extends WebSocketTransformer {
         this.socket.on('disconnect', () => {
             Logger.info(`DaemonWrapper[${server.uuidShort}]`, 'WebSocket disconnected');
 
-            dispatch('server/socket/setState', false);
+            state.server.setState(false);
         });
 
         this.registerEvent('server-status', status => {
-            dispatch('server/socket/setStatus', status);
+            state.server.setStatus(status);
 
             if (status === ServerStatus.OFF) {
-                dispatch('server/socket/setProc', undefined);
-                dispatch('server/socket/setQuery', undefined);
+                state.server.setProc(undefined);
+                state.server.setQuery(undefined);
             }
         });
-        this.registerEvent('server-proc', proc => dispatch('server/socket/setProc', proc));
-        this.registerEvent('server-query', query => dispatch('server/socket/setQuery', query));
+        this.registerEvent('server-proc', proc => state.server.setProc(proc));
+        this.registerEvent('server-query', query => state.server.setQuery(query));
 
         // Setup the upload socket - if something goes really wrong here, it isn't critical so this is mostly here as a "best effort"
         if (upload_url) {
@@ -123,9 +125,9 @@ class DaemonWrapper extends WebSocketTransformer {
         this.uploadSocket?.disconnect();
         delete this.uploadSocket;
 
-        dispatch('server/socket/setStatus', undefined);
-        dispatch('server/socket/setProc', undefined);
-        dispatch('server/socket/setQuery', undefined);
+        state.server.setStatus(undefined);
+        state.server.setProc(undefined);
+        state.server.setQuery(undefined);
 
         Logger.info('DaemonWrapper', 'WebSockets reset.');
     }

@@ -48,7 +48,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, watch, provide, ref } from 'vue';
-import { dispatch } from '~/core';
+import state from '~/state';
 import { useWindowEvent } from '~/plugins';
 
 export default defineComponent({
@@ -95,7 +95,7 @@ export default defineComponent({
                 // If we don't wait for the next tick, the alert will be placed into the modal itself
                 // (which in most cases auto-close), making it useless.
                 setTimeout(() => {
-                    dispatch('alerts/add', {
+                    state.alerts.add({
                         type,
                         title: alert,
                     });

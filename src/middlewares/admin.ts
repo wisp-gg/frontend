@@ -1,5 +1,5 @@
 import { RouteLocationNormalized } from 'vue-router';
-import { state } from '~/core';
+import state from '~/state';
 
 class Admin implements Middleware {
     name() {

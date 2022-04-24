@@ -1,14 +1,11 @@
 if (!window.Wisp) throw new Error('Injectable data missing???');
-import { Lang, Router, Store } from './core';
-
-import './bootstrap/assets';
-import './bootstrap/fontawesome';
-import './bootstrap/daemon';
-import './store/index';
-import './bootstrap/router';
 
 import { createApp } from 'vue';
-import { App } from './views';
+import { createPinia } from 'pinia';
+
+const pinia = createPinia();
+
+import { Lang, Router } from './core';
 import { Clipboard, Tippy } from '~/directives';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import {
@@ -38,11 +35,13 @@ import {
     FormTextarea, FormFile, FormModelSelect
 } from './components/forms';
 
+import { App } from './views';
+
 const app = createApp(App);
 app
+    .use(pinia)
     .use(Router)
     .use(Lang)
-    .use(Store)
     .directive('clipboard', Clipboard)
     .directive('tippy', Tippy)
     .component('fa', FontAwesomeIcon)
@@ -79,3 +78,9 @@ import { enableSentry } from './bootstrap/sentry';
 if (import.meta.env.PROD) {
     enableSentry(app, Router);
 }
+
+import './bootstrap/assets';
+import './bootstrap/fontawesome';
+import './bootstrap/daemon';
+import './state';
+import './bootstrap/router';

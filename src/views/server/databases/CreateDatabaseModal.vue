@@ -26,13 +26,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { dispatch } from '~/core';
+import state from '~/state';
 import { useService } from '~/plugins';
 
 export default defineComponent({
     setup() {
         return {
-            updateList: () => dispatch('lists/refresh', 'databases@getAll'),
+            updateList: () => state.lists.refresh('databases@getAll'),
 
             async fetchDatabaseHosts() {
                 return useService<ListResponse>('databaseHosts@get', {

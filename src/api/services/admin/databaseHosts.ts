@@ -1,7 +1,7 @@
 import { Parser } from '~/api';
 import RequestService from './request';
 import { DatabaseHost } from '~/api/models';
-import { dispatch } from "~/core";
+import state from '~/state';
 
 interface CreateDatabaseHostRequest {
     name: string;
@@ -42,7 +42,7 @@ class DatabaseHostsService {
         return RequestService.put('/database-hosts/:databaseHost?include=node,databases,databases.server', data)
             .then(Parser.parse)
             .then((host: DatabaseHost) => {
-                dispatch('models/refresh', 'databaseHost');
+                state.models.refresh('databaseHost');
 
                 return host;
             });

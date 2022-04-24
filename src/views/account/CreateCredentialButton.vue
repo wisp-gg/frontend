@@ -25,12 +25,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { dispatch } from '~/core';
+import state from '~/state';
 
 export default defineComponent({
     setup(props, context) {
         return {
-            updateList: () => dispatch('lists/refresh', 'account@getCredentials'),
+            updateList: () => state.lists.refresh('account@getCredentials'),
         };
     }
 });

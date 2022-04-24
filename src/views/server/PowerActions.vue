@@ -19,18 +19,18 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
-import { state } from '~/core';
+import state from '~/state';
 import { PowerActionType, ServerStatus } from '~/api/services/daemon/types';
 import { triggerDaemonAction } from '~/plugins';
 
 export default defineComponent({
     setup() {
         return {
-            connected: computed(() => state.server.socket.connected),
-            on: computed(() => state.server.socket.status === ServerStatus.ON),
-            off: computed(() => state.server.socket.status === ServerStatus.OFF),
-            starting: computed(() => state.server.socket.status === ServerStatus.STARTING),
-            stopping: computed(() => state.server.socket.status === ServerStatus.STOPPING),
+            connected: computed(() => state.server.connected),
+            on: computed(() => state.server.status === ServerStatus.ON),
+            off: computed(() => state.server.status === ServerStatus.OFF),
+            starting: computed(() => state.server.status === ServerStatus.STARTING),
+            stopping: computed(() => state.server.status === ServerStatus.STOPPING),
             sendPowerAction(action: PowerActionType) {
                 triggerDaemonAction('send-power', action);
             }

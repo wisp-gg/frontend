@@ -1,4 +1,4 @@
-import { getter } from '~/core';
+import state from '~/state';
 
 class Authenticated implements Middleware {
     name() {
@@ -6,8 +6,7 @@ class Authenticated implements Middleware {
     }
 
     async run() {
-        const loggedIn = getter<boolean>('user/loggedIn');
-        if (loggedIn) return;
+        if (state.user.loggedIn) return;
 
         return {
             name: 'login.index',

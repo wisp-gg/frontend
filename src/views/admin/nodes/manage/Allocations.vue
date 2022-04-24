@@ -71,7 +71,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
-import { dispatch, state } from '~/core';
+import state from '~/state';
 import { useService } from '~/plugins';
 import { Allocation } from '~/api/models';
 import DeleteAllocationIpModal from '~/views/admin/nodes/manage/DeleteAllocationIpModal.vue';
@@ -80,7 +80,8 @@ import debounce from 'debounce';
 export default defineComponent({
     components: { DeleteAllocationIpModal },
     setup() {
-        const updateList = () => dispatch('lists/refresh', 'nodeAllocations@getAll');
+        const updateList = () => state.lists.refresh('nodeAllocations@getAll');
+
         return {
             node: computed(() => state.models.node),
 
@@ -99,7 +100,7 @@ export default defineComponent({
                 }).then(() => {
                     updateList();
 
-                    dispatch('alerts/add', {
+                    state.alerts.add({
                         timeout: 2500,
 
                         type: 'success',

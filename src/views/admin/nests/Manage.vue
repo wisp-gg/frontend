@@ -51,7 +51,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
-import { state } from '~/core';
+import state from '~/state';
 import DeleteNestModal from './DeleteNestModal.vue';
 
 export default defineComponent({

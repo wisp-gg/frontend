@@ -9,7 +9,8 @@
 
 <script lang="ts">
 import { defineComponent, ref, onBeforeUnmount } from 'vue';
-import { Logger, state, getter, loadLanguage, setCurrentLanguage } from '~/core';
+import { Logger, loadLanguage, setCurrentLanguage } from '~/core';
+import state from '~/state';
 import { AuthenticationService, NotificationsService, SettingsService } from '~/api/services/client';
 
 export default defineComponent({
@@ -45,7 +46,7 @@ export default defineComponent({
 
                 ready.value = true;
 
-                if (getter<boolean>('user/loggedIn')) {
+                if (state.user.loggedIn) {
                     // Background service
                     NotificationsService.initializeNotifications();
                 }

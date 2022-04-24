@@ -29,7 +29,7 @@
 <script lang="ts">
 import { defineComponent, computed, watch, ref } from 'vue';
 import { useRoute } from 'vue-router';
-import { state, dispatch } from '~/core';
+import state from '~/state';
 import { File } from '~/api/models';
 import { NavBarPosition } from '~/api/models/User';
 import { useService } from '~/plugins';
@@ -47,7 +47,7 @@ export default defineComponent({
         watch(() => currentRoute.hash, newValue => currentPath.value = newValue.slice(1));
 
         const currentPath = ref(currentRoute.hash.slice(1));
-        const updateList = () => dispatch('lists/refresh', 'files@getDirectory');
+        const updateList = () => state.lists.refresh('files@getDirectory');
 
         return {
             usingSidebar: computed(() => (state.user.data?.preferences?.navbarPosition ?? NavBarPosition.LEFT) === NavBarPosition.LEFT),

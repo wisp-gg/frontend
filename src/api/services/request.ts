@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, Method } from 'axios';
 import { camelCaseToUnderscore } from '~/helpers';
-import { Logger, Router, state, dispatch } from '~/core';
+import { Logger, Router } from '~/core';
+import state from '~/state';
 import { TranslatableError, RequestError } from '~/errors';
 import { BaseModel } from '~/api/models';
 
@@ -260,8 +261,8 @@ export default class RequestService {
     // Technically doesn't belong here, but it should be available as an easy helper method
     // TODO: consider handling this automatically in patch/put instead?
     updateModelBinding<T extends BaseModel>(model: T): T {
-        dispatch('models/update', {
-            name: model.getRouteName(),
+        state.models.update({
+            name: model.getRouteName() as any,
             model: model.getAttributes(),
         });
 

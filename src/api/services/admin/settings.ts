@@ -1,4 +1,4 @@
-import { dispatch } from '~/core';
+import state from '~/state';
 import RequestService from './request';
 
 interface GeneralSettingsRequest {
@@ -46,28 +46,28 @@ class SettingsService {
 
     updateGeneral(data: GeneralSettingsRequest) {
         // TODO: check if lang should change
-        return RequestService.post('/settings/general', data)
-            .then(() => dispatch('settings/update', data));
+        return RequestService.post('/settings/general', data);
+        // .then(() => state.settings.update(data)); // TODO: allow updating via dot notation
     }
 
     updateEmbed(data: EmbedSettingsRequest) {
-        return RequestService.post('/settings/embed', data)
-            .then(() => dispatch('settings/update', data));
+        return RequestService.post('/settings/embed', data);
+        // .then(() => state.settings.update(data)); // TODO: allow updating via dot notation
     }
 
     updateJS(data: JSSettingsRequest) {
         return RequestService.post('/settings/js', data)
-            .then(({ url }) => dispatch('settings/update', { injector: { js: url } }));
+            .then(({ url }) => state.settings.update({ injector: { js: url } }));
     }
 
     updateCSS(data: CSSSettingsRequest) {
         return RequestService.post('/settings/css', data)
-            .then(({ url }) => dispatch('settings/update', { injector: { css: url } }));
+            .then(({ url }) => state.settings.update({ injector: { css: url } }));
     }
 
     updateSSO(data: SSOSettingsRequest) {
-        return RequestService.post('/settings/sso', data)
-            .then(() => dispatch('settings/update', data));
+        return RequestService.post('/settings/sso', data);
+        // .then(() => state.settings.update(data)); // TODO: allow updating via dot notation
     }
 
     private assetToFormData(data: AssetRequest) {
@@ -80,21 +80,21 @@ class SettingsService {
         return RequestService.post('/settings/branding/login_logo', this.assetToFormData(data), {
             'Content-Type': 'multipart/form-data',
         })
-            .then(({ url }) => dispatch('settings/update', { branding: { login_logo: url } }));
+            .then(({ url }) => state.settings.update({ branding: { login_logo: url } }));
     }
 
     uploadFavicon(data: AssetRequest) {
         return RequestService.post('/settings/branding/favicon', this.assetToFormData(data), {
             'Content-Type': 'multipart/form-data',
         })
-            .then(({ url }) => dispatch('settings/update', { branding: { favicon: url } }));
+            .then(({ url }) => state.settings.update({ branding: { favicon: url } }));
     }
 
     uploadLogo(data: AssetRequest) {
         return RequestService.post('/settings/branding/logo', this.assetToFormData(data), {
             'Content-Type': 'multipart/form-data',
         })
-            .then(({ url }) => dispatch('settings/update', { branding: { logo: url } }));
+            .then(({ url }) => state.settings.update({ branding: { logo: url } }));
     }
 }
 

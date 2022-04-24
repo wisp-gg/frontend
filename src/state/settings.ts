@@ -1,5 +1,9 @@
-import { Module } from 'vuex';
+import { defineStore } from 'pinia';
 import { Feature } from '~/api/models/Features';
+
+type DeepPartial<T> = {
+    [P in keyof T]?: DeepPartial<T[P]>;
+};
 
 export interface Branding {
     name: string;
@@ -40,9 +44,9 @@ export interface Misc {
 }
 
 export interface Pusher {
-    namespace?: string;
-    key?: string;
-    cluster?: string;
+    namespace: string;
+    key: string;
+    cluster: string;
 }
 
 export interface Settings {
@@ -60,30 +64,29 @@ export interface Settings {
     features: Record<string, Feature>
 }
 
-export interface SettingsStore {
+export interface SettingsState {
     initialized: boolean;
     data?: Settings;
 }
 
-const settings: Module<SettingsStore, any> = {
-    namespaced: true,
-    state: {
+export default defineStore('settings', {
+    state: () => (<SettingsState>{
         initialized: false,
         data: undefined,
-    },
+    }),
 
-    mutations: {
-        setInitialized: (state, payload: boolean) => {
-            state.initialized = payload;
+    actions: {
+        markInitialized() {
+            this.initialized = true;
         },
 
-        set: (state, payload?: Settings) => {
-            state.data = payload;
+        set(payload?: Settings) {
+            this.data = payload;
         },
 
-        update: (state, payload: Partial<Settings>) => {
+        update(payload: DeepPartial<Settings>) {
             const set = (data: Record<string, any>, payload: Record<string, any>) => {
-                for(const key in payload) {
+                for (const key in payload) {
                     const value = payload[key];
 
                     if (typeof value === 'object') {
@@ -94,25 +97,7 @@ const settings: Module<SettingsStore, any> = {
                 }
             };
 
-            if (state.data) set(state.data, payload);
+            if (this.data) set(this.data, payload);
         },
     },
-
-    actions: {
-        markInitialized: ({ commit }) => {
-            commit('setInitialized', true);
-        },
-
-        set: ({ commit }, payload?: Settings) => {
-            commit('set', payload);
-        },
-
-        update: ({ commit }, payload: Partial<Settings>) => {
-            commit('update', payload);
-        },
-    },
-
-    getters: {},
-};
-
-export default settings;
+});

@@ -17,12 +17,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { dispatch } from '~/core';
+import state from '~/state';
 
 export default defineComponent({
     setup() {
         return {
-            updateList: () => dispatch('lists/refresh', 'locations@getAll'),
+            updateList: () => state.lists.refresh('locations@getAll'),
         };
     },
 });

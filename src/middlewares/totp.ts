@@ -1,5 +1,5 @@
 import { RouteLocationNormalized } from 'vue-router';
-import { state, dispatch } from '~/core';
+import state from '~/state';
 
 class TOTP implements Middleware {
     static LEVEL_NONE = 0;
@@ -24,7 +24,7 @@ class TOTP implements Middleware {
 
             if (this.except.includes((to.name || '').toString())) return;
 
-            dispatch('alerts/add', {
+            state.alerts.add({
                 type: 'danger',
                 title: ['client.account.2fa_must_be_enabled'],
             });

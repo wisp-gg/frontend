@@ -1,4 +1,5 @@
-import { Logger, Router, dispatch } from '~/core';
+import { Logger, Router } from '~/core';
+import state from '~/state';
 import { RequestError } from '~/errors';
 import { Parser } from '~/api';
 import RequestService from './request';
@@ -46,7 +47,7 @@ class AuthenticationService {
             .then(data => {
                 Logger.debug('Authentication', 'User is already authenticated!');
 
-                dispatch('user/set', Parser.parse(data));
+                state.user.set(Parser.parse(data));
             })
             .catch(err => {
                 if (err instanceof RequestError) {
@@ -59,11 +60,11 @@ class AuthenticationService {
 
                 throw err;
             })
-            .finally(() => dispatch('user/markInitialized'));
+            .finally(() => state.user.markInitialized());
     }
 
     private async loggedIn(data: LoginState) {
-        await dispatch('user/set', Parser.parse(data.user!));
+        state.user.set(Parser.parse(data.user!));
         await SettingsService.initializeSettings();
 
         // Background service
@@ -124,7 +125,7 @@ class AuthenticationService {
                 NotificationsService.deinitializeNotifications();
 
                 // TODO: race condition - this should be unset only after redirect finishes (though guest middleware will fail if this is after push :/)
-                await dispatch('user/set', undefined);
+                state.user.set(undefined);
 
                 await Router.push({
                     name: 'login.index',

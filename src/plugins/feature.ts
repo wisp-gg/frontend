@@ -1,5 +1,5 @@
 import { normalizeNamespaceAndPath } from '~/helpers';
-import { state } from '~/core';
+import state from '~/state';
 
 export function featuresStateLoaded(feature: string | string[]): boolean {
     if (Array.isArray(feature)) {

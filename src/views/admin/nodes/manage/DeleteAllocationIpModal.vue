@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue';
-import { dispatch } from '~/core';
+import state from '~/state';
 import { useService } from '~/plugins';
 
 export default defineComponent({
@@ -38,7 +38,7 @@ export default defineComponent({
 
         return {
             allocationIps,
-            updateList: () => dispatch('lists/refresh', 'nodeAllocations@getAll'),
+            updateList: () => state.lists.refresh('nodeAllocations@getAll'),
         };
     }
 });

@@ -36,7 +36,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
-import { state } from '~/core';
+import state from '~/state';
 import minecraft from '~/assets/svg/minecraft.png';
 
 export default defineComponent({

@@ -25,7 +25,8 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
-import { state, getAvailableLanguages } from '~/core';
+import { getAvailableLanguages } from '~/core';
+import state from '~/state';
 
 export default defineComponent({
     setup(props, context) {

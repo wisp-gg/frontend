@@ -30,7 +30,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
-import { dispatch, state } from '~/core';
+import state from '~/state';
 import UpdateContainer from './UpdateContainer.vue';
 import MonitorContainer from './MonitorContainer.vue';
 import ReinstallContainer from './ReinstallContainer.vue';
@@ -48,7 +48,7 @@ export default defineComponent({
 
             toggleSupport: () => {
                 return useService<Server>('advanced@toggleSupport', true).then((server: Server) => {
-                    dispatch('alerts/add', {
+                    state.alerts.add({
                         type: 'success',
                         title: [`server.advanced.support.${server.supportOp ? 'enable_access_alert' : 'disable_access_alert'}`],
                     });

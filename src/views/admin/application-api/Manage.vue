@@ -25,7 +25,7 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { state } from '~/core';
+import state from '~/state';
 import { ApiKey } from '~/api/models';
 import { camelCaseToUnderscore } from '~/helpers';
 

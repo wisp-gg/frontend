@@ -74,7 +74,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
-import { dispatch } from '~/core';
+import state from '~/state';
 import { ServerPermissions } from '~/api/services/client/subusers';
 import { ServerSubuser } from '~/api/models';
 import { useService, refreshList } from '~/plugins';
@@ -111,7 +111,7 @@ export default defineComponent({
                     refreshList('subusers@getAll')
                         .then(() => {
                             if (!props.subuser) {
-                                dispatch('alerts/add', {
+                                state.alerts.add({
                                     type: 'success',
                                     title: ['server.subusers.subuser_added'],
                                 });
@@ -119,7 +119,7 @@ export default defineComponent({
                         });
                 };
             },
-            updateList: () => dispatch('lists/refresh', 'subusers@getAll'),
+            updateList: () => state.lists.refresh('subusers@getAll'),
 
             email,
             selectedPermissions,

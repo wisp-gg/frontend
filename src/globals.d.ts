@@ -48,8 +48,6 @@ interface FrontendConfiguration {
 // eslint-disable-next-line no-var
 declare var Wisp: FrontendConfiguration;
 
-type RootState = import('~/store').RootState;
-
 type TranslatableMessage = [string, any?];
 
 // Validator

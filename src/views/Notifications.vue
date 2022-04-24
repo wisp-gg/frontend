@@ -29,7 +29,7 @@
 <script lang="ts">
 import Popper from 'vue3-popper';
 import { defineComponent, computed } from 'vue';
-import { state, dispatch } from '~/core';
+import state from '~/state';
 import { useService } from '~/plugins';
 import Notification from './Notification.vue';
 import { NavBarPosition } from '~/api/models/User';
@@ -52,7 +52,7 @@ export default defineComponent({
             readAllNotifications: () => {
                 useService('client:account@markNotificationsRead', true)
                     .then(() => {
-                        dispatch('user/update', {
+                        state.user.update({
                             update_relationships: {
                                 notifications: [],
                             },

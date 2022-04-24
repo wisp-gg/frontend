@@ -55,7 +55,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
-import { dispatch, state } from '~/core';
+import state from '~/state';
 import { EggVariable } from '~/api/models';
 import { useService } from '~/plugins';
 
@@ -68,7 +68,7 @@ export default defineComponent({
     },
 
     setup(props) {
-        const updateList = () => dispatch('lists/refresh', 'eggVariables@getAll');
+        const updateList = () => state.lists.refresh('eggVariables@getAll');
 
         return {
             egg: computed(() => state.models.egg),
@@ -77,7 +77,7 @@ export default defineComponent({
                 if (!props.variable) return; // How? skeleton should stop this
 
                 useService('eggVariables@delete', true, { id: props.variable.id }).then(() => {
-                    dispatch('alerts/add', {
+                    state.alerts.add({
                         type: 'success',
                         title: ['admin.nests.egg.variables.variable_deleted', { name: props.variable!.name }],
                     });
@@ -91,7 +91,7 @@ export default defineComponent({
             onSuccess: async (data: EggVariable) => {
                 await updateList();
 
-                dispatch('alerts/add', {
+                state.alerts.add({
                     type: 'success',
                     title: ['admin.nests.egg.variables.variable_updated', { name: data.name }],
                 });

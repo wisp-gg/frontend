@@ -76,7 +76,8 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
-import { state, dispatch, getAvailableLanguages, getCurrentLanguage } from '~/core';
+import { getAvailableLanguages, getCurrentLanguage } from '~/core';
+import state from '~/state';
 import { NavBarPosition } from '~/api/models/User';
 import { useService } from '~/plugins';
 
@@ -96,7 +97,7 @@ export default defineComponent({
                 sso_code: ssoCode,
                 sso_state: ssoState,
             })
-                .then(() => dispatch('user/update', {
+                .then(() => state.user.update({
                     ssoEnabled: true,
                 }));
         }
@@ -116,7 +117,7 @@ export default defineComponent({
             })
                 .then(({ url }) => {
                     if (url) window.location.href = url;
-                    else dispatch('user/update', {
+                    else state.user.update({
                         ssoEnabled: !state.user.data?.ssoEnabled,
                     });
                 }),

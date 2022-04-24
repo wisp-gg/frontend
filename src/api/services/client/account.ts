@@ -1,5 +1,5 @@
-import { dispatch } from '~/core';
 import { Parser } from '~/api';
+import state from '~/state';
 import RequestService from './request';
 
 interface AccountUpdateFormData {
@@ -35,7 +35,7 @@ class AccountService {
     update(data: AccountUpdateFormData) {
         return RequestService.put('/account', data)
             .then(res => {
-                dispatch('user/update', data);
+                state.user.update(data);
 
                 return res;
             });

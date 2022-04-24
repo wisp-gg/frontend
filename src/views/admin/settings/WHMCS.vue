@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { state } from '~/core';
+import state from '~/state';
 
 export default defineComponent({
     setup(props, context) {

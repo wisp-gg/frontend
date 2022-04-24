@@ -1,4 +1,5 @@
-import { state, Lang } from '~/core';
+import { Lang } from '~/core';
+import state from '~/state';
 import { normalizeNamespaceAndPath } from '~/helpers';
 
 export function permissionsStateLoaded(permission: string | string[]): boolean {
@@ -22,6 +23,8 @@ export function permissionsStateLoaded(permission: string | string[]): boolean {
 // NOTE: The initial page load will not have the required data for this due to how we prefer skeleton loading
 // for page contents. Instead, using `computed` should be enough to make the perm state refresh after it is loaded.
 export function hasPermissions(permission: string | string[], matchAny = false): boolean {
+    if (permission == 'details.read') console.log(state.models.server);
+
     if (Array.isArray(permission)) {
         return permission.map(permission => hasPermissions(permission))[matchAny ? 'some' : 'every'](elem => elem);
     }

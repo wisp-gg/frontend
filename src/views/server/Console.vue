@@ -67,7 +67,8 @@ import { SearchBarAddon } from 'xterm-addon-search-bar';
 import { WebLinksAddon } from 'xterm-addon-web-links';
 import 'xterm/css/xterm.css';
 
-import { Logger, state } from '~/core';
+import { Logger } from '~/core';
+import state from '~/state';
 import { ConsoleMessageType } from '~/api/services/daemon';
 import { useDaemonEvent, triggerDaemonAction, useWindowEvent, onModelLoaded, hasPermissions, translateRequiresPermissions } from '~/plugins';
 import UploadLogsButton from '~/views/server/UploadLogsButton.vue';
@@ -243,7 +244,7 @@ export default defineComponent({
                 triggerDaemonAction('request-logs');
             });
 
-            if (state.server.socket.connected) {
+            if (state.server.connected) {
                 triggerDaemonAction('request-logs');
             }
         });

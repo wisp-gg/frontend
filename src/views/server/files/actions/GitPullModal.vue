@@ -41,7 +41,8 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { Logger, dispatch } from '~/core';
+import { Logger } from '~/core';
+import state from '~/state';
 import { triggerDaemonAction, useDaemonEvent } from '~/plugins';
 
 export default defineComponent({
@@ -63,7 +64,7 @@ export default defineComponent({
             pulled,
             onModalChange: () => {
                 if (commit.value) {
-                    dispatch('lists/refresh', 'files@getDirectory');
+                    state.lists.refresh('files@getDirectory');
                 }
 
                 requiresAuth.value = false;

@@ -85,7 +85,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
-import { state } from '~/core';
+import state from '~/state';
 import { onModelLoaded, useService } from '~/plugins';
 import { NodeDaemonInfo } from '~/api/services/admin/nodes';
 import NodeStatistic from './NodeStatistic.vue';

@@ -45,7 +45,8 @@ import { useRouter } from 'vue-router';
 import cronstrue from 'cronstrue/i18n';
 import cronParser from 'cron-parser';
 import { Schedule } from '~/api/models';
-import { dispatch, formatDateAbsolute, state } from '~/core';
+import { formatDateAbsolute } from '~/core';
+import state from '~/state';
 
 export default defineComponent({
     props: {
@@ -87,7 +88,7 @@ export default defineComponent({
 
             onSuccess: (schedule: Schedule) => {
                 if (props.schedule) {
-                    return dispatch('models/refresh', 'schedule');
+                    return state.models.refresh('schedule');
                 } else push({
                     name: 'server.configuration.schedules.manage',
                     params: {

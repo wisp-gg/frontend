@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
-import { dispatch } from '~/core';
+import state from '~/state';
 import { Location } from '~/api/models';
 import { useService } from '~/plugins';
 
@@ -55,7 +55,7 @@ export default defineComponent({
             confirm: () => {
                 return useService('locations@delete', 'admin.locations.delete_location', {
                     id: props.location.id
-                }).then(() => dispatch('lists/refresh', 'locations@getAll'));
+                }).then(() => state.lists.refresh('locations@getAll'));
             }
         };
     }

@@ -102,7 +102,8 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
-import { Router, state } from '~/core';
+import { Router } from '~/core';
+import state from '~/state';
 import { NavBarPosition } from '~/api/models/User';
 import { Passthrough, TabberPassthrough } from '~/views';
 import MobileNav from '~/views/MobileNav.vue';

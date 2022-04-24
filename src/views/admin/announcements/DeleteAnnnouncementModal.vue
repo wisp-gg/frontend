@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { dispatch } from '~/core';
+import state from '~/state';
 import { Announcement } from '~/api/models';
 import { useService } from '~/plugins';
 
@@ -37,7 +37,7 @@ export default defineComponent({
             confirm: () => {
                 return useService('announcements@delete', 'admin.announcements.delete_announcement', {
                     id: props.announcement.id
-                }).then(() => dispatch('lists/refresh', 'announcements@getAll'));
+                }).then(() => state.lists.refresh('announcements@getAll'));
             }
         };
     }

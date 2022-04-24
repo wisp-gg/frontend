@@ -1,7 +1,11 @@
 import { RouteLocationNormalized } from 'vue-router';
-import { Logger, dispatch, state } from '~/core';
+import { Logger } from '~/core';
+import state from '~/state';
+import { TranslatableError } from '~/errors';
 import * as Namespaces from '~/api/services';
-import {TranslatableError} from "~/errors";
+import { Parser } from "~/api";
+
+const validModels = Object.keys(Parser.models);
 
 // Fetches relevant models in the route parameters automatically. Works by checking if [parameter]Service has a `get` method,
 // indicating it's a route model. Uses the model's `getRouteID()` method to verify if the model has changed and should be refetched.
@@ -39,7 +43,7 @@ export class ModelBindings implements Middleware {
         const namespace = from.name?.toString().split('.').shift() || this.namespace;
 
         const currentModels = models.map(a => a.name);
-        this.toDelete = Object.keys(state.models).filter(name => name !== '_refreshFuncs' && !currentModels.includes(name));
+        this.toDelete = Object.keys(state.models).filter(name => validModels.includes(name) && !currentModels.includes(name));
         const modelsToFetch = models.filter(model => {
             return !state.models[model.name] || state.models[model.name]?.getRouteID(namespace) !== model.id;
         });
@@ -48,25 +52,25 @@ export class ModelBindings implements Middleware {
 
         const promises = modelsToFetch.map(model => {
             return model.get()
-                .then(result => dispatch('models/set', {
+                .then(result => state.models.set({
                     name: model.name,
                     model: result,
                     refresh: model.get.bind(this),
                 }));
         });
         if (promises.length > 0) {
-            const finished = await dispatch('loading/add');
+            const finished = state.loading.add();
 
             Promise.all(promises)
                 .catch(err => {
-                    if (err instanceof TranslatableError) dispatch('alerts/add', err.getDisplayError());
+                    if (err instanceof TranslatableError) state.alerts.add(err.getDisplayError());
                 })
                 .finally(() => finished());
         }
     }
 
     async postRun() {
-        this.toDelete.forEach(name => dispatch('models/clear', name));
+        this.toDelete.forEach(name => state.models.clear(name));
         this.toDelete = [];
     }
 }

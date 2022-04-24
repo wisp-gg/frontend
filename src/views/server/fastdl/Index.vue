@@ -49,7 +49,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
-import { dispatch, state } from '~/core';
+import state from '~/state';
 import { useService } from '~/plugins';
 import syncAsset from '~/assets/svg/undraw/sync.svg';
 
@@ -67,7 +67,7 @@ export default defineComponent({
             sync: () => {
                 return useService('fastdl@sync', true)
                     .then(() => {
-                        dispatch('alerts/add', {
+                        state.alerts.add({
                             type: 'success',
                             title: ['server.fastdl.sync_started'],
                         });

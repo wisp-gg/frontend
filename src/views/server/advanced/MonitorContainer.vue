@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
-import { state, dispatch } from '~/core';
+import state from '~/state';
 import { useService } from '~/plugins';
 
 export default defineComponent({
@@ -25,7 +25,7 @@ export default defineComponent({
             toggleMonitor: () => {
                 useService('advanced@toggleMonitor', true)
                     .then(() => {
-                        dispatch('alerts/add', {
+                        state.alerts.add({
                             timeout: 5000,
 
                             type: 'success',

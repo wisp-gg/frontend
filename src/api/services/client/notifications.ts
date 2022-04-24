@@ -1,4 +1,5 @@
-import { Logger, state, dispatch } from '~/core';
+import { Logger } from '~/core';
+import state from '~/state';
 import { Parser } from '~/api/parser';
 import RequestService from './request';
 import Echo from 'laravel-echo';
@@ -10,11 +11,13 @@ class NotificationsService {
     private echo?: Echo;
 
     initializeNotifications() {
+        if (!state.settings.data?.pusher) return Logger.warn('NotificationService', 'Pusher is not configured. Not initializing echo.');
+
         Logger.debug('NotificationsService', 'Initializing echo...');
         try {
             this.echo = new Echo({
                 broadcaster: 'pusher',
-                client: new Pusher(state.settings.data?.pusher?.key!, {
+                client: new Pusher(state.settings.data?.pusher?.key, {
                     cluster: state.settings.data?.pusher?.cluster,
                     forceTLS: true,
                     disableStats: true,
@@ -45,7 +48,7 @@ class NotificationsService {
                     });
 
                     sound.play().catch(() => {});
-                    dispatch('user/update', {
+                    state.user.update({
                         prepend_relationships: {
                             notifications: notification,
                         },

@@ -79,7 +79,7 @@ import { defineComponent } from 'vue';
 import StateLabel from './StateLabel.vue';
 import { PanelMigration } from '~/api/models';
 import { useService } from '~/plugins';
-import { dispatch } from '~/core';
+import state from '~/state';
 
 export default defineComponent({
     components: { StateLabel },
@@ -91,7 +91,7 @@ export default defineComponent({
                 }).then(() => {
                     migration.notifiedUsers = true;
 
-                    dispatch('alerts/add', {
+                    state.alerts.add({
                         type: 'success',
                         title: ['admin.migrator.notified_users']
                     });

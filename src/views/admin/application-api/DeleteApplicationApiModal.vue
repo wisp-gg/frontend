@@ -30,7 +30,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
-import { dispatch } from '~/core';
+import state from '~/state';
 import { ApiKey } from '~/api/models';
 import { useService } from '~/plugins';
 
@@ -52,7 +52,7 @@ export default defineComponent({
             confirm: () => {
                 return useService('apiKeys@delete', 'admin.application_api.delete_api_key', {
                     id: props.apiKey.identifier,
-                }).then(() => dispatch('lists/refresh', 'apiKeys@getAll'));
+                }).then(() => state.lists.refresh('apiKeys@getAll'));
             }
         };
     }

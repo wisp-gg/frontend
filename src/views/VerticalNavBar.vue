@@ -99,9 +99,9 @@
 </style>
 
 <script lang="ts">
-import { defineComponent, computed, ref } from 'vue';
+import { defineComponent, computed } from 'vue';
 import { useRoute } from 'vue-router';
-import { state } from '~/core';
+import state from '~/state';
 import { useService, hasFeatures } from '~/plugins';
 import NavDropdown from './NavDropdown.vue';
 import Notifications from './Notifications.vue';

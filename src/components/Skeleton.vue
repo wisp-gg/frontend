@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
-import { getter } from '~/core';
+import state from '~/state';
 
 export default defineComponent({
     props: {
@@ -23,7 +23,7 @@ export default defineComponent({
         if (!props.content && !props.circle) throw new Error('Skeleton: must define content prop or set circle to true');
 
         return {
-            loading: computed(() => getter<boolean>('loading/isLoading')),
+            loading: computed(() => state.loading.isLoading),
 
             placeholder: computed(() => {
                 if (typeof props.content === 'number') {

@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
-import { state } from '~/core';
+import state from '~/state';
 import PowerActions from '~/views/server/PowerActions.vue';
 import Console from '~/views/server/Console.vue';
 import AcceptEulaModal from '~/views/server/AcceptEulaModal.vue';

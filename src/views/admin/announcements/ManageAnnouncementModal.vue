@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { dispatch } from '~/core';
+import state from '~/state';
 import { Announcement } from '~/api/models';
 import { useService } from '~/plugins';
 
@@ -47,7 +47,7 @@ export default defineComponent({
         return {
             allowedTypes,
 
-            updateList: () => dispatch('lists/refresh', 'announcements@getAll'),
+            updateList: () => state.lists.refresh('announcements@getAll'),
             submit: (data: Record<string, any>) => useService(`announcements@${props.announcement ? 'update' : 'create'}`, true, {
                 ...(props.announcement ? { id: props.announcement.id } : {}),
                 ...data,

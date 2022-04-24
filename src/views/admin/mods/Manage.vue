@@ -59,7 +59,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { state } from '~/core';
+import state from '~/state';
 import { Mod } from '~/api/models';
 import { useService } from '~/plugins';
 import DeleteModModal from './DeleteModModal.vue';

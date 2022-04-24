@@ -106,7 +106,8 @@
 import { defineComponent, ref, watch, computed, onBeforeMount, onBeforeUnmount } from 'vue';
 import { useI18n } from 'vue-i18n';
 import debounce from 'debounce';
-import { Logger, state, dispatch } from '~/core';
+import { Logger } from '~/core';
+import state from '~/state';
 import { useService } from '~/plugins';
 import ListResult from './ListResult.vue';
 
@@ -168,16 +169,16 @@ export default defineComponent({
         });
 
         onBeforeMount(async () => {
-            await dispatch('lists/add', serviceId);
-            await setAttribute('refresh', update);
+            state.lists.add(serviceId);
+            setAttribute('refresh', update);
         });
 
         onBeforeUnmount(async () => {
-            await dispatch('lists/delete', serviceId);
+            state.lists.delete(serviceId);
         });
 
         const setAttribute = (key: string, value: any) => {
-            dispatch('lists/set', {
+            state.lists.set({
                 serviceId,
                 key,
                 value,
@@ -192,7 +193,7 @@ export default defineComponent({
         const update = async () => {
             Logger.debug('List', `Updating list contents from ${props.serviceId}...`);
 
-            const finished = await dispatch('loading/add');
+            const finished = state.loading.add();
             await setAttribute('results', new Array(skeletons).fill(null));
 
             checkboxes = [];

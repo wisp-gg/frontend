@@ -1,7 +1,7 @@
 import { Parser } from '~/api';
 import { Server } from '~/api/models';
-import { dispatch } from '~/core';
 import RequestService from './request';
+import state from '~/state';
 
 interface CreateServerRequest {
     name: string;
@@ -89,7 +89,7 @@ class ServersService {
         return RequestService.put('/servers/:server/details', data)
             .then(Parser.parse)
             .then(server => {
-                dispatch('models/refresh', 'server');
+                state.models.refresh('server');
 
                 return server;
             });
@@ -99,7 +99,7 @@ class ServersService {
         return RequestService.put('/servers/:server/build', data)
             .then(Parser.parse)
             .then(server => {
-                dispatch('models/refresh', 'server');
+                state.models.refresh('server');
 
                 return server;
             });

@@ -1,5 +1,6 @@
 import { RouteRecordRaw } from 'vue-router';
-import { Router, state } from '~/core';
+import { Router } from '~/core';
+import state from '~/state';
 import { Admin, Authenticated, Guest, Permission, Feature, TOTP, ModelBindings } from '~/middlewares';
 import { GenericLayout, PopupLayout, Passthrough, TabberPassthrough } from '~/views';
 import { NotFoundView } from '~/views/errors';

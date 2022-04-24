@@ -1,7 +1,7 @@
 import { Parser } from '~/api';
 import { Egg } from '~/api/models';
 import RequestService from './request';
-import { dispatch } from '~/core';
+import state from '~/state';
 
 interface CreateEggRequest {
     name: string;
@@ -84,7 +84,7 @@ class EggsService {
         })
             .then(Parser.parse)
             .then(egg => {
-                dispatch('models/refresh', 'egg');
+                state.models.refresh('egg');
 
                 return egg;
             });

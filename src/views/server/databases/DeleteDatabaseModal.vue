@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
-import { dispatch } from '~/core';
+import state from '~/state';
 import { ServerDatabase } from '~/api/models';
 import { useService } from '~/plugins';
 
@@ -46,7 +46,7 @@ export default defineComponent({
             confirm: () => {
                 return useService('databases@delete', 'server.databases.delete_database', {
                     id: props.database.id
-                }).then(() => dispatch('lists/refresh', 'databases@getAll'));
+                }).then(() => state.lists.refresh('databases@getAll'));
             }
         };
     }

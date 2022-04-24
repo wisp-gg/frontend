@@ -42,7 +42,7 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { state } from '~/core';
+import state from '~/state';
 import { bytesToString } from '~/helpers';
 import StatusIndicator from '~/views/StatusIndicator.vue';
 import { NavBarPosition } from '~/api/models/User';
@@ -53,7 +53,7 @@ export default defineComponent({
         const { t } = useI18n();
 
         const server = state.models.server;
-        const socket = state.server.socket;
+        const socket = state.server;
 
         return {
             server,

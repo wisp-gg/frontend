@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
-import { state } from '~/core';
+import state from '~/state';
 
 export default defineComponent({
     inheritAttrs: false, // Hack to cause vue not to cry about "extraneous props (class)", even though they're needed if any alerts were active.

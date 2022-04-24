@@ -1,4 +1,4 @@
-import { Alert } from '~/store/modules/alerts';
+import { Alert } from '~/state/alerts';
 
 export class TranslatableError extends Error {
     constructor(public title: TranslatableMessage, public messages: TranslatableMessage[] = []) {

@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { dispatch } from '~/core';
+import state from '~/state';
 import { triggerDaemonAction, useDaemonEvent } from '~/plugins';
 
 export default defineComponent({
@@ -34,12 +34,12 @@ export default defineComponent({
                     finished();
 
                     if (data.url) {
-                        dispatch('alerts/add', {
+                        state.alerts.add({
                             type: 'success',
                             title: ['server.logs.upload_complete', { url: data.url }],
                         });
                     } else {
-                        dispatch('alerts/add', {
+                        state.alerts.add({
                             type: 'danger',
                             title: ['server.logs.upload_failed'],
                         });

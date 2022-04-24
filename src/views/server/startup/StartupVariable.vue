@@ -52,7 +52,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, inject } from 'vue';
-import { dispatch } from '~/core';
+import state from '~/state';
 import { hasPermissions, useService } from '~/plugins';
 import { ServerVariable } from '~/api/models';
 
@@ -72,7 +72,7 @@ export default defineComponent({
                 if (!props.variable?.envVariable) return; // No variable, Skeleton maybe?
 
                 const alertKey = `server.startup.variable(${props.variable?.envVariable})`;
-                dispatch('alerts/clear', alertKey);
+                state.alerts.clear(alertKey);
 
                 useService<ListResponse>('startup@save', alertKey, {
                     environment: {
@@ -81,12 +81,13 @@ export default defineComponent({
                 }).then(data => {
                     updateStartupCommand(data.meta.startupCommand);
 
-                    dispatch('lists/set', {
+
+                    state.lists.set({
                         serviceId: 'startup@getAll',
                         key: 'results',
                         value: data.data,
                     });
-                    dispatch('alerts/add', {
+                    state.alerts.add({
                         key: alertKey,
                         timeout: 2500,
 

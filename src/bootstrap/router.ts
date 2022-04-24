@@ -1,36 +1,38 @@
 import { computed, watch } from 'vue';
 import { RouteRecordRaw } from 'vue-router';
 import { getRouteParams } from '~/helpers';
-import { Logger, Router, Store, Lang, state, dispatch } from '~/core';
+import { Logger, Router, Lang } from '~/core';
 import { globalMiddlewares } from '~/routes';
-import { RouteData } from '~/store/modules/navigation';
+import state from '~/state';
+import { RouteData } from '~/state/navigation';
 import { Passthrough, TabberPassthrough } from '~/views';
 
-const pageTitle = computed(() => {
-    const branding = state.settings.data?.branding?.name || 'WISP';
-    const routeName = Router.currentRoute.value.name?.toString();
-    const routeMatched = Router.currentRoute.value.matched;
-    if (!routeName || routeMatched.length < 0) return `${branding} | Game Panel`;
-
-    const routeTranslation = Lang.global.t(`navigation.${routeName}.title`);
-
-    // TODO: this should also consider (Tabber)Passthrough with separation of admin and client area
-    const route = routeMatched[routeMatched.length - 1];
-    for(const path of route.path.split('/')) {
-        if (!path.startsWith(':')) continue;
-
-        const paramName = path.substring(1);
-        if (paramName in state.models) {
-            const model = state.models[paramName];
-            if (!model.name) continue;
-
-            return `${branding} | ${model.name} - ${routeTranslation}`;
-        }
-    }
-
-    return `${branding} | ${routeTranslation}`;
-});
-watch(pageTitle, (value: string) => document.title = value);
+// TODO: Wait till pinia is initialized
+// const pageTitle = computed(() => {
+//     const branding = state.settings.data?.branding?.name || 'WISP';
+//     const routeName = Router.currentRoute.value.name?.toString();
+//     const routeMatched = Router.currentRoute.value.matched;
+//     if (!routeName || routeMatched.length < 0) return `${branding} | Game Panel`;
+//
+//     const routeTranslation = Lang.global.t(`navigation.${routeName}.title`);
+//
+//     // TODO: this should also consider (Tabber)Passthrough with separation of admin and client area
+//     const route = routeMatched[routeMatched.length - 1];
+//     for(const path of route.path.split('/')) {
+//         if (!path.startsWith(':')) continue;
+//
+//         const paramName = path.substring(1);
+//         if (paramName in state.models) {
+//             const model = state.models[paramName];
+//             if (!model.name) continue;
+//
+//             return `${branding} | ${model.name} - ${routeTranslation}`;
+//         }
+//     }
+//
+//     return `${branding} | ${routeTranslation}`;
+// });
+// watch(pageTitle, (value: string) => document.title = value);
 
 function normalizeMiddleware(middleware: Middleware | [Middleware, number]) {
     return Array.isArray(middleware) ? middleware : [middleware, 0];
@@ -47,7 +49,7 @@ function getMiddlewares(global: PrioritizationMiddleware = [], route: undefined 
 }
 
 Router.beforeEach(async (to, from, next) => {
-    await dispatch('alerts/clear');
+    state.alerts.clear();
 
     const { user: { initialized: initializedUser }, settings: { initialized: initializedSettings } } = state;
     if (!initializedUser || !initializedSettings) {
@@ -57,8 +59,8 @@ Router.beforeEach(async (to, from, next) => {
             new Promise<void>(resolve => {
                 if (initializedUser) return resolve();
 
-                const finished = Store.subscribeAction(action => {
-                    if (action.type === 'user/markInitialized') {
+                const finished = state.user.$onAction(action => {
+                    if (action.name === 'markInitialized') {
                         resolve();
                         finished();
                     }
@@ -67,8 +69,8 @@ Router.beforeEach(async (to, from, next) => {
             new Promise<void>(resolve => {
                 if (initializedSettings) return resolve();
 
-                const finished = Store.subscribeAction(action => {
-                    if (action.type === 'settings/markInitialized') {
+                const finished = state.settings.$onAction(action => {
+                    if (action.name === 'markInitialized') {
                         resolve();
                         finished();
                     }
@@ -80,7 +82,7 @@ Router.beforeEach(async (to, from, next) => {
     const middlewares = getMiddlewares(globalMiddlewares, to.meta?.middlewares);
     Logger.debug('Router', `Visit ${from.fullPath} -> ${to.fullPath} [middlewares: ${middlewares.map(a => a.name()).join(', ')}]`);
 
-    await dispatch('navigation/setCurrentRoute', {
+    state.navigation.setCurrentRoute({
         name: to.name ? to.name.toString() : 'unknown',
         icon: to.meta?.icon || 'unknown',
         params: to.params,
@@ -92,7 +94,7 @@ Router.beforeEach(async (to, from, next) => {
         if (res !== undefined) {
             Logger.debug('Router', `Middleware ${middleware.name()} failed.`);
 
-            await dispatch('navigation/setCurrentRoute', {
+            state.navigation.setCurrentRoute({
                 name: from.name ? from.name.toString() : 'unknown',
                 icon: from.meta?.icon || 'unknown',
                 params: from.params,
@@ -180,7 +182,7 @@ Router.afterEach(async guard => {
             break;
         }
 
-        await dispatch('navigation/setRoutes', routes);
+        state.navigation.setRoutes(routes);
     }
 
     const middlewares = getMiddlewares(globalMiddlewares, guard.meta?.middlewares);

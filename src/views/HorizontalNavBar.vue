@@ -107,9 +107,9 @@
 <script lang="ts">
 import { defineComponent, computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
-import { state, Store } from '~/core';
+import state from '~/state';
 import { useService, hasFeatures } from '~/plugins';
-import { RouteData } from '~/store/modules/navigation';
+import { RouteData } from '~/state/navigation';
 import fullLogo from '~/assets/svg/wisp/full_logo.svg';
 import ServerWidget from '~/views/ServerWidget.vue';
 import Announcements from '~/views/Announcements.vue';
@@ -121,9 +121,10 @@ export default defineComponent({
         const route = useRoute();
         const hoveredCategory = ref<RouteData | null>(null);
 
-        Store.subscribe(mutation => {
-            if (mutation.type === 'navigation/setCurrentRoute') {
-                if (hoveredCategory.value && !mutation.payload.name.startsWith(hoveredCategory.value.name)) {
+        // TODO: Unregister on unmounted
+        state.navigation.$onAction(action => {
+            if (action.name === 'setCurrentRoute') {
+                if (hoveredCategory.value && !action.args[0]?.name.startsWith(hoveredCategory.value.name)) {
                     hoveredCategory.value = null;
                 }
             }

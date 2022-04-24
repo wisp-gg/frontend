@@ -8,13 +8,13 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
-import { state } from '~/core';
+import state from '~/state';
 
 export default defineComponent({
     setup() {
         return {
             server: computed(() => state.models.server),
-            socket: computed(() => state.server.socket),
+            socket: computed(() => state.server),
         };
     },
 });

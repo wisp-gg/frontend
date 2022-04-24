@@ -158,7 +158,8 @@
 import { computed, defineComponent } from 'vue';
 import { useI18n } from 'vue-i18n';
 import cronstrue from 'cronstrue/i18n';
-import { formatDateAbsolute, state } from '~/core';
+import { formatDateAbsolute } from '~/core';
+import state from '~/state';
 import { useService } from '~/plugins';
 import ManageScheduleModal from './ManageScheduleModal.vue';
 import DeleteScheduleModal from './DeleteScheduleModal.vue';

@@ -11,7 +11,7 @@ dayjs.extend(UTC);
 dayjs.extend(Timezone);
 
 import Logger from './logger';
-import { default as Store } from './store';
+import state from '~/state';
 
 function setDayjsLocale(name: string, dates: Record<string, any>) {
     dates.name = name;
@@ -103,12 +103,13 @@ export async function setCurrentLanguage(language: string) {
     else global.locale = language;
 }
 
-Store.subscribe(mutation => {
-    if (mutation.type === 'user/update') {
-        const newLanguage = mutation.payload?.preferences?.language;
-        if (newLanguage) setCurrentLanguage(newLanguage);
-    }
-});
+// TODO: Wait till pinia is initialized
+// state.user.$onAction(action => {
+//     if (action.name === 'update') {
+//         const newLanguage = action.args[0]?.preferences?.language;
+//         if (newLanguage) setCurrentLanguage(newLanguage);
+//     }
+// });
 
 function createDayjsInstance(value: string, timezone?: string) {
     if (timezone) return dayjs(value).tz(timezone).locale(lang.global.locale);

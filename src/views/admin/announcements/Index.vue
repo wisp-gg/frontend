@@ -46,7 +46,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { dispatch } from '~/core';
+import state from '~/state';
 import { useService } from '~/plugins';
 import { Announcement } from '~/api/models';
 import ManageAnnouncementModal from './ManageAnnouncementModal.vue';
@@ -58,7 +58,7 @@ export default defineComponent({
         return {
             resendAnnouncement: (announcement: Announcement) => {
                 return useService('announcements@resend', true, { id: announcement.id })
-                    .then(() => dispatch('alerts/add', {
+                    .then(() => state.alerts.add({
                         type: 'success',
                         title: ['admin.announcements.announcement_resent'],
                     }));

@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
-import { dispatch } from '~/core';
+import state from '~/state';
 import { ServerSubuser } from '~/api/models';
 import { useService } from '~/plugins';
 
@@ -46,7 +46,7 @@ export default defineComponent({
             confirm: () => {
                 return useService('subusers@delete', 'server.subusers.delete_subuser', {
                     id: props.subuser.id
-                }).then(() => dispatch('lists/refresh', 'subusers@getAll'));
+                }).then(() => state.lists.refresh('subusers@getAll'));
             }
         };
     }

@@ -74,12 +74,12 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { state } from '~/core';
+import state from '~/state';
 import { onModelLoaded } from '~/plugins';
 import { Egg } from '~/api/models';
 import Alert from '~/components/Alert.vue';
+import ImportUpdateModal from './ImportUpdateModal.vue';
 import DeleteEggModal from './DeleteEggModal.vue';
-import ImportUpdateModal from "~/views/admin/nests/eggs/ImportUpdateModal.vue";
 
 export default defineComponent({
     components: { ImportUpdateModal, DeleteEggModal, Alert },

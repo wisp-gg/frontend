@@ -29,7 +29,7 @@
 <script lang="ts">
 import Popper from 'vue3-popper';
 import { computed, defineComponent } from 'vue';
-import { dispatch, state } from '~/core';
+import state from '~/state';
 import { useService } from '~/plugins';
 import Announcement from './Announcement.vue';
 import { NavBarPosition } from '~/api/models/User';
@@ -52,7 +52,7 @@ export default defineComponent({
             readAllAnnouncements: () => {
                 useService('client:account@markAnnouncementsRead', true)
                     .then(() => {
-                        dispatch('user/update', {
+                        state.user.update({
                             update_relationships: {
                                 announcements: [],
                             },

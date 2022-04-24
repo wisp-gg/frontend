@@ -117,7 +117,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
-import { state, dispatch } from '~/core';
+import state from '~/state';
 import { useService } from '~/plugins';
 import { Location } from '~/api/models';
 
@@ -125,7 +125,7 @@ export default defineComponent({
     setup() {
         const selectedLocation = ref<Location>();
 
-        const createAlert = (title: string) => dispatch('alerts/add', {
+        const createAlert = (title: string) => state.alerts.add({
             type: 'success',
             title: [title],
         });

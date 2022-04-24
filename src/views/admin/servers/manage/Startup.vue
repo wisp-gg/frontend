@@ -56,7 +56,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
-import { state } from '~/core';
+import state from '~/state';
 import { onModelLoaded, useService } from '~/plugins';
 import { Egg, ServerVariable } from '~/api/models';
 import StartupVariable from '../StartupVariable.vue';

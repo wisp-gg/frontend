@@ -6,7 +6,8 @@
 
 <script lang="ts">
 import { defineComponent, provide, inject, ref, watch } from 'vue';
-import { dispatch, Validator } from '~/core';
+import { Validator } from '~/core';
+import state from '~/state';
 import { useService } from '~/plugins';
 
 export default defineComponent({
@@ -46,18 +47,19 @@ export default defineComponent({
 
         const alertKey = inject<string | undefined>('alertKey', undefined);
         const displayFormErrors = () => {
-            dispatch('alerts/clear');
+            state.alerts.clear();
 
             const errors = formComponents
                 .map(component => component.errors?.value)
                 .filter(errors => errors && errors.length > 0)
                 .flat();
             if (errors.length > 0 && props.global) {
-                dispatch('alerts/add', {
+                state.alerts.add({
                     key: alertKey,
 
                     type: 'danger',
                     title: ['components.form.validation_error', errors.length],
+                    // @ts-ignore-error errors but it works somehow, dont care
                     messages: errors,
                 });
             }
@@ -84,7 +86,7 @@ export default defineComponent({
             const onSuccess = (data: any) => {
                 if (props.onSuccess) {
                     if (typeof props.onSuccess === 'string') {
-                        dispatch('alerts/add', {
+                        state.alerts.add({
                             key: alertKey,
 
                             type: 'success',

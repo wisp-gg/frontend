@@ -1,7 +1,7 @@
-import { dispatch } from '~/core';
 import { Parser } from '~/api';
 import { ApiKey } from '~/api/models';
 import RequestService from './request';
+import state  from '~/state';
 
 export interface Generate2FaData {
     email: string;
@@ -21,7 +21,7 @@ class SecurityService {
     enable2Fa(data: Toggle2FaData) {
         return RequestService.put('/security/totp', data)
             .then(res => {
-                dispatch('user/update', { useTotp: true });
+                state.user.update({ useTotp: true });
 
                 return res;
             });
@@ -30,7 +30,7 @@ class SecurityService {
     disable2Fa(data: Toggle2FaData) {
         return RequestService.delete('/security/totp', data)
             .then(res => {
-                dispatch('user/update', { useTotp: false });
+                state.user.update({ useTotp: false });
 
                 return res;
             });

@@ -54,7 +54,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
-import { dispatch, state } from '~/core';
+import state from '~/state';
 import CreateCredentialButton from './CreateCredentialButton.vue';
 import Enable2faButton from './Enable2faButton.vue';
 import { ApiKey } from '~/api/models';
@@ -63,7 +63,7 @@ import { useService } from '~/plugins';
 export default defineComponent({
     components: { CreateCredentialButton, Enable2faButton },
     setup() {
-        const updateList = () => dispatch('lists/refresh', 'account@getCredentials');
+        const updateList = () => state.lists.refresh('account@getCredentials');
 
         return {
             user: computed(() => state.user.data),

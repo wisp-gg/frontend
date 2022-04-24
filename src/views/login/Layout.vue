@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
-import { state } from '~/core';
+import state from '~/state';
 import fullLogo from '~/assets/svg/wisp/full_logo.svg';
 
 export default defineComponent({

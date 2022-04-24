@@ -57,7 +57,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { dispatch } from '~/core';
+import state from '~/state';
 import { useDaemonEvent, triggerDaemonAction } from '~/plugins';
 import { WorkshopDownloadState, WorkshopDownloadStatus } from '~/api/services/daemon/types';
 
@@ -139,7 +139,7 @@ export default defineComponent({
                     resolve = undefined;
 
                     if (finished) {
-                        dispatch('lists/refresh', 'files@getDirectory');
+                        state.lists.refresh('files@getDirectory');
 
                         finished = false;
                     }

@@ -1,7 +1,7 @@
 import RequestService from './request';
+import state from '~/state';
 import { Parser } from '~/api';
 import { ScheduleTask } from '~/api/models';
-import { dispatch } from '~/core';
 
 interface CreateTaskRequest {
     action: string;
@@ -22,7 +22,7 @@ class ScheduleTasksService {
         return RequestService.post('/servers/:server/schedules/:schedule/tasks', data)
             .then(Parser.parse)
             .then((task: ScheduleTask) => {
-                dispatch('models/refresh', 'schedule');
+                state.models.refresh('schedule');
 
                 return task;
             });
@@ -32,7 +32,7 @@ class ScheduleTasksService {
         return RequestService.patch(`/servers/:server/schedules/:schedule/tasks/${data.id}`, data)
             .then(Parser.parse)
             .then((task: ScheduleTask) => {
-                dispatch('models/refresh', 'schedule');
+                state.models.refresh('schedule');
 
                 return task;
             });
@@ -40,7 +40,7 @@ class ScheduleTasksService {
 
     delete(data: DeleteTaskRequest): Promise<void> {
         return RequestService.delete(`/servers/:server/schedules/:schedule/tasks/${data.id}`)
-            .then(() => dispatch('models/refresh', 'schedule'));
+            .then(() => state.models.refresh('schedule'));
     }
 }
 

@@ -29,7 +29,7 @@
 <script lang="ts">
 import { defineComponent, ref, watch, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import { dispatch } from '~/core';
+import state from '~/state';
 import { useService } from '~/plugins';
 import { FileContents } from '~/api/services/client/files';
 import FileBreadcrumbs from './FileBreadcrumbs.vue';
@@ -84,7 +84,7 @@ export default defineComponent({
             }),
 
             onSuccess: (data: Record<string, any>) => {
-                dispatch('alerts/add', {
+                state.alerts.add({
                     type: 'success',
                     title: ['server.files.file_saved'],
                 });

@@ -47,7 +47,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref } from 'vue';
-import { state, dispatch } from '~/core';
+import state from '~/state';
 import { useService } from '~/plugins';
 import CreateDatabaseModal from './CreateDatabaseModal.vue';
 import DeleteDatabaseModal from './DeleteDatabaseModal.vue';
@@ -67,7 +67,7 @@ export default defineComponent({
                 return useService('databases@rotatePassword', true, {
                     id
                 })
-                    .then(() => dispatch('lists/refresh', 'databases@getAll'));
+                    .then(() => state.lists.refresh('databases@getAll'));
             },
 
             listFields: <ListField[]>[

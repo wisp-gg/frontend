@@ -49,7 +49,7 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { state } from '~/core';
+import state from '~/state';
 import { User } from '~/api/models';
 import DeleteUserModal from '../DeleteUserModal.vue';
 

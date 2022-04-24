@@ -25,7 +25,7 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { dispatch, state } from '~/core';
+import state from '~/state';
 import { Schedule } from '~/api/models';
 import { useService } from '~/plugins';
 
@@ -61,7 +61,7 @@ export default defineComponent({
                             }
                         });
                     } else {
-                        dispatch('lists/refresh', 'schedules@getAll');
+                        state.lists.refresh('schedules@getAll');
                     }
                 });
             }

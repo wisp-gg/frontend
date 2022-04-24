@@ -37,7 +37,7 @@
 import { defineComponent } from 'vue';
 import { useService } from '~/plugins';
 import { Plugin } from '~/api/models';
-import { dispatch } from '~/core';
+import state from '~/state';
 
 export default defineComponent({
     setup() {
@@ -47,7 +47,7 @@ export default defineComponent({
                     plugin_id: plugin.id,
                 });
 
-                dispatch('alerts/add', {
+                state.alerts.add({
                     type: 'success',
                     title: ['server.plugins.plugin_installed', {
                         name: plugin.name,

@@ -1,4 +1,4 @@
-import { getter } from '~/core';
+import state from '~/state';
 
 class Guest implements Middleware {
     name() {
@@ -6,8 +6,7 @@ class Guest implements Middleware {
     }
 
     async run() {
-        const loggedIn = getter<boolean>('user/loggedIn');
-        if (!loggedIn) return;
+        if (!state.user.loggedIn) return;
 
         return {
             name: 'index',

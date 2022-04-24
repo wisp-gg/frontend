@@ -1,7 +1,7 @@
 import RequestService from './request';
 import { Node } from '~/api/models';
 import { Parser } from '~/api';
-import { dispatch } from '~/core';
+import state from '~/state';
 
 interface GetNodeDaemonInfoRequest {
     id: number;
@@ -66,7 +66,7 @@ class NodeService {
         return RequestService.put('/nodes/:node', data)
             .then(Parser.parse)
             .then(node => {
-                dispatch('models/refresh', 'node');
+                state.models.refresh('node');
 
                 return node;
             });

@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { state, dispatch } from '~/core';
+import state from '~/state';
 import DaemonWrapper from '~/api/services/daemon/wrapper';
 import { onModelLoaded } from '~/plugins';
 
@@ -150,7 +150,7 @@ function handleFinishUpload(evt: any) {
 DaemonWrapper.registerEvent('upload-complete', handleFinishUpload);
 DaemonWrapper.registerEvent('upload-error', evt => {
     if (evt.code === 1 || evt.file?.size > (state.models.server?.node?.uploadSize || 100) * 1024 * 1024) {
-        dispatch('alerts/add', {
+        state.alerts.add({
             type: 'danger',
             title: ['server.files.upload_too_large', { name: evt.file.name }],
         });

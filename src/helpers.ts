@@ -1,4 +1,4 @@
-import { state } from '~/core';
+import state from '~/state';
 
 export function bytesToString(bytes: number): [number, string] {
     if (bytes === 0) return [0, 'bytes'];

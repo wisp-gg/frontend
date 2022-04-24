@@ -52,7 +52,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
-import { state } from '~/core';
+import state from '~/state';
 import DetailsAttribute from './DetailsAttribute.vue';
 
 export default defineComponent({
@@ -61,7 +61,7 @@ export default defineComponent({
         return {
             server: computed(() => state.models.server),
             limits: computed(() => state.models.server?.limits),
-            query: computed(() => state.server.socket.query),
+            query: computed(() => state.server.query),
         };
     },
 });

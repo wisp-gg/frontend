@@ -164,7 +164,8 @@ import { defineComponent, onMounted, ref, computed, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import Popper from 'vue3-popper';
-import { Logger, state, dispatch } from '~/core';
+import { Logger } from '~/core';
+import state from '~/state';
 import { supportsDragAndDrop } from '~/plugins';
 import { isAvailable, pendingFiles, handleUploadEvent, uploadPrompt, setOnAllUploadsFinishCallback } from '~/plugins/upload';
 import FileBreadcrumbs from './FileBreadcrumbs.vue';
@@ -249,7 +250,7 @@ export default defineComponent({
                     if (isAvailable()) {
                         handleUploadEvent(e, path.value);
                     } else {
-                        dispatch('alerts/add', {
+                        state.alerts.add({
                             type: 'danger',
                             title: ['server.files.upload_unavailable'],
                         });
@@ -262,7 +263,7 @@ export default defineComponent({
 
         const listElement = ref<any | undefined>();
         setOnAllUploadsFinishCallback(() => {
-            dispatch('lists/refresh', 'files@getDirectory');
+            state.lists.refresh('files@getDirectory');
         });
 
         return {

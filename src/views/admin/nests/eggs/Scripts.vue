@@ -62,7 +62,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
-import { state } from '~/core';
+import state from '~/state';
 
 export default defineComponent({
     setup() {

@@ -34,7 +34,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { dispatch } from '~/core';
+import state from '~/state';
 import { useService } from '~/plugins';
 import { Backup } from '~/api/models';
 import { DownloadBackupRequest } from '~/api/services/client/backups';
@@ -44,7 +44,7 @@ import DeleteBackupModal from './DeleteBackupModal.vue';
 export default defineComponent({
     components: { CreateBackupModal, DeleteBackupModal },
     setup() {
-        const updateList = () => dispatch('lists/refresh', 'backups@getAll');
+        const updateList = () => state.lists.refresh('backups@getAll');
 
         return {
             listFields: <ListField[]>[

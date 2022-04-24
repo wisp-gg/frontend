@@ -70,14 +70,14 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
-import { state, dispatch } from '~/core';
-import Alert from '~/components/Alert.vue';
+import state from '~/state';
 import { useService } from '~/plugins';
+import Alert from '~/components/Alert.vue';
 
 export default defineComponent({
     components: { Alert },
     setup() {
-        const updateList = () => dispatch('lists/refresh', 'serverDatabases@getAll');
+        const updateList = () => state.lists.refresh('serverDatabases@getAll');
         return {
             server: computed(() => state.models.server!),
 
