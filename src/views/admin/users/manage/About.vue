@@ -10,6 +10,7 @@
                 </div>
 
                 <v-input name="external_id" footer="admin.users.external_id_footer" :value="user?.externalId ?? ''" />
+                <v-select name="preferences.language" prefix="generic.languages" footer="admin.users.language_footer" :value="currentLanguage" :options="languages" />
                 <v-switch name="use_totp" label="admin.users.2fa_enabled" footer="admin.users.2fa_enabled_footer" :value="user?.useTotp" v-if="!creating" />
             </container>
 
@@ -49,7 +50,7 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { state } from '~/core';
+import { getAvailableLanguages, state } from '~/core';
 import { User } from '~/api/models';
 import DeleteUserModal from '../DeleteUserModal.vue';
 
@@ -66,6 +67,8 @@ export default defineComponent({
         return {
             creating,
             user: computed(() => state.models.user),
+            languages: computed(() => getAvailableLanguages()), // TODO: these should be sorted by alphabet in their respective lang (or don't be translated at all...?)
+            currentLanguage: computed(() => state.models.user?.preferences?.language),
 
             onSuccess: (user: User) => {
                 if (creating.value) router.push({

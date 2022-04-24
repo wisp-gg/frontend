@@ -304,6 +304,7 @@
 
     "identity": "Identity",
     "external_id_footer": "Leave empty to not assign an external identifier for this user. The external ID should be unique to this user and not be in use by any other users.",
+    "language_footer": "Leave empty to use the default language. The language the user's panel will be displayed in, this is changeable on the user's end in the account settings too.",
     "2fa_enabled": "2FA Enabled",
     "2fa_enabled_footer": "This requires the user to have 2FA already setup, or otherwise they will not be able to login into their account.",
 

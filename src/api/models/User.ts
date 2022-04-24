@@ -17,6 +17,7 @@ export class User extends BaseModel {
     public nameFirst = '';
     public nameLast = '';
     public useTotp = false;
+    public preferences: UserPreferences | undefined;
 
     public get fullName(): string {
         return `${this.nameFirst} ${this.nameLast}`;
@@ -28,7 +29,7 @@ export class User extends BaseModel {
 
     // Currently authenticated user props (or if in admin area)
     public id = -1;
-    public preferences: UserPreferences | undefined;
+
     public rootAdmin = false;
     public supportOp = false;
     public ssoEnabled = false;
