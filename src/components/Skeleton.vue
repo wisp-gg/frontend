@@ -26,7 +26,7 @@ export default defineComponent({
         if (!props.content && !props.circle) throw new Error('Skeleton: must define content prop or set circle to true');
 
         const isLoading = getter<(id?: string) => boolean>('loading/isLoading');
-        const skeletonContext = inject<undefined | (() => string | string[])>('skeletonContext', undefined);
+        const skeletonContext = inject<undefined | (() => string[])>('skeletonContext', undefined);
 
         if (!props.when && !skeletonContext) {
             Logger.warn('Skeleton', 'Detected no context information for when I should be displayed :(');

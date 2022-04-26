@@ -1,33 +1,31 @@
 <template>
-    <skeleton-context when="ModelBindings@server">
-        <div class="grid xl:grid-cols-3 items-start gap-x-4 gap-y-4">
-            <container title="server.advanced.toggle_support_access">
-                <p class="flex-grow">
-                    <t path="server.advanced.support.description" />
-                </p>
+    <div class="grid xl:grid-cols-3 items-start gap-x-4 gap-y-4">
+        <container title="server.advanced.toggle_support_access">
+            <p class="flex-grow">
+                <t path="server.advanced.support.description" />
+            </p>
 
-                <skeleton :content="16">
-                    <v-button class="mt-3 w-full" :color="server.supportOp ? 'danger' : 'primary'" @click="toggleSupport">
-                        <t :path="`generic.${server.supportOp ? 'disable' : 'enable'}`" />
-                    </v-button>
-                </skeleton>
-            </container>
+            <skeleton :content="16">
+                <v-button class="mt-3 w-full" :color="server.supportOp ? 'danger' : 'primary'" @click="toggleSupport">
+                    <t :path="`generic.${server.supportOp ? 'disable' : 'enable'}`" />
+                </v-button>
+            </skeleton>
+        </container>
 
-            <can feature="updater" v-if="canUpdate">
-                <update-container />
-            </can>
+        <can feature="updater" v-if="canUpdate">
+            <update-container />
+        </can>
 
-            <monitor-container />
+        <monitor-container />
 
-            <can feature="version-manager">
-                <template #no-feature>
-                    <reinstall-container />
-                </template>
+        <can feature="version-manager">
+            <template #no-feature>
+                <reinstall-container />
+            </template>
 
-                <install-different-edition-container />
-            </can>
-        </div>
-    </skeleton-context>
+            <install-different-edition-container />
+        </can>
+    </div>
 </template>
 
 <script lang="ts">

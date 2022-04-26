@@ -99,7 +99,7 @@
 </style>
 
 <script lang="ts">
-import { defineComponent, computed, ref } from 'vue';
+import { defineComponent, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { state } from '~/core';
 import { useService, hasFeatures } from '~/plugins';

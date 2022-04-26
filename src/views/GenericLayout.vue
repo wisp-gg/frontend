@@ -40,7 +40,9 @@
 
                 <alerts class="mb-8" />
 
-                <router-view />
+                <skeleton-context :when="skeletonContext">
+                    <router-view />
+                </skeleton-context>
             </div>
 
             <v-footer />
@@ -111,7 +113,6 @@ import VerticalNavBar from './VerticalNavBar.vue';
 import SocketErrorNotice from '~/views/SocketErrorNotice.vue';
 import ServerError from '~/views/errors/ServerError.vue';
 
-// TODO: consider wrapping <router-view> automatically in <skeleton-context> to avoid ModelBindings@ wrappers around pages
 export default defineComponent({
     components: {
         MobileNav,
@@ -147,6 +148,7 @@ export default defineComponent({
 
                 return res;
             }),
+            skeletonContext: computed(() => Object.keys(state.navigation.currentRoute?.params || {}).map(name => `ModelBindings@${name}`)),
         };
     },
 });

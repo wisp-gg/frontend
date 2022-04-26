@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="text-right mt-4 space-x-4 ">
-                    <skeleton :content="4" when="ModelBindings@nest">
+                    <skeleton :content="4">
                         <delete-nest-modal :nest="nest" />
                     </skeleton>
 
