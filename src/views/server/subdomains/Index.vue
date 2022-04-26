@@ -1,31 +1,33 @@
 <template>
-    <container title="server.subdomains.title" no-padding>
-        <template #actions>
-            <div class="text-right">
-                <create-subdomain-modal />
-            </div>
-        </template>
-
-        <list service-id="subdomains@getAll" :fields="listFields">
-            <template #headers-after>
-                <th />
+    <skeleton-context when="ModelBindings@server">
+        <container title="server.subdomains.title" no-padding>
+            <template #actions>
+                <div class="text-right">
+                    <create-subdomain-modal />
+                </div>
             </template>
 
-            <template #field-allocation="{ result }">
-                <code v-clipboard>
-                    {{ result.allocation?.connection }}
-                </code>
-            </template>
+            <list service-id="subdomains@getAll" :fields="listFields">
+                <template #headers-after>
+                    <th />
+                </template>
 
-            <template #fields-after="{ result }">
-                <td class="p-6 text-right">
-                    <skeleton :content="4">
-                        <delete-subdomain-modal :subdomain="result" />
-                    </skeleton>
-                </td>
-            </template>
-        </list>
-    </container>
+                <template #field-allocation="{ result }">
+                    <code v-clipboard>
+                        {{ result.allocation?.connection }}
+                    </code>
+                </template>
+
+                <template #fields-after="{ result }">
+                    <td class="p-6 text-right">
+                        <skeleton :content="4">
+                            <delete-subdomain-modal :subdomain="result" />
+                        </skeleton>
+                    </td>
+                </template>
+            </list>
+        </container>
+    </skeleton-context>
 </template>
 
 <script lang="ts">

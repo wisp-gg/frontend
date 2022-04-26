@@ -2,15 +2,17 @@
     <div>
         <list service-id="startup@getAll" :skeletons="6" @meta="onMeta">
             <template #results="{ results }">
-                <container title="server.startup.startup_command">
-                    <input class="input" id="startup_command" v-clipboard="startupCommand" :value="startupCommand" readonly>
-                </container>
+                <skeleton-context when="startup@getAll">
+                    <container title="server.startup.startup_command">
+                        <input class="input" id="startup_command" v-clipboard="startupCommand" :value="startupCommand" readonly>
+                    </container>
 
-                <div class="flex flex-wrap flex-col lg:flex-row mt-4 gap-y-4">
-                    <div class="w-full lg:w-1/2 lg:odd:pr-2 lg:even:pl-2" v-for="(result, idx) of results" :key="idx">
-                        <startup-variable :variable="result" />
+                    <div class="flex flex-wrap flex-col lg:flex-row mt-4 gap-y-4">
+                        <div class="w-full lg:w-1/2 lg:odd:pr-2 lg:even:pl-2" v-for="(result, idx) of results" :key="idx">
+                            <startup-variable :variable="result" />
+                        </div>
                     </div>
-                </div>
+                </skeleton-context>
             </template>
         </list>
     </div>

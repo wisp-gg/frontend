@@ -1,118 +1,120 @@
 <template>
-    <div class="grid lg:grid-cols-3 gap-x-4 gap-y-4 items-start">
-        <container title="admin.servers.advanced.reinstall_server">
-            <t path="admin.servers.advanced.reinstall_server_note" />
+    <skeleton-context when="ModelBindings@server">
+        <div class="grid lg:grid-cols-3 gap-x-4 gap-y-4 items-start">
+            <container title="admin.servers.advanced.reinstall_server">
+                <t path="admin.servers.advanced.reinstall_server_note" />
 
-            <v-button class="w-full mt-4" color="danger" permission="server.reinstall" @click="reinstall">
-                <t path="generic.reinstall" />
-            </v-button>
-        </container>
-
-        <container title="admin.servers.advanced.install_status">
-            <t path="admin.servers.advanced.install_status_note" />
-
-            <v-button class="w-full mt-4" color="info" permission="server.toggle_install" @click="toggleInstall">
-                <t path="generic.toggle" />
-            </v-button>
-        </container>
-
-        <container title="admin.servers.advanced.rebuild_container">
-            <t path="admin.servers.advanced.rebuild_container_note" />
-
-            <v-button class="w-full mt-4" color="primary" permission="server.rebuild" @click="rebuild">
-                Rebuild Server Container
-            </v-button>
-        </container>
-
-        <container title="admin.servers.advanced.suspend_server">
-            <t path="admin.servers.advanced.suspend_server_note" />
-
-            <skeleton :content="16">
-                <v-button class="w-full mt-4" color="warning" permission="server.suspend" @click="suspend">
-                    <t :path="`generic.${server.suspended ? 'unsuspend' : 'suspend'}`" />
+                <v-button class="w-full mt-4" color="danger" permission="server.reinstall" @click="reinstall">
+                    <t path="generic.reinstall" />
                 </v-button>
-            </skeleton>
-        </container>
+            </container>
 
-        <container title="admin.servers.advanced.updating_status">
-            <t path="admin.servers.advanced.updating_status_note" />
+            <container title="admin.servers.advanced.install_status">
+                <t path="admin.servers.advanced.install_status_note" />
 
-            <v-button class="w-full mt-4" color="info" permission="server.toggle_update" @click="toggleUpdate">
-                <t path="generic.toggle" />
-            </v-button>
-        </container>
+                <v-button class="w-full mt-4" color="info" permission="server.toggle_install" @click="toggleInstall">
+                    <t path="generic.toggle" />
+                </v-button>
+            </container>
 
-        <container title="admin.servers.advanced.move_server">
-            <v-form service-id="servers@move">
-                <v-model-select
-                    name="location_id"
-                    label="components.form.fields.location"
-                    service-id="locations@getAll"
+            <container title="admin.servers.advanced.rebuild_container">
+                <t path="admin.servers.advanced.rebuild_container_note" />
 
-                    label-prop="long"
-                    value-prop="id"
+                <v-button class="w-full mt-4" color="primary" permission="server.rebuild" @click="rebuild">
+                    Rebuild Server Container
+                </v-button>
+            </container>
 
-                    rule="required"
-
-                    v-model:value="selectedLocation"
-                />
+            <container title="admin.servers.advanced.suspend_server">
+                <t path="admin.servers.advanced.suspend_server_note" />
 
                 <skeleton :content="16">
-                    <v-model-select
-                        name="node_id"
-                        label="components.form.fields.node"
-                        service-id="nodes@getAll"
-
-                        label-prop="name"
-                        value-prop="id"
-
-                        :key="selectedLocation"
-                    />
+                    <v-button class="w-full mt-4" color="warning" permission="server.suspend" @click="suspend">
+                        <t :path="`generic.${server.suspended ? 'unsuspend' : 'suspend'}`" />
+                    </v-button>
                 </skeleton>
+            </container>
 
-                <v-submit class="w-full" color="danger" permission="server.move">
-                    Move server
-                </v-submit>
-            </v-form>
-        </container>
+            <container title="admin.servers.advanced.updating_status">
+                <t path="admin.servers.advanced.updating_status_note" />
 
-        <container title="admin.servers.advanced.moving_status">
-            <t path="admin.servers.advanced.moving_status_note" />
+                <v-button class="w-full mt-4" color="info" permission="server.toggle_update" @click="toggleUpdate">
+                    <t path="generic.toggle" />
+                </v-button>
+            </container>
 
-            <v-button class="w-full mt-4" color="warning" permission="server.toggle_move" @click="toggleMove">
-                <t path="generic.toggle" />
-            </v-button>
-        </container>
-
-        <container title="admin.servers.advanced.reset_mod_statuses">
-            <t path="admin.servers.advanced.reset_mod_statuses_note" />
-
-            <v-button class="w-full mt-4" color="danger" permission="server.reset_mods" @click="resetMods">
-                <t path="generic.reset" />
-            </v-button>
-        </container>
-
-        <container title="admin.servers.advanced.toggle_backup_status">
-            <v-form service-id="serverBackups@toggle">
-                <skeleton :content="16">
+            <container title="admin.servers.advanced.move_server">
+                <v-form service-id="servers@move">
                     <v-model-select
-                        name="id"
-                        label="components.form.fields.backup"
-                        service-id="serverBackups@getAll"
+                        name="location_id"
+                        label="components.form.fields.location"
+                        service-id="locations@getAll"
 
-                        label-prop="name"
+                        label-prop="long"
                         value-prop="id"
 
                         rule="required"
-                    />
-                </skeleton>
 
-                <v-submit class="w-full" color="info" permission="server.toggle_backup">
+                        v-model:value="selectedLocation"
+                    />
+
+                    <skeleton :content="16">
+                        <v-model-select
+                            name="node_id"
+                            label="components.form.fields.node"
+                            service-id="nodes@getAll"
+
+                            label-prop="name"
+                            value-prop="id"
+
+                            :key="selectedLocation"
+                        />
+                    </skeleton>
+
+                    <v-submit class="w-full" color="danger" permission="server.move">
+                        Move server
+                    </v-submit>
+                </v-form>
+            </container>
+
+            <container title="admin.servers.advanced.moving_status">
+                <t path="admin.servers.advanced.moving_status_note" />
+
+                <v-button class="w-full mt-4" color="warning" permission="server.toggle_move" @click="toggleMove">
                     <t path="generic.toggle" />
-                </v-submit>
-            </v-form>
-        </container>
-    </div>
+                </v-button>
+            </container>
+
+            <container title="admin.servers.advanced.reset_mod_statuses">
+                <t path="admin.servers.advanced.reset_mod_statuses_note" />
+
+                <v-button class="w-full mt-4" color="danger" permission="server.reset_mods" @click="resetMods">
+                    <t path="generic.reset" />
+                </v-button>
+            </container>
+
+            <container title="admin.servers.advanced.toggle_backup_status">
+                <v-form service-id="serverBackups@toggle">
+                    <skeleton :content="16">
+                        <v-model-select
+                            name="id"
+                            label="components.form.fields.backup"
+                            service-id="serverBackups@getAll"
+
+                            label-prop="name"
+                            value-prop="id"
+
+                            rule="required"
+                        />
+                    </skeleton>
+
+                    <v-submit class="w-full" color="info" permission="server.toggle_backup">
+                        <t path="generic.toggle" />
+                    </v-submit>
+                </v-form>
+            </container>
+        </div>
+    </skeleton-context>
 </template>
 
 <script lang="ts">

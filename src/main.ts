@@ -23,7 +23,7 @@ import {
     List,
     TranslatedMessage,
     Paginator,
-    Skeleton,
+    Skeleton, SkeletonContext,
     Modal, Can, Accordion, Stepper
 } from './components';
 import {
@@ -71,6 +71,7 @@ app
     .component('v-switch', FormSwitch)
     .component('v-textarea', FormTextarea)
     .component('skeleton', Skeleton)
+    .component('skeleton-context', SkeletonContext)
     .component('stepper', Stepper)
     .component('t', TranslatedMessage)
     .mount('#app');

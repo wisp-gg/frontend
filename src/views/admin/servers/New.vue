@@ -93,39 +93,43 @@
         </container>
 
         <container title="admin.servers.startup.service_configuration">
-            <div class="grid lg:grid-cols-2 gap-x-4 gap-y-4">
-                <v-model-select
-                    service-id="nests@getAllForSelector"
+            <skeleton-context when="nests@getAllForSelector">
+                <div class="grid lg:grid-cols-2 gap-x-4 gap-y-4">
+                    <v-model-select
+                        service-id="nests@getAllForSelector"
 
-                    label="components.form.fields.egg"
-                    name="egg_id"
-                    label-prop="name"
-                    value-prop="id"
-                    group-label-prop="name"
-                    group-options-prop="eggs"
-                    rule="required"
+                        label="components.form.fields.egg"
+                        name="egg_id"
+                        label-prop="name"
+                        value-prop="id"
+                        group-label-prop="name"
+                        group-options-prop="eggs"
+                        rule="required"
 
-                    v-model:value="selectedEgg"
-                />
+                        v-model:value="selectedEgg"
+                    />
+
+                    <skeleton :content="16">
+                        <v-input name="docker_image" :value="selectedEgg?.dockerImage" />
+                    </skeleton>
+
+                    <v-switch name="skip_scripts" footer="admin.servers.new.skip_scripts_footer" />
+                </div>
 
                 <skeleton :content="16">
-                    <v-input name="docker_image" :value="selectedEgg?.dockerImage" />
+                    <v-input label="components.form.fields.startup_command" name="startup" rule="required" :value="selectedEgg?.startup" />
                 </skeleton>
-
-                <v-switch name="skip_scripts" footer="admin.servers.new.skip_scripts_footer" />
-            </div>
-
-            <skeleton :content="16">
-                <v-input label="components.form.fields.startup_command" name="startup" rule="required" :value="selectedEgg?.startup" />
-            </skeleton>
+            </skeleton-context>
 
             <list v-if="selectedEgg" service-id="eggVariables@getAll" :data="{ nest: selectedEgg.nestId, egg: selectedEgg.id }">
                 <template #results="{ results }">
-                    <div class="flex flex-wrap flex-col lg:flex-row mt-4">
-                        <div class="w-full lg:w-1/2 lg:odd:pr-3 lg:even:pl-3" v-for="(result, idx) of results" :key="idx">
-                            <startup-variable class="mb-4" :variable="result" />
+                    <skeleton-context when="eggVariables@getAll">
+                        <div class="flex flex-wrap flex-col lg:flex-row mt-4">
+                            <div class="w-full lg:w-1/2 lg:odd:pr-3 lg:even:pl-3" v-for="(result, idx) of results" :key="idx">
+                                <startup-variable class="mb-4" :variable="result" />
+                            </div>
                         </div>
-                    </div>
+                    </skeleton-context>
                 </template>
             </list>
         </container>

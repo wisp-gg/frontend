@@ -1,57 +1,61 @@
 <template>
-    <v-form service-id="serverStartup@update">
-        <container title="admin.servers.startup.command_modification">
-            <skeleton :content="16">
-                <v-input name="startup" label="components.form.fields.startup_command" :value="server.startup" />
-            </skeleton>
-
-            <skeleton :content="16">
-                <v-input name="default_startup_command" :value="selectedEgg.startup" readonly />
-            </skeleton>
-
-            <div class="text-right">
-                <v-submit color="primary">
-                    <t path="generic.save" />
-                </v-submit>
-            </div>
-        </container>
-
-        <container class="mt-4" title="admin.servers.startup.service_configuration">
-            <div class="grid lg:grid-cols-2 gap-x-4 gap-y-4">
+    <skeleton-context when="ModelBindings@server">
+        <v-form service-id="serverStartup@update">
+            <container title="admin.servers.startup.command_modification">
                 <skeleton :content="16">
-                    <v-model-select
-                        service-id="nests@getAllForSelector"
-
-                        label="components.form.fields.egg"
-                        name="egg_id"
-                        label-prop="name"
-                        value-prop="id"
-                        group-label-prop="name"
-                        group-options-prop="eggs"
-                        rule="required"
-
-                        v-model:value="selectedEgg"
-                    />
+                    <v-input name="startup" label="components.form.fields.startup_command" :value="server.startup" />
                 </skeleton>
 
                 <skeleton :content="16">
-                    <v-input name="docker_image" :value="image" />
+                    <v-input name="default_startup_command" :value="selectedEgg.startup" readonly />
                 </skeleton>
 
-                <v-switch name="skip_scripts" />
-            </div>
+                <div class="text-right">
+                    <v-submit color="primary">
+                        <t path="generic.save" />
+                    </v-submit>
+                </div>
+            </container>
 
-            <list v-if="selectedEgg" service-id="eggVariables@getAll" :data="{ nest: selectedEgg.nestId, egg: selectedEgg.id }" >
-                <template #results="{ results }">
-                    <div class="flex flex-wrap flex-col lg:flex-row mt-4">
-                        <div class="w-full lg:w-1/2 lg:odd:pr-3 lg:even:pl-3" v-for="(result, idx) of results" :key="idx">
-                            <startup-variable class="mb-4" :variable="result" :server-value="serverVariables.find(r => r.id === result?.id)?.serverValue" />
-                        </div>
-                    </div>
-                </template>
-            </list>
-        </container>
-    </v-form>
+            <container class="mt-4" title="admin.servers.startup.service_configuration">
+                <div class="grid lg:grid-cols-2 gap-x-4 gap-y-4">
+                    <skeleton :content="16">
+                        <v-model-select
+                            service-id="nests@getAllForSelector"
+
+                            label="components.form.fields.egg"
+                            name="egg_id"
+                            label-prop="name"
+                            value-prop="id"
+                            group-label-prop="name"
+                            group-options-prop="eggs"
+                            rule="required"
+
+                            v-model:value="selectedEgg"
+                        />
+                    </skeleton>
+
+                    <skeleton :content="16">
+                        <v-input name="docker_image" :value="image" />
+                    </skeleton>
+
+                    <v-switch name="skip_scripts" />
+                </div>
+
+                <list v-if="selectedEgg" service-id="eggVariables@getAll" :data="{ nest: selectedEgg.nestId, egg: selectedEgg.id }" >
+                    <template #results="{ results }">
+                        <skeleton-context when="eggVariables@getAll">
+                            <div class="flex flex-wrap flex-col lg:flex-row mt-4">
+                                <div class="w-full lg:w-1/2 lg:odd:pr-3 lg:even:pl-3" v-for="(result, idx) of results" :key="idx">
+                                    <startup-variable class="mb-4" :variable="result" :server-value="serverVariables?.find(r => r.id === result?.id)?.serverValue" />
+                                </div>
+                            </div>
+                        </skeleton-context>
+                    </template>
+                </list>
+            </container>
+        </v-form>
+    </skeleton-context>
 </template>
 
 <script lang="ts">

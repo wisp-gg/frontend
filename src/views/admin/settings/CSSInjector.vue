@@ -3,7 +3,7 @@
         <alert class="m-4" type="info" icon="info-circle" title="admin.settings.css_injector.minification_notice" />
         <alert class="m-4" type="warning" icon="info-circle" title="admin.settings.refresh_page_to_apply_changes" />
 
-        <skeleton :content="64">
+        <skeleton :content="64" when="settings@fetchAsset">
             <v-form class="pt-4" service-id="settings@updateCSS">
                 <!-- TODO: Fix editor requiring path to infer mode, just allow setting mode instead -->
                 <v-editor class="border-b border-primary-400" name="css" path="editor.css" :value="content" />

@@ -1,25 +1,27 @@
 <template>
-    <v-form :service-id="creating ? 'apiKeys@create' : 'apiKeys@update'" :on-success="onSuccess" class="flex flex-col items-start lg:flex-row lg:space-x-4">
-        <container title="generic.permissions" class="w-full lg:w-2/3">
-            <skeleton :content="32">
-                <div class="flex flex-wrap justify-between items-center" v-for="resource of resources" :key="resource">
-                    <span><t :path="`generic.${resourceLabel(resource)}`" /></span>
-                    <v-radio-group :name="`r_${resourceLabel(resource)}`" prefix="admin.application_api.options" :options="{0:'none',1:'read',3:'read_write'}" :value="apiKey ? apiKey?.[resource] : 0" hide-label />
-                </div>
-            </skeleton>
-        </container>
-        <container title="components.form.fields.name" class="w-full mt-4 lg:mt-0 lg:w-2/3">
-            <skeleton :content="8">
-                <v-input name="memo" :value="apiKey?.memo" hide-label />
-            </skeleton>
+    <skeleton-context when="ModelBindings@apiKey">
+        <v-form :service-id="creating ? 'apiKeys@create' : 'apiKeys@update'" :on-success="onSuccess" class="flex flex-col items-start lg:flex-row lg:space-x-4">
+            <container title="generic.permissions" class="w-full lg:w-2/3">
+                <skeleton :content="32">
+                    <div class="flex flex-wrap justify-between items-center" v-for="resource of resources" :key="resource">
+                        <span><t :path="`generic.${resourceLabel(resource)}`" /></span>
+                        <v-radio-group :name="`r_${resourceLabel(resource)}`" prefix="admin.application_api.options" :options="{0:'none',1:'read',3:'read_write'}" :value="apiKey ? apiKey?.[resource] : 0" hide-label />
+                    </div>
+                </skeleton>
+            </container>
+            <container title="components.form.fields.name" class="w-full mt-4 lg:mt-0 lg:w-2/3">
+                <skeleton :content="8">
+                    <v-input name="memo" :value="apiKey?.memo" hide-label />
+                </skeleton>
 
-            <div class="text-right space-x-4 mt-4">
-                <v-submit color="primary">
-                    <t :path="creating ? 'generic.create' : 'generic.save'" />
-                </v-submit>
-            </div>
-        </container>
-    </v-form>
+                <div class="text-right space-x-4 mt-4">
+                    <v-submit color="primary">
+                        <t :path="creating ? 'generic.create' : 'generic.save'" />
+                    </v-submit>
+                </div>
+            </container>
+        </v-form>
+    </skeleton-context>
 </template>
 
 <script lang="ts">

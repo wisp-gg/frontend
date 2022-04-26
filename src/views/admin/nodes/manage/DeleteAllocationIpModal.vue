@@ -1,7 +1,7 @@
 <template>
     <modal v-slot="{ close }" title="admin.nodes.allocations.delete_ip_allocations" permission="node_allocation.delete" opener-text="admin.nodes.allocations.delete_ip" opener-color="danger">
         <v-form service-id="nodeAllocations@massDelete" :on-success="() => { close(); updateList(); }">
-            <skeleton :content="24">
+            <skeleton :content="24" when="nodeAllocations@ips">
                 <v-select
                     name="ips"
                     label="components.form.fields.ip"

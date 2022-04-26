@@ -111,6 +111,7 @@ import VerticalNavBar from './VerticalNavBar.vue';
 import SocketErrorNotice from '~/views/SocketErrorNotice.vue';
 import ServerError from '~/views/errors/ServerError.vue';
 
+// TODO: consider wrapping <router-view> automatically in <skeleton-context> to avoid ModelBindings@ wrappers around pages
 export default defineComponent({
     components: {
         MobileNav,
