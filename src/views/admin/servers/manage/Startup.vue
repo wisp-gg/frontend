@@ -43,11 +43,13 @@
 
             <list v-if="selectedEgg" service-id="eggVariables@getAll" :data="{ nest: selectedEgg.nestId, egg: selectedEgg.id }" >
                 <template #results="{ results }">
-                    <div class="flex flex-wrap flex-col lg:flex-row mt-4">
-                        <div class="w-full lg:w-1/2 lg:odd:pr-3 lg:even:pl-3" v-for="(result, idx) of results" :key="idx">
-                            <startup-variable class="mb-4" :variable="result" :server-value="serverVariables.find(r => r.id === result?.id)?.serverValue" />
+                    <skeleton-context when="eggVariables@getAll">
+                        <div class="flex flex-wrap flex-col lg:flex-row mt-4">
+                            <div class="w-full lg:w-1/2 lg:odd:pr-3 lg:even:pl-3" v-for="(result, idx) of results" :key="idx">
+                                <startup-variable class="mb-4" :variable="result" :server-value="serverVariables?.find(r => r.id === result?.id)?.serverValue" />
+                            </div>
                         </div>
-                    </div>
+                    </skeleton-context>
                 </template>
             </list>
         </container>

@@ -115,7 +115,7 @@
                             </div>
                         </div>
 
-                        <div class="gap-x-4">
+                        <div class="flex gap-x-4">
                             <skeleton :content="8">
                                 <manage-task-modal :task="task" />
                             </skeleton>
@@ -135,7 +135,6 @@
                     <t path="generic.trigger" />
                 </v-button>
             </skeleton>
-
 
             <skeleton :content="4">
                 <delete-schedule-modal redirect :schedule="schedule" />

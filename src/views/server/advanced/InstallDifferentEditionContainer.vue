@@ -1,49 +1,51 @@
 <template>
-    <container title="server.advanced.install_different_edition">
-        <p class="flex-grow">
-            <t path="server.advanced.install_edition.description" />
-        </p>
+    <skeleton-context when="advanced@fetchVersions">
+        <container title="server.advanced.install_different_edition">
+            <p class="flex-grow">
+                <t path="server.advanced.install_edition.description" />
+            </p>
 
-        <v-form class="mt-3" service-id="advanced@installVersion">
-            <skeleton :content="16">
-                <v-select
-                    name="edition"
-                    footer="server.advanced.install_edition.edition_footer"
+            <v-form class="mt-3" service-id="advanced@installVersion">
+                <skeleton :content="16">
+                    <v-select
+                        name="edition"
+                        footer="server.advanced.install_edition.edition_footer"
 
-                    prefix="server.minecraft.editions"
-                    :options="editions"
-                    v-model:value="selectedEdition"
+                        prefix="server.minecraft.editions"
+                        :options="editions"
+                        v-model:value="selectedEdition"
 
-                    label-prop="name"
-                    value-prop="id"
-                    searchable
-                    rule="required"
-                />
-            </skeleton>
+                        label-prop="name"
+                        value-prop="id"
+                        searchable
+                        rule="required"
+                    />
+                </skeleton>
 
-            <skeleton :content="16">
-                <v-select
-                    name="version"
-                    footer="server.advanced.install_edition.version_footer"
+                <skeleton :content="16">
+                    <v-select
+                        name="version"
+                        footer="server.advanced.install_edition.version_footer"
 
-                    :key="selectedEdition"
-                    :options="versions"
-                    label-prop="name"
-                    value-prop="id"
-                    :group-label-prop="shouldCategorise ? 'category' : null"
-                    :group-options-prop="shouldCategorise ? 'versions' : null"
+                        :key="selectedEdition"
+                        :options="versions"
+                        label-prop="name"
+                        value-prop="id"
+                        :group-label-prop="shouldCategorise ? 'category' : null"
+                        :group-options-prop="shouldCategorise ? 'versions' : null"
 
-                    searchable
-                    no-translate
-                    rule="required"
-                />
-            </skeleton>
+                        searchable
+                        no-translate
+                        rule="required"
+                    />
+                </skeleton>
 
-            <v-switch name="format" footer="server.advanced.install_edition.format_footer" />
+                <v-switch name="format" footer="server.advanced.install_edition.format_footer" />
 
-            <v-submit class="w-full" color="primary" label="server.advanced.install_different_edition" />
-        </v-form>
-    </container>
+                <v-submit class="w-full" color="primary" label="server.advanced.install_different_edition" />
+            </v-form>
+        </container>
+    </skeleton-context>
 </template>
 
 <script lang="ts">

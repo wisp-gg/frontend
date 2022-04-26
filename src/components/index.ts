@@ -13,4 +13,5 @@ export { default as Modal } from './Modal.vue';
 export { default as TranslatedMessage } from './TranslatedMessage.vue';
 export { default as Paginator } from './Paginator.vue';
 export { default as Skeleton } from './Skeleton.vue';
+export { default as SkeletonContext } from './SkeletonContext.vue';
 export { default as Stepper } from './Stepper.vue';

@@ -10,9 +10,11 @@
 
         <list service-id="eggVariables@getAll" :skeletons="6">
             <template #results="{ results }">
-                <div class="grid lg:grid-cols-2 gap-x-4 gap-y-4">
-                    <egg-variable v-for="(result, idx) of results" :key="idx" :variable="result" />
-                </div>
+                <skeleton-context when="eggVariables@getAll">
+                    <div class="grid lg:grid-cols-2 gap-x-4 gap-y-4">
+                        <egg-variable v-for="(result, idx) of results" :key="idx" :variable="result" />
+                    </div>
+                </skeleton-context>
             </template>
         </list>
     </div>

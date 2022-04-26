@@ -11,86 +11,88 @@
             </slot>
 
             <slot name="results" :results="list?.results" :meta="list?.meta" :update="update">
-                <table :key="list?.results" class="w-full flex flex-col xl:table">
-                    <tbody class="w-full">
-                        <tr class="w-full bg-primary-400 hidden xl:table-row">
-                            <slot name="headers-before" />
+                <skeleton-context :when="contextId">
+                    <table :key="list?.results" class="w-full flex flex-col xl:table">
+                        <tbody class="w-full">
+                            <tr class="w-full bg-primary-400 hidden xl:table-row">
+                                <slot name="headers-before" />
 
-                            <th class="px-4 py-3" v-if="checkbox">
-                                <div class="flex items-center justify-start">
-                                    <input class="input w-auto" type="checkbox" ref="checkboxAll" @click="onCheckboxAllClick">
+                                <th class="px-4 py-3" v-if="checkbox">
+                                    <div class="flex items-center justify-start">
+                                        <input class="input w-auto" type="checkbox" ref="checkboxAll" @click="onCheckboxAllClick">
 
-                                    <slot name="header-checkbox" />
-                                </div>
-                            </th>
-
-                            <th v-for="field in fields" :key="field.key" class="px-4 py-3 text-left uppercase">
-                                <t :path="`components.table.labels.${field.label ?? field.key}`" />
-                            </th>
-
-                            <slot name="headers-after" />
-                        </tr>
-
-                        <slot v-if="!list?.results.length" name="items-before">
-                            <tr class="bg-primary-500 block w-full xl:table-row">
-                                <!-- colspan="20" will clamp to the amount of headers - since we cant nicely know the amount of headers
-                                    This is the best option as there most likely isnt a case where there will be over 20 headers.
-                                    Without this it'd only span a % of the width of the table.
-                                    -->
-                                <td colspan="20" class="p-32 text-center text-2xl text-white text-opacity-75">
-                                    <t path="generic.no_items" />
-                                </td>
-                            </tr>
-                        </slot>
-                        <template v-else>
-                            <slot name="items-before" :update="update" />
-
-                            <tr v-for="(result, idx) in list?.results" :key="idx" class="bg-primary-500 border-b border-primary-400 block w-full xl:table-row xl:border-none last:border-none hover:bg-primary-600 group" @click="onCheckboxRowClick($event, result)" @contextmenu="onContextMenu">
-                                <slot name="fields-before" :result="result" :update="update" />
-
-                                <td class="px-4 pt-3 xl:py-4 text-center td-min" v-if="checkbox">
-                                    <div class="flex items-center">
-                                        <skeleton :content="2">
-                                            <input class="input w-auto" type="checkbox" :ref="elem => registerCheckboxItem(elem, result)" @click="onCheckboxClick($el)">
-
-                                            <slot name="field-checkbox" :result="result" />
-                                        </skeleton>
+                                        <slot name="header-checkbox" />
                                     </div>
-                                </td>
+                                </th>
 
-                                <td class="block xl:hidden">
-                                    <div class="flex flex-row flex-wrap">
-                                        <div v-for="(field, fieldIdx) in fields" :key="fieldIdx" class="w-full px-4 py-3 text-left sm:w-1/2" :style="field.style">
-                                            <h5 class="text-white/75 font-semibold uppercase">
-                                                <skeleton :content="12">
-                                                    <t :path="`components.table.labels.${field.label ?? field.key}`" />
-                                                </skeleton>
-                                            </h5>
+                                <th v-for="field in fields" :key="field.key" class="px-4 py-3 text-left uppercase">
+                                    <t :path="`components.table.labels.${field.label ?? field.key}`" />
+                                </th>
 
-                                            <skeleton :content="field.skeleton ?? field.key.length">
-                                                <slot :name="`field-${field.key}`" :result="result" :update="update">
-                                                    <list-result :field="field" :value="result ? field.key.split('.').reduce((previous, current) => previous[current], result) : null ?? field.default" />
-                                                </slot>
+                                <slot name="headers-after" />
+                            </tr>
+
+                            <slot v-if="!list?.results.length" name="items-before">
+                                <tr class="bg-primary-500 block w-full xl:table-row">
+                                    <!-- colspan="20" will clamp to the amount of headers - since we cant nicely know the amount of headers
+                                        This is the best option as there most likely isnt a case where there will be over 20 headers.
+                                        Without this it'd only span a % of the width of the table.
+                                        -->
+                                    <td colspan="20" class="p-32 text-center text-2xl text-white text-opacity-75">
+                                        <t path="generic.no_items" />
+                                    </td>
+                                </tr>
+                            </slot>
+                            <template v-else>
+                                <slot name="items-before" :update="update" />
+
+                                <tr v-for="(result, idx) in list?.results" :key="idx" class="bg-primary-500 border-b border-primary-400 block w-full xl:table-row xl:border-none last:border-none hover:bg-primary-600 group" @click="onCheckboxRowClick($event, result)" @contextmenu="onContextMenu">
+                                    <slot name="fields-before" :result="result" :update="update" />
+
+                                    <td class="px-4 pt-3 xl:py-4 text-center td-min" v-if="checkbox">
+                                        <div class="flex items-center">
+                                            <skeleton :content="2">
+                                                <input class="input w-auto" type="checkbox" :ref="elem => registerCheckboxItem(elem, result)" @click="onCheckboxClick($el)">
+
+                                                <slot name="field-checkbox" :result="result" />
                                             </skeleton>
                                         </div>
-                                    </div>
-                                </td>
+                                    </td>
 
-                                <td v-for="(field, fieldIdx) in fields" :key="fieldIdx" class="p-4 text-left hidden xl:table-cell" :style="field.style">
-                                    <skeleton :content="field.skeleton ?? field.key.length">
-                                        <slot :name="`field-${field.key}`" :result="result" :update="update">
-                                            <list-result :field="field" :value="result ? field.key.split('.').reduce((previous, current) => previous[current], result) : null ?? field.default" />
-                                        </slot>
-                                    </skeleton>
-                                </td>
+                                    <td class="block xl:hidden">
+                                        <div class="flex flex-row flex-wrap">
+                                            <div v-for="(field, fieldIdx) in fields" :key="fieldIdx" class="w-full px-4 py-3 text-left sm:w-1/2" :style="field.style">
+                                                <h5 class="text-white/75 font-semibold uppercase">
+                                                    <skeleton :content="12">
+                                                        <t :path="`components.table.labels.${field.label ?? field.key}`" />
+                                                    </skeleton>
+                                                </h5>
 
-                                <slot name="fields-after" :result="result" :update="update" />
-                            </tr>
+                                                <skeleton :content="field.skeleton ?? field.key.length">
+                                                    <slot :name="`field-${field.key}`" :result="result" :update="update">
+                                                        <list-result :field="field" :value="result ? field.key.split('.').reduce((previous, current) => previous[current], result) : null ?? field.default" />
+                                                    </slot>
+                                                </skeleton>
+                                            </div>
+                                        </div>
+                                    </td>
 
-                            <slot name="items-after" :update="update" />
-                        </template>
-                    </tbody>
-                </table>
+                                    <td v-for="(field, fieldIdx) in fields" :key="fieldIdx" class="p-4 text-left hidden xl:table-cell" :style="field.style">
+                                        <skeleton :content="field.skeleton ?? field.key.length">
+                                            <slot :name="`field-${field.key}`" :result="result" :update="update">
+                                                <list-result :field="field" :value="result ? field.key.split('.').reduce((previous, current) => previous[current], result) : null ?? field.default" />
+                                            </slot>
+                                        </skeleton>
+                                    </td>
+
+                                    <slot name="fields-after" :result="result" :update="update" />
+                                </tr>
+
+                                <slot name="items-after" :update="update" />
+                            </template>
+                        </tbody>
+                    </table>
+                </skeleton-context>
             </slot>
 
             <slot name="pagination">
@@ -150,6 +152,7 @@ export default defineComponent({
     setup(props, { emit }) {
         const { t } = useI18n();
         const serviceId = typeof props.serviceId === 'object' ? (Math.random() * 1e10).toString() : props.serviceId;
+        const contextId = typeof props.serviceId === 'object' ? null : props.serviceId;
         const skeletons = props.skeletons || props.perPage;
 
         const checkboxAll = ref<HTMLInputElement | null>(null);
@@ -190,9 +193,10 @@ export default defineComponent({
         const getAttribute = (key: string) => state.lists.data[serviceId]?.[key];
 
         const update = async () => {
-            Logger.debug('List', `Updating list contents from ${props.serviceId}...`);
+            Logger.debug('List', `Updating list contents from ${contextId ?? 'directly passed data'}...`);
 
-            const finished = await dispatch('loading/add');
+            // TODO: re-evaluate this - in theory this is redundant due to useService handling it for us, but how would placeholder results work?
+            const finished = await dispatch('loading/add', contextId);
             await setAttribute('results', new Array(skeletons).fill(null));
 
             checkboxes = [];
@@ -243,6 +247,7 @@ export default defineComponent({
 
         return {
             t,
+            contextId,
 
             list: computed(() => state.lists.data[serviceId]),
             update,

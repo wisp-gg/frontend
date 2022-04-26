@@ -10,7 +10,7 @@
             </template>
 
             <!-- TODO: how does one skeleton the editor...? -->
-            <skeleton :content="8">
+            <skeleton :content="8" when="files@readFile">
                 <v-editor name="content" :path="path" v-model:value="content" @modes="modes = $event" />
             </skeleton>
         </container>
