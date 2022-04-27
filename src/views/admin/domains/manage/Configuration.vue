@@ -20,9 +20,10 @@
                 </ol>
             </div>
 
-            <v-input class="pt-8" name="name" label="components.form.fields.domain_name" footer="admin.domains.domain_name_footer" :value="domain?.name" rule="required" />
+            <div class="grid md:grid-cols-2 gap-x-4 pt-8">
+                <v-input name="name" label="components.form.fields.domain_name" footer="admin.domains.domain_name_footer" :value="domain?.name" rule="required" />
+                <v-input name="root_record" footer="admin.domains.root_record_footer" :value="domain?.rootRecord" />
 
-            <div class="grid md:grid-cols-2 gap-x-4">
                 <skeleton :content="16">
                     <v-select
                         name="nest_identifiers"

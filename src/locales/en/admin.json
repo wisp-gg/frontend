@@ -401,6 +401,7 @@
 
     "nest_identifiers_footer": "A list of nest identifiers which allow servers running under the nest to create subdomains on the domain.",
     "egg_identifiers_footer": "**This is mainly used to allow specific eggs under a nest without having to allow the entire nest** A list of egg identifiers which allow servers running under the specific egg to create subdomains on the domain.",
+    "root_record_footer": "The IP the root domain should create an A record to point to. This can be useful for creating a redirect on the domain for example.",
 
     "delete_domain": "Delete Domain",
     "delete_notice": "Are you sure that you want to delete the \"{name}\" domain? There is no going back, and all servers associated with this domain will lose subdomains associated with it."

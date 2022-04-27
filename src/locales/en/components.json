@@ -126,6 +126,7 @@
       "domain_name": "Domain Name",
       "nest_identifiers": "Nest Identifiers",
       "egg_identifiers": "Egg Identifiers",
+      "root_record": "Root Record",
 
       "branding": {
         "name": "Company Name"
