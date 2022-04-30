@@ -38,6 +38,7 @@
                 <label class="text-white opacity-50 tracking-wide uppercase block mb-3">
                     <t path="components.form.fields.script_uninstall" />
                 </label>
+
                 <skeleton :content="24">
                     <v-editor name="script_uninstall" path="uninstall.sh" height="small" :value="mod?.scriptUninstall" />
                 </skeleton>

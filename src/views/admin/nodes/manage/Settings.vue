@@ -25,7 +25,6 @@
                     <v-input name="display_fqdn" footer="admin.nodes.settings.display_fqdn_footer" :value="node?.connection.display" />
 
                     <v-switch name="public" label="admin.nodes.settings.allow_automatic_allocation" footer="admin.nodes.settings.automatic_allocation_footer" :value="node?.public" />
-                    <v-switch name="behind_proxy" footer="admin.nodes.settings.behind_proxy_footer" :value="node?.connection.behindProxy" />
                     <v-switch no-margin name="maintenance_mode" footer="admin.nodes.settings.maintenance_mode_footer" :value="node?.maintenanceMode" />
                 </container>
             </div>

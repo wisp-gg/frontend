@@ -5,7 +5,6 @@ export class Node extends BaseModel {
     public name = '';
     public description = '';
     public connection = {
-        behindProxy: false,
         fqdn: '',
         display: '',
     };

@@ -180,7 +180,6 @@
 
       "display_fqdn_footer": "Please enter the domain name (e.g node.example.com) that will be shown for users instead of *.daemon.panel.gg. If you're using a domain, you're also gonna need to setup the DNS record for it to point at the node or this won't work as expected.",
       "automatic_allocation_footer": "Allows this node to be used when automatically picking a suitable node for server deployment using the API.",
-      "behind_proxy_footer": "If you are running the daemon behind a proxy such as Cloudflare, select this to have the daemon skip looking for certificates on boot.",
       "maintenance_mode_footer": "If the node is marked as 'Under Maintenance' users won't be able to access servers that are on this node.",
       "cpu_footer": "Enter the total amount of cpu available on this node for server allocation. You may also provide a percentage that will determine the amount of cpu over the set limit to allow. 1 core = 100%.",
       "memory_footer": "Enter the total amount of memory available on this node for allocation to servers. You may also provide a percentage that can allow allocation of more than the defined memory.",

@@ -16,7 +16,6 @@ interface UpdateNodeRequest {
     description?: string;
     public: boolean;
     display_fqdn?: string;
-    behind_proxy: boolean;
     maintenance_node: boolean;
     location_id: number;
 

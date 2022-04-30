@@ -74,7 +74,6 @@
       "type": "Type",
       "fqdn": "FQDN",
       "display_fqdn": "Display FQDN",
-      "behind_proxy": "Behind Proxy",
       "maintenance_mode": "Maintenance Mode",
       "location": "Location",
       "egg": "Egg",
