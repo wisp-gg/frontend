@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, inject, onMounted, onBeforeMount, onBeforeUnmount, computed } from 'vue';
+import { defineComponent, ref, inject, onMounted, onBeforeMount, onBeforeUnmount, watch, computed } from 'vue';
 // @ts-ignore
 import ace from 'ace-builds/src-noconflict/ace';
 // @ts-ignore
@@ -40,6 +40,7 @@ export default defineComponent({
 
         const editorElem = ref<HTMLElement | undefined>();
         const editorValue = ref<string>('');
+
         onMounted(() => {
             if (!editorElem.value) throw new Error('Unable to initialize editor - editor element is missing???');
 
@@ -59,6 +60,13 @@ export default defineComponent({
                 setValue(props.value);
             }
             editor.getSession().on('change', () => setValue(editor.getValue()));
+
+            watch(() => props.value, value => {
+                if (!value) return;
+
+                editor.getSession().setValue(value);
+                editorValue.value = value;
+            });
 
             const { mode } = modelist.getModeForPath(props.path);
             // TODO(@trixter): GLua support
