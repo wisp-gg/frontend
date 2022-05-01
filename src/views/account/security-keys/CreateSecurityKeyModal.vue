@@ -12,47 +12,57 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { RegisterResponse } from '~/api/services/client/securityKeys';
-import { base64Decode, bufferEncode, bufferDecode, decodeSecurityKeyCredentials } from '~/helpers';
+import { dispatch, Logger } from '~/core';
 import { useService } from '~/plugins';
-import { dispatch } from "~/core";
+import { base64Decode, bufferToString, stringToBuffer, decodeSecurityKeyCredentials } from '~/helpers';
+import { RegisterResponse } from '~/api/services/client/securityKeys';
 
 export default defineComponent({
     setup() {
+        const challenge = async (publicKey: any): Promise<PublicKeyCredential> => {
+            publicKey.challenge = stringToBuffer(base64Decode(publicKey.challenge));
+            publicKey.user.id = stringToBuffer(publicKey.user.id);
+
+            if (publicKey.excludeCredentials) {
+                publicKey.excludeCredentials = decodeSecurityKeyCredentials(publicKey.excludeCredentials);
+            }
+
+            const credential = await navigator.credentials.create({ publicKey });
+            if (!credential || credential.type !== 'public-key') {
+                throw new Error(`Unexpected type returned by navigator.credentials.create(): expected "public-key", got "${credential?.type}"`);
+            }
+
+            return credential as PublicKeyCredential; // Re-cast it now we've ensured it's of type public-key
+        };
+
         return {
             register: (data: { name: string }, close: () => void) => useService<RegisterResponse>('securityKeys@register', 'client.security_keys.create_security_key')
                 .then(async (res: RegisterResponse) => {
-                    const publicKey = res.credentials;
-                    publicKey.challenge = bufferDecode(base64Decode(publicKey.challenge));
-                    publicKey.user.id = bufferDecode(publicKey.user.id);
+                    challenge(res.credentials)
+                        .then(async credential => {
+                            await useService('securityKeys@create', 'client.security_keys.create_security_key', {
+                                name: data.name,
+                                token_id: res.token_id,
+                                registration: {
+                                    id: credential.id,
+                                    type: credential.type,
+                                    rawId: bufferToString(credential.rawId),
+                                    response: {
+                                        attestationObject: bufferToString((credential.response as AuthenticatorAttestationResponse).attestationObject),
+                                        clientDataJSON: bufferToString(credential.response.clientDataJSON),
+                                    },
+                                },
+                            });
 
-                    if (publicKey.excludeCredentials) {
-                        publicKey.excludeCredentials = decodeSecurityKeyCredentials(publicKey.excludeCredentials);
-                    }
+                            await dispatch('lists/refresh', 'securityKeys@getAll');
+                            close();
+                        }).catch(err => {
+                            // If it's not a DOM exception - useService most likely handled it, else it's a weird error and will be logged.
+                            if (!(err instanceof DOMException)) return Logger.error('SecurityKeys', err);
 
-                    const credentials = await navigator.credentials.create({ publicKey });
-                    if (!credentials || credentials.type !== 'public-key') {
-                        throw new Error(`Unexpected type returned by navigator.credentials.create(): expected "public-key", got "${credentials?.type}"`);
-                    }
-
-                    const credential = credentials as PublicKeyCredential; // Re-cast it now we've ensured it's of type public-key
-
-                    await useService('securityKeys@create', 'client.security_keys.create_security_key', {
-                        name: data.name,
-                        token_id: res.token_id,
-                        registration: {
-                            id: credential.id,
-                            type: credential.type,
-                            raw_id: bufferEncode(credential.rawId),
-                            response: {
-                                attestation_object: bufferEncode((credential.response as AuthenticatorAttestationResponse).attestationObject),
-                                client_data_json: bufferEncode(credential.response.clientDataJSON),
-                            },
-                        },
-                    });
-
-                    await dispatch('lists/refresh', 'securityKeys@getAll');
-                    close();
+                            // List of ignored errors
+                            if (['AbortError'].includes(err.name)) return;
+                        });
                 }),
         };
     }

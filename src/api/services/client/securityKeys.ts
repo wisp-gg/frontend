@@ -13,10 +13,10 @@ interface CreateSecurityKeyRequest {
     registration: {
         id: string;
         type: string;
-        raw_id: string;
+        rawId: string;
         response: {
-            attestation_object: string;
-            client_data_json: string;
+            attestationObject: string;
+            clientDataJSON: string;
         }
     }
 }

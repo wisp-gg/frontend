@@ -34,7 +34,7 @@ export default defineComponent({
             listFields: <ListField[]>[
                 { key: 'name', features: ['code'], skeleton: 6 },
                 { label: 'created', key: 'createdAt', format: 'datetime', skeleton: 8 },
-                { label: 'last_used', key: 'updatedAt', format: 'datetime', skeleton: 8 }
+                { label: 'last_used', key: 'lastUsedAt', format: 'datetime', skeleton: 8 }
             ],
         };
     },

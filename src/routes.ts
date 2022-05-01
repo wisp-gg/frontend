@@ -41,7 +41,7 @@ export const routes: RouteRecordRaw[] = [
                 name: 'login.totp',
                 path: 'totp',
                 meta: {
-                    middlewares: [Guest, MFAInProgress],
+                    middlewares: [MFAInProgress],
                 },
                 component: () => import('~/views/login/TOTP.vue'),
             },
@@ -49,7 +49,7 @@ export const routes: RouteRecordRaw[] = [
                 name: 'login.key',
                 path: 'key',
                 meta: {
-                    middlewares: [Guest, MFAInProgress],
+                    middlewares: [MFAInProgress],
                 },
                 component: () => import('~/views/login/Key.vue'),
             },

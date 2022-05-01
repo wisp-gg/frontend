@@ -17,7 +17,7 @@
             </p>
 
             <div class="text-center mt-4">
-                <router-link v-if='hasTotp' :to="{name: 'login.totp'}" class="btn btn-warning block w-full mb-2">
+                <router-link v-if="hasTotp" :to="{name: 'login.totp'}" class="btn btn-warning block w-full mb-2">
                     <t path="login.use_different_method" />
                 </router-link>
 
@@ -31,9 +31,9 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref } from 'vue';
-import { dispatch, state } from '~/core';
+import { dispatch, Logger, state } from '~/core';
 import { useService } from '~/plugins';
-import { base64Decode, bufferDecode, bufferEncode, decodeSecurityKeyCredentials } from '~/helpers';
+import { base64Decode, bufferToString, stringToBuffer, decodeSecurityKeyCredentials } from '~/helpers';
 
 export default defineComponent({
     setup() {
@@ -41,9 +41,10 @@ export default defineComponent({
 
         const challenge = async (): Promise<AuthenticatedCredential> => {
             const publicKey = state.user.mfa!.webauthn!.public_key;
+
             const publicKeyCredential = Object.assign({}, publicKey);
 
-            publicKeyCredential.challenge = bufferDecode(base64Decode(publicKey.challenge.toString()));
+            publicKeyCredential.challenge = stringToBuffer(base64Decode(publicKey.challenge.toString()));
             if (publicKey.allowCredentials) {
                 publicKeyCredential.allowCredentials = decodeSecurityKeyCredentials(publicKey.allowCredentials);
             }
@@ -61,17 +62,17 @@ export default defineComponent({
                 return useService('authentication@key', true, {
                     id: credential.id,
                     type: credential.type,
-                    raw_id: bufferEncode(credential.rawId),
+                    rawId: bufferToString(credential.rawId),
                     response: {
-                        authenticator_data: bufferEncode(credential.response.authenticatorData),
-                        client_data_json: bufferEncode(credential.response.clientDataJSON),
-                        signature: bufferEncode(credential.response.signature),
-                        user_handle: credential.response.userHandle ? bufferEncode(credential.response.userHandle) : null,
+                        authenticatorData: bufferToString(credential.response.authenticatorData),
+                        clientDataJSON: bufferToString(credential.response.clientDataJSON),
+                        signature: bufferToString(credential.response.signature),
+                        userHandle: credential.response.userHandle ? bufferToString(credential.response.userHandle) : null,
                     },
                 });
             }).catch(err => {
-                // If its not a DOM exception - useService most likely handled it, else it's a weird error and will be logged.
-                if (!(err instanceof DOMException)) return console.error(err);
+                // If it's not a DOM exception - useService most likely handled it, else it's a weird error and will be logged.
+                if (!(err instanceof DOMException)) return Logger.error('SecurityKeys', err);
 
                 // List of ignored errors
                 if (['AbortError'].includes(err.name)) return;
@@ -83,7 +84,7 @@ export default defineComponent({
                         alert = 'login.security_keys.unknown_key';
                         break;
                     default:
-                        console.error('Unknown DOMException occurred', err.name);
+                        Logger.error('SecurityKeyChallenge', `Unknown DOMException occurred: ${err.name}`);
                 }
 
                 dispatch('alerts/add', {

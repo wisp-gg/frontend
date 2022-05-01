@@ -5,7 +5,7 @@ import { User } from '~/api/models';
 interface MFAData {
     methods: MFAMethods[];
     webauthn?: {
-        public_key: any
+        public_key: PublicKeyCredentialRequestOptions;
     }
 }
 

@@ -94,11 +94,10 @@ export const base64Decode = (input: string): string => {
 };
 
 // @ts-expect-error
-export const bufferEncode = (value: ArrayBuffer): string => window.btoa(String.fromCharCode.apply(null, new Uint8Array(value)));
-export const bufferDecode = (value: string): ArrayBuffer => Uint8Array.from(window.atob(value), c => c.charCodeAt(0));
+export const bufferToString = (value: ArrayBuffer): string => btoa(String.fromCharCode.apply(null, new Uint8Array(value)));
+export const stringToBuffer = (value: string): ArrayBuffer => Uint8Array.from(atob(value), c => c.charCodeAt(0));
 
 export const decodeSecurityKeyCredentials = (credentials: PublicKeyCredentialDescriptor[]) => credentials.map(c => ({
-    id: bufferDecode(base64Decode(c.id.toString())),
-    type: c.type,
-    transports: c.transports,
+    ...c,
+    id: stringToBuffer(base64Decode(c.id.toString())),
 }));

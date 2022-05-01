@@ -45,7 +45,7 @@ export default defineComponent({
 
             confirm: () => {
                 return useService('securityKeys@delete', 'server.security_keys.delete_key', {
-                    id: props.securityKey.uuid
+                    id: props.securityKey.id
                 }).then(() => dispatch('lists/refresh', 'securityKeys@getAll'));
             }
         };
