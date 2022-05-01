@@ -14,6 +14,13 @@
     "confirmation": "The provided password and password confirmation do not match."
   },
 
+  "security_keys": {
+    "insert_and_touch": "Insert your security key and touch it.",
+    "not_responding": "If your security key is not responding, ",
+    "not_responding_click_here": "click here.",
+    "unknown_key": "You used an unknown security key, try again with another key or use TOTP if configured. Otherwise, contact a panel admin."
+  },
+
   "two_factor_token": "Two-Factor Token",
   "use_different_method": "Use a different method",
 
