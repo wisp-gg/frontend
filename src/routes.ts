@@ -98,10 +98,25 @@ export const routes: RouteRecordRaw[] = [
             {
                 name: 'account.settings',
                 path: 'account',
-                component: () => import('~/views/account/Index.vue'),
-                meta: {
-                    icon: 'user',
-                },
+                component: TabberPassthrough,
+                children: [
+                    {
+                        name: 'account.settings.details',
+                        path: '',
+                        component: () => import('~/views/account/Index.vue'),
+                        meta: {
+                            icon: 'user',
+                        },
+                    },
+                    {
+                        name: 'account.settings.2fa',
+                        path: '',
+                        component: () => import('~/views/account/2fa/Index.vue'),
+                        meta: {
+                            icon: 'key',
+                        },
+                    }
+                ],
             },
             { // Redirect for backwards compatability with v1
                 name: 'account.sso',
@@ -122,14 +137,6 @@ export const routes: RouteRecordRaw[] = [
                 component: () => import('~/views/account/Security.vue'),
                 meta: {
                     icon: 'lock',
-                },
-            },
-            {
-                name: 'account.security_keys',
-                path: 'account/security-keys',
-                component: () => import('~/views/account/security-keys/Index.vue'),
-                meta: {
-                    icon: 'key',
                 },
             },
         ],

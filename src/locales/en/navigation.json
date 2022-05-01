@@ -41,16 +41,23 @@
 
     "settings": {
       "title": "Account Settings",
-      "description": "Manage your account details."
+
+      "details": {
+        "title": "Details",
+        "description": "Manage your account details."
+      },
+
+      "2fa": {
+        "title": "2-Factor Authentication",
+        "description": "Control 2-Factor authentication & security keys for your account."
+      }
     },
+
     "security": {
       "title": "Security Controls",
       "description": "Control active sessions and 2-Factor Authentication."
-    },
-    "security_keys": {
-      "title": "Security Keys",
-      "description": "Control hardware security keys for your account."
     }
+
   },
 
   "server": {

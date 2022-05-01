@@ -1,6 +1,6 @@
 <template>
     <div class="bg-primary-500 p-8 rounded-lg">
-        <div class="text-center">
+        <div class="text-center my-8">
             <fa :icon="['fas', 'fingerprint']" class="h-20 text-white/30" />
         </div>
 
