@@ -11,7 +11,7 @@
 
             <!-- TODO: how does one skeleton the editor...? -->
             <skeleton :content="8" when="files@readFile">
-                <v-editor name="content" :path="path" v-model:value="content" @modes="modes = $event" />
+                <v-editor name="content" :path="path" :value="content" @modes="modes = $event" />
             </skeleton>
         </container>
 
