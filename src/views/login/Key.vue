@@ -16,7 +16,7 @@
                 </span>
             </p>
 
-            <div class="text-center mt-3">
+            <div class="text-center mt-4">
                 <router-link :to="{name: 'login.totp'}" class="btn btn-warning block w-full mb-2">
                     <t path="login.use_different_method" />
                 </router-link>
