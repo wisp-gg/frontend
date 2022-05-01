@@ -1,6 +1,6 @@
 <template>
     <modal has-alerts v-slot="{ close }" title="client.security_keys.create_security_key" opener-color="success" opener-text="generic.create">
-        <v-form :service-id="register">
+        <v-form :service-id="data => register(data, close)">
             <v-input name="name" rule="required" />
 
             <div class="text-right space-x-4">
@@ -15,11 +15,12 @@ import { defineComponent } from 'vue';
 import { RegisterResponse } from '~/api/services/client/securityKeys';
 import { base64Decode, bufferEncode, bufferDecode, decodeSecurityKeyCredentials } from '~/helpers';
 import { useService } from '~/plugins';
+import { dispatch } from "~/core";
 
 export default defineComponent({
     setup() {
         return {
-            register: (data: { name: string }) => useService<RegisterResponse>('securityKeys@register', 'client.security_keys.create_security_key')
+            register: (data: { name: string }, close: () => void) => useService<RegisterResponse>('securityKeys@register', 'client.security_keys.create_security_key')
                 .then(async (res: RegisterResponse) => {
                     const publicKey = res.credentials;
                     publicKey.challenge = bufferDecode(base64Decode(publicKey.challenge));
@@ -49,6 +50,9 @@ export default defineComponent({
                             },
                         },
                     });
+
+                    await dispatch('lists/refresh', 'securityKeys@getAll');
+                    close();
                 }),
         };
     }

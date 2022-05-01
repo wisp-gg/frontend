@@ -53,7 +53,9 @@
   "security_keys": {
     "title": "Security Keys",
     "create_security_key": "Create Security Key",
-    "successfully_added": "Security key has been successfully added."
+    "successfully_added": "Security key has been successfully added.",
+    "delete_key": "Delete Security Key",
+    "delete_key_notice": "Are you sure that you want to delete the {name} security key?"
   },
 
   "support": {

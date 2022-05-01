@@ -21,6 +21,10 @@ interface CreateSecurityKeyRequest {
     }
 }
 
+interface DeleteSecurityKeyRequest {
+    id: number;
+}
+
 class SecurityKeysService {
     getAll(req: PaginatableRequest): Promise<ListResponse> {
         return RequestService.get('/security/security-keys', req).then(Parser.parse);
@@ -32,6 +36,10 @@ class SecurityKeysService {
 
     create(data: CreateSecurityKeyRequest): Promise<SecurityKey> {
         return RequestService.post('/security/security-keys/register', data).then(Parser.parse);
+    }
+
+    delete(data: DeleteSecurityKeyRequest): Promise<void> {
+        return RequestService.delete(`/security/security-keys/${data.id}`);
     }
 }
 

@@ -17,7 +17,7 @@
             </p>
 
             <div class="text-center mt-4">
-                <router-link :to="{name: 'login.totp'}" class="btn btn-warning block w-full mb-2">
+                <router-link v-if='hasTotp' :to="{name: 'login.totp'}" class="btn btn-warning block w-full mb-2">
                     <t path="login.use_different_method" />
                 </router-link>
 
@@ -83,7 +83,7 @@ export default defineComponent({
                         alert = 'login.security_keys.unknown_key';
                         break;
                     default:
-                        console.warn('Unknown DOMException occurred', err.name);
+                        console.error('Unknown DOMException occurred', err.name);
                 }
 
                 dispatch('alerts/add', {
