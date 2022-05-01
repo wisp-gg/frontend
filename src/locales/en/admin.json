@@ -304,8 +304,6 @@
     "identity": "Identity",
     "external_id_footer": "Leave empty to not assign an external identifier for this user. The external ID should be unique to this user and not be in use by any other users.",
     "language_footer": "Leave empty to use the default language. The language the user's panel will be displayed in, this is changeable on the user's end in the account settings too.",
-    "2fa_enabled": "2FA Enabled",
-    "2fa_enabled_footer": "This requires the user to have 2FA already setup, or otherwise they will not be able to login into their account.",
 
     "password": "Password",
     "password_optional": "Providing a user password is optional. New user gets an email prompting them to create a password for their account. If a password is provided here you will need to find a different method of providing it to the user.",
@@ -316,6 +314,7 @@
     "ignore_exceptions": "Ignore exceptions raised while revoking keys.",
     "ignore_exceptions_footer": "If checked, any errors thrown while revoking keys across nodes will be ignored. You should avoid this checkbox if possible as any non-revoked keys could continue to be active for up to 24 hours after this account is changed. If you are needing to revoke account permissions immediately and are facing node issues, you should check this box and then restart any nodes that failed to be updated to clear out any stored keys.",
 
+    "disable_2fa": "Disable 2-Factor Authentication",
     "user_has_no_2fa_configured": "The user has no 2FA configured to be able to use it.",
 
     "delete_user": "Delete User",

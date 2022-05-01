@@ -24,10 +24,10 @@
 
         <container title="client.security.2fa">
             <p class="text-white text-opacity-70 mb-4">
-                <t :path="`client.security.2fa_${user.useTotp ? 'enabled' : 'disabled'}`" />
+                <t :path="`client.security.2fa_${user.has2fa.includes('totp') ? 'enabled' : 'disabled'}`" />
             </p>
 
-            <div v-if="user.useTotp">
+            <div v-if="user.has2fa.includes('totp')">
                 <v-form service-id="security@disable2Fa">
                     <v-input name="token" rule="required" />
 
@@ -54,7 +54,7 @@ export default defineComponent({
     components: { CreateSecurityKeyModal, DeleteSecurityKeyModal, Enable2faButton },
     setup() {
         return {
-            user: computed(() => state.user.data),
+            user: computed(() => state.user.data!),
 
             listFields: <ListField[]>[
                 { key: 'name', features: ['code'], skeleton: 6 },

@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="flex items-center px-6 py-3 bg-primary-800 border-t border-white border-opacity-10">
-                    <router-link :to="{name: 'account.settings'}">
+                    <router-link :to="{name: 'account.settings.details'}">
                         <avatar :email="user?.email" class="rounded-full h-10 mr-3" />
                     </router-link>
                     <div>

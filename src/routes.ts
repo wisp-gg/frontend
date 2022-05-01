@@ -110,7 +110,7 @@ export const routes: RouteRecordRaw[] = [
                     },
                     {
                         name: 'account.settings.2fa',
-                        path: '',
+                        path: '2fa',
                         component: () => import('~/views/account/2fa/Index.vue'),
                         meta: {
                             icon: 'key',

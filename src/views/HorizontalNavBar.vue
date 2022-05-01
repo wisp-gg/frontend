@@ -27,7 +27,7 @@
                     <fa :icon="['fas', 'sign-out-alt']" />
                 </v-button>
 
-                <router-link :to="{name: 'account.settings'}">
+                <router-link :to="{name: 'account.settings.details'}">
                     <avatar :email="email" class="rounded-full h-10" />
                 </router-link>
             </div>

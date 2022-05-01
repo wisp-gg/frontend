@@ -1,6 +1,6 @@
 import { dispatch } from '~/core';
 import { Parser } from '~/api';
-import { ApiKey } from '~/api/models';
+import { ApiKey, User } from '~/api/models';
 import RequestService from './request';
 
 export interface Generate2FaData {
@@ -18,19 +18,20 @@ class SecurityService {
         return RequestService.get('/security/totp');
     }
 
-    enable2Fa(data: Toggle2FaData) {
+    enable2Fa(data: Toggle2FaData): Promise<User> {
         return RequestService.put('/security/totp', data)
-            .then(res => {
-                dispatch('user/update', { useTotp: true });
+            .then(Parser.parse)
+            .then((res: User) => {
+                dispatch('user/update', { has2fa: res.has2fa });
 
                 return res;
             });
     }
 
-    disable2Fa(data: Toggle2FaData) {
+    disable2Fa(data: Toggle2FaData): Promise<User> {
         return RequestService.delete('/security/totp', data)
-            .then(res => {
-                dispatch('user/update', { useTotp: false });
+            .then((res: User) => {
+                dispatch('user/update', { has2fa: res.has2fa });
 
                 return res;
             });

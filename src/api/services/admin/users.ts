@@ -14,7 +14,6 @@ interface CreateUserRequest {
 }
 
 type UpdateUserRequest = CreateUserRequest & {
-    use_totp: boolean;
     ignore_connection_error: boolean;
 };
 
