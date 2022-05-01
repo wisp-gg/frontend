@@ -74,7 +74,6 @@
       "type": "Type",
       "fqdn": "FQDN",
       "display_fqdn": "Display FQDN",
-      "behind_proxy": "Behind Proxy",
       "maintenance_mode": "Maintenance Mode",
       "location": "Location",
       "egg": "Egg",
@@ -126,6 +125,7 @@
       "domain_name": "Domain Name",
       "nest_identifiers": "Nest Identifiers",
       "egg_identifiers": "Egg Identifiers",
+      "root_record": "Root Record",
 
       "branding": {
         "name": "Company Name"

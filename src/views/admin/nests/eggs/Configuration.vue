@@ -79,7 +79,7 @@ import { onModelLoaded } from '~/plugins';
 import { Egg } from '~/api/models';
 import Alert from '~/components/Alert.vue';
 import DeleteEggModal from './DeleteEggModal.vue';
-import ImportUpdateModal from "~/views/admin/nests/eggs/ImportUpdateModal.vue";
+import ImportUpdateModal from './ImportUpdateModal.vue';
 
 export default defineComponent({
     components: { ImportUpdateModal, DeleteEggModal, Alert },

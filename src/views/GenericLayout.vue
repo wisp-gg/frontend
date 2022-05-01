@@ -40,7 +40,9 @@
 
                 <alerts class="mb-8" />
 
-                <router-view />
+                <skeleton-context :when="skeletonContext">
+                    <router-view />
+                </skeleton-context>
             </div>
 
             <v-footer />
@@ -146,6 +148,7 @@ export default defineComponent({
 
                 return res;
             }),
+            skeletonContext: computed(() => Object.keys(state.navigation.currentRoute?.params || {}).map(name => `ModelBindings@${name}`)),
         };
     },
 });

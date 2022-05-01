@@ -6,30 +6,32 @@
             class="w-full lg:w-1/2 flex flex-col gap-y-2 transition-all transform"
         >
             <template #results="{ results }">
-                <template v-if="results.length > 0">
-                    <audit-log-row
-                        v-for="(result, idx) of results"
-                        :key="idx"
-                        @click="selectAudit(result, idx)"
-                        :selected="selectedAudit?.[1] === idx"
+                <skeleton-context when="auditLogs@get">
+                    <template v-if="results.length > 0">
+                        <audit-log-row
+                            v-for="(result, idx) of results"
+                            :key="idx"
+                            @click="selectAudit(result, idx)"
+                            :selected="selectedAudit?.[1] === idx"
 
-                        :audit="result"
-                    />
-                </template>
+                            :audit="result"
+                        />
+                    </template>
 
-                <div v-else class="flex flex-col lg:flex-row justify-center items-center my-8">
-                    <img class="w-2/3 lg:w-1/3" :src="notFound" />
+                    <div v-else class="flex flex-col lg:flex-row justify-center items-center my-8">
+                        <img class="w-2/3 lg:w-1/3" :src="notFound" />
 
-                    <div class="text-center gap-y-8 mt-4 lg:mt-0 lg:ml-4 lg:text-left">
-                        <h1 class="text-2xl text-white/75">
-                            <t path="server.audit_logs.no_audits" />
-                        </h1>
+                        <div class="text-center gap-y-8 mt-4 lg:mt-0 lg:ml-4 lg:text-left">
+                            <h1 class="text-2xl text-white/75">
+                                <t path="server.audit_logs.no_audits" />
+                            </h1>
 
-                        <p>
-                            <t path="server.audit_logs.no_audits_description" />
-                        </p>
+                            <p>
+                                <t path="server.audit_logs.no_audits_description" />
+                            </p>
+                        </div>
                     </div>
-                </div>
+                </skeleton-context>
             </template>
         </list>
 

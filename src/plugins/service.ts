@@ -8,6 +8,36 @@ interface ServiceOptions {
     background?: boolean;
 }
 
+function convertToLoadingId(id: string, args: any[]) {
+    let result = id;
+
+    const valueToString = (value: any) => {
+        if ([null, undefined].includes(value)) return '';
+
+        return value.toString();
+    };
+    const objectToString = (data: Record<string, any>) => {
+        let result = '';
+
+        for(const index in data) {
+            const value = data[index];
+
+            result += `${index}:${typeof value === 'object' ? objectToString(value) : valueToString(value)},`;
+        }
+
+        return result.substring(0, result.length - 1);
+    };
+
+    for(const index in args) { // TODO: possibly some type of order enforcing for args?
+        const value = args[index];
+        if (value === undefined) continue;
+
+        result += `;${typeof value === 'object' ? objectToString(value) : valueToString(value)}`;
+    }
+
+    return result;
+}
+
 function useService<T>(id: string, options: ServiceOptions | boolean | string, ...args: any[]): Promise<T> {
     if (typeof options !== 'object') {
         options = {
@@ -58,7 +88,8 @@ function useService<T>(id: string, options: ServiceOptions | boolean | string, .
     if (output instanceof Promise) {
         return new Promise((resolve, reject) => {
             const promise = (options as ServiceOptions).background ?
-                new Promise(resolve => resolve(() => {})) : dispatch('loading/add');
+                // eslint-disable-next-line @typescript-eslint/no-empty-function
+                new Promise(resolve => resolve(() => {})) : dispatch('loading/add', convertToLoadingId(id, cleanArgs));
 
             promise.then(finished => {
                 output

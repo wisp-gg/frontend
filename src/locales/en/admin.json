@@ -180,7 +180,6 @@
 
       "display_fqdn_footer": "Please enter the domain name (e.g node.example.com) that will be shown for users instead of *.daemon.panel.gg. If you're using a domain, you're also gonna need to setup the DNS record for it to point at the node or this won't work as expected.",
       "automatic_allocation_footer": "Allows this node to be used when automatically picking a suitable node for server deployment using the API.",
-      "behind_proxy_footer": "If you are running the daemon behind a proxy such as Cloudflare, select this to have the daemon skip looking for certificates on boot.",
       "maintenance_mode_footer": "If the node is marked as 'Under Maintenance' users won't be able to access servers that are on this node.",
       "cpu_footer": "Enter the total amount of cpu available on this node for server allocation. You may also provide a percentage that will determine the amount of cpu over the set limit to allow. 1 core = 100%.",
       "memory_footer": "Enter the total amount of memory available on this node for allocation to servers. You may also provide a percentage that can allow allocation of more than the defined memory.",
@@ -304,6 +303,7 @@
 
     "identity": "Identity",
     "external_id_footer": "Leave empty to not assign an external identifier for this user. The external ID should be unique to this user and not be in use by any other users.",
+    "language_footer": "Leave empty to use the default language. The language the user's panel will be displayed in, this is changeable on the user's end in the account settings too.",
     "2fa_enabled": "2FA Enabled",
     "2fa_enabled_footer": "This requires the user to have 2FA already setup, or otherwise they will not be able to login into their account.",
 
@@ -400,6 +400,7 @@
 
     "nest_identifiers_footer": "A list of nest identifiers which allow servers running under the nest to create subdomains on the domain.",
     "egg_identifiers_footer": "**This is mainly used to allow specific eggs under a nest without having to allow the entire nest** A list of egg identifiers which allow servers running under the specific egg to create subdomains on the domain.",
+    "root_record_footer": "The IP the root domain should create an A record to point to. This can be useful for creating a redirect on the domain for example.",
 
     "delete_domain": "Delete Domain",
     "delete_notice": "Are you sure that you want to delete the \"{name}\" domain? There is no going back, and all servers associated with this domain will lose subdomains associated with it."

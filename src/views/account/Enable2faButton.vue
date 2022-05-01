@@ -2,25 +2,27 @@
     <modal v-slot="{ close }" title="client.security.2fa_modal_header" opener-color="success" opener-text="client.security.enable_2fa" @update:modelValue="onModalChange">
         <v-form service-id="security@enable2Fa">
             <div class="flex flex-col lg:flex-row">
-                <skeleton :content="8">
-                    <div class="flex items-center">
-                        <vue-qrcode :color="{ dark: '#000', light: '#FFF' }" type="image/webp" :quality="1" :value="totpUrl" class="w-48 h-48 !max-w-[none]" />
-                    </div>
-                </skeleton>
-                <div class="flex flex-col mt-4 lg:mt-0 lg:ml-8">
-                    <p class="flex-grow text-white text-opacity-75">
-                        <t path="client.security.2fa_notice" />
-                    </p>
-
-                    <label class="text-white opacity-50 tracking-wide uppercase block my-3" for="secret">
-                        <t path="client.security.2fa_secret" />
-                    </label>
-                    <skeleton :content="32">
-                        <input class="input flex-grow mb-8 cursor-pointer" id="secret" v-clipboard="totpData?.secret" :value="totpData?.secret" readonly>
+                <skeleton-context when="security@get2Fa">
+                    <skeleton :content="8">
+                        <div class="flex items-center">
+                            <vue-qrcode :color="{ dark: '#000', light: '#FFF' }" type="image/webp" :quality="1" :value="totpUrl" class="w-48 h-48 !max-w-[none]" />
+                        </div>
                     </skeleton>
+                    <div class="flex flex-col mt-4 lg:mt-0 lg:ml-8">
+                        <p class="flex-grow text-white text-opacity-75">
+                            <t path="client.security.2fa_notice" />
+                        </p>
 
-                    <v-input name="token" rule="required" />
-                </div>
+                        <label class="text-white opacity-50 tracking-wide uppercase block my-3" for="secret">
+                            <t path="client.security.2fa_secret" />
+                        </label>
+                        <skeleton :content="32">
+                            <input class="input flex-grow mb-8 cursor-pointer" id="secret" v-clipboard="totpData?.secret" :value="totpData?.secret" readonly>
+                        </skeleton>
+
+                        <v-input name="token" rule="required" />
+                    </div>
+                </skeleton-context>
             </div>
 
             <div class="text-right space-x-4">

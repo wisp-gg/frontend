@@ -8,6 +8,7 @@ export class Domain extends BaseModel {
     public serversCount = -1;
     public nestIdentifiers: string[] = [];
     public eggIdentifiers: string[] = [];
+    public rootRecord?: string;
 
     getRouteName() {
         return 'domain';
