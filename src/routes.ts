@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router';
 import { Router, state } from '~/core';
-import { Admin, Authenticated, Guest, Permission, Feature, TOTP, ModelBindings } from '~/middlewares';
+import { Admin, Authenticated, Guest, Permission, Feature, TOTP, ModelBindings, MFAInProgress } from '~/middlewares';
 import { GenericLayout, PopupLayout, Passthrough, TabberPassthrough } from '~/views';
 import { NotFoundView } from '~/views/errors';
 
@@ -40,7 +40,18 @@ export const routes: RouteRecordRaw[] = [
             {
                 name: 'login.totp',
                 path: 'totp',
+                meta: {
+                    middlewares: [Guest, MFAInProgress],
+                },
                 component: () => import('~/views/login/TOTP.vue'),
+            },
+            {
+                name: 'login.key',
+                path: 'key',
+                meta: {
+                    middlewares: [Guest, MFAInProgress],
+                },
+                component: () => import('~/views/login/Key.vue'),
             },
             {
                 name: 'login.reset_password',

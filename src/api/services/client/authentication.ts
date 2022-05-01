@@ -20,6 +20,18 @@ interface TotpFormData {
     token: string;
 }
 
+interface KeyLoginData {
+    id: string;
+    type: string;
+    raw_id: string;
+    response: {
+        authenticator_data: string;
+        client_data_json: string;
+        signature: string;
+        user_handle?: string;
+    }
+}
+
 interface ResetPasswordFormData {
     email: string;
 }
@@ -30,11 +42,12 @@ interface ResetPasswordTokenFormData {
     password_confirmation: string;
 }
 
+
 export interface LoginState {
     finished?: boolean;
     user?: ModelResponse,
 
-    required?: 'totp';
+    required?: MFAMethods[];
     redirect?: string;
 }
 
@@ -84,10 +97,21 @@ class AuthenticationService {
                     return;
                 }
 
-                if (data.required === 'totp') {
-                    return Router.push({
-                        name: 'login.totp',
+                if (data.required?.length) {
+                    await dispatch('user/setMfa', {
+                        methods: data.required,
+                        webauthn: data.webauthn,
                     });
+
+                    if (data.required?.includes('webauthn')) {
+                        return Router.push({
+                            name: 'login.key',
+                        });
+                    } else if (data.required?.includes('totp')) {
+                        return Router.push({
+                            name: 'login.2fa',
+                        });
+                    }
                 }
             });
     }
@@ -96,12 +120,13 @@ class AuthenticationService {
         return RequestService.post('/auth/login/totp?include[]=notifications&include[]=announcements', data)
             .then(async data => {
                 if (data.finished) return this.loggedIn(data);
+            });
+    }
 
-                if (data.required === 'totp') {
-                    return Router.push({
-                        name: 'login.totp',
-                    });
-                }
+    key(data: KeyLoginData) {
+        return RequestService.post('/auth/login/key?include[]=notifications&include[]=announcements', data)
+            .then(async data => {
+                if (data.finished) return this.loggedIn(data);
             });
     }
 

@@ -52,6 +52,13 @@ type RootState = import('~/store').RootState;
 
 type TranslatableMessage = [string, any?];
 
+// Auth
+type MFAMethods = 'totp' | 'webauthn';
+
+interface AuthenticatedCredential extends PublicKeyCredential {
+    response: AuthenticatorAssertionResponse;
+}
+
 // Validator
 type ValidationRule = (value: any, input?: any) => { valid: boolean; subpath?: string; normalized?: any; };
 type ValidationRules = Record<string, ValidationRule>;

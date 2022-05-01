@@ -10,6 +10,16 @@
       "description": "Login to the panel."
     },
 
+    "totp": {
+      "title": "Enter 2fa TOTP code",
+      "description": "Enter the 2fa TOTP code to login."
+    },
+
+    "key": {
+      "title": "Security key",
+      "description": "Touch security key to login."
+    },
+
     "reset_password": {
       "title": "Reset Password",
       "description": "Reset your account's password.",

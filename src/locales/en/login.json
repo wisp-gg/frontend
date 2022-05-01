@@ -15,9 +15,10 @@
   },
 
   "two_factor_token": "Two-Factor Token",
+  "use_different_method": "Use a different method",
 
   "invalid_user": "The credentials provided do not match those we have on record. If you're not sure that your password is correct, try resetting it.",
-  "invalid_totp_session": "The previous session expired, please try again.",
+  "invalid_mfa_session": "The previous session expired, please try again.",
   "sso_down": "Unable to contact the servers to verify the account, please try again later.",
   "sso_failed": "Something went wrong when trying to verify the account, please try again later.",
   "sso_invalid": "The previous session expired, please try again.",
