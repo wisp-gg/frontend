@@ -46,10 +46,10 @@ export default defineComponent({
                                 registration: {
                                     id: credential.id,
                                     type: credential.type,
-                                    rawId: bufferToString(credential.rawId),
+                                    raw_id: bufferToString(credential.rawId),
                                     response: {
-                                        attestationObject: bufferToString((credential.response as AuthenticatorAttestationResponse).attestationObject),
-                                        clientDataJSON: bufferToString(credential.response.clientDataJSON),
+                                        attestation_object: bufferToString((credential.response as AuthenticatorAttestationResponse).attestationObject),
+                                        client_data_json: bufferToString(credential.response.clientDataJSON),
                                     },
                                 },
                             });

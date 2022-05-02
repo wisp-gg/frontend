@@ -62,12 +62,12 @@ export default defineComponent({
                 return useService('authentication@key', true, {
                     id: credential.id,
                     type: credential.type,
-                    rawId: bufferToString(credential.rawId),
+                    raw_id: bufferToString(credential.rawId),
                     response: {
-                        authenticatorData: bufferToString(credential.response.authenticatorData),
-                        clientDataJSON: bufferToString(credential.response.clientDataJSON),
+                        authenticator_data: bufferToString(credential.response.authenticatorData),
+                        client_data_json: bufferToString(credential.response.clientDataJSON),
                         signature: bufferToString(credential.response.signature),
-                        userHandle: credential.response.userHandle ? bufferToString(credential.response.userHandle) : null,
+                        user_handle: credential.response.userHandle ? bufferToString(credential.response.userHandle) : null,
                     },
                 });
             }).catch(err => {

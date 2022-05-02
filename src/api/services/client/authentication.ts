@@ -23,12 +23,12 @@ interface TotpFormData {
 interface KeyLoginData {
     id: string;
     type: string;
-    rawId: string;
+    raw_id: string;
     response: {
-        authenticatorData: string;
-        clientDataJSON: string;
+        authenticator_data: string;
+        client_data_json: string;
         signature: string;
-        userHandle?: string;
+        user_handle?: string;
     }
 }
 
