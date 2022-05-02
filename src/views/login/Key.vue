@@ -74,7 +74,7 @@ export default defineComponent({
                 if (!(err instanceof DOMException)) return Logger.error('SecurityKeys', err);
 
                 // List of ignored errors
-                if (['AbortError'].includes(err.name)) return;
+                if (['AbortError', 'NotAllowedError'].includes(err.name)) return;
 
                 let alert = 'generic.something_went_wrong';
 
