@@ -31,6 +31,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref } from 'vue';
+import * as Sentry from '@sentry/vue';
 import { dispatch, Logger, state } from '~/core';
 import { useService } from '~/plugins';
 import { base64Decode, bufferToString, stringToBuffer, decodeSecurityKeyCredentials } from '~/helpers';
@@ -85,6 +86,7 @@ export default defineComponent({
                         break;
                     default:
                         Logger.error('SecurityKeyChallenge', `Unknown DOMException occurred: ${err.name}`);
+                        Sentry.captureException(err);
                 }
 
                 dispatch('alerts/add', {
