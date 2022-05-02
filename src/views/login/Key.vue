@@ -38,8 +38,6 @@ import { base64Decode, bufferToString, stringToBuffer, decodeSecurityKeyCredenti
 
 export default defineComponent({
     setup() {
-        const abortController = ref(new AbortController());
-
         const challenge = async (): Promise<AuthenticatedCredential> => {
             const publicKey = state.user.mfa!.webauthn!.public_key;
 
@@ -50,7 +48,7 @@ export default defineComponent({
                 publicKeyCredential.allowCredentials = decodeSecurityKeyCredentials(publicKey.allowCredentials);
             }
 
-            const credential = await navigator.credentials.get({ signal: abortController.value.signal, publicKey: publicKeyCredential }) as AuthenticatedCredential | null;
+            const credential = await navigator.credentials.get({ publicKey: publicKeyCredential }) as AuthenticatedCredential | null;
             if (!credential) throw new Error('No credentials provided for challenge.');
 
             return credential;
