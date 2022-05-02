@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router';
 import { Router, state } from '~/core';
-import { Admin, Authenticated, Guest, Permission, Feature, TOTP, ModelBindings } from '~/middlewares';
+import { Admin, Authenticated, Guest, Permission, Feature, Require2FA, ModelBindings, MFAInProgress } from '~/middlewares';
 import { GenericLayout, PopupLayout, Passthrough, TabberPassthrough } from '~/views';
 import { NotFoundView } from '~/views/errors';
 
@@ -40,7 +40,18 @@ export const routes: RouteRecordRaw[] = [
             {
                 name: 'login.totp',
                 path: 'totp',
+                meta: {
+                    middlewares: [MFAInProgress],
+                },
                 component: () => import('~/views/login/TOTP.vue'),
+            },
+            {
+                name: 'login.key',
+                path: 'key',
+                meta: {
+                    middlewares: [MFAInProgress],
+                },
+                component: () => import('~/views/login/Key.vue'),
             },
             {
                 name: 'login.reset_password',
@@ -72,7 +83,7 @@ export const routes: RouteRecordRaw[] = [
         path: '/',
         component: GenericLayout,
         meta: {
-            middlewares: [Authenticated, TOTP, new ModelBindings('client')],
+            middlewares: [Authenticated, Require2FA, new ModelBindings('client')],
             showChildrenInNavbar: true,
         },
         children: [
@@ -87,10 +98,25 @@ export const routes: RouteRecordRaw[] = [
             {
                 name: 'account.settings',
                 path: 'account',
-                component: () => import('~/views/account/Index.vue'),
-                meta: {
-                    icon: 'user',
-                },
+                component: TabberPassthrough,
+                children: [
+                    {
+                        name: 'account.settings.details',
+                        path: '',
+                        component: () => import('~/views/account/Index.vue'),
+                        meta: {
+                            icon: 'user',
+                        },
+                    },
+                    {
+                        name: 'account.settings.2fa',
+                        path: '2fa',
+                        component: () => import('~/views/account/2fa/Index.vue'),
+                        meta: {
+                            icon: 'key',
+                        },
+                    }
+                ],
             },
             { // Redirect for backwards compatability with v1
                 name: 'account.sso',
@@ -119,7 +145,7 @@ export const routes: RouteRecordRaw[] = [
         path: '/server/:server',
         component: GenericLayout,
         meta: {
-            middlewares: [Authenticated, TOTP, new ModelBindings('client')],
+            middlewares: [Authenticated, Require2FA, new ModelBindings('client')],
             showChildrenInNavbar: true
         },
         children: [
@@ -414,7 +440,7 @@ export const routes: RouteRecordRaw[] = [
         path: '/server/:server/console',
         component: PopupLayout,
         meta: {
-            middlewares: [Authenticated, TOTP, new ModelBindings('client')],
+            middlewares: [Authenticated, Require2FA, new ModelBindings('client')],
         },
         children: [
             {
@@ -428,7 +454,7 @@ export const routes: RouteRecordRaw[] = [
         path: '/admin',
         component: GenericLayout,
         meta: {
-            middlewares: [Authenticated, Admin, TOTP, new ModelBindings('admin')],
+            middlewares: [Authenticated, Admin, Require2FA, new ModelBindings('admin')],
             showChildrenInNavbar: true,
         },
         children: [

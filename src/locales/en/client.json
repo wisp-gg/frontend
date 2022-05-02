@@ -50,6 +50,14 @@
     "api_key_generated": "A new client API key has been generated for your account."
   },
 
+  "security_keys": {
+    "title": "Security Keys",
+    "create_security_key": "Create Security Key",
+    "successfully_added": "Security key has been successfully added.",
+    "delete_key": "Delete Security Key",
+    "delete_key_notice": "Are you sure that you want to delete the {name} security key?"
+  },
+
   "support": {
     "your_servers": "Your Servers",
     "enable_access": "Enable Support OP Access",

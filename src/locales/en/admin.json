@@ -304,8 +304,6 @@
     "identity": "Identity",
     "external_id_footer": "Leave empty to not assign an external identifier for this user. The external ID should be unique to this user and not be in use by any other users.",
     "language_footer": "Leave empty to use the default language. The language the user's panel will be displayed in, this is changeable on the user's end in the account settings too.",
-    "2fa_enabled": "2FA Enabled",
-    "2fa_enabled_footer": "This requires the user to have 2FA already setup, or otherwise they will not be able to login into their account.",
 
     "password": "Password",
     "password_optional": "Providing a user password is optional. New user gets an email prompting them to create a password for their account. If a password is provided here you will need to find a different method of providing it to the user.",
@@ -316,6 +314,9 @@
     "ignore_exceptions": "Ignore exceptions raised while revoking keys.",
     "ignore_exceptions_footer": "If checked, any errors thrown while revoking keys across nodes will be ignored. You should avoid this checkbox if possible as any non-revoked keys could continue to be active for up to 24 hours after this account is changed. If you are needing to revoke account permissions immediately and are facing node issues, you should check this box and then restart any nodes that failed to be updated to clear out any stored keys.",
 
+    "disable_2fa": "Disable 2-Factor Authentication",
+    "disable_2fa_notice": "This is a dangerous action! This will disable TOTP based authentication if it's enabled, and also delete ALL security keys from the user's account, this is an irreversible action.",
+    "2fa_disabled": "2FA has been disabled for this user's account.",
     "user_has_no_2fa_configured": "The user has no 2FA configured to be able to use it.",
 
     "delete_user": "Delete User",
@@ -400,7 +401,7 @@
 
     "nest_identifiers_footer": "A list of nest identifiers which allow servers running under the nest to create subdomains on the domain.",
     "egg_identifiers_footer": "**This is mainly used to allow specific eggs under a nest without having to allow the entire nest** A list of egg identifiers which allow servers running under the specific egg to create subdomains on the domain.",
-    "root_record_footer": "The IP the root domain should create an A record to point to. This can be useful for creating a redirect on the domain for example.",
+    "root_record_footer": "The IP address for a new A DNS record that a root domain should point to. Useful for configuring a redirect for the domain.",
 
     "delete_domain": "Delete Domain",
     "delete_notice": "Are you sure that you want to delete the \"{name}\" domain? There is no going back, and all servers associated with this domain will lose subdomains associated with it."

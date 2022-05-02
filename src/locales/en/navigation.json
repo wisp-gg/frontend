@@ -10,6 +10,16 @@
       "description": "Login to the panel."
     },
 
+    "totp": {
+      "title": "Enter 2fa TOTP code",
+      "description": "Enter the 2fa TOTP code to login."
+    },
+
+    "key": {
+      "title": "Security key",
+      "description": "Touch security key to login."
+    },
+
     "reset_password": {
       "title": "Reset Password",
       "description": "Reset your account's password.",
@@ -31,12 +41,23 @@
 
     "settings": {
       "title": "Account Settings",
-      "description": "Manage your account details."
+
+      "details": {
+        "title": "Details",
+        "description": "Manage your account details."
+      },
+
+      "2fa": {
+        "title": "2-Factor Authentication",
+        "description": "Control 2-Factor authentication & security keys for your account."
+      }
     },
+
     "security": {
       "title": "Security Controls",
       "description": "Control active sessions and 2-Factor Authentication."
     }
+
   },
 
   "server": {

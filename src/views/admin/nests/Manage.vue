@@ -5,7 +5,7 @@
                 <div class="grid lg:grid-cols-2 gap-x-4 gap-y-4">
                     <div>
                         <v-input name="name" footer="admin.nests.name_footer" rule="required" :value="nest?.name "/>
-                        <v-input label="components.form.fields.identifier" name="shortName" footer="admin.nests.identifier_footer" rule="required" :value="nest?.shortName" />
+                        <v-input label="components.form.fields.identifier" name="shortName" footer="admin.nests.identifier_footer" :value="nest?.shortName" />
                         <v-input no-margin label="components.form.fields.description" name="description" :value="nest?.description" />
                     </div>
 

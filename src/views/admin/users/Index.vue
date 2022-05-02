@@ -37,10 +37,10 @@
             </v-button>
         </template>
 
-        <template #field-useTotp="{ result }">
+        <template #field-has2fa="{ result }">
             <fa
-                :icon="['fas', result.useTotp ? 'lock' : 'lock-open']"
-                :class="result.useTotp ? 'text-success' : 'text-danger'"
+                :icon="['fas', result.has2fa ? 'lock' : 'lock-open']"
+                :class="result.has2fa ? 'text-success' : 'text-danger'"
                 size="lg"
             />
         </template>
@@ -76,7 +76,7 @@ export default defineComponent({
                 { key: 'id', skeleton: 3, features: ['code'] },
                 { key: 'fullName', label: 'name', skeleton: 14 },
                 { key: 'email', skeleton: 8 },
-                { key: 'useTotp', label: '2fa', skeleton: 1 },
+                { key: 'has2fa', label: '2fa', skeleton: 1 },
                 { key: 'serversCount', label: 'servers', skeleton: 1, features: ['code'] },
             ]
         };

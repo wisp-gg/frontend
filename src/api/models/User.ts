@@ -16,7 +16,7 @@ export class User extends BaseModel {
     public email = '';
     public nameFirst = '';
     public nameLast = '';
-    public useTotp = false;
+    public has2fa: boolean = false;
     public preferences: UserPreferences | undefined;
 
     public get fullName(): string {
@@ -30,6 +30,7 @@ export class User extends BaseModel {
     // Currently authenticated user props (or if in admin area)
     public id = -1;
 
+    public mfaMethods: MFAMethods[] = [];
     public rootAdmin = false;
     public supportOp = false;
     public ssoEnabled = false;

@@ -14,7 +14,6 @@ interface CreateUserRequest {
 }
 
 type UpdateUserRequest = CreateUserRequest & {
-    use_totp: boolean;
     ignore_connection_error: boolean;
 };
 
@@ -43,6 +42,12 @@ class UsersService {
 
     update(data: UpdateUserRequest): Promise<User> {
         return RequestService.put('/users/:user', data)
+            .then(Parser.parse)
+            .then(RequestService.updateModelBinding);
+    }
+
+    disable2FA(): Promise<User> {
+        return RequestService.post('/users/:user/disable-2fa')
             .then(Parser.parse)
             .then(RequestService.updateModelBinding);
     }

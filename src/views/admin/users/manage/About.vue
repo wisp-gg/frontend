@@ -11,7 +11,6 @@
 
                 <v-input name="external_id" footer="admin.users.external_id_footer" :value="user?.externalId ?? ''" />
                 <v-select name="preferences.language" prefix="generic.languages" footer="admin.users.language_footer" :value="currentLanguage" :options="languages" />
-                <v-switch name="use_totp" label="admin.users.2fa_enabled" footer="admin.users.2fa_enabled_footer" :value="user?.useTotp" v-if="!creating" />
             </container>
 
             <container title="admin.users.password">
@@ -34,14 +33,22 @@
                 </div>
             </container>
 
-            <div class="bg-primary-500 p-4 rounded text-right space-x-4 mt-4">
-                <skeleton :content="4">
-                    <delete-user-modal v-if="user" :user="user" />
-                </skeleton>
+            <div class="flex bg-primary-500 p-4 mt-4 rounded justify-between">
+                <div>
+                    <skeleton :content="8">
+                        <disable2fa-modal v-if="user?.has2fa" />
+                    </skeleton>
+                </div>
 
-                <v-submit color="primary" :permission="creating ? 'user.create' : 'user.update'">
-                    <t :path="creating ? 'generic.create' : 'generic.save'" />
-                </v-submit>
+                <div class="flex gap-x-4">
+                    <skeleton :content="4">
+                        <delete-user-modal v-if="user" :user="user" />
+                    </skeleton>
+
+                    <v-submit color="primary" :permission="creating ? 'user.create' : 'user.update'">
+                        <t :path="creating ? 'generic.create' : 'generic.save'" />
+                    </v-submit>
+                </div>
             </div>
         </div>
     </v-form>
@@ -52,14 +59,13 @@ import { defineComponent, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { getAvailableLanguages, state } from '~/core';
 import { User } from '~/api/models';
+import Disable2faModal from './Disable2faModal.vue';
 import DeleteUserModal from '../DeleteUserModal.vue';
 
 export default defineComponent({
-    components: {
-        DeleteUserModal,
-    },
+    components: { Disable2faModal, DeleteUserModal },
 
-    setup(props, context) {
+    setup() {
         const router = useRouter();
         const route = useRoute();
         const creating = computed(() => route.name === 'admin.management.users.new');

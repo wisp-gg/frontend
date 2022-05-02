@@ -24,8 +24,8 @@
 
             <template #field-2fa="{ result }">
                 <fa
-                    :icon="['fas', result.user.useTotp ? 'lock' : 'lock-open']"
-                    :class="result.user.useTotp ? 'text-success' : 'text-danger'"
+                    :icon="['fas', result.user.has2fa ? 'lock' : 'lock-open']"
+                    :class="result.user.has2fa ? 'text-success' : 'text-danger'"
                     size="lg"
                 />
             </template>

@@ -15,6 +15,7 @@ export { default as PluginsService } from './plugins';
 export { default as SchedulesService } from './schedules';
 export { default as ScheduleTasksService } from './scheduleTasks';
 export { default as SecurityService } from './security';
+export { default as SecurityKeysService } from './securityKeys';
 export { default as ServerService } from './server';
 export { default as ServersService } from './servers';
 export { default as SettingsService } from './settings';
