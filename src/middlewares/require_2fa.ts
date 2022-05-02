@@ -1,7 +1,7 @@
 import { RouteLocationNormalized } from 'vue-router';
 import { state, dispatch } from '~/core';
 
-class Required2FA implements Middleware {
+class Require2FA implements Middleware {
     static LEVEL_NONE = 0;
     static LEVEL_ADMIN = 1;
     static LEVEL_ALL = 2;
@@ -9,15 +9,15 @@ class Required2FA implements Middleware {
     private except = ['account.settings.2fa'];
 
     name() {
-        return 'required_2fa';
+        return 'require_2fa';
     }
 
     async run(to: RouteLocationNormalized) {
         if (!state.user.data) return;
 
         const required = state.settings.data?.misc?.required_2fa || 0;
-        if (required > 0 && !state.user.data?.has2FAEnabled()) {
-            if (required === Required2FA.LEVEL_ADMIN) {
+        if (required > 0 && !state.user.data?.has2fa) {
+            if (required === Require2FA.LEVEL_ADMIN) {
                 const user = state.user.data;
                 if (!user?.rootAdmin && !user?.supportOp) return;
             }
@@ -36,4 +36,4 @@ class Required2FA implements Middleware {
     }
 }
 
-export default new Required2FA();
+export default new Require2FA();

@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router';
 import { Router, state } from '~/core';
-import { Admin, Authenticated, Guest, Permission, Feature, TOTP, ModelBindings, MFAInProgress } from '~/middlewares';
+import { Admin, Authenticated, Guest, Permission, Feature, Require2FA, ModelBindings, MFAInProgress } from '~/middlewares';
 import { GenericLayout, PopupLayout, Passthrough, TabberPassthrough } from '~/views';
 import { NotFoundView } from '~/views/errors';
 
@@ -83,7 +83,7 @@ export const routes: RouteRecordRaw[] = [
         path: '/',
         component: GenericLayout,
         meta: {
-            middlewares: [Authenticated, TOTP, new ModelBindings('client')],
+            middlewares: [Authenticated, Require2FA, new ModelBindings('client')],
             showChildrenInNavbar: true,
         },
         children: [
@@ -145,7 +145,7 @@ export const routes: RouteRecordRaw[] = [
         path: '/server/:server',
         component: GenericLayout,
         meta: {
-            middlewares: [Authenticated, TOTP, new ModelBindings('client')],
+            middlewares: [Authenticated, Require2FA, new ModelBindings('client')],
             showChildrenInNavbar: true
         },
         children: [
@@ -440,7 +440,7 @@ export const routes: RouteRecordRaw[] = [
         path: '/server/:server/console',
         component: PopupLayout,
         meta: {
-            middlewares: [Authenticated, TOTP, new ModelBindings('client')],
+            middlewares: [Authenticated, Require2FA, new ModelBindings('client')],
         },
         children: [
             {
@@ -454,7 +454,7 @@ export const routes: RouteRecordRaw[] = [
         path: '/admin',
         component: GenericLayout,
         meta: {
-            middlewares: [Authenticated, Admin, TOTP, new ModelBindings('admin')],
+            middlewares: [Authenticated, Admin, Require2FA, new ModelBindings('admin')],
             showChildrenInNavbar: true,
         },
         children: [

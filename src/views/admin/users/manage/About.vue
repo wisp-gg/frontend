@@ -36,7 +36,7 @@
             <div class="flex bg-primary-500 p-4 mt-4 rounded justify-between">
                 <div>
                     <skeleton :content="8">
-                        <disable2fa-modal v-if="user?.has2FAEnabled()" />
+                        <disable2fa-modal v-if="user?.has2fa" />
                     </skeleton>
                 </div>
 
@@ -59,16 +59,13 @@ import { defineComponent, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { getAvailableLanguages, state } from '~/core';
 import { User } from '~/api/models';
+import Disable2faModal from './Disable2faModal.vue';
 import DeleteUserModal from '../DeleteUserModal.vue';
-import Disable2faModal from "~/views/admin/users/manage/Disable2faModal.vue";
 
 export default defineComponent({
-    components: {
-        Disable2faModal,
-        DeleteUserModal,
-    },
+    components: { Disable2faModal, DeleteUserModal },
 
-    setup(props, context) {
+    setup() {
         const router = useRouter();
         const route = useRoute();
         const creating = computed(() => route.name === 'admin.management.users.new');

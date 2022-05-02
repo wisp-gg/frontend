@@ -16,7 +16,7 @@ export class User extends BaseModel {
     public email = '';
     public nameFirst = '';
     public nameLast = '';
-    public has2fa: MFAMethods[] | boolean = false;
+    public has2fa: boolean = false;
     public preferences: UserPreferences | undefined;
 
     public get fullName(): string {
@@ -30,13 +30,10 @@ export class User extends BaseModel {
     // Currently authenticated user props (or if in admin area)
     public id = -1;
 
+    public mfaMethods: MFAMethods[] = [];
     public rootAdmin = false;
     public supportOp = false;
     public ssoEnabled = false;
-
-    public has2FAEnabled() {
-        return typeof this.has2fa === 'boolean' ? this.has2fa : this.has2fa.length > 0;
-    }
 
     public get permissions(): string[] {
         return this.getRelationship('permissions') || [];

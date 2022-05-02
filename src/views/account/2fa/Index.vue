@@ -24,10 +24,10 @@
 
         <container title="client.security.2fa">
             <p class="text-white text-opacity-70 mb-4">
-                <t :path="`client.security.2fa_${user.has2fa.includes('totp') ? 'enabled' : 'disabled'}`" />
+                <t :path="`client.security.2fa_${user.mfaMethods?.includes('totp') ? 'enabled' : 'disabled'}`" />
             </p>
 
-            <div v-if="user.has2fa.includes('totp')">
+            <div v-if="user.mfaMethods?.includes('totp')">
                 <v-form service-id="security@disable2Fa">
                     <v-input name="token" rule="required" />
 
