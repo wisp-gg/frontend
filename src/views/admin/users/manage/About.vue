@@ -36,10 +36,7 @@
             <div class="flex bg-primary-500 p-4 mt-4 rounded justify-between">
                 <div>
                     <skeleton :content="8">
-                        <!-- TODO: Make this a modal, warn about security keys being wiped and use_totp being set to false -->
-                        <v-button color="warning" v-if="user?.has2fa" permission="user.update">
-                            <t path="admin.users.disable_2fa" />
-                        </v-button>
+                        <disable2fa-modal v-if="user?.has2FAEnabled()" />
                     </skeleton>
                 </div>
 
@@ -63,9 +60,11 @@ import { useRoute, useRouter } from 'vue-router';
 import { getAvailableLanguages, state } from '~/core';
 import { User } from '~/api/models';
 import DeleteUserModal from '../DeleteUserModal.vue';
+import Disable2faModal from "~/views/admin/users/manage/Disable2faModal.vue";
 
 export default defineComponent({
     components: {
+        Disable2faModal,
         DeleteUserModal,
     },
 

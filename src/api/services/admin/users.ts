@@ -46,6 +46,12 @@ class UsersService {
             .then(RequestService.updateModelBinding);
     }
 
+    disable2FA(): Promise<User> {
+        return RequestService.post('/users/:user/disable-2fa')
+            .then(Parser.parse)
+            .then(RequestService.updateModelBinding);
+    }
+
     delete(data: DeleteUserRequest): Promise<void> {
         return RequestService.delete(`/users/${data.id}`);
     }

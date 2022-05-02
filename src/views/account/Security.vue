@@ -5,7 +5,7 @@
                 <a href="https://docs.panel.gg/" target="_blank" class="mr-3 text-white text-opacity-50">
                     <t path="generic.api_docs" />
                 </a>
-                <create-credential-button />
+                <create-credential-modal />
             </div>
         </template>
 
@@ -34,12 +34,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { dispatch } from '~/core';
-import CreateCredentialButton from './CreateCredentialButton.vue';
+import CreateCredentialModal from './CreateCredentialModal.vue';
 import { ApiKey } from '~/api/models';
 import { useService } from '~/plugins';
 
 export default defineComponent({
-    components: { CreateCredentialButton },
+    components: { CreateCredentialModal },
     setup() {
         const updateList = () => dispatch('lists/refresh', 'account@getCredentials');
 

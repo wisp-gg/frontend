@@ -315,6 +315,8 @@
     "ignore_exceptions_footer": "If checked, any errors thrown while revoking keys across nodes will be ignored. You should avoid this checkbox if possible as any non-revoked keys could continue to be active for up to 24 hours after this account is changed. If you are needing to revoke account permissions immediately and are facing node issues, you should check this box and then restart any nodes that failed to be updated to clear out any stored keys.",
 
     "disable_2fa": "Disable 2-Factor Authentication",
+    "disable_2fa_notice": "This is a dangerous action! This will disable TOTP based authentication if it's enabled, and also delete ALL security keys from the user's account, this is an irreversible action.",
+    "2fa_disabled": "2FA has been disabled for this user's account.",
     "user_has_no_2fa_configured": "The user has no 2FA configured to be able to use it.",
 
     "delete_user": "Delete User",
