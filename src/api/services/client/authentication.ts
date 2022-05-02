@@ -109,7 +109,7 @@ class AuthenticationService {
                         });
                     } else if (data.required?.includes('totp')) {
                         return Router.push({
-                            name: 'login.2fa',
+                            name: 'login.totp',
                         });
                     }
                 }
