@@ -281,6 +281,9 @@
   },
 
   "mods": {
+    "mod_installed": "{name} mod has been successfully installed.",
+    "mod_uninstalled": "{name} mod has been successfully uninstalled.",
+
     "states": {
       "install": "Install",
       "installing": "Installing",

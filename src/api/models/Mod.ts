@@ -1,6 +1,13 @@
 import { BaseModel } from './BaseModel';
 import { Egg } from '~/api/models/Egg';
 
+export enum ModState {
+    Installing = 1,
+    Installed,
+    Uninstalling,
+    NotInstalled
+}
+
 export class Mod extends BaseModel {
     public id = -1;
     public name = '';
@@ -9,7 +16,7 @@ export class Mod extends BaseModel {
     public category?: string;
 
     // server only
-    public serverState = -1;
+    public serverState: ModState = -1;
 
     // admin only
     public scriptInstall = '';
@@ -29,10 +36,10 @@ export class Mod extends BaseModel {
     }
 
     public serverStateInfo() {
-        if (this.serverState === 1) return ['installing', 'warning', true]; // Installing
-        if (this.serverState === 2) return ['uninstall', 'danger', false]; // Installed
-        if (this.serverState === 3) return ['uninstalling', 'warning', true]; // Uninstalling
-        if (this.serverState === 4) return ['install', 'primary', false]; // Not installed
+        if (this.serverState === ModState.Installing) return ['installing', 'warning', true];
+        if (this.serverState === ModState.Installed) return ['uninstall', 'danger', false];
+        if (this.serverState === ModState.Uninstalling) return ['uninstalling', 'warning', true];
+        if (this.serverState === ModState.NotInstalled) return ['install', 'primary', false];
 
         return null;
     }

@@ -1,25 +1,30 @@
 <template>
     <div class="grid lg:grid-cols-3 xl:grid-cols-4 gap-4 items-start">
-        <container class="lg:col-span-2 xl:col-span-3" title="client.security_keys.title" no-padding>
+        <container class="lg:col-span-2 xl:col-span-3" title="client.security.backup_codes">
             <template #actions>
-                <div class="text-right">
-                    <create-security-key-modal />
+                <div class="flex gap-x-4">
+                    <v-button color="primary">
+                        Download
+                    </v-button>
+
+                    <v-button color="warning">
+                        Regenerate
+                    </v-button>
                 </div>
             </template>
 
-            <list service-id="securityKeys@getAll" :per-page="12" :fields="listFields">
-                <template #headers-after>
-                    <th />
-                </template>
-
-                <template #fields-after="{ result }">
-                    <td class="text-right p-4">
-                        <skeleton :content="8">
-                            <delete-security-key-modal :security-key="result" />
-                        </skeleton>
-                    </td>
-                </template>
-            </list>
+            <div class="grid grid-cols-5 gap-4">
+                <p>0000 0000</p>
+                <p class="line-through" v-tippy="`Used at 17:11 04/05/2022`">0000 0000</p>
+                <p>0000 0000</p>
+                <p>0000 0000</p>
+                <p>0000 0000</p>
+                <p>0000 0000</p>
+                <p>0000 0000</p>
+                <p>0000 0000</p>
+                <p>0000 0000</p>
+                <p>0000 0000</p>
+            </div>
         </container>
 
         <container title="client.security.2fa">
@@ -41,6 +46,28 @@
             </div>
         </container>
     </div>
+
+    <container class="mt-4 lg:col-span-2 xl:col-span-3" title="client.security_keys.title" no-padding>
+        <template #actions>
+            <div class="text-right">
+                <create-security-key-modal />
+            </div>
+        </template>
+
+        <list service-id="securityKeys@getAll" :per-page="12" :fields="listFields">
+            <template #headers-after>
+                <th />
+            </template>
+
+            <template #fields-after="{ result }">
+                <td class="text-right p-4">
+                    <skeleton :content="8">
+                        <delete-security-key-modal :security-key="result" />
+                    </skeleton>
+                </td>
+            </template>
+        </list>
+    </container>
 </template>
 
 <script lang="ts">

@@ -7,7 +7,7 @@
         <template #fields-after="{ result }">
             <th class="p-6 text-right">
                 <skeleton :content="6">
-                    <!-- TODO: Improve this somehow so it doesnt call the function 5 times... mod-row component? -->
+                    <!-- TODO: UX kinda sucks here, waiting for mod to install before giving any feedback - implement a button spinner or something -->
                     <v-button
                         v-if="result.serverStateInfo()"
                         :color="result.serverStateInfo()[1]"
@@ -25,18 +25,24 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Accordion from '~/components/Accordion.vue';
+import { dispatch } from '~/core';
+import { useService, refreshList } from '~/plugins';
 import { Mod } from '~/api/models';
-import { useService } from '~/plugins';
+import { ModState } from '~/api/models/Mod';
 
 export default defineComponent({
-    components: { Accordion },
     setup() {
         return {
-            toggleModInstall: (mod: Mod) => {
-                if ([1, 3].includes(mod.serverState)) return;
+            toggleModInstall: async (mod: Mod) => {
+                if ([ModState.Installing, ModState.Uninstalling].includes(mod.serverState)) return;
 
-                return useService('mods@toggle', true, { id: mod.id });
+                await useService('mods@toggle', true, { id: mod.id });
+
+                await refreshList('mods@get');
+                dispatch('alerts/add', {
+                    type: 'success',
+                    title: [`server.mods.mod_${mod.serverState === ModState.Installed ? 'uninstalled' : 'installed'}`, { name: mod.name }]
+                });
             },
 
             listFields: <ListField[]>[
