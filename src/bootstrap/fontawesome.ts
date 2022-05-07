@@ -75,6 +75,7 @@ import {
 import {
     faHeart as farHeart,
     faClock as farClock,
+    faPaste as farPaste,
 } from '@fortawesome/free-regular-svg-icons';
 
 import {
@@ -89,10 +90,10 @@ library.add(
     fasFileAlt, fasWifi, fasGamepad, fasMapMarkedAlt, fasUsers, fasEdit, fasArrowRight, fasCopy, fasFileArchive, fasDownload,
     fasTrash, fasDatabase, fasWrench, fasUserPlus, fasUserCog, fasNetworkWired, fasFingerprint, fasBoxes, fasCalendarAlt, fasPlug,
     fasCubes, fasPlus, fasChevronRight, fasSearch, fasPencilAlt, fasDoorOpen, fasStopwatch, fasPlayCircle, fasHome, fasRandom,
-    fasGlobe, fasHeartbeat, fasCube, fasEgg, farClock, fasUserAlt, fasKey, fasPowerOff, fasIdBadge, fasStar, fasExchangeAlt,
+    fasGlobe, fasHeartbeat, fasCube, fasEgg, fasUserAlt, fasKey, fasPowerOff, fasIdBadge, fasStar, fasExchangeAlt,
 
     /* REGULAR */
-    farHeart,
+    farHeart, farClock, farPaste,
 
     /* BRANDS */
     fabSteam, fabGit,

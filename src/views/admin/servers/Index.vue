@@ -16,9 +16,16 @@
             <div class="flex items-center">
                 <server-status-indicator :server="result" />
 
-                <v-button permission="server.read" :to="{ name: 'admin.management.servers.manage.about', params: { server: result.id } }" class="ml-4 text-white/75">
-                    {{ result.name }}
-                </v-button>
+                <div class="ml-4">
+                    <v-button permission="server.read" :to="{ name: 'admin.management.servers.manage.about', params: { server: result.id } }" class="text-white/75">
+                        {{ result.name }}
+                    </v-button>
+
+                    <p class="text-xs" v-clipboard="result.uuid">
+                        <fa class="mr-1" :icon="['far', 'paste']" />
+                        <t path="admin.servers.copy_uuid" />
+                    </p>
+                </div>
             </div>
         </template>
 
@@ -72,7 +79,6 @@ export default defineComponent({
         return {
             listFields: <ListField[]>[
                 { key: 'name', skeleton: 8 },
-                { key: 'uuid', features: ['code'], skeleton: 16 },
                 { key: 'owner', skeleton: 12 },
                 { key: 'node', skeleton: 6 },
                 { key: 'connection', skeleton: 12 },
