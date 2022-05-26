@@ -1,32 +1,5 @@
 <template>
     <div class="grid lg:grid-cols-3 xl:grid-cols-4 gap-4 items-start">
-        <container class="lg:col-span-2 xl:col-span-3" title="client.security.backup_codes">
-            <template #actions>
-                <div class="flex gap-x-4">
-                    <v-button color="primary">
-                        Download
-                    </v-button>
-
-                    <v-button color="warning">
-                        Regenerate
-                    </v-button>
-                </div>
-            </template>
-
-            <div class="grid grid-cols-5 gap-4">
-                <p>0000 0000</p>
-                <p class="line-through" v-tippy="`Used at 17:11 04/05/2022`">0000 0000</p>
-                <p>0000 0000</p>
-                <p>0000 0000</p>
-                <p>0000 0000</p>
-                <p>0000 0000</p>
-                <p>0000 0000</p>
-                <p>0000 0000</p>
-                <p>0000 0000</p>
-                <p>0000 0000</p>
-            </div>
-        </container>
-
         <container title="client.security.2fa">
             <p class="text-white text-opacity-70 mb-4">
                 <t :path="`client.security.2fa_${user.mfaMethods?.includes('totp') ? 'enabled' : 'disabled'}`" />
