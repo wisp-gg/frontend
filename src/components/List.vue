@@ -46,7 +46,7 @@
                             <template v-else>
                                 <slot name="items-before" :update="update" />
 
-                                <tr v-for="(result, idx) in list?.results" :key="idx" class="bg-primary-500 border-b border-primary-400 block w-full xl:table-row xl:border-none last:border-none hover:bg-primary-600 group" @click="onCheckboxRowClick($event, result)" @contextmenu="onContextMenu">
+                                <tr v-for="(result, idx) in list?.results" :key="idx" class="bg-primary-500 border-b border-primary-400 block w-full xl:table-row xl:border-none last:border-none hover:bg-primary-600 group" @click="onCheckboxRowClick($event, result)" @contextmenu="$emit('result-context-menu', $event, result)">
                                     <slot name="fields-before" :result="result" :update="update" />
 
                                     <td class="px-4 pt-3 xl:py-4 text-center td-min" v-if="checkbox">
@@ -142,11 +142,8 @@ export default defineComponent({
         searchable: {
             type: Boolean,
         },
-        onContextMenu: {
-            type: Function,
-        },
     },
-    emits: ['results', 'meta', 'pagination', 'checked'], // update setAttribute if you touch this
+    emits: ['results', 'meta', 'pagination', 'checked', 'result-context-menu'], // update setAttribute if you touch this
 
     // TODO: Ability to filter
     setup(props, { emit }) {
@@ -304,6 +301,10 @@ export default defineComponent({
                     updateCheckboxState();
                 }
             },
+
+            onContextMenu: (event: MouseEvent, element: HTMLElement, result: any) => {
+                console.log('clicked');
+            }
         };
     }
 });

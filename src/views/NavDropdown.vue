@@ -4,9 +4,9 @@
             <p class="text-white text-opacity-75">
                 <t :path="name" />
             </p>
-            <p :class="active ? ['text-accent-500'] : ['text-white']">
-                &bull;
-            </p>
+            <span class="transition-transform" :class="[active ? ['text-accent-500'] : ['text-white'], open ? ['rotate-90'] : []]">
+                <fa class="text-xs" :icon="['fas', `chevron-right`]" />
+            </span>
         </div>
 
         <div v-if="open" class="px-6 pb-3">

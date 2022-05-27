@@ -51,10 +51,11 @@
                 :per-page="100"
                 :skeletons="5"
                 :fields="listFields"
-                :on-context-menu="onContextMenu"
                 ref="listElement"
                 checkbox
                 class="files"
+
+                @result-context-menu="onContextMenu"
             >
                 <template #headers-after>
                     <th />
@@ -279,9 +280,10 @@ export default defineComponent({
                 { label: 'last_modified', key: 'modifiedAt', format: 'datetime', skeleton: 16, style: 'width: auto' },
             ],
 
-            onContextMenu: (evt: MouseEvent) => {
+            onContextMenu: (evt: MouseEvent, result: any) => {
                 evt.preventDefault();
-                // TODO: Me
+                // TODO: Somehow dynamically create below element at evt.clientX / evt.clientY (vue3-popper needs a way to override x / y placement instead of opener ig?)
+                // <file-actions-dropdown :path="path" :file="result" />
 
                 return false;
             },
