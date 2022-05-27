@@ -48,8 +48,9 @@
                     taggable
                     rule="required"
                     no-translate
+                    footer="admin.nodes.allocations.ip_footer"
                 />
-                <v-input name="alias" />
+                <v-input name="alias" footer="admin.nodes.allocations.alias_footer" />
 
                 <v-select
                     name="ports"
@@ -57,6 +58,7 @@
                     taggable
                     rule="required"
                     no-translate
+                    footer="admin.nodes.allocations.ports_footer"
                 />
 
                 <div class="text-right">
