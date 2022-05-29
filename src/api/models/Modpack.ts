@@ -1,9 +1,16 @@
 import { BaseModel } from './BaseModel';
+import { ModpackVersion } from './ModpackVersion';
 
 export class Modpack extends BaseModel {
-    public id = -1;
+    public id = '';
     public name = '';
     public description = '';
-    public iconUrl = '';
+    public thumbnailUrl = '';
+    public websiteUrl = '';
     public downloads = -1;
+    public updatedAt = '';
+
+    public get versions(): ModpackVersion[] {
+        return this.getRelationship('versions');
+    }
 }

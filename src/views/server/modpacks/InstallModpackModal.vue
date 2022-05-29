@@ -9,12 +9,12 @@
         </i18n-t>
 
         <v-form service-id="modpacks@install" class="mt-2">
-            <v-input type="hidden" name="modpack" :value="modpack?.id?.toString()" />
+            <v-input type="hidden" name="modpack_id" :value="modpack?.id?.toString()" />
 
             <v-select
-                name="version"
+                name="version_id"
 
-                :options="fetchVersions"
+                :options="versions"
                 label-prop="name"
                 value-prop="id"
                 searchable
@@ -33,9 +33,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 import { Modpack } from '~/api/models';
-import { useService } from '~/plugins';
 
 export default defineComponent({
     props: {
@@ -46,15 +45,12 @@ export default defineComponent({
     },
     setup(props) {
         return {
-            async fetchVersions() {
-                return useService('modpacks@versions', {
-                    displayErrorsInUI: 'server.modpacks.install_modpack',
-                    background: true,
-                }, {
-                    modpack: props.modpack.id,
-                });
-            },
-
+            versions: computed(() => props.modpack?.versions?.map(version => {
+                return {
+                    name: version.name,
+                    id: version.versionId,
+                };
+            })),
             listFields: <ListField[]>[
                 { key: 'name', skeleton: 8 },
                 { key: 'description', skeleton: 16 },

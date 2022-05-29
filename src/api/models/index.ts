@@ -14,6 +14,7 @@ export { Location } from './Location';
 export { Mod } from './Mod';
 export { Features } from './Features';
 export { Modpack } from './Modpack';
+export { ModpackVersion } from './ModpackVersion';
 export { Nest } from './Nest';
 export { Node } from './Node';
 export { Notification } from './Notification';
