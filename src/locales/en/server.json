@@ -261,7 +261,9 @@
       "description": "This will install different edition of Minecraft of your choice on the server.",
       "edition_footer": "The edition for the server.",
       "version_footer": "The version of the edition.",
-      "format_footer": "All server files will be DELETED (some editions may not work with existing files)"
+      "format_footer": "All server files will be DELETED (some editions may not work with existing files)",
+
+      "already_ongoing": "An edition is already being installed, please wait until it finishes."
     },
 
     "reinstall": {

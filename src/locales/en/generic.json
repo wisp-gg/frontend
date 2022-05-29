@@ -76,6 +76,7 @@
 
   "something_went_wrong": "Something went wrong while trying to perform this action.",
   "daemon_connection_exception": "There was an exception while attempting to communicate with the daemon.",
+  "query_failed": "Database query failed with the following error: {error}",
 
   "server": {
     "no_servers": "No Servers",

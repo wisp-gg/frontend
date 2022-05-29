@@ -95,7 +95,9 @@
       "notified_users": "No users left to notify",
       "manual": "Manual",
       "failed": "Failed"
-    }
+    },
+
+    "already_ongoing": "This panel has already migration on-going, please finish it first."
   },
 
   "announcements": {
@@ -278,10 +280,10 @@
       "updating_toggled": "The update status has been toggled.",
 
       "move_server": "Move server to another node",
-
       "moving_status": "Moving Status",
       "moving_status_note": "If you need to change the moving status, you may do so with the button below.\n",
       "moving_toggled": "The move status has been toggled.",
+      "move_already_ongoing": "Can't move a server that is already being moved, please wait until it finishes moving.",
 
       "reset_mod_statuses": "Reset mod installation statuses",
       "reset_mod_statuses_note": "Will reset all mods' installation state if it bugs out, in case the server has mod installations locked completely and they have been stuck for a long time.",
