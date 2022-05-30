@@ -2,7 +2,7 @@
     <list service-id="servers@getAll" :per-page="12" searchable>
         <template #results="{ results }">
             <skeleton-context when="servers@getAll">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4 gap-y-6" v-if="!results.length > 0">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4 gap-y-6" v-if="results.length > 0">
                     <server-card v-for="(result, idx) of results" :key="idx" :server="result" />
                 </div>
                 <div v-else class="flex flex-col lg:flex-row justify-center items-center my-8">
