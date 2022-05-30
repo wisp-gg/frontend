@@ -37,13 +37,13 @@
 
             <div class="justify-end z-10">
                 <div class="flex items-center py-3 bg-primary-800 border-t border-white border-opacity-10">
-                    <v-button :to="{name: adminRoute}" class="mx-auto relative text-lg text-white text-opacity-50 hover:text-opacity-80" v-if="user?.rootAdmin || user?.supportOp">
+                    <v-button v-tippy="`generic.admin_area`" :to="{name: adminRoute}" class="mx-auto relative text-lg text-white text-opacity-50 hover:text-opacity-80" v-if="user?.rootAdmin || user?.supportOp">
                         <fa :icon="['fas', 'cogs']" class="cursor-pointer" />
                     </v-button>
-                    <div class="mx-auto relative" v-if="announcementsEnabled">
+                    <div class="mx-auto relative" v-if="announcementsEnabled" v-tippy="`generic.announcements`">
                         <announcements />
                     </div>
-                    <div class="mx-auto relative">
+                    <div class="mx-auto relative" v-tippy="`generic.notifications`">
                         <notifications />
                     </div>
                 </div>

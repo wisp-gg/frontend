@@ -49,8 +49,9 @@
   "at_a_glance": "At a glance",
   "settings": "Settings",
   "limits": "Limits",
-  "notifications": "Notifications",
+  "admin_area": "Admin Area",
   "announcements": "Announcements",
+  "notifications": "Notifications",
   "clear_all": "Clear All",
   "formats": "Formats:",
   "device_information": "Device Information",
@@ -61,6 +62,7 @@
   "reinstall": "Reinstall",
   "suspend": "Suspend",
   "unsuspend": "Unsuspend",
+  "here": "here",
 
   "users": "Users",
   "allocations": "Allocations",
@@ -80,6 +82,7 @@
   "server": {
     "no_servers": "No Servers",
     "no_servers_description": "Seems like you have no servers...",
+    "no_servers_description_admin": "Seems like you have no servers. You can make servers from the admin area by clicking {link}.",
 
     "hostname": "Hostname",
     "name": "Name",
