@@ -13,6 +13,7 @@
 
             <v-select
                 name="version_id"
+                label="components.form.fields.version"
 
                 :options="versions"
                 label-prop="name"

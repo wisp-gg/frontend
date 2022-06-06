@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from 'vue';
+import { computed, defineComponent, onMounted } from 'vue';
 import * as Sentry from '@sentry/vue';
 import { dispatch, Logger, state } from '~/core';
 import { useService } from '~/plugins';

@@ -1,5 +1,5 @@
 <template>
-    <list service-id="modpacks@get" :fields="listFields" searchable>
+    <list service-id="modpacks@get" :fields="listFields" :per-page="10" searchable>
         <template #headers-after>
             <th />
         </template>

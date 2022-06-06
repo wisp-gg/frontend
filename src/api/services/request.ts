@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, Method } from 'axios';
+import axios, { AxiosInstance, Method, AxiosRequestConfig } from 'axios';
 import { camelCaseToUnderscore } from '~/helpers';
 import { Logger, Router, state, dispatch } from '~/core';
 import { TranslatableError, RequestError } from '~/errors';
@@ -80,21 +80,13 @@ export default class RequestService {
         return data;
     }
 
-    private request(method: Method, endpoint: string, data?: Record<string, any>, headers?: Record<string, any>): Promise<any> {
+    private request(method: Method, endpoint: string, ...args: any[]): Promise<any> {
         if (!this.ready) return this.waitForReady(() => {
-            return this.request(method, endpoint, data);
+            return this.request(method, endpoint, ...args);
         });
 
         endpoint = this.injectRouterParameters(endpoint);
-
-        // Axios delete method requires a more special structure (where data and headers are merged into one for whatever reason)
-        // @see https://github.com/axios/axios/issues/897#issuecomment-343715381
-        if (method.toLowerCase() === 'delete' && data) data = {
-            data,
-            headers,
-        };
-
-        return this.axios[method.toLowerCase() as HTTPMethods](endpoint, data, headers)
+        return this.axios[method.toLowerCase() as HTTPMethods](endpoint, ...args)
             .then(async res => {
                 if (import.meta.env.DEV && import.meta.env.VITE_HTTP_DELAY) {
                     await new Promise(resolve => setTimeout(resolve, import.meta.env.VITE_HTTP_DELAY));
@@ -188,11 +180,11 @@ export default class RequestService {
             });
     }
 
-    get(endpoint: string, data?: Record<string, any>, headers?: Record<string, any>) {
-        return this.request('GET', `${endpoint}${data ? `?${this.toQuery(data)}` : ''}`, headers);
+    get(endpoint: string, data?: Record<string, any>, config?: AxiosRequestConfig) {
+        return this.request('GET', `${endpoint}${data ? `?${this.toQuery(data)}` : ''}`, config);
     }
 
-    getCached(cacheKey: string, endpoint: string, data?: Record<string, any>, headers?: Record<string, any>): Promise<any> {
+    getCached(cacheKey: string, endpoint: string, data?: Record<string, any>, config?: AxiosRequestConfig): Promise<any> {
         cacheKey = this.injectRouterParameters(cacheKey);
         if (data) {
             cacheKey += `?${JSON.stringify(data)}`; // Although not correct way, it's the lazy:tm: way
@@ -205,7 +197,7 @@ export default class RequestService {
         }
 
         return this.responseCache[cacheKey] = new Promise((resolve, reject) => {
-            this.get(endpoint, data, headers)
+            this.get(endpoint, data, config)
                 .then(resolve)
                 .catch(err => {
                     delete this.responseCache[cacheKey];
@@ -215,20 +207,20 @@ export default class RequestService {
         });
     }
 
-    post(endpoint: string, data?: Record<string, any>, headers?: Record<string, any>) {
-        return this.request('POST', endpoint, data, headers);
+    post(endpoint: string, data?: Record<string, any>, config?: AxiosRequestConfig) {
+        return this.request('POST', endpoint, data, config);
     }
 
-    patch(endpoint: string, data?: Record<string, any>, headers?: Record<string, any>) {
-        return this.request('PATCH', endpoint, data, headers);
+    patch(endpoint: string, data?: Record<string, any>, config?: AxiosRequestConfig) {
+        return this.request('PATCH', endpoint, data, config);
     }
 
-    put(endpoint: string, data?: Record<string, any>, headers?: Record<string, any>) {
-        return this.request('PUT', endpoint, data, headers);
+    put(endpoint: string, data?: Record<string, any>, config?: AxiosRequestConfig) {
+        return this.request('PUT', endpoint, data, config);
     }
 
-    delete(endpoint: string, data?: Record<string, any>, headers?: Record<string, any>) {
-        return this.request('DELETE', endpoint, data, headers);
+    delete(endpoint: string, config?: AxiosRequestConfig) {
+        return this.request('DELETE', endpoint, config);
     }
 
     toQuery(data: {[key: string]: string | number | Record<string, any>}) {

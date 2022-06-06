@@ -29,7 +29,7 @@ class SecurityService {
     }
 
     disable2Fa(data: Toggle2FaData): Promise<User> {
-        return RequestService.delete('/security/totp', data)
+        return RequestService.delete('/security/totp', { data })
             .then((res: User) => {
                 dispatch('user/update', { has2fa: res.has2fa });
 

@@ -78,21 +78,27 @@ class SettingsService {
 
     uploadLoginLogo(data: AssetRequest) {
         return RequestService.post('/settings/branding/login_logo', this.assetToFormData(data), {
-            'Content-Type': 'multipart/form-data',
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
         })
             .then(({ url }) => dispatch('settings/update', { branding: { login_logo: url } }));
     }
 
     uploadFavicon(data: AssetRequest) {
         return RequestService.post('/settings/branding/favicon', this.assetToFormData(data), {
-            'Content-Type': 'multipart/form-data',
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
         })
             .then(({ url }) => dispatch('settings/update', { branding: { favicon: url } }));
     }
 
     uploadLogo(data: AssetRequest) {
         return RequestService.post('/settings/branding/logo', this.assetToFormData(data), {
-            'Content-Type': 'multipart/form-data',
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
         })
             .then(({ url }) => dispatch('settings/update', { branding: { logo: url } }));
     }

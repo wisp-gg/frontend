@@ -82,7 +82,7 @@ class ServersService {
     }
 
     delete(data: DeleteServerRequest): Promise<void> {
-        return RequestService.delete('/servers/:server', data);
+        return RequestService.delete('/servers/:server', { data });
     }
 
     updateDetails(data: UpdateDetailsRequest): Promise<Server> {
