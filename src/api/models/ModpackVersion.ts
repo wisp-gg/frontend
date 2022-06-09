@@ -1,9 +1,9 @@
 import { BaseModel } from './BaseModel';
 
 export class ModpackVersion extends BaseModel {
-    static Release = 0;
-    static Beta = 1;
-    static Alpha = 2;
+    static Release = 1;
+    static Beta = 2;
+    static Alpha = 3;
 
     public versionId = '';
     public name = '';

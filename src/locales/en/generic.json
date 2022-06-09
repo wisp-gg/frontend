@@ -130,6 +130,12 @@
     }
   },
 
+  "release_types": {
+    "alpha": "Alpha",
+    "beta": "Beta",
+    "release": "Release"
+  },
+
   "units": {
     "bytes": "B",
     "kilobytes": "KB",

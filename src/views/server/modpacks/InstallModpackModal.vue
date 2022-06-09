@@ -35,8 +35,15 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { dispatch } from '~/core';
-import { Modpack } from '~/api/models';
+import { Modpack, ModpackVersion } from '~/api/models';
+
+const releaseTypes = {
+    [ModpackVersion.Release]: 'release',
+    [ModpackVersion.Beta]: 'beta',
+    [ModpackVersion.Alpha]: 'alpha',
+};
 
 export default defineComponent({
     props: {
@@ -46,10 +53,17 @@ export default defineComponent({
         },
     },
     setup(props) {
+        const { t } = useI18n();
+
         return {
             versions: computed(() => props.modpack?.versions?.map(version => {
+                let name = version.name;
+                if (releaseTypes[version.releaseType]) {
+                    name += ` (${t(`generic.release_types.${releaseTypes[version.releaseType]}`)})`;
+                }
+
                 return {
-                    name: version.name,
+                    name,
                     id: version.versionId,
                 };
             })),
