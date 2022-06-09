@@ -12,7 +12,9 @@ class ModsService {
     }
 
     toggle(data: ToggleModRequest): Promise<void> {
-        return RequestService.post(`/servers/:server/mods/${data.id}`);
+        return RequestService.post(`/servers/:server/mods/${data.id}`, {
+            timeout: 20000,
+        });
     }
 }
 

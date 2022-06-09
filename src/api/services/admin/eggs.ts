@@ -71,7 +71,9 @@ class EggsService {
         formData.append('import_file', data.import_file);
 
         return RequestService.post(`/nests/${data.nest_id}/eggs/import?include=nest`, formData, {
-            'Content-Type': 'multipart/form-data',
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
         }).then(Parser.parse);
     }
 
@@ -80,7 +82,9 @@ class EggsService {
         formData.append('import_file', data.import_file);
 
         return RequestService.post('/nests/:nest/eggs/:egg/import?include=nest', formData, {
-            'Content-Type': 'multipart/form-data',
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
         })
             .then(Parser.parse)
             .then(egg => {
@@ -110,7 +114,9 @@ class EggsService {
 
     updateThumbnail(data: AssetRequest): Promise<Egg> {
         return RequestService.post('/nests/:nest/eggs/:egg/thumbnail', this.assetToFormData(data), {
-            'Content-Type': 'multipart/form-data',
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
         })
             .then(Parser.parse)
             .then(RequestService.updateModelBinding);

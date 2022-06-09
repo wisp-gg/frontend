@@ -1,12 +1,12 @@
 <template>
-    <list service-id="modpacks@get" :fields="listFields" searchable>
+    <list service-id="modpacks@get" :fields="listFields" :per-page="10" searchable>
         <template #headers-after>
             <th />
         </template>
 
         <template #field-name="{ result }">
             <div class="flex items-center">
-                <img :src="result.iconUrl" class="w-16 mr-4">
+                <img :src="result.thumbnailUrl" class="w-16 mr-4">
                 <p>{{ result.name }}</p>
             </div>
         </template>

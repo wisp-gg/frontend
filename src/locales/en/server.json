@@ -379,7 +379,9 @@
   "modpacks": {
     "install_modpack": "Install Modpack",
     "install_warning": "You are about to install {modpack}, this is an operation which may overwrite existing files & can not be reversed.",
-    "format_footer": "Ticking the format option means that all existing files will be deleted before installing the modpack."
+    "format_footer": "Ticking the format option means that all existing files will be deleted before installing the modpack.",
+
+    "installing": "The modpack is now installing. You will be notified when it's finished."
   },
 
   "plugins": {

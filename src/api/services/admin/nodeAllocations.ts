@@ -58,7 +58,7 @@ class NodeAllocationsService {
     }
 
     massDelete(data: MassDeleteAllocationsRequest): Promise<void> {
-        return RequestService.delete('/nodes/:node/allocations', data);
+        return RequestService.delete('/nodes/:node/allocations', { data });
     }
 
     delete(data: DeleteAllocationRequest): Promise<void> {
