@@ -20,6 +20,11 @@
       "failed": "Failed to install the version {name}."
     },
 
+    "modpack": {
+      "installed": "Finished installing modpack {name}.",
+      "failed": "Failed to install the modpack {name}."
+    },
+
     "fastdl": {
       "synced": "FastDL has been synced.",
       "failed": "Failed syncing FastDL."

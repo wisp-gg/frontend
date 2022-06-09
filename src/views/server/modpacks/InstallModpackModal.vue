@@ -1,5 +1,5 @@
 <template>
-    <modal title="server.modpacks.install_modpack" permission="modpack.update" opener-color="primary" opener-text="generic.install">
+    <modal v-slot="{ close }" title="server.modpacks.install_modpack" permission="modpack.update" opener-color="primary" opener-text="generic.install">
         <i18n-t keypath="server.modpacks.install_warning" tag="h2">
             <template #modpack>
                 <skeleton :content="10">
@@ -8,7 +8,7 @@
             </template>
         </i18n-t>
 
-        <v-form service-id="modpacks@install" class="mt-2">
+        <v-form service-id="modpacks@install" class="mt-2" :on-success="() => { close(); onSuccess(); }">
             <v-input type="hidden" name="modpack_id" :value="modpack?.id?.toString()" />
 
             <v-select
@@ -35,6 +35,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
+import { dispatch } from '~/core';
 import { Modpack } from '~/api/models';
 
 export default defineComponent({
@@ -57,6 +58,12 @@ export default defineComponent({
                 { key: 'description', skeleton: 16 },
                 { key: 'downloads', format: 'number', skeleton: 8 },
             ],
+            onSuccess: () => {
+                dispatch('alerts/add', {
+                    type: 'success',
+                    title: ['server.modpacks.installing'],
+                });
+            },
         };
     },
 });
