@@ -41,7 +41,7 @@
                 <template #fields-after="{ result }">
                     <td class="p-6 text-right">
                         <skeleton :content="8">
-                            <v-button v-if="!result.failed && !result.notifiedUsers && result.migratedData" color="info" permission="migrator.update" @click="notifyUsers(result)">
+                            <v-button v-if="!result.failed && !result.notifiedUsers && result.migratedData" color="info" permission="migrator.update" @click="notifyUsers(result)" spinner>
                                 <t path="admin.migrator.notify_users" />
                             </v-button>
                         </skeleton>
@@ -85,18 +85,16 @@ export default defineComponent({
     components: { StateLabel },
     setup() {
         return {
-            notifyUsers: (migration: PanelMigration) => {
-                useService('migrator@notify', true, {
-                    id: migration.id
-                }).then(() => {
-                    migration.notifiedUsers = true;
+            notifyUsers: (migration: PanelMigration) => useService('migrator@notify', true, {
+                id: migration.id
+            }).then(() => {
+                migration.notifiedUsers = true;
 
-                    dispatch('alerts/add', {
-                        type: 'success',
-                        title: ['admin.migrator.notified_users']
-                    });
+                dispatch('alerts/add', {
+                    type: 'success',
+                    title: ['admin.migrator.notified_users']
                 });
-            },
+            }),
 
             listFields: <ListField[]>[
                 { key: 'fqdn', skeleton: 12 },

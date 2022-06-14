@@ -5,7 +5,7 @@
         </p>
 
         <skeleton :content="16">
-            <v-button :color="server.monitor ? 'danger' : 'success'" permission="monitor.update" class="mt-3 w-full" @click="toggleMonitor">
+            <v-button :color="server.monitor ? 'danger' : 'success'" permission="monitor.update" class="mt-3 w-full" @click="toggleMonitor" spinner>
                 <t :path="`generic.${server.monitor ? 'disable' : 'enable'}`" />
             </v-button>
         </skeleton>
@@ -22,17 +22,15 @@ export default defineComponent({
         return {
             server: computed(() => state.models.server!),
 
-            toggleMonitor: () => {
-                useService('advanced@toggleMonitor', true)
-                    .then(() => {
-                        dispatch('alerts/add', {
-                            timeout: 5000,
+            toggleMonitor: () => useService('advanced@toggleMonitor', true)
+                .then(() => {
+                    dispatch('alerts/add', {
+                        timeout: 5000,
 
-                            type: 'success',
-                            title: ['server.advanced.monitor.toggled'],
-                        });
+                        type: 'success',
+                        title: ['server.advanced.monitor.toggled'],
                     });
-            },
+                }),
         };
     },
 });

@@ -15,13 +15,13 @@
             <template #fields-after="{ result }">
                 <td class="p-6 text-right">
                     <skeleton :content="8">
-                        <v-button color="primary" permission="backup.deploy" class="mr-2" @click="deploy(result)">
+                        <v-button color="primary" permission="backup.deploy" class="mr-2" @click="deploy(result)" spinner>
                             <t path="generic.deploy" />
                         </v-button>
-                        <v-button color="info" permission="backup.download" class="mr-2" @click="download(result)">
+                        <v-button color="info" permission="backup.download" class="mr-2" @click="download(result)" spinner>
                             <t path="generic.download" />
                         </v-button>
-                        <v-button color="warning" permission="backup.update" class="mr-2" @click="toggleLocked(result)">
+                        <v-button color="warning" permission="backup.update" class="mr-2" @click="toggleLocked(result)" spinner>
                             <t :path="`generic.${result.locked ? 'unlock' : 'lock'}`" />
                         </v-button>
                         <delete-backup-modal :backup="result" />
@@ -55,17 +55,13 @@ export default defineComponent({
             ],
             updateList,
 
-            deploy: (result: Backup) => {
-                useService('backups@deploy', true, result);
-            },
-            download: (result: Backup) => {
-                useService<DownloadBackupRequest>('backups@download', true, result)
-                    .then(({ url }) => window.open(url));
-            },
-            toggleLocked: (result: Backup) => {
-                useService<DownloadBackupRequest>('backups@toggleLocked', true, result)
-                    .then(updateList);
-            },
+            deploy: (result: Backup) => useService('backups@deploy', true, result),
+
+            download: (result: Backup) => useService<DownloadBackupRequest>('backups@download', true, result)
+                .then(({ url }) => window.open(url)),
+
+            toggleLocked: (result: Backup) => useService<DownloadBackupRequest>('backups@toggleLocked', true, result)
+                .then(updateList),
         };
     },
 });

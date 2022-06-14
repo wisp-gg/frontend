@@ -38,7 +38,7 @@
 
             <div class="text-right">
                 <skeleton :content="4">
-                    <v-button class="py-3 px-6 mr-4" permission="egg_variable.delete" @click="deleteVariable" color="danger" tooltip="generic.delete">
+                    <v-button class="py-3 px-6 mr-4" permission="egg_variable.delete" @click="deleteVariable" color="danger" tooltip="generic.delete" spinner>
                         <fa :icon="['fas', 'trash']" fixed-width size="lg" />
                     </v-button>
                 </skeleton>
@@ -76,7 +76,7 @@ export default defineComponent({
             deleteVariable: () => {
                 if (!props.variable) return; // How? skeleton should stop this
 
-                useService('eggVariables@delete', true, { id: props.variable.id }).then(() => {
+                return useService('eggVariables@delete', true, { id: props.variable.id }).then(() => {
                     dispatch('alerts/add', {
                         type: 'success',
                         title: ['admin.nests.egg.variables.variable_deleted', { name: props.variable!.name }],
@@ -84,8 +84,6 @@ export default defineComponent({
 
                     updateList();
                 });
-
-                return true;
             },
 
             onSuccess: async (data: EggVariable) => {

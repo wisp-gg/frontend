@@ -13,7 +13,7 @@
                                 <t path="server.allocations.primary" />
                             </p>
 
-                            <v-button v-else color="primary" permission="allocation.update" @click="makePrimary(result.id)">
+                            <v-button v-else color="primary" permission="allocation.update" @click="makePrimary(result.id)" spinner>
                                 <t path="server.allocations.make_primary" />
                             </v-button>
                         </skeleton>
@@ -38,13 +38,10 @@ import { dispatch } from '~/core';
 export default defineComponent({
     setup() {
         return {
-            makePrimary: (id: number) => {
-                return useService('allocations@update', true, {
-                    id,
-                    primary: true
-                })
-                    .then(() => dispatch('lists/refresh', 'allocations@getAll'));
-            },
+            makePrimary: (id: number) => useService('allocations@update', true, {
+                id,
+                primary: true
+            }).then(() => dispatch('lists/refresh', 'allocations@getAll')),
 
             listFields: <ListField[]>[
                 { key: 'ip', features: ['code', 'clipboard'], skeleton: 12 },

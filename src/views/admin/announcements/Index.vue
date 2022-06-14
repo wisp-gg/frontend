@@ -26,7 +26,7 @@
             <template #fields-after="{ result }">
                 <td class="p-6 text-right space-x-4">
                     <skeleton :content="6">
-                        <v-button v-if="result.active" color="warning" permission="announcement.update" @click="resendAnnouncement(result)">
+                        <v-button v-if="result.active" color="warning" permission="announcement.update" @click="resendAnnouncement(result)" spinner>
                             <t path="admin.announcements.resend" />
                         </v-button>
                     </skeleton>
@@ -56,13 +56,11 @@ export default defineComponent({
     components: { ManageAnnouncementModal, DeleteAnnnouncementModal },
     setup() {
         return {
-            resendAnnouncement: (announcement: Announcement) => {
-                return useService('announcements@resend', true, { id: announcement.id })
-                    .then(() => dispatch('alerts/add', {
-                        type: 'success',
-                        title: ['admin.announcements.announcement_resent'],
-                    }));
-            },
+            resendAnnouncement: (announcement: Announcement) => useService('announcements@resend', true, { id: announcement.id })
+                .then(() => dispatch('alerts/add', {
+                    type: 'success',
+                    title: ['admin.announcements.announcement_resent'],
+                })),
 
             listFields: <ListField[]>[
                 { key: 'text', label: 'content', skeleton: 16 },

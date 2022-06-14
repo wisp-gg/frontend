@@ -19,13 +19,13 @@
                         <td class="p-6 text-right">
                             <div class="flex justify-end space-x-4">
                                 <skeleton :content="8">
-                                    <v-button color="warning" class="py-3 px-6" permission="server_database.update" @click="rotatePassword(result.id)">
+                                    <v-button color="warning" class="py-3 px-6" permission="server_database.update" @click="rotatePassword(result.id)" spinner>
                                         <t path="generic.reset_password" />
                                     </v-button>
                                 </skeleton>
 
                                 <skeleton :content="4">
-                                    <v-button color="danger" permission="server_database.delete" @click="deleteDatabase(result.id)">
+                                    <v-button color="danger" permission="server_database.delete" @click="deleteDatabase(result.id)" spinner>
                                         <t path="generic.delete" />
                                     </v-button>
                                 </skeleton>
@@ -83,18 +83,13 @@ export default defineComponent({
 
             updateList,
 
-            rotatePassword: (id: number) => {
-                return useService('serverDatabases@rotatePassword', true, {
-                    id
-                })
-                    .then(updateList);
-            },
-            deleteDatabase: (id: number) => {
-                return useService('serverDatabases@delete', true, {
-                    id,
-                })
-                    .then(updateList);
-            },
+            rotatePassword: (id: number) => useService('serverDatabases@rotatePassword', true, {
+                id
+            }).then(updateList),
+
+            deleteDatabase: (id: number) => useService('serverDatabases@delete', true, {
+                id,
+            }).then(updateList),
 
             listFields: <ListField[]>[
                 { key: 'name', skeleton: 6 },

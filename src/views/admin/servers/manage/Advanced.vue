@@ -3,7 +3,7 @@
         <container title="admin.servers.advanced.reinstall_server">
             <t path="admin.servers.advanced.reinstall_server_note" />
 
-            <v-button class="w-full mt-4" color="danger" permission="server.reinstall" @click="reinstall">
+            <v-button class="w-full mt-4" color="danger" permission="server.reinstall" @click="reinstall" spinner>
                 <t path="generic.reinstall" />
             </v-button>
         </container>
@@ -11,7 +11,7 @@
         <container title="admin.servers.advanced.install_status">
             <t path="admin.servers.advanced.install_status_note" />
 
-            <v-button class="w-full mt-4" color="info" permission="server.toggle_install" @click="toggleInstall">
+            <v-button class="w-full mt-4" color="info" permission="server.toggle_install" @click="toggleInstall" spinner>
                 <t path="generic.toggle" />
             </v-button>
         </container>
@@ -19,7 +19,7 @@
         <container title="admin.servers.advanced.rebuild_container">
             <t path="admin.servers.advanced.rebuild_container_note" />
 
-            <v-button class="w-full mt-4" color="primary" permission="server.rebuild" @click="rebuild">
+            <v-button class="w-full mt-4" color="primary" permission="server.rebuild" @click="rebuild" spinner>
                 Rebuild Server Container
             </v-button>
         </container>
@@ -28,7 +28,7 @@
             <t path="admin.servers.advanced.suspend_server_note" />
 
             <skeleton :content="16">
-                <v-button class="w-full mt-4" color="warning" permission="server.suspend" @click="suspend">
+                <v-button class="w-full mt-4" color="warning" permission="server.suspend" @click="suspend" spinner>
                     <t :path="`generic.${server.suspended ? 'unsuspend' : 'suspend'}`" />
                 </v-button>
             </skeleton>
@@ -37,7 +37,7 @@
         <container title="admin.servers.advanced.updating_status">
             <t path="admin.servers.advanced.updating_status_note" />
 
-            <v-button class="w-full mt-4" color="info" permission="server.toggle_update" @click="toggleUpdate">
+            <v-button class="w-full mt-4" color="info" permission="server.toggle_update" @click="toggleUpdate" spinner>
                 <t path="generic.toggle" />
             </v-button>
         </container>
@@ -79,7 +79,7 @@
         <container title="admin.servers.advanced.moving_status">
             <t path="admin.servers.advanced.moving_status_note" />
 
-            <v-button class="w-full mt-4" color="warning" permission="server.toggle_move" @click="toggleMove">
+            <v-button class="w-full mt-4" color="warning" permission="server.toggle_move" @click="toggleMove" spinner>
                 <t path="generic.toggle" />
             </v-button>
         </container>
@@ -87,7 +87,7 @@
         <container title="admin.servers.advanced.reset_mod_statuses">
             <t path="admin.servers.advanced.reset_mod_statuses_note" />
 
-            <v-button class="w-full mt-4" color="danger" permission="server.reset_mods" @click="resetMods">
+            <v-button class="w-full mt-4" color="danger" permission="server.reset_mods" @click="resetMods" spinner>
                 <t path="generic.reset" />
             </v-button>
         </container>

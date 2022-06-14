@@ -65,7 +65,7 @@
                             user
                         </p>
                     </div>
-                    <v-button class="ml-auto mr-3 text-lg text-white text-opacity-50 hover:text-opacity-80" @click="logout">
+                    <v-button class="ml-auto mr-3 text-lg text-white text-opacity-50 hover:text-opacity-80" @click="logout" spinner>
                         <fa :icon="['fas', 'sign-out-alt']" class="icon" />
                     </v-button>
                 </div>

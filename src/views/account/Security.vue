@@ -20,7 +20,7 @@
                         <v-form service-id="security@deleteCredential" :on-success="updateList">
                             <v-input type="hidden" name="identifier" :value="result.identifier" />
 
-                            <v-button color="danger" class="py-3 px-6" @click="deleteKey(result)">
+                            <v-button color="danger" class="py-3 px-6" @click="deleteKey(result)" spinner>
                                 <t path="generic.delete" />
                             </v-button>
                         </v-form>
@@ -44,11 +44,9 @@ export default defineComponent({
         const updateList = () => dispatch('lists/refresh', 'account@getCredentials');
 
         return {
-            deleteKey: (key: ApiKey) => {
-                return useService('security@deleteCredential', true, {
-                    identifier: key.identifier
-                }).then(updateList);
-            },
+            deleteKey: (key: ApiKey) => useService('security@deleteCredential', true, {
+                identifier: key.identifier
+            }).then(updateList),
 
             updateList,
             listFields: <ListField[]>[

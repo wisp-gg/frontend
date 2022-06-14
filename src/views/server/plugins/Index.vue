@@ -23,7 +23,7 @@
                             <t path="server.plugins.external" />
                         </code>
 
-                        <v-button v-else permission="plugin.update" color="primary" @click="installPlugin(result)">
+                        <v-button v-else permission="plugin.update" color="primary" @click="installPlugin(result)" spinner>
                             <t path="generic.install" />
                         </v-button>
                     </skeleton>
@@ -42,18 +42,16 @@ import { dispatch } from '~/core';
 export default defineComponent({
     setup() {
         return {
-            installPlugin: async (plugin: Plugin) => {
-                await useService('plugins@install', true, {
-                    plugin_id: plugin.id,
-                });
-
+            installPlugin: (plugin: Plugin) => useService('plugins@install', true, {
+                plugin_id: plugin.id,
+            }).then(() => {
                 dispatch('alerts/add', {
                     type: 'success',
                     title: ['server.plugins.plugin_installed', {
                         name: plugin.name,
                     }],
                 });
-            },
+            }),
 
             listFields: <ListField[]>[
                 { key: 'name', skeleton: 8 },

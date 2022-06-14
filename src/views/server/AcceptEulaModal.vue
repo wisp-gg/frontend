@@ -6,7 +6,7 @@
                 <t path="server.console.eula_notice" />
             </p>
 
-            <v-button color="primary" class="px-8 py-2" @click="acceptEula()">
+            <v-button color="primary" class="px-8 py-2" @click="acceptEula()" spinner>
                 <t path="generic.accept" />
             </v-button>
         </div>

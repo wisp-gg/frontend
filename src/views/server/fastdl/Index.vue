@@ -20,7 +20,7 @@
                         <t path="server.fastdl.click_button" />
                     </h2>
 
-                    <v-button color="primary" permission="fastdl.update" @click="sync">
+                    <v-button color="primary" permission="fastdl.update" @click="sync" spinner>
                         <t path="server.fastdl.sync_button" />
                     </v-button>
                 </div>
@@ -64,15 +64,13 @@ export default defineComponent({
                 return `${state.models.server.node.fastDlUrl}/${state.models.server.uuidShort}`;
             }),
 
-            sync: () => {
-                return useService('fastdl@sync', true)
-                    .then(() => {
-                        dispatch('alerts/add', {
-                            type: 'success',
-                            title: ['server.fastdl.sync_started'],
-                        });
+            sync: () => useService('fastdl@sync', true)
+                .then(() => {
+                    dispatch('alerts/add', {
+                        type: 'success',
+                        title: ['server.fastdl.sync_started'],
                     });
-            },
+                }),
         };
     },
 });

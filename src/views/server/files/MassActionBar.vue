@@ -1,7 +1,7 @@
 <template>
     <div class="pointer-events-none fixed bottom-0 z-20 left-0 right-0 flex justify-center" :class="usingSidebar ? ['md:ml-64'] : []">
         <div class="btn-group justify-center pointer-events-auto rounded-lg p-4 mb-6 bg-primary-800">
-            <v-button color="warning" :permission="['file.archive', 'file.read']" @click="compressFiles">
+            <v-button color="warning" :permission="['file.archive', 'file.read']" @click="compressFiles" spinner>
                 <t path="server.files.compress" />
             </v-button>
 
@@ -17,7 +17,7 @@
                 </ul>
 
                 <div class="text-right">
-                    <v-button color="danger" @click="deleteFiles().then(close)">
+                    <v-button color="danger" @click="deleteFiles().then(close)" spinner>
                         <t path="generic.submit" />
                     </v-button>
                 </div>

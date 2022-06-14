@@ -30,7 +30,7 @@
                         </skeleton>
 
                         <skeleton :content="8">
-                            <v-button color="warning" permission="database.update" class="py-3 px-6" @click="rotatePassword(result.id)">
+                            <v-button color="warning" permission="database.update" class="py-3 px-6" @click="rotatePassword(result.id)" spinner>
                                 <t path="generic.reset_password" />
                             </v-button>
                         </skeleton>
@@ -63,12 +63,9 @@ export default defineComponent({
             databaseLimit: computed(() => state.models.server?.featureLimits.databases || 0),
             databaseCount,
 
-            rotatePassword: (id: number) => {
-                return useService('databases@rotatePassword', true, {
-                    id
-                })
-                    .then(() => dispatch('lists/refresh', 'databases@getAll'));
-            },
+            rotatePassword: (id: number) => useService('databases@rotatePassword', true, {
+                id
+            }).then(() => dispatch('lists/refresh', 'databases@getAll')),
 
             listFields: <ListField[]>[
                 { key: 'name', skeleton: 6 },

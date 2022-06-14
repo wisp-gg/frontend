@@ -10,7 +10,7 @@
             <t path="server.schedules.delete_task_notice" />
 
             <div class="text-right">
-                <v-button color="danger" @click="confirm">
+                <v-button color="danger" @click="confirm" spinner>
                     <t path="generic.delete" />
                 </v-button>
             </div>

@@ -131,7 +131,7 @@
 
         <div class="text-right space-x-4">
             <skeleton :content="8">
-                <v-button v-if="schedule.isActive" color="primary" permission="schedule.update" @click="trigger">
+                <v-button v-if="schedule.isActive" color="primary" permission="schedule.update" @click="trigger" spinner>
                     <t path="generic.trigger" />
                 </v-button>
             </skeleton>
@@ -193,9 +193,7 @@ export default defineComponent({
             }).next().toISOString(), 'LL @ LT') : t('generic.not_applicable')),
             tasks: computed(() => (schedule.value?.tasks || []).sort((a: ScheduleTask, b: ScheduleTask) => a.sequenceId - b.sequenceId) || []),
 
-            trigger: () => {
-                return useService('schedules@trigger', true).then(() => schedule.value!.isProcessing = true);
-            },
+            trigger: () => useService('schedules@trigger', true).then(() => schedule.value!.isProcessing = true),
         };
     },
 });

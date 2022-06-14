@@ -1,17 +1,19 @@
 <template>
     <span class="focus:outline-none" :class="spanClass" v-tippy="tippy" v-if="disabled || hasTooltip" tabindex="0">
-        <component :is="component" v-bind="componentProps">
-            <slot />
+        <component :is="component" @click="handleClick" v-bind="componentProps">
+            <fa v-if="showSpinner" :icon="['fas', 'spinner']" spin size="lg" fixed-width />
+            <slot v-else />
         </component>
     </span>
 
-    <component :is="component" v-bind="componentProps" v-else>
-        <slot />
+    <component v-else :is="component" @click="handleClick" v-bind="componentProps">
+        <fa v-if="showSpinner" :icon="['fas', 'spinner']" spin size="lg" fixed-width />
+        <slot v-else />
     </component>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, PropType } from 'vue';
+import { defineComponent, computed, PropType, ref } from 'vue';
 import { hasPermissions, translateRequiresPermissions } from '~/plugins';
 
 export default defineComponent({
@@ -45,19 +47,27 @@ export default defineComponent({
         spanClass: {
             type: [String, Array],
         },
+        spinner: {
+            type: Boolean,
+            default: false,
+        }
     },
 
     setup(props, context) {
+        const showSpinner = ref(false);
         const hasPerms = computed(() => props.permission ? hasPermissions(props.permission) : true);
+
         const disabled = computed(() => {
             if (context.attrs.disabled || context.attrs.disabled === '') return true;
 
-            return !hasPerms.value || null;
+            return !hasPerms.value || showSpinner.value || null;
         });
+
         return {
             hasTooltip: computed(() => {
                 return props.tooltip || props.permission;
             }),
+            showSpinner,
             disabled,
             component: computed(() => {
                 if (props.href) return 'a';
@@ -104,6 +114,17 @@ export default defineComponent({
 
                 return props.tooltip ? [props.tooltip, props.tooltipPlacement] : null;
             }),
+
+            handleClick: async (evt: MouseEvent) => {
+                evt.stopImmediatePropagation();
+
+                const clickEvt = context.attrs.onClick;
+                if (typeof clickEvt !== 'function') return;
+
+                if (props.spinner) showSpinner.value = true;
+                await clickEvt(evt);
+                if (props.spinner) showSpinner.value = false;
+            }
         };
     }
 });

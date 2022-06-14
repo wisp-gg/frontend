@@ -18,7 +18,7 @@
                     <t path="generic.none" />
                 </div>
 
-                <v-button color="secondary" class="w-full !rounded-t-none" @click="readAllAnnouncements">
+                <v-button color="secondary" class="w-full !rounded-t-none" @click="readAllAnnouncements" spinner>
                     <t path="generic.clear_all" />
                 </v-button>
             </div>
@@ -49,16 +49,14 @@ export default defineComponent({
                 return navPreference === NavBarPosition.LEFT ? 'right-end' : 'bottom';
             }),
 
-            readAllAnnouncements: () => {
-                useService('client:account@markAnnouncementsRead', true)
-                    .then(() => {
-                        dispatch('user/update', {
-                            update_relationships: {
-                                announcements: [],
-                            },
-                        });
+            readAllAnnouncements: () => useService('client:account@markAnnouncementsRead', true)
+                .then(() => {
+                    dispatch('user/update', {
+                        update_relationships: {
+                            announcements: [],
+                        },
                     });
-            },
+                }),
         };
     },
 });

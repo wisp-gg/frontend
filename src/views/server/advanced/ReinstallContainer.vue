@@ -5,7 +5,7 @@
         </p>
 
         <!-- TODO: confirmation-modal component -->
-        <v-button color="danger" permission="reinstall.update" class="mt-3 w-full" @click="reinstall">
+        <v-button color="danger" permission="reinstall.update" class="mt-3 w-full" @click="reinstall" spinner>
             <t path="server.advanced.reinstall_server" />
         </v-button>
     </container>
@@ -18,9 +18,7 @@ import { useService } from '~/plugins';
 export default defineComponent({
     setup() {
         return {
-            reinstall: () => {
-                return useService('advanced@reinstall', true);
-            }
+            reinstall: () => useService('advanced@reinstall', true),
         };
     },
 });

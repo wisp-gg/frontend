@@ -6,7 +6,7 @@
             </p>
 
             <skeleton :content="16">
-                <v-button class="mt-3 w-full" :color="server.supportOp ? 'danger' : 'primary'" @click="toggleSupport">
+                <v-button class="mt-3 w-full" :color="server.supportOp ? 'danger' : 'primary'" @click="toggleSupport" spinner>
                     <t :path="`generic.${server.supportOp ? 'disable' : 'enable'}`" />
                 </v-button>
             </skeleton>
@@ -46,14 +46,12 @@ export default defineComponent({
 
             canUpdate: computed<boolean>(() => state.models.server?.egg?.canUpdate || false),
 
-            toggleSupport: () => {
-                return useService<Server>('advanced@toggleSupport', true).then((server: Server) => {
-                    dispatch('alerts/add', {
-                        type: 'success',
-                        title: [`server.advanced.support.${server.supportOp ? 'enable_access_alert' : 'disable_access_alert'}`],
-                    });
+            toggleSupport: () => useService<Server>('advanced@toggleSupport', true).then((server: Server) => {
+                dispatch('alerts/add', {
+                    type: 'success',
+                    title: [`server.advanced.support.${server.supportOp ? 'enable_access_alert' : 'disable_access_alert'}`],
                 });
-            },
+            }),
         };
     },
 });
