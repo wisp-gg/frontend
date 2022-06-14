@@ -10,7 +10,7 @@ export enum DaemonVersion {
 const INTERNAL_EVENTS = ['upload-start', 'upload-progress', 'upload-complete', 'upload-error'];
 
 export abstract class WebSocketTransformer {
-    private version: DaemonVersion = DaemonVersion.V1;
+    protected version: DaemonVersion = DaemonVersion.V1;
     private events: Record<string, any[]> = {};
     protected socket: Socket | undefined;
 

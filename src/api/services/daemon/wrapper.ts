@@ -1,11 +1,11 @@
 import { io, Socket } from 'socket.io-client';
 // @ts-ignore
 import SocketIOFileUpload from 'socketio-file-upload/client';
-import { Logger, dispatch } from '~/core';
+import { dispatch, Logger } from '~/core';
 import { Server } from '~/api/models';
 import { ServerService } from '~/api/services/client';
 import { ServerStatus } from './types';
-import { WebSocketTransformer } from './websocket';
+import { WebSocketTransformer, DaemonVersion } from './websocket';
 
 class DaemonWrapper extends WebSocketTransformer {
     protected uploadSocket: Socket | undefined;
@@ -16,6 +16,12 @@ class DaemonWrapper extends WebSocketTransformer {
     // It shouldn't be relied on as indicator for "successfully connected".
     async connect(server: Server): Promise<void> {
         await this.disconnect();
+
+        if (server.suspended && this.version === DaemonVersion.V1) {
+            Logger.warn(`DaemonWrapper[${server.uuidShort}]`, 'Server is suspended - connection will not work so it will not be attempted.');
+            return;
+        }
+
         this.id = server.uuidShort;
 
         const { url, upload_url, token } = await ServerService.getWebsocket(); // TODO: race condition, we may want to connect as some point, but if we disconnect right after the request starts (and before it ends), it'll keep connecting :/

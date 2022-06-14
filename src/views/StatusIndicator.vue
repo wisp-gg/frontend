@@ -1,12 +1,13 @@
 <template>
-    <div class="bg-opacity-20 rounded-full p-1.5" :class="[`bg-${color}`]" v-tippy="`generic.server.status.${state}`">
-        <div class="bg-opacity-100 rounded-full w-2 h-2" :class="[`bg-${color}`]" />
+    <div class="bg-opacity-20 rounded-full p-1.5" :class="[`bg-${state[0]}`]" v-tippy="`generic.server.status.${state[1]}`">
+        <div class="bg-opacity-100 rounded-full w-2 h-2" :class="[`bg-${state[0]}`]" />
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
-import { mappedState } from '~/api/services/client/servers';
+import { computed, defineComponent } from 'vue';
+import { mappedState, ServerStatus } from '~/api/services/client/servers';
+import { state } from '~/core';
 
 export default defineComponent({
     props: {
@@ -15,9 +16,15 @@ export default defineComponent({
         },
     },
     setup(props) {
+        const server = computed(() => state.models.server);
+
         return {
-            color: computed(() => props.status !== undefined && mappedState[props.status] ? mappedState[props.status][0] : 'danger'),
-            state: computed(() => props.status !== undefined && mappedState[props.status] ? mappedState[props.status][1] : 'error'),
+            state: computed(() => {
+                if (props.status && mappedState[props.status]) return mappedState[props.status];
+                if (server.value?.suspended) return mappedState[ServerStatus.Suspended];
+
+                return mappedState[ServerStatus.Error];
+            }),
         };
     },
 });
