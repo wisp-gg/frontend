@@ -79,6 +79,7 @@ interface FormComponent {
     validate?: () => void;
     rule?: string;
     onSubmit?: (state: boolean) => void;
+    onSuccess?: (data: any) => void;
 }
 
 // List stuff

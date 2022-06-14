@@ -301,6 +301,7 @@ export default defineComponent({
 
                     inputDisabled.value = state;
                 },
+                onSuccess: () => input.value = props.value, // Reset the state to the default
             });
         });
 

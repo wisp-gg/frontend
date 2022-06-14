@@ -82,6 +82,8 @@ export default defineComponent({
             onSubmit(true);
 
             const onSuccess = (data: any) => {
+                formComponents.forEach(component => component.onSuccess?.(data));
+
                 if (props.onSuccess) {
                     if (typeof props.onSuccess === 'string') {
                         dispatch('alerts/add', {
