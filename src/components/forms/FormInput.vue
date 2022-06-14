@@ -42,7 +42,8 @@
                 :placeholder="placeholder ? t(placeholder) : ''"
                 :disabled="inputDisabled"
                 :readonly="readonly"
-                @blur="change"
+                @blur="blur"
+                @change="change"
                 @input="emitUpdate"
                 @keydown="emitKeyDown"
                 @keyup="emitKeyUp"
@@ -207,17 +208,17 @@ export default defineComponent({
 
                 return true;
             }),
-            change: (evt: HTMLInputElement) => {
+            change: (evt: KeyboardEvent) => {
                 /*
                  * Autofill on iOS triggers this event, so we need to check whether the value was changed
                  * and update it if so.
                  *
                  * @see https://github.com/wisp-gg/frontend/issues/61
                  */
-                if (input.value !== evt.value) input.value = evt.value;
-
-                validate();
+                const target = evt.target as HTMLInputElement;
+                if (input.value !== target.value) input.value = target.value;
             },
+            blur: () => validate(),
             emitUpdate: () => emit('update:value', input.value),
             emitKeyDown: (evt: KeyboardEvent) => emit('keydown', evt),
             emitKeyUp: (evt: KeyboardEvent) => emit('keyup', evt),
