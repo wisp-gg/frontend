@@ -402,6 +402,8 @@
       "spigot": "Spigot",
       "spongevanilla": "SpongeVanilla",
       "tuinity": "Tuinity",
+      "quiltmc": "QuiltMC",
+      "quiltmc_snapshots": "QuiltMC (Snapshots)",
       "vanilla": "Vanilla",
       "vanilla_snapshots": "Vanilla (Snapshots)",
       "velocity": "Velocity",
