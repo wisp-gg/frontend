@@ -116,10 +116,10 @@ export default defineComponent({
             }),
 
             handleClick: async (evt: MouseEvent) => {
-                evt.stopImmediatePropagation();
-
                 const clickEvt = context.attrs.onClick;
                 if (typeof clickEvt !== 'function') return;
+
+                evt.stopImmediatePropagation();
 
                 if (props.spinner) showSpinner.value = true;
                 await clickEvt(evt);
