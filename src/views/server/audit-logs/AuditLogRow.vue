@@ -44,36 +44,7 @@ export default defineComponent({
     },
     setup(props) {
         return {
-            icon: computed(() => {
-                if (!props.audit) return;
-
-                switch(props.audit.subaction) {
-                    case 'create': return ['plus', 'bg-success', 'text-accent-500'];
-                    case 'update': return ['pencil-alt', 'bg-warning', 'text-warning'];
-                    case 'delete': return ['trash', 'bg-danger', 'text-danger'];
-                    case 'trigger': return ['play-circle', 'bg-blue-500', 'text-blue-300'];
-                    case 'deploy': return ['server', 'bg-blue-500', 'text-blue-300'];
-                    case 'download': return ['download', 'bg-accent-300', 'text-accent-500'];
-                    case 'restart':
-                    case 'crash':
-                        return ['power-off', 'bg-danger', 'text-danger'];
-
-                    default: return ['question', 'bg-accent-200', 'text-accent-500'];
-                }
-            }),
-
-            translationKey: computed(() => {
-                if (!props.audit) return;
-
-                return `audits.${props.audit.action.replace(/:/g, '.')}.${props.audit.subaction}`;
-            }),
-
-            templatableMeta: computed(() => {
-                if (!props.audit?.metadata) return [];
-
-                return Object.keys(props.audit.metadata).filter(a => a !== 'changes');
-            }),
-
+            icon: computed(() => props.audit?.iconInfo),
             formattedDate: computed(() => props.audit?.createdAt ? formatDate(props.audit?.createdAt, 'L LT') : null),
             tooltip: computed(() => {
                 if (props.audit?.createdAt) {

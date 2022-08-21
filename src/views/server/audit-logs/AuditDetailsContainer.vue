@@ -12,7 +12,7 @@
 
                 <div>
                     <h1 class="text-white text-xl">
-                        <t :path="`${audit.translationKey()}.title`" />
+                        <t :path="`${audit.translationKey}.title`" />
                     </h1>
 
                     <p>{{ formattedDate }}</p>
@@ -144,22 +144,7 @@ export default defineComponent({
             },
 
             formattedDate: computed(() => props.audit?.createdAt ? formatDateAbsolute(props.audit?.createdAt, 'L LT') : null),
-
-            icon: computed(() => {
-                if (!props.audit) return;
-
-                switch(props.audit.subaction) {
-                    case 'create': return ['plus', 'bg-success', 'text-accent-500'];
-                    case 'update': return ['pencil-alt', 'bg-warning', 'text-warning'];
-                    case 'delete': return ['trash', 'bg-danger', 'text-danger'];
-                    case 'trigger': return ['play-circle', 'bg-blue-500', 'text-blue-300'];
-                    case 'deploy': return ['server', 'bg-blue-500', 'text-blue-300'];
-                    case 'download': return ['download', 'bg-accent-300', 'text-accent-500'];
-
-                    default: return ['question', 'bg-accent-200', 'text-accent-500'];
-                }
-            }),
-
+            icon: computed(() => props.audit?.iconInfo),
             metaKeys: computed(() => {
                 if (!props.audit?.metadata) return [];
 
