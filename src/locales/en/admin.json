@@ -359,6 +359,7 @@
 
       "update_egg": "Update Egg",
       "import_update_notice": "Importing a new egg file will overwrite any existing settings. If you wish to keep your existing settings, you should import the new egg separately.",
+      "import_updated": "The egg has been updated from the new file. You will have to reboot your WISP daemons to apply changes to nodes.",
       "import_json_error": "There was an error while attempting to parse the JSON file: {error}",
       "import_file_error": "The JSON file provided was not valid.",
       "import_invalid_json": "The JSON file provided is not in a format that can be recognized.",
