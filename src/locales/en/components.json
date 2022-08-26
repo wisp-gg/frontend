@@ -126,6 +126,7 @@
       "nest_identifiers": "Nest Identifiers",
       "egg_identifiers": "Egg Identifiers",
       "root_record": "Root Record",
+      "invalidate_sessions": "Invalidate Sessions",
 
       "branding": {
         "name": "Company Name"

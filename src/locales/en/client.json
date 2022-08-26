@@ -16,6 +16,7 @@
     "failed_linking_sso": "Failed linking the external account. Please try again later.",
 
     "password_requirements": "Passwords must contain at least one uppercase, lowercase, and numeric character and must be at least 8 characters in length.",
+    "invalidate_sessions_footer": "Selecting this option will force all other devices logged into this account to re-login, otherwise sessions will remain active.",
 
     "invalid_confirmation_password": "The password provided for your account was invalid.",
     "invalid_totp": "The provided 2FA token was invalid.",

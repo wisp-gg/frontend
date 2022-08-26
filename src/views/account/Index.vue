@@ -53,6 +53,7 @@
                     <v-input type="password" name="new_password" footer="client.account.password_requirements" rule="required" />
 
                     <v-input type="password" name="new_password_confirmation" rule="required" />
+                    <v-switch name="invalidate_sessions" footer="client.account.invalidate_sessions_footer" />
 
                     <div class="text-right">
                         <v-submit color="primary" label="client.account.update_password" />

@@ -14,6 +14,7 @@ interface AccountUpdateFormData {
     // password
     new_password?: string;
     new_password_confirmation?: string;
+    invalidate_sessions?: boolean;
 
     // identity
     name_first?: string;
