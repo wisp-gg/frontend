@@ -127,6 +127,13 @@
       }
     },
 
+    "version": {
+      "update": {
+        "title": "Version installed",
+        "message": "{user} updated version to {edition} - {version}"
+      }
+    },
+
     "plugin": {
       "update": {
         "title": "Plugin installed",
