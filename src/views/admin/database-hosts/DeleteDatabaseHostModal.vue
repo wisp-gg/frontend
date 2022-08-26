@@ -12,6 +12,8 @@
             <v-form class="mt-4" :service-id="confirm" :can-submit="canDelete">
                 <v-input name="confirm_name" v-model:value="confirmNameValue" />
 
+                <v-switch name="force" footer="admin.database_hosts.force_footer" />
+
                 <div class="text-right">
                     <v-submit color="danger">
                         <t path="generic.delete" />
@@ -43,9 +45,10 @@ export default defineComponent({
 
             canDelete: computed(() => confirmNameValue.value === props.host.name),
 
-            confirm: () => {
+            confirm: (data: { force: boolean }) => {
                 return useService('databaseHosts@delete', 'admin.database_hosts.delete_host', {
-                    id: props.host.id
+                    id: props.host.id,
+                    force: data.force,
                 }).then(() => dispatch('lists/refresh', 'databaseHosts@getAll'));
             }
         };

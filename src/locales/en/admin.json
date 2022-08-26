@@ -116,6 +116,7 @@
     "edit_host": "Edit Database Host",
     "delete_host": "Delete Database Host",
     "delete_notice": "Are you sure that you want to delete the {name} database host? There is no going back, all data will immediately be removed.",
+    "force_footer": "Dangerous: Force deleting a database host will remove the host from the panel even if your database host reports an error. This may leave dangling databases on your host if it reports an error.",
     "host_details": "Host Details",
     "user_details": "User Details",
     "databases": "Databases",

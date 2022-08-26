@@ -16,6 +16,7 @@ type UpdateDatabaseHostRequest = CreateDatabaseHostRequest
 
 interface DeleteDatabaseHostRequest {
     id: number;
+    force: boolean;
 }
 
 class DatabaseHostsService {
@@ -49,7 +50,11 @@ class DatabaseHostsService {
     }
 
     delete(data: DeleteDatabaseHostRequest): Promise<void> {
-        return RequestService.delete(`/database-hosts/${data.id}`);
+        return RequestService.delete(`/database-hosts/${data.id}`, {
+            data: {
+                force: data.force
+            }
+        });
     }
 }
 
