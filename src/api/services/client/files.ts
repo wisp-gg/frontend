@@ -67,11 +67,15 @@ class FilesService {
     }
 
     compressFile(data: CompressFilesRequest) {
-        return RequestService.post('/servers/:server/files/compress', data);
+        return RequestService.post('/servers/:server/files/compress', data, {
+            timeout: 60000,
+        });
     }
 
     decompressFile(data: FileRequest) {
-        return RequestService.post('/servers/:server/files/decompress', data);
+        return RequestService.post('/servers/:server/files/decompress', data, {
+            timeout: 60000,
+        });
     }
 }
 
