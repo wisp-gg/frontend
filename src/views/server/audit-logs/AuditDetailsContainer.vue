@@ -21,12 +21,12 @@
 
             <audit-log-message :audit="audit" :key="audit" class="p-4 my-4 border border-white/10 rounded-lg" />
 
-            <div class="border border-white/10 rounded-lg overflow-hidden" v-if="audit.metadata.changes?.length > 0">
-                <div class="p-4 text-white/75 rounded-t-lg">
+            <div class="border border-white/10 rounded-lg overflow-hidden p-4" v-if="Object.keys(audit.metadata.changes || {}).length > 0">
+                <div class="text-white/75 rounded-t-lg">
                     <t path="generic.changes" />
                 </div>
 
-                <div class="p-4">
+                <div class="mt-3">
                     <div v-for="[key, value] in Object.entries(audit.metadata.changes)">
                         <!-- TODO: Support for parsing different changes like arrays (subuser permissions)
                              @see havasu's audit log design for subuser perm's in wisp-team-design
