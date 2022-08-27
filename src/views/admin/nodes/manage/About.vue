@@ -2,7 +2,7 @@
     <div class="flex flex-col lg:flex-row lg:space-x-4 gap-y-4">
         <div class="w-full lg:w-3/5">
             <skeleton-context when="nodes@daemonInfo">
-                <container title="generic.information">
+                <container :title="node ? ['_raw', node.name] : 'generic.information'">
                     <div class="grid">
                         <table>
                             <tbody>
