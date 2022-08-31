@@ -20,7 +20,7 @@ export default defineComponent({
 
         return {
             state: computed(() => {
-                if (props.status && mappedState[props.status]) return mappedState[props.status];
+                if (props.status != undefined && mappedState[props.status]) return mappedState[props.status];
                 if (server.value?.suspended) return mappedState[ServerStatus.Suspended];
 
                 return mappedState[ServerStatus.Error];
