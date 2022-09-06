@@ -22,7 +22,10 @@ class SecurityService {
         return RequestService.put('/security/totp', data)
             .then(Parser.parse)
             .then((res: User) => {
-                dispatch('user/update', { has2fa: res.has2fa });
+                dispatch('user/update', {
+                    has2fa: res.has2fa,
+                    mfaMethods: [...res.mfaMethods, 'totp'],
+                });
 
                 return res;
             });
@@ -30,8 +33,14 @@ class SecurityService {
 
     disable2Fa(data: Toggle2FaData): Promise<User> {
         return RequestService.delete('/security/totp', { data })
+            .then(Parser.parse)
             .then((res: User) => {
-                dispatch('user/update', { has2fa: res.has2fa });
+                console.log(res);
+
+                dispatch('user/update', {
+                    has2fa: res.has2fa,
+                    mfaMethods: res.mfaMethods.filter(x => x !== 'totp')
+                });
 
                 return res;
             });

@@ -16,7 +16,7 @@ export class User extends BaseModel {
     public email = '';
     public nameFirst = '';
     public nameLast = '';
-    public has2fa: boolean = false;
+    public has2fa = false;
     public preferences: UserPreferences | undefined;
 
     public get fullName(): string {

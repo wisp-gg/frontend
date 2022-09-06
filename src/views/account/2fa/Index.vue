@@ -6,7 +6,7 @@
             </p>
 
             <div v-if="user.mfaMethods?.includes('totp')">
-                <v-form service-id="security@disable2Fa">
+                <v-form service-id="security@disable2Fa" :on-success="onSuccess">
                     <v-input name="token" rule="required" />
 
                     <div class="text-right">
@@ -45,7 +45,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
-import { state } from '~/core';
+import { dispatch, state } from '~/core';
 import CreateSecurityKeyModal from './CreateSecurityKeyModal.vue';
 import DeleteSecurityKeyModal from './DeleteSecurityKeyModal.vue';
 import Enable2faButton from './Enable2faButton.vue';
@@ -61,6 +61,14 @@ export default defineComponent({
                 { label: 'created', key: 'createdAt', format: 'datetime', skeleton: 8 },
                 { label: 'last_used', key: 'lastUsedAt', format: 'datetime', skeleton: 8 }
             ],
+
+            onSuccess: () => {
+                dispatch('alerts/add', {
+                    type: 'success',
+                    title: ['client.security.2fa_disabled'],
+                });
+
+            }
         };
     },
 });

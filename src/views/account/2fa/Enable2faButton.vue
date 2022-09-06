@@ -1,6 +1,6 @@
 <template>
     <modal v-slot="{ close }" title="client.security.2fa_modal_header" opener-color="success" opener-text="client.security.enable_2fa" @update:modelValue="onModalChange">
-        <v-form service-id="security@enable2Fa">
+        <v-form service-id="security@enable2Fa" :on-success="() => { close('success', ['client.security.2fa_enabled']); }">
             <div class="flex flex-col lg:flex-row">
                 <skeleton-context when="security@get2Fa">
                     <skeleton :content="8">
