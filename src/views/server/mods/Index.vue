@@ -14,6 +14,7 @@
                         :disabled="result.serverStateInfo()[2]"
                         permission="mod.update"
                         @click="toggleModInstall(result)"
+                        spinner
                     >
                         <t :path="`server.mods.states.${result.serverStateInfo()[0]}`" />
                     </v-button>
