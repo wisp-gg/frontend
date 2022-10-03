@@ -33,7 +33,7 @@
                     <i18n-t keypath="server.fastdl.enable_fastdl" class="text-white/75 ml-3" tag="p">
                         <template #code>
                             <code>
-                                sv_downloadurl {{ fastDlUrl }}
+                                sv_downloadurl "{{ fastDlUrl }}"
                             </code>
                         </template>
 
