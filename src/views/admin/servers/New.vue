@@ -121,7 +121,7 @@
                 </skeleton>
             </skeleton-context>
 
-            <list v-if="selectedEgg" service-id="eggVariables@getAll" :data="{ nest: selectedEgg.nestId, egg: selectedEgg.id }">
+            <list v-if="selectedEgg" :per-page="50" service-id="eggVariables@getAll" :data="{ nest: selectedEgg.nestId, egg: selectedEgg.id }">
                 <template #results="{ results }">
                     <skeleton-context when="eggVariables@getAll">
                         <div class="flex flex-wrap flex-col lg:flex-row mt-4">
