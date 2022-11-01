@@ -23,10 +23,10 @@
                     </p>
                     <p class="text-white/75">
                         <skeleton :content="16">
-                            <span class="tracking-wide" v-clipboard>{{ server.primaryAllocation().displayName() }}</span>
+                            <span class="tracking-wide" v-clipboard>{{ server?.primaryAllocation().displayName() }}</span>
 
                             <span class="text-white/50 block md:inline text-sm leading-none tracking-tight">
-                                <t :path="['generic.server.on_node', { node: server.node.name }]" />
+                                <t :path="['generic.server.on_node', { node: server?.node.name }]" />
                             </span>
                         </skeleton>
                     </p>
@@ -34,7 +34,7 @@
 
                 <button
                     v-tippy="'generic.server.go_to_console'"
-                    class="border border-primary-100 px-2 rounded text-primary-0 hover:text-white mr-4 hidden xs:block"
+                    class="border border-primary-100 px-2 py-1 rounded text-primary-0 hover:text-white mr-4 hidden xs:block"
                     @click="server?.openConsolePopup()"
                 >
                     <fa :icon="['fas', 'external-link-square-alt']" fixed-width />
@@ -43,7 +43,7 @@
                     <router-link :to="{name: 'server.system.index', params: { server: server?.uuidShort }}">
                         <button
                             v-tippy="'generic.server.manage'"
-                            class="border border-primary-100 px-2 rounded text-primary-0 hover:text-white hidden xs:block"
+                            class="border border-primary-100 px-2 py-1 rounded text-primary-0 hover:text-white hidden xs:block"
                         >
                             <fa :icon="['fas', 'wrench']" fixed-width />
                         </button>
