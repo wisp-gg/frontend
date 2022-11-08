@@ -265,7 +265,7 @@
     },
 
     "reinstall": {
-      "description": "This will reinstall the server potentially overwriting some files during this process. Before proceeding, please make sure to back up all important files."
+      "description": "This will reinstall the server, potentially overwriting some files during this process. Before proceeding, please make sure to back up all important files."
     }
   },
 
