@@ -265,7 +265,7 @@
     },
 
     "reinstall": {
-      "description": "This will reinstall the server to the original state you received it as. Danger! This will overwrite ALL server data, so make sure to back up all important files."
+      "description": "This will reinstall the server potentially overwriting some files during this process. Before proceeding, please make sure to back up all important files."
     }
   },
 
