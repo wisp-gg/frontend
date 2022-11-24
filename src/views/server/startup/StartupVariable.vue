@@ -10,7 +10,7 @@
 
                 name="enabled"
                 permission="startup.update"
-                :value="variable?.serverValue === '1'"
+                :value="variable?.serverValue ? variable?.serverValue === '1' : variable?.defaultValue === '1'"
                 @update:value="save"
                 no-margin
             />
