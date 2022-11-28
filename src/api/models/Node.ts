@@ -14,6 +14,7 @@ export class Node extends BaseModel {
         fastdl: -1,
     };
     public uploadSize = -1;
+    public daemonV2 = false;
 
     // Admin only props
     public public = false;

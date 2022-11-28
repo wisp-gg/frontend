@@ -174,10 +174,14 @@
       "general_configuration": "General Configuration",
       "allow_automatic_allocation": "Allow Automatic Allocation",
       "max_web_upload": "Maximum Web Upload Filesize",
+      "use_go_daemon": "Use Go Daemon",
+      "use_go_daemon_warning": "The Go Daemon is currently experimental!",
 
+      "daemon_version": "Daemon Version",
       "daemon_port": "Daemon Port",
       "sftp_port": "SFTP Port",
       "fastdl_port": "FastDL Port",
+
 
       "display_fqdn_footer": "Please enter the domain name (e.g node.example.com) that will be shown for users instead of *.daemon.panel.gg. If you're using a domain, you're also gonna need to setup the DNS record for it to point at the node or this won't work as expected.",
       "automatic_allocation_footer": "Allows this node to be used when automatically picking a suitable node for server deployment using the API.",

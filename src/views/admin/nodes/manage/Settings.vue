@@ -27,6 +27,14 @@
                     <v-switch name="public" label="admin.nodes.settings.allow_automatic_allocation" footer="admin.nodes.settings.automatic_allocation_footer" :value="node?.public" />
                     <v-switch no-margin name="maintenance_mode" footer="admin.nodes.settings.maintenance_mode_footer" :value="node?.maintenanceMode" />
                 </container>
+
+                <container title="admin.nodes.settings.daemon_version" class="my-4">
+                    <div class="mb-4">
+                        <alert type="warning" icon="info-circle" title="admin.nodes.settings.use_go_daemon_warning" />
+                    </div>
+
+                    <v-switch name="daemon_v2" label="admin.nodes.settings.use_go_daemon" :value="node?.daemonV2" />
+                </container>
             </div>
 
             <div class="w-full lg:w-1/2">
