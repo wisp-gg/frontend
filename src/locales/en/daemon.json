@@ -48,7 +48,7 @@
 
     "socket": {
       "trouble_connecting": "We're having some trouble connecting to your server, please wait...",
-      "couldnt_validate_permissions": "There was an error validating the credentials provided for the websocket. Please refresh the page.",
+      "couldnt_validate_credentials": "There was an error validating the credentials provided for the websocket. Please refresh the page.",
       "no_permission": "You do not have permission to access the websocket for this server.",
       "no_upload_permission": "You do not have permission to access the upload websocket for this server.",
       "invalid_namespace": "The server's websocket was not found on the daemon, please refresh the page."

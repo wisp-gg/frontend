@@ -1,7 +1,10 @@
 import Sockette from 'sockette';
 import { dispatch, Logger } from '~/core';
+import { ServerService } from '~/api/services/client';
 import { ServerStatus, TransformedDaemonEvent } from '../types';
 import { BaseWebsocket, WebSocketConnectData } from './BaseWebsocket';
+
+const reconnectErrors = ['jwt: exp claim is invalid', 'jwt: created too far in past (denylist)'];
 
 export class DaemonV2 extends BaseWebsocket {
     private socket?: Sockette;
@@ -62,7 +65,8 @@ export class DaemonV2 extends BaseWebsocket {
             },
 
             onerror: err => {
-                Logger.warn('DaemonWrapper', 'WebSocket received an error', err);
+                Logger.warn('DaemonWrapper', 'WebSocket connection failed');
+                dispatch('server/socket/setError', 'errors.socket.trouble_connecting');
             },
 
             onmessage: evt => {
@@ -77,29 +81,23 @@ export class DaemonV2 extends BaseWebsocket {
             }
         });
 
-        // const connectionFailedHandler = (message: string) => {
-        //     Logger.warn('DaemonWrapper', `WebSocket connection failed: ${message}`);
-        //
-        //     switch(message.toLowerCase()) { // Convert any errors we don't control to translated format
-        //         case 'websocket error':
-        //         case 'timeout':
-        //             message = 'errors.socket.trouble_connecting';
-        //             break;
-        //         case 'invalid namespace':
-        //             message = 'errors.socket.invalid_namespace';
-        //             break;
-        //     }
-        //
-        //     dispatch('server/socket/setError', message);
-        // };
-
-        // this.socket.on('connect_error', err => connectionFailedHandler(err.message));
-        // this.socket.on('auth_failed', data => connectionFailedHandler(data.message));
-
         this.on('auth_success', () => {
             Logger.info('DaemonWrapper', 'WebSocket connected and successfully authenticated');
 
             dispatch('server/socket/setState', true);
+        });
+
+        this.on('token expiring', () => this.refreshToken());
+        this.on('token expired', () => this.refreshToken());
+        this.on('jwt error', (error: string) => {
+            dispatch('server/socket/setState', true);
+            Logger.warn('DaemonWrapper', `JWT validation error from daemon: ${error}`);
+
+            if (reconnectErrors.find(v => error.toLowerCase().indexOf(v) >= 0)) {
+                this.refreshToken();
+            } else {
+                dispatch('server/socket/setError', 'errors.socket.couldnt_validate_credentials');
+            }
         });
     }
 
@@ -126,5 +124,10 @@ export class DaemonV2 extends BaseWebsocket {
             event,
             args: args
         }));
+    }
+
+    async refreshToken() {
+        const data = await ServerService.getWebsocket();
+        this.emit('auth', data.token);
     }
 }
