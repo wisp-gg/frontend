@@ -10,7 +10,6 @@ import { DaemonV1, DaemonV2 } from './versions';
 class DaemonWrapper extends WebSocketTransformer {
     private id?: string;
     private eventsSetup = false;
-    public siofu?: SocketIOFileUpload;
 
     // The promise will resolve before the connection succeeds (as it doesn't matter).
     // It shouldn't be relied on as indicator for "successfully connected".
@@ -102,6 +101,12 @@ class DaemonWrapper extends WebSocketTransformer {
 
     getId() {
         return this.id;
+    }
+
+    get siofu(): SocketIOFileUpload | undefined {
+        if (this.socket instanceof DaemonV1) {
+            return this.socket.siofu;
+        }
     }
 }
 
