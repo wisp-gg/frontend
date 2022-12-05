@@ -39,7 +39,12 @@ export interface DaemonActionMap {
     'backdoor-scanner-start': undefined,
 }
 
-export type TransformedDaemonEvent = (data: Record<string, any>) => [keyof DaemonEventMap, any?];
+export type Transformers = {
+    events: Record<string, TransformedDaemonEvent>,
+    actions: Record<string, (...data: any) => any>,
+};
+
+export type TransformedDaemonEvent = (data: any) => [keyof DaemonEventMap, any?];
 
 // Extraneous types
 export type PowerActionType = 'start' | 'restart' | 'stop' | 'kill';

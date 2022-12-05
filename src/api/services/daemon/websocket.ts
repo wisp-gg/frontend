@@ -1,9 +1,10 @@
-import { Socket } from 'socket.io-client';
 import Logger from '~/core/logger';
-import { DaemonActionMap, DaemonEventMap, TransformedDaemonEvent } from './types';
+import { DaemonActionMap, DaemonEventMap } from './types';
+import { BaseWebsocket } from './versions/BaseWebsocket';
 
 export enum DaemonVersion {
     V1,
+    V2,
 }
 
 // Internal events that should bypass transformers.
@@ -12,93 +13,30 @@ const INTERNAL_EVENTS = ['upload-start', 'upload-progress', 'upload-complete', '
 export abstract class WebSocketTransformer {
     protected version: DaemonVersion = DaemonVersion.V1;
     private events: Record<string, any[]> = {};
-    protected socket: Socket | undefined;
-
-    private transformers: Record<number, {
-        events: Record<string, TransformedDaemonEvent>,
-        actions: Record<string, (...data: any) => any>,
-    }> = {};
-
-    // Register all transformations for websocket events and actions
-    constructor() {
-        // NodeJS-based daemon
-        const onConsoleMessage: TransformedDaemonEvent = (data: Record<string, any>) => {
-            return ['console-output', data];
-        };
-        const onStatusUpdate: TransformedDaemonEvent = (data: Record<string, number>) => {
-            const { status } = data;
-            return ['server-status', status];
-        };
-        this.transformers[DaemonVersion.V1] = {
-            events: {
-                'connected': () => ['connected'],
-                'console': onConsoleMessage,
-                'server log': onConsoleMessage,
-                'initial status': onStatusUpdate,
-                'status': onStatusUpdate,
-                'proc': data => {
-                    const networkStats: any = Object.values(data.network || {}).shift();
-
-                    return ['server-proc', {
-                        cpuUsed: data.cpu.total,
-                        memoryUsed: data.memory.total,
-                        diskUsed: data.disk.used,
-                        network: {
-                            rxBytes: networkStats?.rx_bytes || 0,
-                            txBytes: networkStats?.tx_bytes || 0
-                        },
-                    }];
-                },
-                'query': data => ['server-query', data],
-                'upload-logs': data => ['upload-logs', data],
-                'filesearch-results': data => ['search-results', data],
-                'filesearch-error': data => ['search-error', data],
-                'git-success': data => ['git-success', data],
-                'git-error': data => ['git-error', data],
-                'workshop-dl-new': () => ['workshop-dl-new'],
-                'workshop-dl-status': data => ['workshop-dl-status', data],
-                'workshop-dl-finish': data => ['workshop-dl-finish', data],
-                'backdoorscanner-found': data => ['backdoor-scanner-found', data],
-                'backdoorscanner-finished': () => ['backdoor-scanner-finish'],
-            },
-
-            actions: {
-                'send-power': data => ['set status', data],
-                'send-command': data => ['send command', data],
-                'request-logs': () => ['send server log'],
-                'upload-logs': () => ['upload-logs'],
-                'search': data => ['filesearch-start', data],
-                'git-clone': data => ['git-clone', data],
-                'git-pull': data => ['git-pull', data],
-                'workshop-dl-get-status': () => ['workshop-dl-cache-or-new'],
-                'workshop-dl-download': data => ['workshop-dl', data],
-                'backdoor-scanner-start': () => ['backdoorscanner-start'],
-            },
-        };
-    }
+    protected socket?: BaseWebsocket;
 
     public setCurrentVersion(version: DaemonVersion) {
         this.version = version;
     }
 
-    protected emit(evtName: string, data?: any) {
+    protected onWebsocketEvent(evtName: string, data?: any) {
         if (INTERNAL_EVENTS.includes(evtName)) {
             this.events[evtName]?.forEach(callback => callback(data));
             return;
         }
 
-        if (!this.transformers[this.version]?.events)
-            return Logger.warn('WebSocketTransformer', `No transformer configured for version ${this.version}, unable to process ${evtName}...`);
-        if (!this.transformers[this.version].events[evtName])
+        if (!this.socket?.transformers.events)
+            return Logger.warn('WebSocketTransformer', `No transformer configured for version ${DaemonVersion[this.version]}, unable to process ${evtName}...`);
+        if (!this.socket.transformers.events[evtName])
             return Logger.warn('WebSocketTransformer', `No transformer configured for event ${evtName}, unable to process...`);
 
-        const transformed = this.transformers[this.version].events[evtName](data);
+        const transformed = this.socket.transformers.events[evtName](data);
 
         this.events[transformed.shift()]?.forEach(callback => callback(...transformed));
     }
 
     protected setupEvents() {
-        this.socket?.onAny(this.emit.bind(this));
+        this.socket?.onAny(this.onWebsocketEvent.bind(this));
     }
 
     protected clearEvents() {
@@ -116,13 +54,13 @@ export abstract class WebSocketTransformer {
     }
 
     public trigger<K extends keyof DaemonActionMap>(name: K, data?: DaemonActionMap[K]) {
-        if (!this.transformers[this.version]?.actions)
+        if (!this.socket?.transformers.actions)
             return Logger.warn('WebSocketTransformer', `No transformer configured for version ${this.version}, unable to process ${name}...`);
-        if (!this.transformers[this.version].actions[name])
+        if (!this.socket.transformers.actions[name])
             return Logger.warn('WebSocketTransformer', `No transformer configured for event ${name}, unable to process...`);
 
-        const transformed = this.transformers[this.version].actions[name](data);
+        const transformed = this.socket.transformers.actions[name](data);
 
-        this.socket?.emit(transformed.shift(), ...transformed);
+        this.socket.emit(transformed.shift(), ...transformed);
     }
 }
