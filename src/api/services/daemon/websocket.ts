@@ -26,9 +26,9 @@ export abstract class WebSocketTransformer {
         }
 
         if (!this.socket?.transformers.events)
-            return Logger.warn('WebSocketTransformer', `No transformer configured for version ${DaemonVersion[this.version]}, unable to process ${evtName}...`);
+            return Logger.debug('WebSocketTransformer', `No transformer configured for version ${DaemonVersion[this.version]}, unable to process ${evtName}...`);
         if (!this.socket.transformers.events[evtName])
-            return Logger.warn('WebSocketTransformer', `No transformer configured for event ${evtName}, unable to process...`);
+            return Logger.debug('WebSocketTransformer', `No transformer configured for event ${evtName}, unable to process...`);
 
         const transformed = this.socket.transformers.events[evtName](data);
 
@@ -55,9 +55,9 @@ export abstract class WebSocketTransformer {
 
     public trigger<K extends keyof DaemonActionMap>(name: K, data?: DaemonActionMap[K]) {
         if (!this.socket?.transformers.actions)
-            return Logger.warn('WebSocketTransformer', `No transformer configured for version ${this.version}, unable to process ${name}...`);
+            return Logger.debug('WebSocketTransformer', `No transformer configured for version ${this.version}, unable to process ${name}...`);
         if (!this.socket.transformers.actions[name])
-            return Logger.warn('WebSocketTransformer', `No transformer configured for event ${name}, unable to process...`);
+            return Logger.debug('WebSocketTransformer', `No transformer configured for event ${name}, unable to process...`);
 
         const transformed = this.socket.transformers.actions[name](data);
 

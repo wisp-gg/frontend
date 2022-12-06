@@ -1,7 +1,7 @@
 import Sockette from 'sockette';
 import { dispatch, Logger } from '~/core';
 import { ServerService } from '~/api/services/client';
-import { ServerStatus, TransformedDaemonEvent } from '../types';
+import { ConsoleMessageType, ServerStatus, TransformedDaemonEvent } from '../types';
 import { BaseWebsocket, WebSocketConnectData } from './BaseWebsocket';
 
 const reconnectErrors = ['jwt: exp claim is invalid', 'jwt: created too far in past (denylist)'];
@@ -35,14 +35,32 @@ export class DaemonV2 extends BaseWebsocket {
             return ['server-status', status];
         };
 
+        const onStatsUpdate: TransformedDaemonEvent = (statsRaw: string) => {
+            const stats: Record<string, any> = JSON.parse(statsRaw);
+
+            return ['server-proc', {
+                cpuUsed: stats.cpu_absolute,
+                memoryUsed: stats.memory_bytes,
+                diskUsed: stats.disk_bytes,
+                network: {
+                    rxBytes: stats.network.rx_bytes,
+                    txBytes: stats.network.tx_bytes
+                },
+            }];
+        };
+
         this.transformers = {
             events: {
                 'connected': () => ['connected'],
+                'console output': data => ['console-output', { type: ConsoleMessageType.PROCESS, line: data }], // TODO: i18n on daemon (includes sending type & translationData)
+                'daemon message': data => ['console-output', { type: ConsoleMessageType.DAEMON, line: data }], // TODO: i18n on daemon
                 'status': onStatusUpdate,
+                'stats': onStatsUpdate,
             },
 
             actions: {
                 'request-logs': () => ['send logs'],
+                'send-power': data => ['set state', data],
             },
         };
     }
@@ -90,7 +108,7 @@ export class DaemonV2 extends BaseWebsocket {
         this.on('token expiring', () => this.refreshToken());
         this.on('token expired', () => this.refreshToken());
         this.on('jwt error', (error: string) => {
-            dispatch('server/socket/setState', true);
+            dispatch('server/socket/setState', false);
             Logger.warn('DaemonWrapper', `JWT validation error from daemon: ${error}`);
 
             if (reconnectErrors.find(v => error.toLowerCase().indexOf(v) >= 0)) {
