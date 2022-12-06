@@ -99,7 +99,7 @@ export class DaemonV2 extends BaseWebsocket {
             }
         });
 
-        this.on('auth_success', () => {
+        this.on('auth success', () => {
             Logger.info('DaemonWrapper', 'WebSocket connected and successfully authenticated');
 
             dispatch('server/socket/setState', true);
