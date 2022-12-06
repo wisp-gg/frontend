@@ -61,7 +61,7 @@ export default defineComponent({
             status: computed(() => socket.status),
             cpu: computed(() => socket.proc?.cpuUsed ? `${socket.proc.cpuUsed?.toFixed(2)}%` : '--'),
             memory: computed(() => {
-                if (socket.proc) {
+                if (socket.proc?.memoryUsed) {
                     const [value, unit] = bytesToString(socket.proc.memoryUsed);
                     return `${value} ${t(`generic.units.${unit}`)}`;
                 }
@@ -69,7 +69,7 @@ export default defineComponent({
                 return '--';
             }),
             disk: computed(() => {
-                if (socket.proc) {
+                if (socket.proc?.diskUsed) {
                     const [value, unit] = bytesToString(socket.proc.diskUsed);
                     return `${value} ${t(`generic.units.${unit}`)}`;
                 }
