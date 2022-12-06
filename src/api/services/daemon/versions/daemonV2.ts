@@ -61,6 +61,7 @@ export class DaemonV2 extends BaseWebsocket {
             actions: {
                 'request-logs': () => ['send logs'],
                 'send-power': data => ['set state', data],
+                'send-command': data => ['send command', data],
             },
         };
     }
