@@ -49,11 +49,21 @@ export class DaemonV2 extends BaseWebsocket {
             }];
         };
 
+        const onDaemonMessage: TransformedDaemonEvent = (logRaw: string) => {
+            const log: Record<string, any> = JSON.parse(logRaw);
+
+            return ['console-output', {
+                type: ConsoleMessageType.DAEMON,
+                line: log.line,
+                translationData: log.translation_data
+            }];
+        };
+
         this.transformers = {
             events: {
                 'connected': () => ['connected'],
-                'console output': data => ['console-output', { type: ConsoleMessageType.PROCESS, line: data }], // TODO: i18n on daemon (includes sending type & translationData)
-                'daemon message': data => ['console-output', { type: ConsoleMessageType.DAEMON, line: data }], // TODO: i18n on daemon
+                'console output': data => ['console-output', { type: ConsoleMessageType.PROCESS, line: data }],
+                'daemon message': onDaemonMessage,
                 'status': onStatusUpdate,
                 'stats': onStatsUpdate,
             },

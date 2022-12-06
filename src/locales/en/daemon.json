@@ -6,21 +6,28 @@
     "rebuild_updating_config": "{yellow}New container built, rotating hamsters...",
     "rebuild_complete": "{cyan}Completed rebuild process for server. Server is now booting.",
 
-    "logs_throttled": "{yellow}Your server is sending too much data too quickly! Automatic spam detection triggered.",
-    "checking_size": "{cyan}Checking size of server data directory...",
-    "disk_usage": "{yellow}Disk Usage: {current}M / {limit}M",
-    "ensuring_permissions": "{yellow}Ensuring file permissions.",
+    "image_pull_started": "{yellow}Pulling Docker container image, this could take a few minutes to complete...",
+    "image_pull_completed": "{yellow}Finished pulling Docker container image.",
+
     "initializing_container": "{yellow}Container is being initialized...",
     "running_preflight": "{yellow}Running server preflight.",
+    "updating_process_configuration": "{yellow}Updating process configuration files...",
+    "logs_throttled": "{yellow}Your server is sending too much data too quickly! Logs will be throttled.",
+    "checking_size": "{cyan}Checking server disk space usage, this could take a few seconds...",
+    "disk_usage": "{yellow}Disk Usage: {current}M / {limit}M",
+    "ensuring_permissions": "{yellow}Ensuring file permissions are set correctly, this could take a few seconds...",
     "starting_container": "{green}Starting server container.",
     "resource_limits_modified": "{warning}Your server has had some resource limits modified, you may need to restart to apply them.",
 
     "aborting_reboot": "{red}Aborting automatic reboot due to crash within the last 60 seconds.",
     "crash_detected_rebooting": "{red}Server process detected as entering a crashed state; rebooting.",
     "crash_detected": "{bgRed}---------- Detected server process in a crashed state! ----------",
+    "crash_detection_disabled": "{red}Aborting automatic restart, crash detection is disabled for this instance.",
     "exit_code": "{red}Exit code: {white}{exitCode}",
     "out_of_memory": "{red}Out of Memory: {white}{oomKilled}",
     "error_response": "{red}Error Response: {white}{error}",
+
+    "restoring_file": "(restoring): {file}",
 
     "state_changed": {
       "on": "{cyan}Server marked as {bold}ON",
