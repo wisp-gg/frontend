@@ -63,6 +63,7 @@ export class DaemonV2 extends BaseWebsocket {
             events: {
                 'connected': () => ['connected'],
                 'console output': data => ['console-output', { type: ConsoleMessageType.PROCESS, line: data }],
+                'install output': data => ['console-output', { type: ConsoleMessageType.PROCESS, line: data }],
                 'daemon message': onDaemonMessage,
                 'status': onStatusUpdate,
                 'stats': onStatsUpdate,

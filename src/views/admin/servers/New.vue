@@ -174,12 +174,23 @@ export default defineComponent({
             },
 
             onSuccess: (server: Server) => {
-                return router.push({
-                    name: 'admin.management.servers.manage.about',
-                    params: {
-                        server: server.id,
-                    }
-                });
+                // If the node is running the go daemon, redirect the user to the console as install logs can be viewed live
+                // However this is not the case on the node daemon, so there's no point redirecting them to an error page.
+                if (selectedNode.value!.daemonV2) {
+                    return router.push({
+                        name: 'server.system.index',
+                        params: {
+                            server: server.uuidShort,
+                        }
+                    });
+                } else {
+                    return router.push({
+                        name: 'admin.management.servers.manage.about',
+                        params: {
+                            server: server.id,
+                        }
+                    });
+                }
             },
         };
     }

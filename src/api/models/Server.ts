@@ -85,6 +85,10 @@ export class Server extends BaseModel {
         }
     }
 
+    public get inConflictState() {
+        return this.moving || this.updating || this.installed !== 1;
+    }
+
     // Admin only
     public get nest(): Nest {
         return this.getRelationship('nest');

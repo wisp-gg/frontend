@@ -1,7 +1,5 @@
 <template>
-    <server-error v-if="alerts.find(r => r.title[0].startsWith('server.errors'))" />
-
-    <div v-else class="flex" :class="preference === 1 ? ['flex-col'] : ['flex-col md:flex-row']">
+    <div class="flex" :class="preference === 1 ? ['flex-col'] : ['flex-col md:flex-row']">
         <div class="mobile-nav">
             <mobile-nav />
         </div>
@@ -14,7 +12,11 @@
         <div class="flex-grow mt-12 md:mt-0" :class="preference === 1 ? ['flex', 'flex-col', 'items-center'] : ['pl-0', 'md:pl-64']">
             <socket-error-notice />
 
-            <div class="mx-4 mt-8 md:mx-8" :class="preference === 1 ? ['md:container'] : []">
+            <template v-if="server?.inConflictState && (!rootAdmin || !server?.node.daemonV2 || (rootAdmin && currentRoute.name !== 'server.system.index'))">
+                TODO: conflict state page
+            </template>
+
+            <div v-else class="mx-4 mt-8 md:mx-8" :class="preference === 1 ? ['md:container'] : []">
                 <div class="flex flex-col md:flex-row justify-between items-center mb-8">
                     <div class="flex">
                         <div class="w-14 h-14 md:w-20 md:h-20 mr-3 flex items-center justify-center header-icon shrink-0">
@@ -111,20 +113,20 @@ import MobileNav from '~/views/MobileNav.vue';
 import HorizontalNavBar from './HorizontalNavBar.vue';
 import VerticalNavBar from './VerticalNavBar.vue';
 import SocketErrorNotice from '~/views/SocketErrorNotice.vue';
-import ServerError from '~/views/errors/ServerError.vue';
 
 export default defineComponent({
     components: {
         MobileNav,
-        ServerError,
         SocketErrorNotice,
         VerticalNavBar,
         HorizontalNavBar,
     },
     setup() {
         return {
+            server: computed(() => state.models.server),
             alerts: computed(() => state.alerts.items),
             currentRoute: computed(() => state.navigation.currentRoute),
+            rootAdmin: computed(() => state.user.data?.rootAdmin ?? false),
             preference: computed(() => state.user.data?.preferences?.navbarPosition || NavBarPosition.LEFT),
             breadcrumbPath: computed(() => {
                 const currentRoute = Router.currentRoute.value;
