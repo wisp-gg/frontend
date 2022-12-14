@@ -68,7 +68,7 @@
   },
 
   "migrator": {
-    "notice": "Migrate your data from another Pterodactyl/WISP instance before installing the daemon. If you are migrating more than 100 nests, 100 eggs per nest, 2500 users or 1000 servers contact us for a manual migration, which will also migrate hashed user passwords and database passwords.",
+    "notice": "Migrate your data from another Pterodactyl/WISP instance before installing the daemon. If you are migrating more than 100 nests, 100 eggs per nest, 10000 users or 1000 servers contact us for a manual migration, which will also migrate hashed user passwords and database passwords.",
     "migrate": "Migrate",
     "notify_users": "Notify users",
     "notified_users": "All users will receive an email soon. You will be notified when it's finished.",
