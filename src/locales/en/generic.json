@@ -112,8 +112,8 @@
       "error": "Error",
 
       "offline": "Offline",
-      "online": "Online",
       "starting": "Starting",
+      "running": "Online",
       "stopping": "Stopping",
 
       "migrating": "Pending migration",

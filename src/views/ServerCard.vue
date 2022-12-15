@@ -4,7 +4,7 @@
             <div class="gradient" />
             <div class="flex items-center bg-primary-900 bg-opacity-25 px-4 md:px-8 py-4">
                 <div class="self-start mt-1 mr-2">
-                    <span v-if="!server || stats.status === -2" class="text-accent-500">
+                    <span v-if="!server || stats.status === 'loading'" class="text-accent-500">
                         <fa :icon="['fas', 'spinner']" spin fixed-width />
                     </span>
                     <status-indicator v-else :status="stats.status" />
@@ -55,7 +55,7 @@
                 <p v-tippy="'generic.server.cpu'" class="block md:flex 2xl:block flex-col items-center text-white text-sm xl:text-normal tracking-tight">
                     <skeleton :content="8">
                         <fa class="text-white/50 mr-1 inline md:block 2xl:inline" :icon="['fas', 'tachometer-alt']" size="sm" fixed-width />
-                        {{ stats.proc?.cpu?.total?.toFixed(2) ?? '--' }} %
+                        {{ stats.process?.cpu_used?.toFixed(2) ?? '--' }} %
                     </skeleton>
                 </p>
                 <p v-tippy="'generic.server.memory'" class="block md:flex 2xl:block flex-col items-center text-white text-sm xl:text-normal tracking-tight">
@@ -138,10 +138,10 @@
 </style>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, onUnmounted, computed, watch } from 'vue';
+import { computed, defineComponent, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Server } from '~/api/models';
-import { ServerStats } from '~/api/services/client/servers';
+import { ServerStats, ServerStatus } from '~/api/services/client/servers';
 import { ServersService } from '~/api/services/client';
 import minecraft from '~/assets/svg/minecraft.png';
 import StatusIndicator from '~/views/StatusIndicator.vue';
@@ -159,7 +159,7 @@ export default defineComponent({
         const { t } = useI18n();
 
         const stats = ref<ServerStats>({
-            status: -2,
+            status: ServerStatus.Loading,
         });
 
         let registered = false;
@@ -184,7 +184,7 @@ export default defineComponent({
         watch(() => props.server, (newServer?: Server, oldServer?: Server) => {
             unregister(oldServer);
             stats.value = {
-                status: -2,
+                status: ServerStatus.Loading,
             };
             register(newServer);
         });
@@ -204,7 +204,7 @@ export default defineComponent({
                 return '--';
             }),
             memoryUsage: computed(() => {
-                const memory = stats.value.proc?.memory?.total;
+                const memory = stats.value.process?.memory_used;
                 if (memory) {
                     const [value, unit] = bytesToString(memory);
                     return `${value} ${t(`generic.units.${unit}`)}`;
@@ -223,7 +223,7 @@ export default defineComponent({
                 return '--';
             }),
             diskUsage: computed(() => {
-                const disk = stats.value.proc?.disk?.used;
+                const disk = stats.value.process?.disk_used;
                 if (disk) {
                     const [value, unit] = bytesToString(disk);
                     return `${value} ${t(`generic.units.${unit}`)}`;

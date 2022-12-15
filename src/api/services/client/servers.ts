@@ -4,51 +4,79 @@ import { Server } from '~/api/models';
 import RequestService from './request';
 
 export enum ServerStatus {
-    Error = -1,
+    Loading = 'loading',
+    Error = 'error',
 
-    Offline = 0,
-    Online = 1,
-    Starting = 2,
-    Stopping = 3,
+    Offline = 'offline',
+    Starting = 'starting',
+    Running = 'running',
+    Stopping = 'stopping',
 
-    Migrating = 10,
+    Migrating = 'migrating',
 
-    Installing = 20,
-    FailedInstall = 21,
+    Installing = 'installing',
+    FailedInstall = 'failed_install',
 
-    Suspended = 30,
-    Updating = 31,
-    Moving = 32,
+    Suspended = 'suspended',
+    Updating = 'updating',
+    Moving = 'moving',
 
-    CreatingBackup = 40,
-    DeployingBackup = 41,
+    CreatingBackup = 'creating_backup',
+    DeployingBackup = 'deploying_backup',
 }
 
-export const mappedState: {[status: number]: [string, string]} = {
-    [ServerStatus.Error]: ['danger', 'error'],
+export const mappedState: {[status: string]: string} = {
+    [ServerStatus.Error]: 'danger',
 
-    [ServerStatus.Offline]: ['danger', 'offline'],
-    [ServerStatus.Online]: ['success', 'online'],
-    [ServerStatus.Starting]: ['info', 'starting'],
-    [ServerStatus.Stopping]: ['info', 'stopping'],
+    [ServerStatus.Offline]: 'danger',
+    [ServerStatus.Running]: 'success',
+    [ServerStatus.Starting]: 'info',
+    [ServerStatus.Stopping]: 'info',
 
-    [ServerStatus.Migrating]: ['warning', 'migrating'],
+    [ServerStatus.Migrating]: 'warning',
 
-    [ServerStatus.Installing]: ['warning', 'installing'],
-    [ServerStatus.FailedInstall]: ['danger', 'failed_install'],
+    [ServerStatus.Installing]: 'warning',
+    [ServerStatus.FailedInstall]: 'danger',
 
-    [ServerStatus.Suspended]: ['warning', 'suspended'],
-    [ServerStatus.Updating]: ['info', 'updating'],
-    [ServerStatus.Moving]: ['info', 'moving'],
+    [ServerStatus.Suspended]: 'warning',
+    [ServerStatus.Updating]: 'info',
+    [ServerStatus.Moving]: 'info',
 
-    [ServerStatus.CreatingBackup]: ['info', 'creating_backup'],
-    [ServerStatus.DeployingBackup]: ['info', 'deploying_backup'],
+    [ServerStatus.CreatingBackup]: 'info',
+    [ServerStatus.DeployingBackup]: 'info',
 };
+
+// server-proc
+export interface ServerProcess {
+    cpu_used: number,
+    memory_used: number
+    disk_used: number,
+    network: {
+        rx_bytes: number,
+        tx_bytes: number
+    },
+}
+
+// server-query
+export interface ServerQuery {
+    type: string;
+    name: string;
+    description: string;
+    gamemode: string;
+    version: string;
+    map: string;
+    password: boolean;
+    maxplayers: number;
+    players: []; // TODO: proper type for me
+    bots: []; // TODO: proper type for me
+
+    raw: any;
+}
 
 export interface ServerStats {
     status: ServerStatus;
-    proc?: Record<string, any>; // TODO: Me
-    query?: Record<string, any>; // TODO: Me
+    process?: ServerProcess;
+    query?: ServerQuery;
 }
 
 interface GetStatsRequest {
@@ -129,7 +157,7 @@ class ServersService {
 
                     Logger.debug('ServersService', `Missing data for ${uuid}, assuming it's dead.`);
                     this.queue[uuid]({
-                        status: -1,
+                        status: ServerStatus.Error,
                     });
                 }
             });
