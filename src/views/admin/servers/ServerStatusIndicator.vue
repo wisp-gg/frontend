@@ -3,10 +3,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, onUnmounted, watch } from 'vue';
+import { defineComponent, onMounted, onUnmounted, ref, watch } from 'vue';
 import { Server } from '~/api/models';
 import { ServersService } from '~/api/services/client';
-import { ServerStats } from '~/api/services/client/servers';
+import { ServerStats, ServerStatus } from '~/api/services/client/servers';
 import StatusIndicator from '~/views/StatusIndicator.vue';
 
 export default defineComponent({
@@ -21,7 +21,7 @@ export default defineComponent({
 
     setup(props) {
         const stats = ref<ServerStats>({
-            status: -2,
+            status: ServerStatus.Loading,
         });
 
         let registered = false;
@@ -46,7 +46,7 @@ export default defineComponent({
         watch(() => props.server, (newServer?: Server, oldServer?: Server) => {
             unregister(oldServer);
             stats.value = {
-                status: -2,
+                status: ServerStatus.Loading,
             };
             register(newServer);
         });

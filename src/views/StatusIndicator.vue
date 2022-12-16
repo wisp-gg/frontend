@@ -12,7 +12,8 @@ import { state } from '~/core';
 export default defineComponent({
     props: {
         status: {
-            type: String
+            type: String,
+            default: ServerStatus.Error
         },
     },
     setup(props) {

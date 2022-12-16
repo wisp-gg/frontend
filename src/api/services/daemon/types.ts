@@ -67,10 +67,10 @@ export interface ConsoleOutput {
 
 // server-status
 export enum ServerStatus {
-    OFF,
-    ON,
-    STARTING,
-    STOPPING,
+    OFF = 'offline',
+    STARTING = 'starting',
+    ON = 'running',
+    STOPPING = 'stopping',
 }
 
 // server-proc

@@ -2,7 +2,7 @@ import { io, Socket } from 'socket.io-client';
 // @ts-ignore
 import SocketIOFileUpload from 'socketio-file-upload/client';
 import { dispatch, Logger } from '~/core';
-import { TransformedDaemonEvent } from '../types';
+import { ServerStatus, TransformedDaemonEvent } from '../types';
 import { BaseWebsocket, WebSocketConnectData } from './BaseWebsocket';
 
 export class DaemonV1 extends BaseWebsocket {
@@ -16,10 +16,30 @@ export class DaemonV1 extends BaseWebsocket {
         const onConsoleMessage: TransformedDaemonEvent = (data: Record<string, any>) => {
             return ['console-output', data];
         };
+
         const onStatusUpdate: TransformedDaemonEvent = (data: Record<string, number>) => {
             const { status } = data;
-            return ['server-status', status];
+
+            let realStatus = ServerStatus.OFF;
+            switch(status) {
+                case 0:
+                    realStatus = ServerStatus.OFF;
+                    break;
+                case 1:
+                    realStatus = ServerStatus.ON;
+                    break;
+                case 2:
+                    realStatus = ServerStatus.STARTING;
+                    break;
+                case 3:
+                    realStatus = ServerStatus.STOPPING;
+                    break;
+            }
+
+            return ['server-status', realStatus];
         };
+
+
         this.transformers = {
             events: {
                 'connected': () => ['connected'],

@@ -1,7 +1,7 @@
 import Sockette from 'sockette';
 import { dispatch, Logger } from '~/core';
 import { ServerService } from '~/api/services/client';
-import { ConsoleMessageType, ServerStatus, TransformedDaemonEvent } from '../types';
+import { ConsoleMessageType, TransformedDaemonEvent } from '../types';
 import { BaseWebsocket, WebSocketConnectData } from './BaseWebsocket';
 
 const reconnectErrors = ['jwt: exp claim is invalid', 'jwt: created too far in past (denylist)'];
@@ -13,27 +13,6 @@ export class DaemonV2 extends BaseWebsocket {
 
     constructor() {
         super();
-
-        const onStatusUpdate: TransformedDaemonEvent = (statusStr: string) => {
-            let status = ServerStatus.OFF;
-
-            switch(statusStr) {
-                case 'offline':
-                    status = ServerStatus.OFF;
-                    break;
-                case 'starting':
-                    status = ServerStatus.STARTING;
-                    break;
-                case 'running':
-                    status = ServerStatus.ON;
-                    break;
-                case 'stopping':
-                    status = ServerStatus.STOPPING;
-                    break;
-            }
-
-            return ['server-status', status];
-        };
 
         const onStatsUpdate: TransformedDaemonEvent = (statsRaw: string) => {
             const stats: Record<string, any> = JSON.parse(statsRaw);
@@ -65,7 +44,7 @@ export class DaemonV2 extends BaseWebsocket {
                 'console output': data => ['console-output', { type: ConsoleMessageType.PROCESS, line: data }],
                 'install output': data => ['console-output', { type: ConsoleMessageType.PROCESS, line: data }],
                 'daemon message': onDaemonMessage,
-                'status': onStatusUpdate,
+                'status': data => ['server-status', data],
                 'stats': onStatsUpdate,
             },
 
