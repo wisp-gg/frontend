@@ -10,7 +10,8 @@
         <template #default="{ close }">
             <div class="flex items-center">
                 <v-form service-id="files@createDirectory" :on-success="() => { close(); updateList(); }" class="flex-grow">
-                    <v-input name="path" label="components.form.fields.folder_name" :result-prefix="path + (path.endsWith('/') ? '' : '/')" rule="required" />
+                    <v-input type="hidden" name="root" rule="required" :value="path" />
+                    <v-input name="name" label="components.form.fields.folder_name" rule="required" />
 
                     <div class="text-right">
                         <v-submit color="primary" label="generic.create" permission="file.write" />

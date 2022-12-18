@@ -5,28 +5,51 @@ export interface FileRequest {
     path: string;
 }
 
-export interface FileContents {
+export interface CreateDirectoryRequest {
+    root: string;
+    name: string;
+}
+
+export interface ReadFileRequest {
+    path: string;
+}
+
+export interface ReadFileResponse {
     content: string;
 }
 
-export interface WriteFileRequest extends FileRequest {
+export interface WriteFileRequest {
+    path: string;
     content: string;
 }
 
-export interface ManageFilesRequest {
-    paths: string[];
+export interface CopyFileRequest {
+    path: string;
 }
 
 export interface DownloadFileResponse {
     url: string;
 }
 
-export interface RenameFileRequest extends FileRequest {
+export interface DeleteFilesRequest {
+    root: string;
+    files: string[];
+}
+
+export interface RenameFileRequest {
+    root: string;
+    from: string;
     to: string;
 }
 
-export interface CompressFilesRequest extends ManageFilesRequest {
-    to: string;
+export interface CompressFilesRequest {
+    root: string;
+    files: string[];
+}
+
+export interface DecompressFilesRequest {
+    root: string;
+    file: string;
 }
 
 class FilesService {
@@ -38,11 +61,11 @@ class FilesService {
             .then(Parser.parse);
     }
 
-    createDirectory(data: FileRequest) {
+    createDirectory(data: CreateDirectoryRequest) {
         return RequestService.post('/servers/:server/files/directory', data);
     }
 
-    readFile(data: FileRequest) {
+    readFile(data: ReadFileRequest) {
         return RequestService.get('/servers/:server/files/read', data);
     }
 
@@ -50,11 +73,11 @@ class FilesService {
         return RequestService.post('/servers/:server/files/write', data);
     }
 
-    copyFile(data: FileRequest) {
+    copyFile(data: CopyFileRequest) {
         return RequestService.post('/servers/:server/files/copy', data);
     }
 
-    deleteFile(data: ManageFilesRequest) {
+    deleteFile(data: DeleteFilesRequest) {
         return RequestService.post('/servers/:server/files/delete', data);
     }
 
@@ -72,7 +95,7 @@ class FilesService {
         });
     }
 
-    decompressFile(data: FileRequest) {
+    decompressFile(data: DecompressFilesRequest) {
         return RequestService.post('/servers/:server/files/decompress', data, {
             timeout: 60000,
         });

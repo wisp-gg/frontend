@@ -7,32 +7,32 @@
         <template #content>
             <ul class="bg-primary-300 mt-2 rounded border border-white/25">
                 <li>
-                    <rename-button :path="formattedPath + file.name" :name="file.name" />
+                    <rename-button :root="path" :name="file.name" />
                 </li>
 
                 <li v-if="file.isFile">
-                    <v-button color="secondary" class="flex items-center p-4 text-sm w-full rounded-none" :permission="['file.read', 'file.write']" @click="copyFile(formattedPath + file.name)">
+                    <v-button color="secondary" class="flex items-center p-4 text-sm w-full rounded-none" :permission="['file.read', 'file.write']" @click="copyFile(file.name)">
                         <fa class="mr-2" :icon="['fas', 'copy']" size="lg" fixed-width />
                         <t path="server.files.copy" />
                     </v-button>
                 </li>
 
                 <li v-if="!file.isArchive">
-                    <v-button color="secondary" class="flex items-center p-4 text-sm w-full rounded-none" :permission="['file.archive', 'file.read']" @click="compressFile(formattedPath + file.name, path)">
+                    <v-button color="secondary" class="flex items-center p-4 text-sm w-full rounded-none" :permission="['file.archive', 'file.read']" @click="compressFile(file.name)">
                         <fa class="mr-2" :icon="['fas', 'file-archive']" size="lg" fixed-width />
                         <t path="server.files.compress" />
                     </v-button>
                 </li>
 
                 <li v-if="file.isArchive">
-                    <v-button color="secondary" class="flex items-center p-4 text-sm w-full rounded-none" :permission="['file.read', 'file.write']" @click="decompressFile(formattedPath + file.name)">
+                    <v-button color="secondary" class="flex items-center p-4 text-sm w-full rounded-none" :permission="['file.read', 'file.write']" @click="decompressFile(file.name)">
                         <fa class="mr-2" :icon="['fas', 'file-archive']" size="lg" fixed-width />
                         <t path="server.files.decompress" />
                     </v-button>
                 </li>
 
                 <li v-if="file.isFile">
-                    <v-button color="secondary" class="flex items-center p-4 text-sm w-full rounded-none" permission="file.read" @click="downloadFile(formattedPath + file.name)">
+                    <v-button color="secondary" class="flex items-center p-4 text-sm w-full rounded-none" permission="file.read" @click="downloadFile(file.name)">
                         <fa class="mr-2" :icon="['fas', 'download']" size="lg" fixed-width />
                         <t path="server.files.download" />
                     </v-button>
@@ -40,7 +40,7 @@
 
                 <li>
                     <!-- TODO: this should be prompted -->
-                    <v-button color="danger" class="flex items-center p-4 text-sm w-full rounded-t-none" permission="file.delete" @click="deleteFile(formattedPath + file.name)">
+                    <v-button color="danger" class="flex items-center p-4 text-sm w-full rounded-t-none" permission="file.delete" @click="deleteFile(file.name)">
                         <fa class="mr-2" :icon="['fas', 'trash']" size="lg" fixed-width />
                         <t path="generic.delete" />
                     </v-button>
@@ -78,15 +78,15 @@ export default defineComponent({
         return {
             formattedPath: computed(() => props.path === '/' ? '/' : `${props.path}/`),
             copyFile: (path: string) => {
-                useService('files@copyFile', true, { path })
+                useService('files@copyFile', true, { root: props.path, file: path })
                     .then(() => updateList());
             },
-            compressFile: (path: string, to: string) => {
-                useService('files@compressFile', true, { paths: [path], to, })
+            compressFile: (path: string) => {
+                useService('files@compressFile', true, { root: props.path, files: [path] })
                     .then(() => updateList());
             },
             decompressFile: (path: string) => {
-                useService('files@decompressFile', true, { path })
+                useService('files@decompressFile', true, { root: props.path, file: path })
                     .then(() => updateList());
             },
             downloadFile: (path: string) => {
@@ -94,7 +94,7 @@ export default defineComponent({
                     .then(({ url }) => window.open(url));
             },
             deleteFile: (path: string) => {
-                useService('files@deleteFile', true, { paths: [path] })
+                useService('files@deleteFile', true, { root: props.path, files: [path] })
                     .then(() => updateList());
             },
         };

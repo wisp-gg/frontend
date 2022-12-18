@@ -27,8 +27,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, watch, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { defineComponent, computed } from 'vue';
 import { state, dispatch } from '~/core';
 import { File } from '~/api/models';
 import { NavBarPosition } from '~/api/models/User';
@@ -36,6 +35,10 @@ import { useService } from '~/plugins';
 
 export default defineComponent({
     props: {
+        path: {
+            type: String,
+            required: true,
+        },
         files: {
             type: Array as () => File[],
             required: true,
@@ -43,29 +46,22 @@ export default defineComponent({
     },
 
     setup(props) {
-        const currentRoute = useRoute();
-        watch(() => currentRoute.hash, newValue => currentPath.value = newValue.slice(1));
-
-        const currentPath = ref(currentRoute.hash.slice(1));
         const updateList = () => dispatch('lists/refresh', 'files@getDirectory');
 
         return {
             usingSidebar: computed(() => (state.user.data?.preferences?.navbarPosition ?? NavBarPosition.LEFT) === NavBarPosition.LEFT),
 
             compressFiles: () => {
-                const paths = props.files.map(f => `${currentPath.value}/${f.name}`);
-
                 return useService('files@compressFile', true, {
-                    to: currentPath.value || '/',
-                    paths
+                    root: props.path,
+                    files: props.files.map(f => f.name),
                 }).then(updateList);
             },
 
             deleteFiles: () => {
-                const paths = props.files.map(f => `${currentPath.value}/${f.name}`);
-
                 return useService('files@deleteFile', true, {
-                    paths
+                    root: props.path,
+                    files: props.files.map(f => f.name),
                 }).then(updateList);
             },
         };

@@ -4,7 +4,6 @@ import { Server } from '~/api/models';
 import RequestService from './request';
 
 export enum ServerStatus {
-    Loading = 'loading',
     Error = 'error',
 
     Offline = 'offline',

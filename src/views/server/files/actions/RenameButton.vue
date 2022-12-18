@@ -9,9 +9,10 @@
 
         <template #default>
             <v-form service-id="files@renameFile" :on-success="updateList">
-                <v-input type="hidden" name="path" :value="path" />
+                <v-input type="hidden" name="root" :value="root" />
+                <v-input type="hidden" name="from" :value="name" />
 
-                <v-input name="to" label="components.form.fields.name" rule="required" :value="fullName" />
+                <v-input name="to" label="components.form.fields.name" rule="required" :value="name" />
 
                 <div class="text-right space-x-4">
                     <v-submit color="primary" label="generic.submit" :permission="['file.read', 'file.write']" />
@@ -22,12 +23,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent } from 'vue';
 import { dispatch } from '~/core';
 
 export default defineComponent({
     props: {
-        path: {
+        root: {
             type: String,
             required: true,
         },
@@ -36,15 +37,10 @@ export default defineComponent({
             required: true,
         },
     },
-    setup(props, context) {
+
+    setup(props) {
         return {
             updateList: () => dispatch('lists/refresh', 'files@getDirectory'),
-            fullName: computed(() => {
-                const path = props.path.split('/');
-                path.pop();
-
-                return `${path.join('/')}/${props.name}`;
-            }),
         };
     }
 });

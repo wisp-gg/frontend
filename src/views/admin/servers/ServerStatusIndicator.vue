@@ -21,7 +21,7 @@ export default defineComponent({
 
     setup(props) {
         const stats = ref<ServerStats>({
-            status: ServerStatus.Loading,
+            status: ServerStatus.Error,
         });
 
         let registered = false;
@@ -46,7 +46,7 @@ export default defineComponent({
         watch(() => props.server, (newServer?: Server, oldServer?: Server) => {
             unregister(oldServer);
             stats.value = {
-                status: ServerStatus.Loading,
+                status: ServerStatus.Error,
             };
             register(newServer);
         });

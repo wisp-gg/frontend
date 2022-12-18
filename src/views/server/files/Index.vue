@@ -139,7 +139,7 @@
                 </template>
 
                 <template #items-after>
-                    <mass-action-bar v-if="checkedItems.length > 0" :files="checkedItems" />
+                    <mass-action-bar v-if="checkedItems.length > 0" :path="path" :files="checkedItems" />
                 </template>
             </list>
         </div>
