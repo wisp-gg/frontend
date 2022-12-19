@@ -1,10 +1,6 @@
 import { Parser } from '~/api';
 import RequestService from './request';
 
-export interface FileRequest {
-    path: string;
-}
-
 export interface CreateDirectoryRequest {
     root: string;
     name: string;
@@ -24,6 +20,10 @@ export interface WriteFileRequest {
 }
 
 export interface CopyFileRequest {
+    path: string;
+}
+
+export interface DownloadFileRequest {
     path: string;
 }
 
@@ -81,7 +81,7 @@ class FilesService {
         return RequestService.post('/servers/:server/files/delete', data);
     }
 
-    downloadFile(data: FileRequest): Promise<DownloadFileResponse> {
+    downloadFile(data: DownloadFileRequest): Promise<DownloadFileResponse> {
         return RequestService.get('/servers/:server/files/download', data);
     }
 
