@@ -83,7 +83,7 @@ export async function handleUploadEvent(evt: Event, path: string) {
             pendingFiles.value[identifier] = await handleWebkitEntry(webkitEntry, identifier, path, webkitEntry.name);
         } else {
             const actualFile: FileWithMetadata = file instanceof File ? file : file.getAsFile();
-            if (!actualFile) return; // Should we throw an error instead?
+            if (!actualFile) continue; // Should we throw an error instead?
 
             actualFile.meta = Object.assign(actualFile.meta || {}, {
                 parent: identifier,

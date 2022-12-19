@@ -31,6 +31,10 @@ export interface DownloadFileResponse {
     url: string;
 }
 
+export interface UploadFileResponse {
+    url: string;
+}
+
 export interface DeleteFilesRequest {
     root: string;
     files: string[];
@@ -83,6 +87,10 @@ class FilesService {
 
     downloadFile(data: DownloadFileRequest): Promise<DownloadFileResponse> {
         return RequestService.get('/servers/:server/files/download', data);
+    }
+
+    uploadFile(): Promise<UploadFileResponse> {
+        return RequestService.get('/servers/:server/files/upload');
     }
 
     renameFile(data: RenameFileRequest) {
