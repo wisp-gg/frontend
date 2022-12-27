@@ -79,6 +79,7 @@ export function getAvailableLanguages() {
         'es_EM', // Spanish (Modern)
         'sv_SE', // Swedish
         'pl_PL', // Polish
+        'pt_BR', // Portuguese
     ];
 }
 
