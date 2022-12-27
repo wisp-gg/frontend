@@ -216,6 +216,7 @@
     "delete_server_notice": "Are you sure that you want to delete the \"{name}\" server? Deleting a server is an irreversible action and will immediately remove this server from the panel and daemon.",
     "force_footer": "Dangerous: Force deleting a server will remove the server from the panel even if the daemon reports an error. This may leave dangling files on your daemon if it reports an error.",
     "cant_delete_unmigrated_nodes_server": "You can't delete a server on a node which has no configured FQDN - use force delete to proceed.",
+    "cant_delete_from_offline_node": "Unable to delete the server from an offline node.",
 
     "new": {
       "core_details": "Core Details",

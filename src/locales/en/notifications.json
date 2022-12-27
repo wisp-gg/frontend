@@ -50,7 +50,9 @@
       "exceeded_limits": "Failed migration for {fqdn}: {message} Contact us for manual migration.",
       "aborted_migration": "Aborted migration for {fqdn}: {message}",
       "data_mismatch": "Failed migration for {fqdn} due to data mismatch: {message}",
-      "failed_due_to_internal_error": "Failed migration for {fqdn}: Something went wrong internally, please contact us through a support ticket."
+      "failed_due_to_internal_error": "Failed migration for {fqdn}: Something went wrong internally, please contact us through a support ticket.",
+      "finished_notifying_users": "Finished notifying users for {fqdn}.",
+      "failed_notifying_users": "Failed notifying users for {fqdn}: Something went wrong internally."
     }
   }
 }
