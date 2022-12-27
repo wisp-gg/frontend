@@ -5,6 +5,7 @@ export class Plugin extends BaseModel {
     public name = '';
     public description = '';
     public iconUrl = '';
+    public downloadUrl = '';
     public downloads = -1;
     public premium = false;
     public external = false;

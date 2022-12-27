@@ -19,9 +19,9 @@
                             <t path="server.plugins.premium" />
                         </code>
 
-                        <code v-else-if="result.external">
-                            <t path="server.plugins.external" />
-                        </code>
+                        <v-button color="primary" :href="result.downloadUrl" target="_blank" v-else-if="result.external">
+                            <t path="server.plugins.download_manually" />
+                        </v-button>
 
                         <v-button v-else permission="plugin.update" color="primary" @click="installPlugin(result)" spinner>
                             <t path="generic.install" />

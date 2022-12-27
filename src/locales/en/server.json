@@ -387,7 +387,7 @@
   "plugins": {
     "plugin_installed": "{name} plugin has been successfully installed.",
     "premium": "Not available (premium)",
-    "external": "Not available (external)"
+    "download_manually": "Download manually"
   },
 
   "minecraft": {
