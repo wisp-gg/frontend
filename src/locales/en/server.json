@@ -391,6 +391,8 @@
   },
 
   "minecraft": {
+    "edition_installing": "The edition is now installing, you will be notified when it's finished.",
+
     "editions": {
       "bungeecord": "Bungeecord",
       "craftbukkit": "CraftBukkit",

@@ -5,7 +5,7 @@
                 <t path="server.advanced.install_edition.description" />
             </p>
 
-            <v-form class="mt-3" service-id="advanced@installVersion">
+            <v-form class="mt-3" service-id="advanced@installVersion" :on-success="onSuccess">
                 <skeleton :content="16">
                     <v-select
                         name="edition"
@@ -51,6 +51,7 @@
 <script lang="ts">
 import { defineComponent, computed, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { dispatch } from '~/core';
 import { useService } from '~/plugins';
 import { MinecraftData, Version, CategorizedVersions, VersionLabel } from '~/api/services/client/advanced';
 
@@ -119,6 +120,13 @@ export default defineComponent({
                     });
                 }
             }),
+
+            onSuccess: () => {
+                dispatch('alerts/add', {
+                    type: 'success',
+                    title: ['server.minecraft.edition_installing'],
+                });
+            },
         };
     },
 });
