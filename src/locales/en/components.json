@@ -141,6 +141,7 @@
         "site_name": "Site Name",
         "title": "Title",
         "description": "Description",
+        "color": "Color",
         "image": "Image URL"
       },
 

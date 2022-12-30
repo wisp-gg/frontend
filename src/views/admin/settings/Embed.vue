@@ -5,6 +5,7 @@
                 <v-input name="og.site_name" footer="admin.settings.embed.site_name_footer" :value="og?.site_name" />
                 <v-input name="og.title" footer="admin.settings.embed.title_footer" :value="og?.title" />
                 <v-input name="og.description" footer="admin.settings.embed.description_footer" :value="og?.description" />
+                <v-input name="og.color" footer="admin.settings.embed.color_footer" :value="og?.color" />
                 <v-input name="og.image" footer="admin.settings.embed.image_footer" :value="og?.image" />
             </div>
 
