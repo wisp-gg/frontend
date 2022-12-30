@@ -41,6 +41,7 @@
       "site_name_footer": "The site name that should be displayed on embeds.",
       "title_footer": "The title that should be displayed on embeds.",
       "description_footer": "Short description that should be displayed on embeds.",
+      "color_footer": "Hex color prepended by # which will be displayed on embeds.",
       "image_footer": "The Image URL that will be displayed on embeds."
     },
     "js_injector": {

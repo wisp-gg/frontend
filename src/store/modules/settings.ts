@@ -24,6 +24,7 @@ export interface OpenGraph {
     site_name?: string;
     title?: string;
     description?: string;
+    color?: string;
     image?: string;
 }
 

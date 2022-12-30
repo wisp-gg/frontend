@@ -12,6 +12,7 @@ interface EmbedSettingsRequest {
     ['og.site_name']: string;
     ['og.title']: string;
     ['og.description']: string;
+    ['og.color']: string;
     ['og.image']: string;
 }
 
