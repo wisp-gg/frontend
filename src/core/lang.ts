@@ -80,6 +80,7 @@ export function getAvailableLanguages() {
         'sv_SE', // Swedish
         'pl_PL', // Polish
         'pt_BR', // Portuguese
+        'ro_RO', // Romanian
     ];
 }
 
