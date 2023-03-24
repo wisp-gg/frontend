@@ -74,7 +74,9 @@ export default defineComponent({
                 // TODO: locale support
                 return {
                     description: cronstrue.toString(expression, { locale: 'en', use24HourTimeFormat: true }),
-                    nextRunTime: formatDateAbsolute(cronParser.parseExpression(expression).next().toISOString(), 'LL @ LT'),
+                    nextRunTime: formatDateAbsolute(cronParser.parseExpression(expression, {
+                        tz: 'UTC'
+                    }).next().toISOString(), 'LL @ LT'),
                 };
             } catch { // Invalid cron
                 return;
