@@ -12,7 +12,7 @@
                 </div>
             </div>
 
-            <div class="flex justify-end items-center py-3 space-x-12">
+            <div class="flex justify-end items-center py-3 space-x-6">
                 <v-button :to="{name: adminRoute}" class="relative text-lg text-white text-opacity-50 hover:text-opacity-80" v-if="user?.rootAdmin || user?.supportOp">
                     <fa :icon="['fas', 'cogs']" class="cursor-pointer" />
                 </v-button>
