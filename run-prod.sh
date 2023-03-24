@@ -1,4 +1,4 @@
-read -p "Do you want to rebuild? [y/n]" -n 1 -r
+read -p "Do you want to rebuild? [y/N]" -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
@@ -13,5 +13,6 @@ if ! grep -q BaseURL "dist/index.html"; then
 fi
 
 cd dist
-python3 -m http.server
+printf "Common issues:\n - Make sure you have third party cookies enabled for the site.\n - Disable cors on your browser.\n\n"
+python3 -m http.server --bind 127.0.0.1
 cd ../
