@@ -13,7 +13,7 @@ Requirements:
 Setup:
 1. Copy .env.example to .env & change the URL to your instance.
 2. Run "npm install"
-3. To run a development instance run npm run dev
+3. To run a development build run npm run dev
 4. To run a production build run the run-prod.sh file
 
 Common issues:
