@@ -11,7 +11,7 @@
             <vertical-nav-bar v-if="preference === 0" />
         </div>
 
-        <div class="flex-grow mt-12 md:mt-0" :class="preference === 1 ? ['flex', 'flex-col', 'items-center'] : ['pl-0', 'md:pl-64']">
+        <div class="flex-grow mt-12 md:mt-0" :class="preference === 1 ? ['flex', 'flex-col', 'items-center', 'px-10'] : ['pl-0', 'md:pl-64']">
             <socket-error-notice />
 
             <div class="mx-4 mt-8 md:mx-8" :class="preference === 1 ? ['md:container'] : []">
