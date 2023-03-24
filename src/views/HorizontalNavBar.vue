@@ -100,7 +100,7 @@
     }
 
     .nav-secondary li:first-child a {
-        padding-left: 0;
+        padding-left: 15px;
     }
 </style>
 
