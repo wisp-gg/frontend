@@ -15,7 +15,7 @@
             <socket-error-notice />
 
             <div class="mx-4 mt-8 md:mx-8" :class="preference === 1 ? ['md:container'] : []">
-                <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="flex flex-col lg:flex-row justify-between items-center md:items-start mb-8">
                     <div class="flex">
                         <div class="w-14 h-14 md:w-20 md:h-20 mr-3 flex items-center justify-center header-icon shrink-0">
                             <fa :icon="['fas', currentRoute.icon]" :key="currentRoute.icon" class="text-xl md:text-3xl" />
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div class="text-center lg:text-left">
-                        <ol class="flex flex-wrap py-3 px-4 list-none">
+                        <ol class="flex flex-wrap py-3 px-4 md:px-2 list-none">
                             <li class="breadcrumb" v-for="data of breadcrumbPath" :key="data">
                                 <t :path="`navigation.${data}.title`" />
                             </li>
