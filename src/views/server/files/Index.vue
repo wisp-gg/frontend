@@ -164,6 +164,10 @@
         display: revert;
       }
     }
+    
+    .test {
+      display: none;
+    }
 </style>
 
 <script lang="ts">
@@ -281,7 +285,7 @@ export default defineComponent({
             pendingFiles,
             listElement,
             listFields: <ListField[]>[
-                { label: 'file_name', key: 'name', skeleton: 16, style: 'width: auto' },
+                { label: 'file_name', key: 'name', skeleton: 16, style: 'width: 50%; overflow: hidden;' },
                 { label: 'size', key: 'size', skeleton: 4, style: 'width: auto' },
                 { label: 'last_modified', key: 'modifiedAt', format: 'datetime', skeleton: 16, style: 'width: auto' },
             ],
