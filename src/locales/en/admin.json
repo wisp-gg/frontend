@@ -124,7 +124,7 @@
     "host_has_databases": "Cannot delete a database host server that has active databases linked to it.",
 
     "name_footer": "A short identifier used to distinguish this location from others. Must be between 1 and 60 characters, for example, us.nyc.lvl3.",
-    "host_footer": "The IP address or FQDN that should be used when attempting to connect to this MySQL host from the panel to add new databases.",
+    "host_footer": "The IP address that should be used when attempting to connect to this MySQL host from the panel to add new databases.",
     "port_footer": "The port that MySQL is running on for this host.",
     "username_footer": "The username of an account that has enough permissions to create new users and databases on the system.",
     "password_footer": "The password to the account defined.",
