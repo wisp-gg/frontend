@@ -131,7 +131,7 @@
                 </template>
 
                 <template #fields-after="{ result }">
-                    <td class="p-4 w-[10%]">
+                    <td class="p-4 right">
                         <skeleton :content="4">
                             <file-actions-dropdown :path="path" :file="result" />
                         </skeleton>
@@ -157,6 +157,12 @@
 
     .drag-files * {
         pointer-events: none !important;
+    }
+    
+    @media (max-width: 1280px) {
+      .block {
+        display: revert;
+      }
     }
 </style>
 
@@ -275,7 +281,7 @@ export default defineComponent({
             pendingFiles,
             listElement,
             listFields: <ListField[]>[
-                { label: 'file_name', key: 'name', skeleton: 16, style: 'width: 50%' },
+                { label: 'file_name', key: 'name', skeleton: 16, style: 'width: auto' },
                 { label: 'size', key: 'size', skeleton: 4, style: 'width: auto' },
                 { label: 'last_modified', key: 'modifiedAt', format: 'datetime', skeleton: 16, style: 'width: auto' },
             ],
