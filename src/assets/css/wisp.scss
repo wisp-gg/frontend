@@ -420,3 +420,12 @@ button {
 
   color: #fff !important;
 }
+
+/*
+TODO: Better approach? It's using 100% height as default, but parent doesn't set any.
+TODO: Margin is being calculated based on non-existing variables, setting it to 4px makes it the same as selected inputs.
+*/
+.multiselect-tags-search-wrapper {
+  margin: 4px !important;
+  height: 28px !important;
+}
