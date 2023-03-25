@@ -7,6 +7,14 @@
                 </v-button>
             </div>
         </template>
+        
+        <template #no-items-extra>
+          <div class="pt-2">
+                <v-button color="primary" permission="domain.create" :to="{ name: 'admin.service_management.domains.new' }">
+                    <t path="generic.create" />
+                </v-button>
+            </div>
+        </template>
 
         <template #headers-after>
             <th />

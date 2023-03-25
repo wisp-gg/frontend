@@ -10,6 +10,12 @@
             <template #headers-after>
                 <th />
             </template>
+            
+            <template #no-items-extra>
+              <div class="pt-2">
+                <manage-subuser-modal />
+              </div>
+            </template>
 
             <template #field-name="{ result }">
                 <div class="flex items-center">

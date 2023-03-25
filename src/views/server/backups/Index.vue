@@ -11,6 +11,12 @@
             <template #headers-after>
                 <th />
             </template>
+            
+            <template #no-items-extra>
+              <div class="pt-2">
+                <create-backup-modal />
+              </div>
+            </template>
 
             <template #fields-after="{ result }">
                 <td class="p-6 text-right">

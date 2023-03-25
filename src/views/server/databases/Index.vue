@@ -10,6 +10,12 @@
             <template #headers-after>
                 <th />
             </template>
+            
+            <template #no-items-extra>
+              <div class="pt-2">
+                <create-database-modal />
+              </div>
+            </template>
 
             <template #field-connection="{ result }">
                 <code v-clipboard>{{ result.host.connection() }}</code>

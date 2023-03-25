@@ -8,6 +8,13 @@
             <template #headers-before>
                 <th />
             </template>
+            
+            <template #no-items-extra>
+              <div class="pt-2">
+                <manage-schedule-modal />
+              </div>
+            </template>
+            
 
             <template #headers-after>
                 <th />

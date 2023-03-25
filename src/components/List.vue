@@ -39,7 +39,7 @@
                                         Without this it'd only span a % of the width of the table.
                                         -->
                                     <td colspan="20" class="p-32 text-center text-2xl text-white text-opacity-75">
-                                        <t path="generic.no_items" />
+                                        <t path="generic.no_items" /> <slot name="no-items-extra" />
                                     </td>
                                 </tr>
                             </slot>
