@@ -3,7 +3,7 @@
         <div class="flex flex-grow" ref="terminalElement" />
         <div class="flex terminal-input">
             <div class="text-accent-500 terminal-prompt">
-                /
+                $
             </div>
             <v-input
                 class="flex-grow"
