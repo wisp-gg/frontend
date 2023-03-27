@@ -28,13 +28,15 @@
                 no-margin
             />
         </skeleton>
-
-        <p class="mt-3">
-            <skeleton :content="12">
-                {{ variable.description }}
-            </skeleton>
-        </p>
-
+        
+        <template #container-header-extra>
+          <skeleton :content="16">
+            <div class="inline" v-tippy="variable.description">
+              <fa class="text-white/50 inline pl-2" :icon="['fas', 'circle-info']" size="sm" fixed-width />
+            </div>
+          </skeleton>
+        </template>
+        
         <div class="text-white/75 mt-3">
             <p class="inline-block mr-2">
                 <skeleton :content="6">

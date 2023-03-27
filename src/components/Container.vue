@@ -10,6 +10,7 @@
                                 No title specified
                             </template>
                         </h3>
+                            <slot name="container-header-extra" />
                         <!-- TODO: description isn't centered vertically -->
                         <p v-if="description" class="ml-2 text-white text-opacity-50">
                             <!-- TODO: Investigate why this causes an error (switch from any page to databases to re-produce) -->
