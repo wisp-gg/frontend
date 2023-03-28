@@ -1,7 +1,7 @@
 <template>
     <div class="grid lg:grid-cols-3 items-start gap-x-4 gap-y-4">
         <container title="server.advanced.toggle_support_access">
-
+            
             <template #container-header-extra>
                 <div class="inline pl-2">
                   <fa class="text-white/50 inline" v-tippy="'server.advanced.support.description'" :icon="['fas', 'circle-info']" size="sm" fixed-width />

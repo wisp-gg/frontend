@@ -1,6 +1,6 @@
 <template>
     <div class="w-full 2xl:even:pl-3 2xl:odd:pr-3">
-        <div class="server flex flex-col text-center overflow-hidden whitespace-nowrap lg:pb-3 xl:pb-6" :style="`--thumbnail:url('${server?.egg?.thumbnail || minecraft}');`">
+        <div class="server flex flex-col text-center overflow-hidden whitespace-nowrap" :style="`--thumbnail:url('${server?.egg?.thumbnail || minecraft}');`">
             <div class="gradient" />
             <div class="flex items-center bg-primary-900 bg-opacity-25 px-4 md:px-8 py-4">
                 <div class="self-start mt-1 mr-2">
@@ -51,7 +51,7 @@
                 </skeleton>
             </div>
 
-            <div class="grid grid-cols-2 xl:grid-cols-4 px-4 py-2 md:px-8 md:py-4 md:pb-3 lg:pt-9 xl:pt-12">
+            <div class="grid grid-cols-2 xl:grid-cols-4 px-4 py-2 md:px-8 md:py-4">
                 <p v-tippy="'generic.server.cpu'" class="block md:flex 2xl:block flex-col items-center text-white text-sm xl:text-normal tracking-tight">
                     <skeleton :content="8">
                         <fa class="text-white/50 mr-1 inline md:block 2xl:inline" :icon="['fas', 'tachometer-alt']" size="sm" fixed-width />
@@ -65,14 +65,14 @@
                         {{ memoryUsage }} / {{ memoryMax }}
                     </skeleton>
                 </p>
-                <p v-tippy="'generic.server.disk'" class="pt-3 xl:pt-0 block md:flex 2xl:block flex-col items-center text-white text-sm xl:text-normal tracking-tight">
+                <p v-tippy="'generic.server.disk'" class="block md:flex 2xl:block flex-col items-center text-white text-sm xl:text-normal tracking-tight">
                     <skeleton :content="8">
                         <fa class="text-white/50 mr-1 inline md:block 2xl:inline" :icon="['fas', 'hdd']" size="sm" fixed-width />
 
                         {{ diskUsage }} / {{ diskMax }}
                     </skeleton>
                 </p>
-                <p v-tippy="'generic.server.players'" class="pt-3 xl:pt-0 block md:flex 2xl:block flex-col items-center text-white text-sm xl:text-normal tracking-tight">
+                <p v-tippy="'generic.server.players'" class="block md:flex 2xl:block flex-col items-center text-white text-sm xl:text-normal tracking-tight">
                     <skeleton :content="8">
                         <fa class="text-white/50 mr-1 inline md:block 2xl:inline" :icon="['fas', 'user']" size="sm" fixed-width />
                         {{ stats.query?.players?.length ?? '--' }} / {{ stats.query?.maxplayers ?? '--' }}
@@ -128,12 +128,12 @@
 
     .gradient::before {
         background: rgb(37,36,68);
-        background: linear-gradient(90deg, rgba(37,36,68,0.1) 0%, rgba(37,36,68,0.5) 100%);
+        background: linear-gradient(90deg, rgba(37,36,68,0) 0%, rgba(37,36,68,0.8) 100%);
     }
 
     .gradient::after {
         background: rgb(37,36,68);
-        background: linear-gradient(0deg, rgba(37,36,68,0.1) 0%, rgba(37,36,68,1) 100%);
+        background: linear-gradient(0deg, rgba(37,36,68,0) 0%, rgba(37,36,68,1) 100%);
     }
 </style>
 
