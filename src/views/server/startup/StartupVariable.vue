@@ -31,8 +31,8 @@
         
         <template #container-header-extra>
           <skeleton :content="16">
-            <div class="inline" v-tippy="variable.description">
-              <fa class="text-white/50 inline pl-2" :icon="['fas', 'circle-info']" size="sm" fixed-width />
+            <div class="inline pl-2">
+              <fa class="text-white/50 inline" v-tippy="variable.description" :icon="['fas', 'circle-info']" size="sm" fixed-width />
             </div>
           </skeleton>
         </template>

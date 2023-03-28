@@ -4,6 +4,13 @@
             <p class="flex-grow">
                 <t path="server.advanced.install_edition.description" />
             </p>
+        <template #container-header-extra>
+          <skeleton :content="18">
+            <div class="inline" v-tippy="server.advanced.install_edition.description">
+              <fa class="text-white/50 inline pl-2" :icon="['fas', 'circle-info']" size="sm" fixed-width />
+            </div>
+          </skeleton>
+        </template>
 
             <v-form class="mt-3" service-id="advanced@installVersion" :on-success="onSuccess">
                 <skeleton :content="16">
