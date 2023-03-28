@@ -151,24 +151,24 @@ export default defineComponent({
             terminal.open(terminalElement.value);
             fitAddon.fit();
 
-            //const resize = () => {
+            const resize = () => {
                 // https://github.com/xtermjs/xterm.js/issues/3564
-            //    let lastCols;
-            //    let loop = true;
-            //    while(loop) {
-            //        const { cols } = fitAddon.proposeDimensions();
+                let lastCols;
+                let loop = true;
+                while(loop) {
+                    const { cols } = fitAddon.proposeDimensions();
 
-            //        const core = (terminal as any)._core;
-            //        core._renderService.clear();
-            //        terminal.resize(cols, rows);
+                    const core = (terminal as any)._core;
+                    core._renderService.clear();
+                    terminal.resize(cols, rows);
 
-            //        if (cols === lastCols) loop = false;
+                    if (cols === lastCols) loop = false;
 
-            //        lastCols = cols;
-            //    }
-            //};
+                    lastCols = cols;
+                }
+            };
             //useWindowEvent('resize', debounce(resize, 100));
-            //resize();
+            resize();
 
             let hooked = false;
             const hookSearchBarKeyEvents = () => {
