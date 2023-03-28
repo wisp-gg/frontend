@@ -54,6 +54,15 @@
     .terminal-prompt {
         padding: 1rem .5rem 1rem 1.5rem;
     }
+
+    .terminal-container{
+        /* this is important */
+        overflow: hidden;
+    }
+    .xterm .xterm-viewport {
+        /* see : https://github.com/xtermjs/xterm.js/issues/3564#issuecomment-1004417440 */
+        width: initial !important;
+    }
 </style>
 
 <script lang="ts">
@@ -142,24 +151,24 @@ export default defineComponent({
             terminal.open(terminalElement.value);
             fitAddon.fit();
 
-            const resize = () => {
+            //const resize = () => {
                 // https://github.com/xtermjs/xterm.js/issues/3564
-                let lastCols;
-                let loop = true;
-                while(loop) {
-                    const { cols } = fitAddon.proposeDimensions();
+            //    let lastCols;
+            //    let loop = true;
+            //    while(loop) {
+            //        const { cols } = fitAddon.proposeDimensions();
 
-                    const core = (terminal as any)._core;
-                    core._renderService.clear();
-                    terminal.resize(cols, rows);
+            //        const core = (terminal as any)._core;
+            //        core._renderService.clear();
+            //        terminal.resize(cols, rows);
 
-                    if (cols === lastCols) loop = false;
+            //        if (cols === lastCols) loop = false;
 
-                    lastCols = cols;
-                }
-            };
-            useWindowEvent('resize', debounce(resize, 100));
-            resize();
+            //        lastCols = cols;
+            //    }
+            //};
+            //useWindowEvent('resize', debounce(resize, 100));
+            //resize();
 
             let hooked = false;
             const hookSearchBarKeyEvents = () => {
