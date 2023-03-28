@@ -1,8 +1,10 @@
 <template>
     <container title="server.advanced.update_server">
-        <p class="flex-grow">
-            <t path="server.advanced.updater.description" />
-        </p>
+        <template #container-header-extra>
+            <div class="inline pl-2">
+              <fa class="text-white/50 inline" v-tippy="'server.advanced.updater.description'" :icon="['fas', 'circle-info']" size="sm" fixed-width />
+            </div>
+        </template>
 
         <v-form service-id="advanced@update" class="mt-4">
             <v-switch name="beta" footer="server.advanced.updater.beta" />

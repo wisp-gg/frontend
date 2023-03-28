@@ -1,11 +1,13 @@
 <template>
     <container title="server.advanced.health_monitor">
-        <p class="flex-grow">
-            <t path="server.advanced.monitor.description" />
-        </p>
+              <template #container-header-extra>
+            <div class="inline pl-2">
+              <fa class="text-white/50 inline" v-tippy="'server.advanced.monitor.description'" :icon="['fas', 'circle-info']" size="sm" fixed-width />
+            </div>
+        </template>
 
         <skeleton :content="16">
-            <v-button :color="server.monitor ? 'danger' : 'success'" permission="monitor.update" class="mt-3 w-full" @click="toggleMonitor" spinner>
+            <v-button :color="server.monitor ? 'danger' : 'success'" permission="monitor.update" class="w-full" @click="toggleMonitor" spinner>
                 <t :path="`generic.${server.monitor ? 'disable' : 'enable'}`" />
             </v-button>
         </skeleton>

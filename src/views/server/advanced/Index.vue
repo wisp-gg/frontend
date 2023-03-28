@@ -1,12 +1,15 @@
 <template>
-    <div class="grid xl:grid-cols-3 items-start gap-x-4 gap-y-4">
+    <div class="grid lg:grid-cols-3 items-start gap-x-4 gap-y-4">
         <container title="server.advanced.toggle_support_access">
-            <p class="flex-grow">
-                <t path="server.advanced.support.description" />
-            </p>
+            
+            <template #container-header-extra>
+                <div class="inline pl-2">
+                  <fa class="text-white/50 inline" v-tippy="'server.advanced.support.description'" :icon="['fas', 'circle-info']" size="sm" fixed-width />
+                </div>
+            </template>
 
             <skeleton :content="16">
-                <v-button class="mt-3 w-full" :color="server.supportOp ? 'danger' : 'primary'" @click="toggleSupport" spinner>
+                <v-button class="w-full" :color="server.supportOp ? 'danger' : 'primary'" @click="toggleSupport" spinner>
                     <t :path="`generic.${server.supportOp ? 'disable' : 'enable'}`" />
                 </v-button>
             </skeleton>
