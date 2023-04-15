@@ -2,7 +2,7 @@
     <container title="client.security.credentials_list" no-padding>
         <template #actions>
             <div class="text-right">
-                <a href="https://docs.panel.gg/" target="_blank" class="mr-3 text-white text-opacity-50">
+                <a href="https://gamepanel.notion.site/Client-API-ed28e66a240a4c6886232daf141f81c5" target="_blank" class="mr-3 text-white text-opacity-50">
                     <t path="generic.api_docs" />
                 </a>
                 <create-credential-modal />
