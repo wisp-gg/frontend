@@ -15,7 +15,7 @@ class PluginsService {
 
     install(data: InstallModpackRequest) {
         return RequestService.post('/servers/:server/modpacks', data, {
-            timeout: 20000,
+            timeout: 60000,
         });
     }
 }

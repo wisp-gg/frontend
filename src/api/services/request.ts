@@ -32,7 +32,7 @@ export default class RequestService {
         // /auth/@me should be ignored
         this.axios = axios.create({
             baseURL: window.Wisp ? (window.Wisp.BaseURL + `/api/${namespace}`) : undefined,
-            timeout: 10000,
+            timeout: 60000,
             responseType: 'json',
             headers: {
                 // TODO: Me
