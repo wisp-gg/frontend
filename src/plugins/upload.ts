@@ -80,7 +80,17 @@ export async function handleUploadEvent(evt: Event, path: string) {
                 uploaded_size: 0,
             };
 
-            pendingFiles.value[identifier] = await handleWebkitEntry(webkitEntry, identifier, path, webkitEntry.name);
+            // Check if file is smaller than the available disk space on the server, and if not, show an error.
+            if (state.models.server?.node?.diskSpace < webkitEntry.size) {
+                dispatch('alerts/add', {
+                    type: 'danger',
+                    title: ['server.files.upload_too_large', { name: webkitEntry.name }],
+                });
+                return;
+            } else {
+                pendingFiles.value[identifier] = await handleWebkitEntry(webkitEntry, identifier, path, webkitEntry.name);
+            }
+
         } else {
             const actualFile: FileWithMetadata = file instanceof File ? file : file.getAsFile();
             if (!actualFile) return; // Should we throw an error instead?
