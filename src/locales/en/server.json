@@ -372,7 +372,7 @@
   "fastdl": {
     "sync": "Sync FastDL Content",
     "sync_button": "Sync FastDL",
-    "note": "This will sync all your FastDL content from the game server, compress it and upload to our web server. Everything inside the garrysmod/, garrysmod/addons/ and garrysmod/gamemodes/ folder that contains downloadable content will be synced.",
+    "note": "This will sync all your FastDL content from the game server, compress it and upload to our web server.",
     "click_button": "Click this button:",
     "enable_fastdl": "To enable FastDL for your server after a sync, you need to add {code} into your {file} file.",
     "sync_started": "FastDL is now syncing. You will be notified when it finishes."
