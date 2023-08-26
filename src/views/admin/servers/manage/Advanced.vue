@@ -49,7 +49,7 @@
                     label="components.form.fields.location"
                     service-id="locations@getAll"
 
-                    label-prop="long"
+                    label-prop="short"
                     value-prop="id"
 
                     rule="required"
