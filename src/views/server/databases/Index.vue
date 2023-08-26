@@ -10,11 +10,11 @@
             <template #headers-after>
                 <th />
             </template>
-            
+
             <template #no-items-extra>
-              <div class="pt-2">
-                <create-database-modal />
-              </div>
+                <div class="pt-2">
+                    <create-database-modal />
+                </div>
             </template>
 
             <template #field-connection="{ result }">
@@ -25,14 +25,13 @@
                 <td class="p-6 text-right">
                     <div class="flex justify-end space-x-4">
                         <skeleton :content="12">
-                            <form v-if="result.host.phpmyadminUrl" :action="result.host.phpmyadminUrl" method="post" target="_blank">
-                                <input type="hidden" id="pma_username" name="pma_username" :value="result.username">
-                                <input type="hidden" id="pma_password" name="pma_password" :value="result.password">
-
-                                <v-button type="submit" color="primary" class="py-3 px-6">
-                                    <t path="server.databases.phpmyadmin" />
-                                </v-button>
-                            </form>
+                            <template v-if="result.host.phpmyadminUrl">
+                                <a :href="result.host.phpmyadminUrl" target="_blank">
+                                    <v-button color="primary" class="py-3 px-6">
+                                        <t path="server.databases.phpmyadmin" />
+                                    </v-button>
+                                </a>
+                            </template>
                         </skeleton>
 
                         <skeleton :content="8">
