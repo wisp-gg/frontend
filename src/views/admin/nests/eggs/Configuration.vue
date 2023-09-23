@@ -9,7 +9,7 @@
                 <div>
                     <v-input name="name" rule="required" :value="egg?.name" />
                     <v-input name="tag" label="components.form.fields.identifier" :value="egg?.tag" />
-                    <v-textarea name="description" :value="egg?.description" />
+                    <v-textarea name="description" rule="required" :value="egg?.description" />
                 </div>
 
                 <div>
