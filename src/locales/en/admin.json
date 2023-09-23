@@ -69,7 +69,7 @@
   },
 
   "migrator": {
-    "notice": "Migrate your data from another Pterodactyl/WISP instance before installing the daemon. If you are migrating more than 100 nests, 100 eggs per nest, 10000 users or 1000 servers contact us for a manual migration, which will also migrate hashed user passwords and database passwords.",
+    "notice": "Migrate your data from another Pterodactyl/WISP instance before installing the daemon. If you are migrating more than 100 nests, 100 eggs per nest, 10000 users or 1000 servers, contact us for a manual migration, which will also migrate hashed user passwords and database passwords.",
     "migrate": "Migrate",
     "notify_users": "Notify users",
     "notified_users": "All users will receive an email soon. You will be notified when it's finished.",
@@ -88,6 +88,7 @@
     "after_migration": "After migration is done, please note the following:",
     "db_hosts_reset": "All database hosts' passwords need to be set again (as those can't be synced due to Pterodactyl API limitations)",
     "migrated_nodes_cpu": "Migrated nodes' CPU is set to 800% (with 100% overallocation)",
+    "migrated_servers_backups": "Migrated servers' backup limit is disabled by setting it to 0. WISP Backups have size limit, while Pterodactyl does not.",
     "spare_allocations_ignored": "Any spare allocations from migrated nodes were ignored during the migration",
     "move_to_installing_daemon": "Then you can move to setting up the WISP Daemon on your game nodes.",
 
@@ -152,7 +153,7 @@
     "delete_notice": "Are you sure that you want to delete the \"{short}\" location? There is no going back, all data will immediately be removed.",
     "location_has_nodes": "You must delete/move all nodes within the location before deleting it.",
     "location_details": "Location Details",
-    "nodes" : "Nodes",
+    "nodes": "Nodes",
 
     "short_footer": "A short identifier used to distinguish this location from others. Must be between 1 and 60 characters, for example, \"us.nyc.lvl3\".",
     "long_footer": "A longer description of this location. Must be less than 255 characters."
@@ -183,7 +184,7 @@
       "display_fqdn_footer": "Please enter the domain name (e.g node.example.com) that will be shown for users instead of *.daemon.panel.gg. If you're using a domain, you're also gonna need to setup the DNS record for it to point at the node or this won't work as expected.",
       "automatic_allocation_footer": "Allows this node to be used when automatically picking a suitable node for server deployment using the API.",
       "maintenance_mode_footer": "If the node is marked as 'Under Maintenance' users won't be able to access servers that are on this node.",
-      "cpu_footer": "Enter the total amount of cpu available on this node for server allocation. You may also provide a percentage that will determine the amount of cpu over the set limit to allow. 1 core = 100%.",
+      "cpu_footer": "Enter the total amount of cpu available on this node for server allocation. You may also provide a percentage that will determine the amount of cpu over the set limit to allow. 1 core = 200%.",
       "memory_footer": "Enter the total amount of memory available on this node for allocation to servers. You may also provide a percentage that can allow allocation of more than the defined memory.",
       "disk_footer": "Enter the total amount of disk space available on this node for server allocation. You may also provide a percentage that will determine the amount of disk space over the set limit to allow.",
       "max_web_upload_footer": "Enter the maximum size of files that can be uploaded through the web-based file manager."

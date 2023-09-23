@@ -60,6 +60,9 @@
                     <t path="admin.migrator.db_hosts_reset" />
                 </li>
                 <li>
+                    <t path="admin.migrator.migrated_servers_backups" />
+                </li>
+                <li>
                     <t path="admin.migrator.migrated_nodes_cpu" />
                 </li>
                 <li>
