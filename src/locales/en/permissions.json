@@ -378,6 +378,16 @@
         "title": "Update",
         "description": "Allows the user to reinstall this server."
       }
+    },
+
+    "rustwipe": {
+      "title": "Rust Wipe",
+      "description": "Permissions which allow the user to trigger a Rust wipe for this server.",
+
+      "trigger": {
+        "title": "Trigger",
+        "description": "Allows the user to trigger a Rust wipe for this server."
+      }
     }
   },
 

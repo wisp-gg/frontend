@@ -45,6 +45,18 @@
                 rule="required"
             />
 
+            <v-select
+                v-if="action === 'wipe'"
+
+                name="payload"
+                prefix="server.schedules.wipe_actions"
+                :options="allowedWipeActions"
+                :value="task?.payload"
+                rule="required"
+            />
+            <!-- TODO implement customization for seed, size, map, etc -->
+
+
             <div class="text-right space-x-4">
                 <v-submit no-margin color="primary" label="generic.submit" />
             </div>
@@ -66,17 +78,22 @@ export default defineComponent({
     setup(props) {
         const allowedActions = ref<string[]>(['power', 'command']);
         const allowedPowerActions = ['start', 'restart', 'stop', 'kill'];
+        const allowedWipeActions = ['players', 'world', 'world_and_players'];
         const action = ref<string>(props.task?.action || allowedActions.value[0]);
 
         onModelLoaded('server', server => {
             if (server.featureLimits.backupMegabytes > 0) {
                 allowedActions.value.push('backup');
             }
+            if (server.egg.tag === 'rust') {
+                allowedActions.value.push('wipe');
+            }
         });
 
         return {
             allowedActions,
             allowedPowerActions,
+            allowedWipeActions,
             action,
 
             submit: (data: any) => {

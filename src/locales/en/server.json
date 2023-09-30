@@ -224,7 +224,8 @@
     "actions": {
       "power": "Send power action",
       "command": "Send command",
-      "backup": "Create a backup"
+      "backup": "Create a backup",
+      "wipe": "Wipe Rust server files"
     },
 
     "power_actions": {
@@ -232,6 +233,12 @@
       "restart": "Restart the server",
       "stop": "Stop the server",
       "kill": "Forcefully stop the server"
+    },
+
+    "wipe_actions": {
+      "world": "Delete all the world files",
+      "players": "Delete all the player data",
+      "world_and_players": "Delete all world and player data"
     }
   },
 
@@ -413,5 +420,13 @@
       "velocity": "Velocity",
       "waterfall": "Waterfall"
     }
+  },
+
+  "rustwipe": {
+    "wipe": "Wipe",
+    "warning": "You are about to wipe the server and delete {file}, this is an operation which can not be reversed.",
+    "wiping": "The server is now wiping. You will be notified when it's finished.",
+    "new_seed_footer": "Optional: Enter new seed to change the current map seed egg variable.",
+    "map_size": "Generate new Map Size"
   }
 }
