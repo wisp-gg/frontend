@@ -421,12 +421,4 @@
       "waterfall": "Waterfall"
     }
   },
-
-  "rustwipe": {
-    "wipe": "Wipe",
-    "warning": "You are about to wipe the server and delete {file}, this is an operation which can not be reversed.",
-    "wiping": "The server is now wiping. You will be notified when it's finished.",
-    "new_seed_footer": "Optional: Enter new seed to change the current map seed egg variable.",
-    "map_size": "Generate new Map Size"
-  }
 }
