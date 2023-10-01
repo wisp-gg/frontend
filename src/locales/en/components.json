@@ -19,6 +19,7 @@
       "author": "Author",
       "ip": "IP",
       "alias": "Alias",
+      "path": "File Path",
       "ports": "Ports",
       "phpmyadmin_url": "phpMyAdmin URL",
 
