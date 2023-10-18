@@ -250,7 +250,8 @@
       "resource_limits": "Resource Limits",
       "feature_limits": "Feature Limits",
       "allocation_management": "Allocation Management",
-      "oom_disabled_footer": "Disables the OOM Killer on the server. This will allow the server to float at the maximum ram and swap space."
+      "oom_disabled_footer": "Disables the OOM Killer on the server. This will allow the server to float at the maximum ram and swap space.",
+      "force_outgoing_ip_footer": "Forces the server to use the primary allocation's IP for outgoing connections by creating a separate Docker network. Required by some games to work properly with multiple IPs on the machine, such as Source Engine games."
     },
 
     "startup": {

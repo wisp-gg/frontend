@@ -382,7 +382,12 @@
 
     "rustwipe": {
       "title": "Rust Wipe",
-      "description": "Permissions which allow the user to trigger a Rust wipe for this server.",
+      "description": "Permissions which allow the user to manage the Rust wipe for this server.",
+
+      "read": {
+        "title": "Read",
+        "description": "Allows the user to view the Rust wipe page for this server."
+      },
 
       "trigger": {
         "title": "Trigger",

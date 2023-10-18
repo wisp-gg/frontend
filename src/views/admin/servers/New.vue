@@ -89,6 +89,7 @@
                 <!-- TODO: Min/max validation rules (10-1000 here) -->
                 <v-input label="components.form.fields.block_io_proportion" footer="admin.servers.new.io_footer" name="io" rule="required|integer" value="500" />
                 <v-switch name="oom_disabled" footer="admin.servers.build_configuration.oom_disabled_footer" />
+                <v-switch name ="force_outgoing_ip" footer="admin.servers.build_configuration.force_outgoing_ip_footer" />
             </div>
         </container>
 

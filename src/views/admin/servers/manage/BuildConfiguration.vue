@@ -7,6 +7,7 @@
             <v-input name="disk" rule="required|integer" suffix="generic.units.megabytes" :value="server?.limits.disk" />
             <v-input label="components.form.fields.block_io_proportion" name="io" rule="required|integer" :value="server?.limits.io" />
             <v-switch name="oom_disabled" footer="admin.servers.build_configuration.oom_disabled_footer" :value="server?.oomDisabled" />
+            <v-switch name="force_outgoing_ip" footer="admin.servers.build_configuration.force_outgoing_ip_footer" :value="server?.forceOutgoingIp" />
 
         </container>
 

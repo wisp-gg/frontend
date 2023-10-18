@@ -128,6 +128,7 @@
       "egg_identifiers": "Egg Identifiers",
       "root_record": "Root Record",
       "invalidate_sessions": "Invalidate Sessions",
+      "force_outgoing_ip": "Force Outgoing IP",
 
       "branding": {
         "name": "Company Name"

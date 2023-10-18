@@ -37,6 +37,7 @@ export class Server extends BaseModel {
     public updating = false;
     public moving = false;
     public oomDisabled = false;
+    public forceOutgoingIp = false;
 
     public get egg(): Egg {
         return this.getRelationship('egg');

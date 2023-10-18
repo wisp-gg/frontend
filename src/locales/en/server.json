@@ -236,9 +236,9 @@
     },
 
     "wipe_actions": {
-      "world": "Delete all the world files",
-      "players": "Delete all the player data",
-      "world_and_players": "Delete all world and player data"
+      "world": "(Map Wipe) Delete all the world files",
+      "players": "(Blueprint Wipe) Delete all the player data",
+      "world_and_players": "(Full Wipe) Delete all world and player data"
     }
   },
 
