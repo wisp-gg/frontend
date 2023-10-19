@@ -251,6 +251,7 @@
       "description": "Description",
       "owner": "Owner",
       "connection": "Connection",
+      "jdbc_string": "JDBC Connection String",
       "username": "Username",
       "password": "Password",
       "2fa": "2FA",

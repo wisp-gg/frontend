@@ -21,6 +21,17 @@
                 <code v-clipboard>{{ result.host.connection() }}</code>
             </template>
 
+            <template #field-jdbc_string="{ result }">
+                <div v-if="result.showJdbc">
+                    <code v-clipboard>
+                        jdbc:mysql://{{result.username}}:{{encodeURIComponent(result.password)}}@{{result.host.connection()}}/{{result.name}}
+                    </code>
+                </div>
+                <v-button v-else @click="result.showJdbc = true">
+                    <code class="skeleton">{{ '•'.repeat(12) }}</code>
+                </v-button>
+            </template>
+
             <template #fields-after="{ result }">
                 <td class="p-6 text-right">
                     <div class="flex justify-end space-x-4">
@@ -77,6 +88,7 @@ export default defineComponent({
                 { key: 'username', features: ['clipboard', 'code'], skeleton: 12 },
                 { key: 'password', features: ['clipboard', 'code', 'secret'], skeleton: 12 },
                 { key: 'connection', skeleton: 12 },
+                { key: 'jdbc_string', skeleton: 12 },
             ],
         };
     },
