@@ -44,25 +44,12 @@
         </skeleton>
 
         <template #container-header-extra>
-          <skeleton :content="16">
-            <div class="inline pl-2">
-              <fa class="text-white/50 inline" v-tippy="variable.description" :icon="['fas', 'circle-info']" size="sm" fixed-width />
-            </div>
-          </skeleton>
-        </template>
-
-        <div class="text-white/75 mt-3">
-            <p class="inline-block mr-2">
-                <skeleton :content="6">
-                    <t path="server.startup.input_rules" />
-                </skeleton>
-            </p>
-
-
-            <skeleton :content="12">
-                <code class="text-sm mx-1">{{ variable.rules }}</code>
+            <skeleton :content="16">
+                <div class="inline pl-2">
+                    <fa class="text-white/50 inline" v-tippy="variable.description" :icon="['fas', 'circle-info']" size="sm" fixed-width />
+                </div>
             </skeleton>
-        </div>
+        </template>
     </container>
 </template>
 
