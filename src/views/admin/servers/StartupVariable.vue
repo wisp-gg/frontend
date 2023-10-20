@@ -1,7 +1,22 @@
 <template>
     <div>
         <skeleton :content="16">
-            <v-switch no-margin v-if="variable?.tickable" :label="['_raw', variable.name]" :name="`environment.${variable.envVariable}`" :value="(serverValue ?? variable.defaultValue) === 'true'" />
+            <v-select
+                v-if="inRules.length > 0"
+                :name="`environment.${variable.envVariable}`"
+                :label="['_raw', variable.name]"
+                :options="inRules"
+                :value="serverValue ?? variable.defaultValue"
+                no-margin
+            />
+
+            <v-switch
+                v-else-if="variable?.tickable"
+                :label="['_raw', variable.name]"
+                :name="`environment.${variable.envVariable}`"
+                :value="(serverValue ?? variable.defaultValue) === 'true'"
+                no-margin
+            />
 
             <v-input
                 v-else
@@ -35,7 +50,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { computed, defineComponent } from 'vue';
 import { EggVariable } from '~/api/models';
 
 export default defineComponent({
@@ -47,5 +62,11 @@ export default defineComponent({
             type: String,
         },
     },
+    setup(props) {
+        const inRules = computed(() => (props.variable?.rules || '').split('in:')[1]?.split(',') || []);
+        return {
+            inRules,
+        };
+    }
 });
 </script>

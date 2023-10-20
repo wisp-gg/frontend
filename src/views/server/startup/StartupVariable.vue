@@ -3,8 +3,22 @@
         <alerts class="mb-6" :by-key="`server.startup.variable(${variable?.envVariable})`" />
 
         <skeleton :content="16">
+            <v-select
+                v-if="inRules.length > 0"
+                v-tippy="!variable.userEditable && (isAdmin ? 'server.startup.variable_not_editable_admin': 'server.startup.variable_not_editable')"
+                :disabled="!variable?.userEditable"
+
+                name=""
+                permission="startup.update"
+                :options="inRules"
+                :value="variable?.serverValue || ''"
+                @update:value="save"
+                hide-label
+                no-margin
+            />
+
             <v-switch
-                v-if="variable?.tickable"
+                v-else-if="variable?.tickable"
                 v-tippy="!variable.userEditable && (isAdmin ? 'server.startup.variable_not_editable_admin': 'server.startup.variable_not_editable')"
                 :disabled="!variable?.userEditable"
 
@@ -28,7 +42,7 @@
                 no-margin
             />
         </skeleton>
-        
+
         <template #container-header-extra>
           <skeleton :content="16">
             <div class="inline pl-2">
@@ -36,7 +50,7 @@
             </div>
           </skeleton>
         </template>
-        
+
         <div class="text-white/75 mt-3">
             <p class="inline-block mr-2">
                 <skeleton :content="6">
@@ -68,7 +82,10 @@ export default defineComponent({
         const updateStartupCommand = inject<(newCommand: string) => any>('updateStartupCommand');
         if (!updateStartupCommand) throw new Error('Missing required injection updateStartupCommand');
 
+        const inRules = computed(() => (props.variable?.rules || '').split('in:')[1]?.split(',') || []);
+
         return {
+            inRules,
             isAdmin: computed(() => hasPermissions('admin:server_startup.read')),
             save: (value: string | boolean) => {
                 if (!props.variable?.envVariable) return; // No variable, Skeleton maybe?
