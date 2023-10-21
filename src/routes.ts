@@ -1,8 +1,8 @@
 import { RouteRecordRaw } from 'vue-router';
 import { Router, state } from '~/core';
-import { Admin, Authenticated, Guest, Permission, Feature, Require2FA, ModelBindings, MFAInProgress } from '~/middlewares';
+import { Admin, Authenticated, Guest, Permission, Feature, Require2FA, ModelBindings, MFAInProgress, MaintenanceMode } from '~/middlewares';
 import { GenericLayout, PopupLayout, Passthrough, TabberPassthrough } from '~/views';
-import { NotFoundView } from '~/views/errors';
+import { NotFoundView, MaintenanceView } from '~/views/errors';
 
 declare module 'vue-router' {
     interface RouteMeta {
@@ -65,7 +65,7 @@ export const routes: RouteRecordRaw[] = [
             },
         ],
     },
-    { // Backwards compatability with v1
+    { // Backwards compatibility with v1
         name: 'login.sso',
         path: '/auth/login/sso',
         meta: {
@@ -118,7 +118,7 @@ export const routes: RouteRecordRaw[] = [
                     }
                 ],
             },
-            { // Redirect for backwards compatability with v1
+            { // Redirect for backwards compatibility with v1
                 name: 'account.sso',
                 path: 'account/sso',
                 meta: {
@@ -145,7 +145,7 @@ export const routes: RouteRecordRaw[] = [
         path: '/server/:server',
         component: GenericLayout,
         meta: {
-            middlewares: [Authenticated, Require2FA, new ModelBindings('client')],
+            middlewares: [Authenticated, Require2FA, MaintenanceMode, new ModelBindings('client')],
             showChildrenInNavbar: true
         },
         children: [
@@ -825,7 +825,7 @@ export const routes: RouteRecordRaw[] = [
                                 ]
                             },
 
-                            { // Backwards compatibility with WHMCS's go go Service button
+                            { // Backwards compatibility with WHMCS's go to Service button
                                 name: 'admin.management.servers.view',
                                 path: 'view/:id',
                                 meta: {
@@ -1092,6 +1092,11 @@ export const routes: RouteRecordRaw[] = [
         path: '/:catchAll(.*)',
         component: NotFoundView,
     },
+    {
+        name: 'maintenance',
+        path: '/maintenance',
+        component: MaintenanceView,
+    }
 ];
 
 routes.forEach(Router.addRoute);
