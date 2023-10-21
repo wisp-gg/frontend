@@ -22,6 +22,7 @@
       "path": "File Path",
       "ports": "Ports",
       "phpmyadmin_url": "phpMyAdmin URL",
+      "display_top": "Display at the top",
 
       "name_first": "First Name",
       "name_last": "Last Name",

@@ -9,4 +9,5 @@ export class Announcement extends BaseModel {
     public active = false;
     public createdAt = '';
     public updatedAt = '';
+    public displayAtTop = false;
 }

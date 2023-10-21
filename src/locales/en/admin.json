@@ -107,6 +107,7 @@
     "delete_announcement": "Delete Announcement",
     "delete_notice": "Deleting this announcement is irreversible - please click delete again to confirm the deletion.",
     "enabled_footer": "Whether the announcement is instantly visible to all users.",
+    "display_at_top": "Selecting this will additionally display announcement bar at the top of the page.",
     "resend": "Resend",
     "announcement_resent": "The announcement has been successfully resent to users on the panel.",
     "cant_resend_disabled": "A disabled announcement can't be resent - enable the announcement first."

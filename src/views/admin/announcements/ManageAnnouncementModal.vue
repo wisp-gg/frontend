@@ -16,9 +16,9 @@
                 :value="announcement?.type ?? 'success'"
             />
 
-            <v-input name="text" label="components.form.fields.content" rule="required" :value="announcement?.text ?? ''" />
-
+            <v-input name="text" label="components.form.fields.content" rule="required|max:512" :value="announcement?.text ?? ''" />
             <v-switch name="active" label="components.form.fields.enabled" footer="admin.announcements.enabled_footer" :value="announcement?.active ?? true" />
+            <v-switch name="display_at_top" label="components.form.fields.display_top" footer="admin.announcements.display_at_top" :value="announcement?.displayAtTop ?? false" />
 
             <div class="text-right">
                 <v-submit color="primary">

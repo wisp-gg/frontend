@@ -6,6 +6,7 @@ interface CreateAnnouncementRequest {
     type: string;
     text: string;
     active: boolean;
+    displayAtTop: boolean;
 }
 
 interface UpdateAnnouncementRequest extends CreateAnnouncementRequest {
