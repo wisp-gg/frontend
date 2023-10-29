@@ -16,7 +16,7 @@ interface UpdateNodeRequest {
     description?: string;
     public: boolean;
     display_fqdn?: string;
-    maintenance_mode: boolean;
+    maintenance_node: boolean;
     location_id: number;
 
     cpu: number;

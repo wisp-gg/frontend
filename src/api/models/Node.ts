@@ -4,7 +4,6 @@ export class Node extends BaseModel {
     public id = -1;
     public name = '';
     public description = '';
-    public maintenanceMode = false;
     public connection = {
         fqdn: '',
         display: '',
@@ -18,6 +17,7 @@ export class Node extends BaseModel {
 
     // Admin only props
     public public = false;
+    public maintenanceMode = false;
     public serversCount?: number;
     public limits = {
         cpu: -1,

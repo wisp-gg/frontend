@@ -4,11 +4,6 @@
     "description": "Couldn't find the page you were looking for."
   },
 
-  "maintenance": {
-    "title": "Maintenance",
-    "description": "The Node hosting this server is currently in Maintenance Mode. Please try again later or contact support for more information."
-  },
-
   "login": {
     "index": {
       "title": "Login",
