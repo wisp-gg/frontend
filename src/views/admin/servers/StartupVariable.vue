@@ -63,7 +63,7 @@ export default defineComponent({
         },
     },
     setup(props) {
-        const inRules = computed(() => (props.variable?.rules || '').split('in:')[1]?.split(',') || []);
+        const inRules = computed(() => ((props.variable?.rules || '').split('|').find(rule => rule.startsWith('in:')) || '').split(':')[1]?.split(',') || []);
         return {
             inRules,
         };
