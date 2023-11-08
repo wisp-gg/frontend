@@ -294,7 +294,7 @@
     "delete_subdomain": "Delete Subdomain",
     "delete_subdomain_notice": "Are you sure that you want to delete the {name} subdomain? All connections using this subdomain will no longer work.",
     "already_in_use": "The subdomain is already in use. Please choose another one.",
-    "domain_not_found": "The domain you specified was not found on.",
+    "domain_not_found": "The domain you specified was not found.",
     "allocation_not_found": "The allocation you specified was not found on this server."
   },
 
