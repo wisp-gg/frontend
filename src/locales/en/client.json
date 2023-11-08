@@ -14,6 +14,7 @@
     "enable_quick_login": "Enable Quick Login",
     "disable_quick_login": "Disable Quick Login",
     "failed_linking_sso": "Failed linking the external account. Please try again later.",
+    "unknown_action": "Attempted to perform an unknown action on your account. Please try again later.",
 
     "password_requirements": "Passwords must contain at least one uppercase, lowercase, and numeric character and must be at least 8 characters in length.",
     "invalidate_sessions_footer": "Selecting this option will force all other devices logged into this account to re-login, otherwise sessions will remain active.",
@@ -56,7 +57,8 @@
     "create_security_key": "Create Security Key",
     "successfully_added": "Security key has been successfully added.",
     "delete_key": "Delete Security Key",
-    "delete_key_notice": "Are you sure that you want to delete the {name} security key?"
+    "delete_key_notice": "Are you sure that you want to delete the {name} security key?",
+    "invalid_data": "The data provided for the security key was invalid."
   },
 
   "support": {

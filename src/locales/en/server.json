@@ -275,6 +275,12 @@
 
     "reinstall": {
       "description": "This will reinstall the server, potentially overwriting some files during this process. Before proceeding, please make sure to back up all important files."
+    },
+
+    "version_manager": {
+      "failed_to_retrieve_data": "Failed to retrieve version data from the API.",
+      "invalid_edition": "Invalid edition specified.",
+      "invalid_version": "Invalid version specified."
     }
   },
 
@@ -286,7 +292,10 @@
     "allocation_footer": "The allocation which the subdomain will point towards.",
 
     "delete_subdomain": "Delete Subdomain",
-    "delete_subdomain_notice": "Are you sure that you want to delete the {name} subdomain? All connections using this subdomain will no longer work."
+    "delete_subdomain_notice": "Are you sure that you want to delete the {name} subdomain? All connections using this subdomain will no longer work.",
+    "already_in_use": "The subdomain is already in use. Please choose another one.",
+    "domain_not_found": "The domain you specified was not found on.",
+    "allocation_not_found": "The allocation you specified was not found on this server."
   },
 
   "mods": {

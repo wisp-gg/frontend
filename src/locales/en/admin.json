@@ -74,6 +74,10 @@
     "notify_users": "Notify users",
     "notified_users": "All users will receive an email soon. You will be notified when it's finished.",
 
+    "admin.migrator.cant_notify_users": "Cannot notify users about the migration. Either the migration has failed, users have already been notified, or the data has not been migrated yet.",
+    "cant_migrate_self": "You can't migrate from your own instance.",
+    "invalid_panel_url": "The panel url is invalid. Ensure it contains protocol (http/https) and is reachable.",
+
     "step_1": "Step 1 - Migrate Data",
     "step_2": "Step 2 - Notify Users",
     "step_3": "Step 3 - Finishing Touches",
@@ -202,6 +206,7 @@
       "invalid_mapping": "The mapping provided for port {port} was invalid and could not be processed.",
       "cidr_out_of_range": "CIDR notation only allows masks between /25 and /32.",
       "port_out_of_range": "Ports in an allocation must be greater than 1024 and less than or equal to 65535.",
+      "invalid_ip_format": "The IP address provided is not in a valid IPv format.",
 
       "ip_footer": "The IP which will be bound to the servers container, this supports subnets up to /25 at a time. (eg. 192.168.0.192/28)",
       "alias_footer": "The alias will be showed in the place of the IP if this is specified, useful for networks using NAT which require the allocation to be an internal IP to allow users to see the public IP.",
@@ -252,7 +257,8 @@
       "feature_limits": "Feature Limits",
       "allocation_management": "Allocation Management",
       "oom_disabled_footer": "Disables the OOM Killer on the server. This will allow the server to float at the maximum ram and swap space.",
-      "force_outgoing_ip_footer": "Forces the server to use the primary allocation's IP for outgoing connections by creating a separate Docker network. Required by some games to work properly with multiple IPs on the machine, such as Source Engine games."
+      "force_outgoing_ip_footer": "Forces the server to use the primary allocation's IP for outgoing connections by creating a separate Docker network. Required by some games to work properly with multiple IPs on the machine, such as Source Engine games.",
+      "cant_find_primary_allocation": "Cannot find the primary allocation for this server."
     },
 
     "startup": {
@@ -333,6 +339,7 @@
     "delete_user": "Delete User",
     "delete_notice": "Are you sure that you want to delete the \"{email}\" user? There is no going back, all data will immediately be removed.",
     "cant_delete_yourself": "You cannot delete yourself.",
+    "cant_remove_last_admin": "You cannot remove the last administrator on the panel.",
     "cant_delete_user_with_servers": "You cannot delete a user while they own servers."
   },
 
@@ -396,7 +403,8 @@
     "mod_configuration": "Mod Configuration",
     "delete_mod": "Delete Mod",
     "delete_notice": "Are you sure that you want to delete the \"{name}\" mod? There is no going back, all data will immediately be removed.",
-    "mod_has_servers": "Cannot modify the associated egg ID when servers are currently attached to a mod."
+    "mod_has_servers": "Cannot modify the associated egg ID when servers are currently attached to a mod.",
+    "already_installing_or_uninstalling": "The mod is already installing or uninstalling."
   },
 
   "domains": {
