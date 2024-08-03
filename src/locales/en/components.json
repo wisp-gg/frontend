@@ -109,6 +109,7 @@
       "tickable": "Tickable",
       "user_viewable": "User Viewable",
       "user_editable": "User Editable",
+      "disable_special_characters_in_database_passwords": "Disable Special Characters In Database Passwords",
       "rules": "Rules",
       "allocation": "Allocation",
       "primary_allocation": "Primary Allocation",

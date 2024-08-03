@@ -362,6 +362,7 @@
 
       "configuration": "Configuration",
       "process_management": "Process Management",
+      "disable_special_characters_in_database_passwords_footer": "This option allows you to disable special characters from being in generated database passwords. This is useful for games which do not properly handle special characters, such as FiveM.",
       "delete_egg": "Delete Egg",
       "delete_notice": "Are you sure that you want to delete the \"{name}\" egg? There is no going back, all data will immediately be removed.",
       "egg_has_servers": "You can not delete a egg which has servers running under it.",
