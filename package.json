@@ -36,7 +36,7 @@
     "tailwindcss": "^3.0.23",
     "tippy.js": "^6.3.7",
     "vue": "^3.2.31",
-    "vue-i18n": "^9.1.9",
+    "vue-i18n": "^9.13.1",
     "vue-qrcode": "^1.0.0",
     "vue-router": "^4.0.14",
     "vue3-popper": "^1.4.2",
