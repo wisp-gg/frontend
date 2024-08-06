@@ -15,7 +15,7 @@
                 <div>
                     <v-input name="docker_image" rule="required" :value="egg?.dockerImage" />
                     <v-textarea name="startup" rule="required" :value="egg?.startup" />
-                    <v-switch name="disable_special_characters_in_database_passwords" footer="admin.nests.egg.disable_special_characters_in_database_passwords_footer" :value="egg?.disable_special_characters_in_database_passwords" />
+                    <v-switch name="disable_special_characters_in_database_passwords" footer="admin.nests.egg.disable_special_characters_in_database_passwords_footer" :value="egg?.disableSpecialCharactersInDatabasePasswords" />
                 </div>
             </div>
         </container>
