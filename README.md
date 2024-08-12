@@ -1,4 +1,4 @@
-# Game Panel Frontend
+# WISP Panel Frontend
 
 [![Crowdin](https://badges.crowdin.net/wisp-game-panel/localized.svg)](https://crowdin.com/project/wisp-game-panel)
 
