@@ -47,7 +47,7 @@ export default defineComponent({
         const confirmNameValue = ref<string>();
 
         return {
-            hasServers: (props.nest.serversCount ?? 0) > 0,
+            hasServers: (props.nest?.serversCount ?? 0) > 0,
 
             confirmNameValue,
 
