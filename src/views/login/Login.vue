@@ -21,7 +21,7 @@
 
         <div class="text-center mt-3">
             <router-link :to="{name: 'login.reset_password'}" class="forgot">
-                <t path="login.struggling_to_login" />
+                <t path="login.reset_password" />
             </router-link>
         </div>
     </div>
