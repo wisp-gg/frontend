@@ -1,7 +1,7 @@
 <template>
     <footer>
         <div class="w-full text-center py-5">
-            <span v-tippy="setTippyContent" :data-content="nodeDescription">
+            <span v-tippy="['_raw', nodeDescription]">
                 <fa :icon="['fas', 'code-branch']" /> {{ version }}
             </span>
         </div>
@@ -20,28 +20,21 @@ export default defineComponent({
         };
 
         const nodeIdentifierMap: NodeIdentifierToLocation  = {
-            'nl-ams': 'Netherlands, Amsterdam',
-            'au-syd': 'Australia, Sydney',
-            'fr-gra': 'France, Gravelines',
-            'sg-sin': 'Singapore, Singapore',
-            'ca-mnt': 'Canada, Montreal',
+            'de-nur': 'Germany, Nuremberg',
+            'us-chi': 'United States, Chicago',
             'local': 'local dev'
         };
 
         const node = window.Wisp.Node || 'unknown';
-        const nodeName = node.split('-web')[0];
-        const location = nodeIdentifierMap[nodeName] || 'Unknown Location';
+        const [country, cityAndNumber] = node.split('-');
+        const nodeLocation = `${country}-${cityAndNumber.slice(0, -2)}`;
+        const location = nodeIdentifierMap[nodeLocation] || 'Unknown Location';
 
         const nodeDescription = `You are geo-routed to our web server in ${location}. We've automatically chosen this location to give you the fastest experience possible.`;
-
-        const setTippyContent = (el) => {
-            return el.dataset.content || 'Unknown';
-        };
 
         return {
             version,
             nodeDescription,
-            setTippyContent
         };
     }
 });
