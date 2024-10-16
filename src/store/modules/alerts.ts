@@ -46,7 +46,10 @@ const alerts: Module<AlertStore, any> = {
             if (!payload.icon && lookup[payload.type]) payload.icon = lookup[payload.type];
 
             commit('addItem', payload);
-            window.scrollTo(0, 0);
+
+            // If the alert only affects a specific item,
+            // we don't want to scroll to the top of the page
+            if (! payload.key) window.scrollTo(0, 0);
 
             if (payload.timeout) {
                 setTimeout(() => {
