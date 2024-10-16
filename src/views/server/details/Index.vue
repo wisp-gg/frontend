@@ -29,7 +29,7 @@
 
                     <details-attribute icon="map-marked-alt" name="generic.server.map" :value="query?.map" />
                     <details-attribute icon="users" name="generic.server.players">
-                        <t :path="['generic.server.players_amount', { current: query?.players.length ?? '--', max: query?.maxplayers ?? '--' }]" />
+                        <t :path="['generic.server.players_amount', { current: query?.numplayers ?? query?.players.length ?? '--', max: query?.maxplayers ?? '--' }]" />
                     </details-attribute>
                     <details-attribute icon="wifi" name="generic.server.ip" :value="server?.primaryAllocation().displayName()" />
                     <details-attribute icon="id-badge" name="generic.uuid">

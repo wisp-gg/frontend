@@ -76,7 +76,7 @@ export default defineComponent({
 
                 return '--';
             }),
-            players: computed(() => socket.query ? socket.query.players.length : '--'),
+            players: computed(() => socket.query ? socket.query.numplayers ?? socket.query.players.length : '--'),
         };
     },
 });

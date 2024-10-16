@@ -89,8 +89,9 @@ export interface GameStatistics {
     map: string;
     password: boolean;
     maxplayers: number;
-    players: []; // TODO: proper type for me
-    bots: []; // TODO: proper type for me
+    numplayers: number;
+    players: any[]; // TODO: proper type for me
+    bots: any[]; // TODO: proper type for me
 
     raw: any;
 }
