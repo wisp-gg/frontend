@@ -76,11 +76,12 @@ export function getAvailableLanguages() {
         'da_DK', // Danish
         'nl_NL', // Dutch
         'fr_FR', // French
-        'es_EM', // Spanish (Modern)
-        'sv_SE', // Swedish
+        'de_DE', // German
         'pl_PL', // Polish
         'pt_BR', // Portuguese
         'ro_RO', // Romanian
+        'es_EM', // Spanish (Modern)
+        'sv_SE', // Swedish
     ];
 }
 
