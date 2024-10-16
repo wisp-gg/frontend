@@ -69,7 +69,7 @@
 
             <div class="bg-primary-500 p-4 rounded text-right space-x-4 mt-4">
                 <skeleton :content="4">
-                    <delete-node-modal :node="node" />
+                    <delete-node-modal v-if="node" :node="node" />
                 </skeleton>
             </div>
         </div>
@@ -77,10 +77,10 @@
         <div class="w-full lg:w-2/5">
             <container title="generic.at_a_glance" no-padding>
                 <skeleton :content="32">
-                    <node-statistic icon="tachometer-alt" name="generic.server.cpu" :value="node?.cpuUsage" :max="node?.cpuLimit" unit="percentage" />
-                    <node-statistic icon="memory" name="generic.server.memory" :value="node?.memoryUsage * 1024 * 1024" :max="node?.memoryLimit * 1024 * 1024" unit="bytes" />
-                    <node-statistic icon="hdd" name="generic.server.disk" :value="node?.diskUsage * 1024 * 1024" :max="node?.diskLimit * 1024 * 1024" unit="bytes" />
-                    <node-statistic icon="server" name="generic.servers" :value="node?.serversCount" />
+                    <node-statistic icon="tachometer-alt" name="generic.server.cpu" :value="node?.cpuUsage || 0" :max="node?.cpuLimit" unit="percentage" />
+                    <node-statistic icon="memory" name="generic.server.memory" :value="(node?.memoryUsage || 0) * 1024 * 1024" :max="node?.memoryLimit * 1024 * 1024" unit="bytes" />
+                    <node-statistic icon="hdd" name="generic.server.disk" :value="(node?.diskUsage || 0) * 1024 * 1024" :max="node?.diskLimit * 1024 * 1024" unit="bytes" />
+                    <node-statistic icon="server" name="generic.servers" :value="node?.serversCount || 0"  />
                 </skeleton>
             </container>
         </div>
