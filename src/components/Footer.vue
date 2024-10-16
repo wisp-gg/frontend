@@ -1,7 +1,7 @@
 <template>
     <footer>
         <div class="w-full text-center py-5">
-            <span v-tippy="['_raw', nodeDescription]">
+            <span v-tippy="[nodeDescription, 'top', true]">
                 <fa :icon="['fas', 'code-branch']" /> {{ version }}
             </span>
         </div>
@@ -27,7 +27,8 @@ export default defineComponent({
 
         const node = window.Wisp.Node || 'unknown';
         const [country, cityAndNumber] = node.split('-');
-        const nodeLocation = `${country}-${cityAndNumber.slice(0, -2)}`;
+
+        const nodeLocation = `${country}${cityAndNumber ? `-${cityAndNumber.slice(0, -2)}` : ''}`;
         const location = nodeIdentifierMap[nodeLocation] || 'Unknown Location';
 
         const nodeDescription = `You are geo-routed to our web server in ${location}. We've automatically chosen this location to give you the fastest experience possible.`;
