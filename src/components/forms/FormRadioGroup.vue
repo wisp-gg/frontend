@@ -47,7 +47,7 @@ input[type="radio"] {
 </style>
 
 <script lang="ts">
-import { defineComponent, inject, ref, computed, onBeforeMount, onBeforeUnmount } from 'vue';
+import { defineComponent, inject, ref, computed, onBeforeMount, onBeforeUnmount, watch } from 'vue';
 
 export default defineComponent({
     props: {
@@ -73,8 +73,13 @@ export default defineComponent({
         },
     },
 
-    setup(props, context) {
+    setup(props) {
         const input = ref<string | null>(typeof props.value !== 'undefined' ? props.value.toString() : null);
+
+        watch(() => props.value, newValue => {
+            input.value = newValue !== 'undefined' ? newValue.toString() : null;
+        });
+
         const inputDisabled = ref<boolean>(false);
 
         let unregister: any;
