@@ -308,7 +308,7 @@ export default defineComponent({
             chart.render();
 
             // after the chart renders, we'll initially add a point to the graph for a smoother transition
-            addPoint(new Date().getTime(), 0);
+            addPoint(Date.now(), 0);
 
             useDaemonEvent('server-proc', data => {
                 let val: number | null = null;
