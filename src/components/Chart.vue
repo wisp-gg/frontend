@@ -187,6 +187,7 @@ export default defineComponent({
                 },
                 yaxis: [
                     {
+                        min: 0,
                         decimalsInFloat: false,
                         labels: {
                             style: {
@@ -305,6 +306,8 @@ export default defineComponent({
             };
 
             chart.render();
+
+            addPoint(new Date().getTime(), 0);
 
             useDaemonEvent('server-proc', data => {
                 let val: number | null = null;
