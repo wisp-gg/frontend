@@ -14,7 +14,7 @@
                 v-else-if="variable?.tickable"
                 :label="['_raw', variable.name]"
                 :name="`environment.${variable.envVariable}`"
-                :value="(serverValue ?? variable.defaultValue) === 'true'"
+                :value="!!Number(serverValue ?? variable?.defaultValue)"
                 no-margin
             />
 
@@ -67,6 +67,6 @@ export default defineComponent({
         return {
             inRules,
         };
-    }
+    },
 });
 </script>
