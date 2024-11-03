@@ -80,7 +80,7 @@ export default defineComponent({
             type: Boolean,
         },
         label: {
-            type: String,
+            type: [String, Array],
         },
         hideLabel: {
             type: Boolean,

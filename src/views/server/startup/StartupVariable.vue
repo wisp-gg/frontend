@@ -22,9 +22,10 @@
                 v-tippy="!variable.userEditable && (isAdmin ? 'server.startup.variable_not_editable_admin': 'server.startup.variable_not_editable')"
                 :disabled="!variable?.userEditable"
 
-                name="enabled"
+                :label="['_raw', variable?.name]"
+                :name="`environment.${variable?.envVariable}`"
                 permission="startup.update"
-                :value="variable?.serverValue ? variable?.serverValue === '1' : variable?.defaultValue === '1'"
+                :value="tickableValue"
                 @update:value="save"
                 no-margin
             />
@@ -71,8 +72,14 @@ export default defineComponent({
 
         const inRules = computed(() => ((props.variable?.rules || '').split('|').find(rule => rule.startsWith('in:')) || '').split(':')[1]?.split(',') || []);
 
+        const tickableValue = computed(() => props.variable?.tickable
+            ? props.variable.serverValue ? props.variable?.serverValue === '1' : props.variable?.defaultValue === '1'
+            : false
+        );
+
         return {
             inRules,
+            tickableValue,
             isAdmin: computed(() => hasPermissions('admin:server_startup.read')),
             save: (value: string | boolean) => {
                 if (!props.variable?.envVariable) return; // No variable, Skeleton maybe?
