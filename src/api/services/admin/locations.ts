@@ -17,7 +17,7 @@ class LocationsService {
     getAll(req: PaginatableRequest): Promise<ListResponse> {
         return RequestService.get('/locations', {
             ...req,
-            include: ['nodes_count', 'servers_count']
+            include: ['nodesCount', 'serversCount']
         }).then(Parser.parse);
     }
 

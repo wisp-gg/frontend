@@ -49,7 +49,7 @@ class NodeService {
         return RequestService.get('/nodes', {
             ...req,
             sort: 'name',
-            include: ['location', 'servers_count']
+            include: ['location', 'serversCount']
         })
             .then(Parser.parse);
     }

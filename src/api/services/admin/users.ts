@@ -25,7 +25,7 @@ class UsersService {
     getAll(req: PaginatableRequest): Promise<User[]> {
         return RequestService.get('/users', {
             ...req,
-            include: ['servers_count']
+            include: ['serversCount']
         })
             .then(Parser.parse);
     }
