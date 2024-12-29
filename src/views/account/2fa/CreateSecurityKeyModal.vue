@@ -14,14 +14,22 @@
 import { defineComponent } from 'vue';
 import { dispatch, Logger } from '~/core';
 import { useService } from '~/plugins';
-import { base64Decode, bufferToString, stringToBuffer, decodeSecurityKeyCredentials } from '~/helpers';
+import { base64Decode, bufferToString, decodeSecurityKeyCredentials } from '~/helpers';
 import { RegisterResponse } from '~/api/services/client/securityKeys';
 
 export default defineComponent({
     setup() {
         const challenge = async (publicKey: any): Promise<PublicKeyCredential> => {
-            publicKey.challenge = stringToBuffer(base64Decode(publicKey.challenge));
-            publicKey.user.id = stringToBuffer(publicKey.user.id);
+            // First decode the base64 challenge, then convert to Uint8Array
+            publicKey.challenge = Uint8Array.from(
+                atob(base64Decode(publicKey.challenge)),
+                c => c.charCodeAt(0)
+            );
+
+            publicKey.user.id = Uint8Array.from(
+                publicKey.user.id,
+                (c: string) => c.charCodeAt(0)
+            );
 
             if (publicKey.excludeCredentials) {
                 publicKey.excludeCredentials = decodeSecurityKeyCredentials(publicKey.excludeCredentials);
@@ -32,7 +40,7 @@ export default defineComponent({
                 throw new Error(`Unexpected type returned by navigator.credentials.create(): expected "public-key", got "${credential?.type}"`);
             }
 
-            return credential as PublicKeyCredential; // Re-cast it now we've ensured it's of type public-key
+            return credential as PublicKeyCredential;
         };
 
         return {

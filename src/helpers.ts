@@ -82,22 +82,33 @@ export function convertDataToUnderscore(data: Record<string, any>): any {
 }
 
 export const base64Decode = (input: string): string => {
-    input = input.replace(/-/g, '+').replace(/_/g, '/');
-    const pad = input.length % 4;
-    if (pad) {
-        if (pad === 1) {
-            throw new Error('InvalidLengthError: Input base64url string is the wrong length to determine padding');
-        }
-        input += new Array(5 - pad).join('=');
-    }
-    return input;
+    const base64 = input
+        .replace(/-/g, '+')
+        .replace(/_/g, '/');
+    return base64.padEnd(base64.length + (4 - base64.length % 4) % 4, '=');
 };
 
-// @ts-expect-error
-export const bufferToString = (value: ArrayBuffer): string => btoa(String.fromCharCode.apply(null, new Uint8Array(value)));
-export const stringToBuffer = (value: string): ArrayBuffer => Uint8Array.from(atob(value), c => c.charCodeAt(0));
+export const bufferToString = (buffer: ArrayBuffer): string => {
+    const bytes = new Uint8Array(buffer);
+    const binaryString = String.fromCharCode.apply(null, [...bytes]);
+    return btoa(binaryString);
+};
 
-export const decodeSecurityKeyCredentials = (credentials: PublicKeyCredentialDescriptor[]) => credentials.map(c => ({
-    ...c,
-    id: stringToBuffer(base64Decode(c.id.toString())),
-}));
+export const stringToBuffer = (value: string): ArrayBuffer => {
+    const normalizedBase64 = value
+        .replace(/-/g, '+')
+        .replace(/_/g, '/')
+        .padEnd(value.length + (4 - value.length % 4) % 4, '=');
+
+    const binaryStr = atob(normalizedBase64);
+    return Uint8Array.from(binaryStr, c => c.charCodeAt(0));
+};
+
+export const decodeSecurityKeyCredentials = (credentials: PublicKeyCredentialDescriptor[]) =>
+    credentials.map(c => ({
+        ...c,
+        id: Uint8Array.from(
+            atob(base64Decode(c.id.toString())),
+            c => c.charCodeAt(0)
+        ),
+    }));

@@ -41,17 +41,35 @@ export default defineComponent({
         const challenge = async (): Promise<AuthenticatedCredential> => {
             const publicKey = state.user.mfa!.webauthn!.public_key;
 
-            const publicKeyCredential = Object.assign({}, publicKey);
+            // Create a new object instead of Object.assign to avoid any potential references
+            const publicKeyCredential: PublicKeyCredentialRequestOptions = {
+                ...publicKey,
+                challenge: Uint8Array.from(
+                    atob(base64Decode(publicKey.challenge.toString())),
+                    c => c.charCodeAt(0)
+                )
+            };
 
-            publicKeyCredential.challenge = stringToBuffer(base64Decode(publicKey.challenge.toString()));
             if (publicKey.allowCredentials) {
-                publicKeyCredential.allowCredentials = decodeSecurityKeyCredentials(publicKey.allowCredentials);
+                publicKeyCredential.allowCredentials = publicKey.allowCredentials.map(cred => ({
+                    ...cred,
+                    id: Uint8Array.from(
+                        atob(base64Decode(cred.id.toString())),
+                        c => c.charCodeAt(0)
+                    ),
+                }));
             }
 
-            const credential = await navigator.credentials.get({ publicKey: publicKeyCredential }) as AuthenticatedCredential | null;
-            if (!credential) throw new Error('No credentials provided for challenge.');
+            // Explicitly type the credential request
+            const credential = await navigator.credentials.get({
+                publicKey: publicKeyCredential
+            });
 
-            return credential;
+            if (!credential) {
+                throw new Error('No credentials provided for challenge.');
+            }
+
+            return credential as AuthenticatedCredential;
         };
 
         const triggerChallenge = () => {
