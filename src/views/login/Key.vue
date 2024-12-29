@@ -31,60 +31,26 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted } from 'vue';
+import { startAuthentication } from '@simplewebauthn/browser';
 import * as Sentry from '@sentry/vue';
 import { dispatch, Logger, state } from '~/core';
 import { useService } from '~/plugins';
-import { base64Decode, bufferToString, stringToBuffer, decodeSecurityKeyCredentials } from '~/helpers';
 
 export default defineComponent({
     setup() {
-        const challenge = async (): Promise<AuthenticatedCredential> => {
-            const publicKey = state.user.mfa!.webauthn!.public_key;
-
-            // Create a new object instead of Object.assign to avoid any potential references
-            const publicKeyCredential: PublicKeyCredentialRequestOptions = {
-                ...publicKey,
-                challenge: Uint8Array.from(
-                    atob(base64Decode(publicKey.challenge.toString())),
-                    c => c.charCodeAt(0)
-                )
-            };
-
-            if (publicKey.allowCredentials) {
-                publicKeyCredential.allowCredentials = publicKey.allowCredentials.map(cred => ({
-                    ...cred,
-                    id: Uint8Array.from(
-                        atob(base64Decode(cred.id.toString())),
-                        c => c.charCodeAt(0)
-                    ),
-                }));
-            }
-
-            // Explicitly type the credential request
-            const credential = await navigator.credentials.get({
-                publicKey: publicKeyCredential
-            });
-
-            if (!credential) {
-                throw new Error('No credentials provided for challenge.');
-            }
-
-            return credential as AuthenticatedCredential;
-        };
-
         const triggerChallenge = () => {
             dispatch('alerts/clear');
 
-            challenge().then(credential => {
+            startAuthentication({ optionsJSON: state.user.mfa!.webauthn!.public_key }).then(credential => {
                 return useService('authentication@key', true, {
                     id: credential.id,
                     type: credential.type,
-                    raw_id: bufferToString(credential.rawId),
+                    raw_id: credential.rawId,
                     response: {
-                        authenticator_data: bufferToString(credential.response.authenticatorData),
-                        client_data_json: bufferToString(credential.response.clientDataJSON),
-                        signature: bufferToString(credential.response.signature),
-                        user_handle: credential.response.userHandle ? bufferToString(credential.response.userHandle) : null,
+                        authenticator_data: credential.response.authenticatorData,
+                        client_data_json: credential.response.clientDataJSON,
+                        signature: credential.response.signature,
+                        user_handle: credential.response.userHandle || null,
                     },
                 });
             }).catch(err => {

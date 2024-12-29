@@ -80,35 +80,3 @@ export function convertDataToUnderscore(data: Record<string, any>): any {
 
     return res;
 }
-
-export const base64Decode = (input: string): string => {
-    const base64 = input
-        .replace(/-/g, '+')
-        .replace(/_/g, '/');
-    return base64.padEnd(base64.length + (4 - base64.length % 4) % 4, '=');
-};
-
-export const bufferToString = (buffer: ArrayBuffer): string => {
-    const bytes = new Uint8Array(buffer);
-    const binaryString = String.fromCharCode.apply(null, [...bytes]);
-    return btoa(binaryString);
-};
-
-export const stringToBuffer = (value: string): ArrayBuffer => {
-    const normalizedBase64 = value
-        .replace(/-/g, '+')
-        .replace(/_/g, '/')
-        .padEnd(value.length + (4 - value.length % 4) % 4, '=');
-
-    const binaryStr = atob(normalizedBase64);
-    return Uint8Array.from(binaryStr, c => c.charCodeAt(0));
-};
-
-export const decodeSecurityKeyCredentials = (credentials: PublicKeyCredentialDescriptor[]) =>
-    credentials.map(c => ({
-        ...c,
-        id: Uint8Array.from(
-            atob(base64Decode(c.id.toString())),
-            c => c.charCodeAt(0)
-        ),
-    }));

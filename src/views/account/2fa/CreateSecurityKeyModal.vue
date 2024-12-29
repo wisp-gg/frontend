@@ -12,41 +12,29 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { startRegistration } from '@simplewebauthn/browser';
 import { dispatch, Logger } from '~/core';
 import { useService } from '~/plugins';
-import { base64Decode, bufferToString, decodeSecurityKeyCredentials } from '~/helpers';
 import { RegisterResponse } from '~/api/services/client/securityKeys';
 
 export default defineComponent({
     setup() {
-        const challenge = async (publicKey: any): Promise<PublicKeyCredential> => {
-            // First decode the base64 challenge, then convert to Uint8Array
-            publicKey.challenge = Uint8Array.from(
-                atob(base64Decode(publicKey.challenge)),
-                c => c.charCodeAt(0)
-            );
-
-            publicKey.user.id = Uint8Array.from(
-                publicKey.user.id,
-                (c: string) => c.charCodeAt(0)
-            );
-
-            if (publicKey.excludeCredentials) {
-                publicKey.excludeCredentials = decodeSecurityKeyCredentials(publicKey.excludeCredentials);
-            }
-
-            const credential = await navigator.credentials.create({ publicKey });
-            if (!credential || credential.type !== 'public-key') {
-                throw new Error(`Unexpected type returned by navigator.credentials.create(): expected "public-key", got "${credential?.type}"`);
-            }
-
-            return credential as PublicKeyCredential;
-        };
-
         return {
             register: (data: { name: string }, close: () => void) => useService<RegisterResponse>('securityKeys@register', 'client.security_keys.create_security_key')
                 .then(async (res: RegisterResponse) => {
-                    challenge(res.credentials)
+                    const publicKeyCredentialCreationOptions = {
+                        ...res.credentials,
+                        user: {
+                            ...res.credentials.user,
+                            id: btoa(res.credentials.user.id)  // Convert the raw user ID to base64url
+                                .replace(/\+/g, '-')
+                                .replace(/\//g, '_')
+                                .replace(/=/g, '')
+                        }
+                    };
+
+
+                    startRegistration({ optionsJSON: publicKeyCredentialCreationOptions })
                         .then(async credential => {
                             await useService('securityKeys@create', 'client.security_keys.create_security_key', {
                                 name: data.name,
@@ -54,10 +42,10 @@ export default defineComponent({
                                 registration: {
                                     id: credential.id,
                                     type: credential.type,
-                                    raw_id: bufferToString(credential.rawId),
+                                    raw_id: credential.rawId,
                                     response: {
-                                        attestation_object: bufferToString((credential.response as AuthenticatorAttestationResponse).attestationObject),
-                                        client_data_json: bufferToString(credential.response.clientDataJSON),
+                                        attestation_object: credential.response.attestationObject,
+                                        client_data_json: credential.response.clientDataJSON,
                                     },
                                 },
                             });
@@ -65,6 +53,8 @@ export default defineComponent({
                             await dispatch('lists/refresh', 'securityKeys@getAll');
                             close();
                         }).catch(err => {
+                            console.log(err);
+
                             // If it's not a DOM exception - useService most likely handled it, else it's a weird error and will be logged.
                             if (!(err instanceof DOMException)) return Logger.error('SecurityKeys', err);
 

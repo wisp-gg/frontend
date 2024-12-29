@@ -17,6 +17,7 @@
     "@popperjs/core": "^2.11.4",
     "@sentry/tracing": "^6.19.3",
     "@sentry/vue": "^6.19.3",
+    "@simplewebauthn/browser": "^13.0.0",
     "@tailwindcss/line-clamp": "^0.3.1",
     "@vueform/multiselect": "^2.3.3",
     "ace-builds": "^1.4.14",

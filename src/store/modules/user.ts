@@ -1,11 +1,12 @@
 import { Module } from 'vuex';
+import { PublicKeyCredentialRequestOptionsJSON } from '@simplewebauthn/browser';
 import Logger from '~/core/logger';
 import { User } from '~/api/models';
 
 interface MFAData {
     methods: MFAMethods[];
     webauthn?: {
-        public_key: PublicKeyCredentialRequestOptions;
+        public_key: PublicKeyCredentialRequestOptionsJSON;
     }
 }
 
